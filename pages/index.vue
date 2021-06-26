@@ -1,18 +1,18 @@
 <template>
   <div class="container">
     <div class="dd">
-        <Header/>
+        <commonHead/>
         <commonFoot/>
     </div>
   </div>
 </template>
 
 <script>
-import Header from '@/components/home/head.vue'
+import commonHead from '@/components/common/commonHead.vue'
 import commonFoot from '@/components/common/commonFoot.vue'
 export default {
   components:{
-    Header,
+    commonHead,
     commonFoot
   }
 }
