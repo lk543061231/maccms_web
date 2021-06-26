@@ -1,9 +1,10 @@
 <template>
-    <div>活动活动活动活动活动活动活动活动活动活动</div>
+    <div>应用市场</div>
 </template>
 
 <script>
 export default {
+    name:'应用市场'
 
 }
 </script>

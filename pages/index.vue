@@ -1,23 +1,27 @@
 <template>
   <div class="container">
-    <div>
+    <div class="dd">
         <Header/>
-
+        <commonFoot/>
     </div>
   </div>
 </template>
 
 <script>
-import comHeader from '@/components/comHeader.vue'
 import Header from '@/components/home/head.vue'
+import commonFoot from '@/components/common/commonFoot.vue'
 export default {
   components:{
-    comHeader,
-    Header
+    Header,
+    commonFoot
   }
 }
 </script>
 
-<style lang="less" scoped>
-
+<style lang="scss" scoped>
+.container{
+  .dd{
+    color: #000;
+  }
+}
 </style>

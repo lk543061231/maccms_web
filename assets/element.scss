@@ -1,7 +1,24 @@
 /* 改变主题色变量 */
-$--color-primary: teal;
+
+$--color-primary: #F7502D;
 
 /* 改变 icon 字体路径变量，必需 */
-$--font-path: '~element-ui/lib/theme-chalk/fonts';
 
-@import "~element-ui/packages/theme-chalk/src/index";
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+// @import "~element-ui/packages/theme-chalk/src/index";
+// 按需加载修改
+@import "~element-ui/packages/theme-chalk/src/carousel-item";
+@import "~element-ui/packages/theme-chalk/src/carousel";
+@import "~element-ui/packages/theme-chalk/src/message";
+@import "~element-ui/packages/theme-chalk/src/button";
+@import "~element-ui/packages/theme-chalk/src/menu-item";
+@import "~element-ui/packages/theme-chalk/src/menu-item-group";
+@import "~element-ui/packages/theme-chalk/src/menu";
+@import "~element-ui/packages/theme-chalk/src/radio";
+@import "~element-ui/packages/theme-chalk/src/radio-group";
+@import "~element-ui/packages/theme-chalk/src/radio-button";
+@import "~element-ui/packages/theme-chalk/src/form";
+@import "~element-ui/packages/theme-chalk/src/form-item";
+@import "~element-ui/packages/theme-chalk/src/input";
+@import "~element-ui/packages/theme-chalk/src/step";
+@import "~element-ui/packages/theme-chalk/src/steps";

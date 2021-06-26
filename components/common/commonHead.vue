@@ -42,6 +42,9 @@
         </div>
       </div>
     </div>
+    <div class="body-container">
+      <nuxt-child></nuxt-child>
+    </div>
   </div>
 </template>
 
@@ -51,7 +54,7 @@ export default {
     return {
       activeIndex: "1"
     };
-  }
+  },
 };
 </script>
 
