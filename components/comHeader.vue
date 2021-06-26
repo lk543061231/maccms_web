@@ -1,5 +1,11 @@
 <template>
-    <div class="header-wrap">头部</div>
+    <div class="header-wrap">
+        <div>
+            <span @click="$router.push({name:'index-home'})">首页</span>
+            <span @click="$router.push({name:'index-activity'})">活动</span>
+        </div>
+        <nuxt-child></nuxt-child>
+    </div>
 </template>
 
 <script>
