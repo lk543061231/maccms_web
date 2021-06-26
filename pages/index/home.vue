@@ -10,9 +10,20 @@
                 </p>
                 <p class="p4 f16-c172335">更新时间（2020-12-23)</p>
                 <div class="package-list">
-                    <p class="pl-item f16-c172335" v-for="(item,index) in packageList" :key="index">
-                        {{item.label}}
-                    </p>
+                    <el-popover
+                        placement="bottom"
+                        trigger="hover"
+                    >
+                        <div>
+                            <p>123</p>
+                            <p>123</p>
+                            <p>123</p>
+                        </div>
+                        <p slot="reference" class="pl-item f16-c172335 pl-item-1">安装包下载 </p>
+                    </el-popover>
+                    
+                    <p class="pl-item f16-c172335 pl-item-2">升级包下载 </p>
+                    <p class="pl-item f16-c172335 pl-item-2">部署详情 </p>
                 </div>
             </div>
         </div>
@@ -23,6 +34,53 @@
                     <p class="si-s2">{{item.subTitle}}</p>
                     <img class="si-img" :src="item.img" >
                 </div>
+            </div>
+        </div>
+        <div class="content bg1">
+            <p class="f38-c172335">Pro版UI设计 交互体验大更新</p>
+            <p class="f20-c172335 mt20">永久免费开源专业影视MACCMS Pro版</p>
+            <p class="f20-c8F8F8F mt30">新版本默认模版对应用户体验，UI，UX都是的最先反馈出平台高 留存的核心因素，能够大幅度提神站长的盈利目标。</p>
+            <div class="con-list mt30">
+                <div class="con-item" v-for="(item,index) in conList" :key="index">
+                    <div class="con-img-wrap">
+                        <img class="con-img" :src="item.img" >
+                    </div>
+                    <span class="f16-c8F8F8F">{{item.label}}</span>
+                </div>
+            </div>
+            <img class="mt30" src="@/assets/images/home/home2.png" >
+        </div>
+        <div class="content ">
+            <p class="f38-c172335">首选优质插件和模版</p>
+            <p class="f20-c172335 mt20">您可以下载部署Pro版将提供更多优质的插件模版</p>
+            <p class="f20-c8F8F8F mt30">可以直接下载到本地，自行部署到服务器内后台会自动检测到最新版将直接可以免费使用。</p>
+            <p class="f20-c172335 mt30">模版的UI和UX，插件的功能实用型都经过严格审核，可以更好的吸引用户满足所需功能。模版和插件库预期会累计提供上千款供您选择！</p>
+            <p class="mt30 to-look">
+                去看看
+                <i class="el-icon-right"></i>
+            </p>
+            <img class="look-img" src="@/assets/images/home/home3.png" >
+        </div>
+        <div class="content bg2">
+            <p class="f50-cffffff">产品优势</p>
+            <div class="advantage-wrap mt20">
+                <div class="adcantage-list" v-for="(item,index) in advantageList" :key="index">
+                    <div class="adcantage-item" v-for="(data,di) in item" :key="di">
+                        <img :src="data.img" class="ai-img">
+                        <p class="ai-t">{{data.title}}</p>
+                        <p class="ai-st">{{data.subTitle}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content partner">
+            <p class="f50-c242424">合作伙伴</p>
+            <div class="partner-wrap" >
+                <img class="p-img mt30" 
+                v-for="(img,iIndex) in partnerList" 
+                :key="iIndex" :src="img.img" 
+                @mouseleave="mouseLeave(img,iIndex+1)"
+                @mouseenter="mouseEnter(img,iIndex+1)">
             </div>
         </div>
     </div>
@@ -39,10 +97,45 @@ export default {
                 {label:'部署详情',value:2},
             ],
             stepList:[
-                {title:'99%',subTitle:'占有率',img:require('@/assets/images/home/home6.png')},
-                {title:'300W+',subTitle:'安装量',img:require('@/assets/images/home/home6.png')},
-                {title:'12年',subTitle:'技术沉淀',img:require('@/assets/images/home/home6.png')},
+                {title:'99%',subTitle:'占有率',img:require('@/assets/images/home/home-s1.png')},
+                {title:'300W+',subTitle:'安装量',img:require('@/assets/images/home/home-s2.png')},
+                {title:'12年',subTitle:'技术沉淀',img:require('@/assets/images/home/home-s3.png')},
+            ],
+            conList:[
+                {label:'增加API开发文档',img:require('@/assets/images/home/home-con1.png')},
+                {label:'提升二次开发的效率',img:require('@/assets/images/home/home-con1.png')},
+                {label:'WebPack等原生开发',img:require('@/assets/images/home/home-con1.png')},
+                {label:'支持APP开发',img:require('@/assets/images/home/home-con1.png')},
+            ],
+            advantageList:[
+                [
+                    {title:'底层技术架构',subTitle:'10多年技术沉淀，有着丰富的经验和技术积累，并且能够随着流行趋势加入更多当下流行的功能',img:require('@/assets/images/home/home-adv1.png')},
+                    {title:'强大的后台功能',subTitle:'管理后台界面大方、操作简单、功能齐全、模块众多、双端管理，只要你会电脑或手机就会使用',img:require('@/assets/images/home/home-adv2.png')},
+                    {title:'丰富的系统标签',subTitle:'系统内置了丰富的cms标签并支持thinkphp框架标签完美融合，可以调取系统内所有的数据，只要你懂一些前端知识就可以快速的开发自己的模板功能',img:require('@/assets/images/home/home-adv3.png')},
+                ],
+                [
+                    {title:'部署安装简单',subTitle:'支持任何操作系统（Windows、Mac、Linux）在PHP+MYSQL环境下可以快速键安装部署',img:require('@/assets/images/home/home-adv4.png')},
+                    {title:'第三方支付接口',subTitle:'苹果CMS内置多种在线支付方案，支付宝、微信等等接口，轻松配置扩展即可拥有支付功能收取打赏不发愁',img:require('@/assets/images/home/home-adv5.png')},
+                    {title:'三层级推广模式',subTitle:'苹果CMS内置三层级分销模块，会员推广赚取积分，提取服务，会员层级系统社交推广站点，合理的提高用户体验性与用户使用的粘合度',img:require('@/assets/images/home/home-adv6.png')},
+                ]
+            ],
+            partnerList:[
+                {img:require('@/assets/images/home/home-i1.png')},
+                {img:require('@/assets/images/home/home-i2.png')},
+                {img:require('@/assets/images/home/home-i3.png')},
+                {img:require('@/assets/images/home/home-i4.png')},
+                {img:require('@/assets/images/home/home-i5.png')},
+                {img:require('@/assets/images/home/home-i6.png')},
+                {img:require('@/assets/images/home/home-i7.png')},
             ]
+        }
+    },
+    methods:{
+        mouseEnter(img,index){
+            img.img=require( '@/assets/images/home/home-i'+ index+'-a.png')
+        },
+        mouseLeave(img,index){
+            img.img=require( '@/assets/images/home/home-i'+ index+'.png')
         }
     }
 }
@@ -79,12 +172,20 @@ export default {
                     border-radius: 24px;
                     border: 1px solid #172335;
                     cursor: pointer;
+                }
+                .pl-item-1{
+                    border: none;
+                    color: #fff;
+                    padding: 14px 56px;
+                    background: linear-gradient(270deg, #F53E2D 0%, #FE6232 100%);
+                    box-shadow: 0px 5px 12px 0px rgba(253, 95, 49, 0.29);
                     &:hover{
-                        border: none;
-                        background: linear-gradient(270deg, #F53E2D 0%, #FE6232 100%);
-                        box-shadow: 0px 5px 12px 0px rgba(253, 95, 49, 0.29);
-                        color: #fff;
-                        padding: 14px 56px;
+                        opacity: 0.09;
+                    }
+                }
+                .pl-item-2{
+                    &:hover{
+                        background: rgba(23, 35, 53, 0.08);
                     }
                 }
             }
@@ -138,6 +239,114 @@ export default {
             }
         }
         
+    }
+    .content{
+        display: flex;
+        flex-direction: column;
+        padding-top: 50px;
+        align-items: center;
+        .con-list{
+            display: flex;
+            .con-item{
+                display: flex;
+                align-items: center;
+                margin-right: 36px;
+                .con-img-wrap{
+                    padding: 6px;
+                    border-radius: 6px;
+                    background: #F6E8E7;
+                    margin-right: 10px;
+                    .con-img{
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+        }
+        .to-look{
+            width: 207px;
+            height: 55px;
+            background: linear-gradient(270deg, #F53E2D 0%, #FE6232 100%);
+            box-shadow: 0px 5px 12px 0px rgba(253, 95, 49, 0.29);
+            border-radius: 28px;
+            text-align: center;
+            line-height: 55px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .look-img{
+            width: 1000px;
+            height: 700px;
+        }
+    }
+
+    .bg1{
+        background: url('@/assets/images/home/home1.png') no-repeat;
+        background-size: 103% 100%;
+        width: 100%;
+        height: 1000px;
+        img{
+            width: 1123px;
+            height: 650px;
+        }
+    }
+    .bg2{
+        background: url('@/assets/images/home/home5.png') no-repeat;
+        background-size: 103% 100%;
+        width: 100%;
+        height: 700px;
+        .advantage-wrap{
+            .adcantage-list{
+                display: flex;
+                border-bottom: 1px solid #FF9767;
+                .adcantage-item{
+                    color: #FFFDFE;
+                    padding:40px ;
+                    border-right: 1px solid #FF9767;
+                    .ai-img{
+                        width: 50px;
+                        height: 50px;
+                    }
+                    .ai-t{
+                        margin-top: 20px;
+                        font-size: 27px;
+                        font-weight: 600;
+                    }
+                    .ai-st{
+                        margin-top: 10px;
+                        font-size: 16px;
+                        width: 370px;
+                        white-space: normal;
+                    }
+                    &:last-child{
+                        border-right: none;
+                    }
+                    &:first-child{
+                        padding-left: 0;
+                    }
+                }
+                &:last-child{
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+    .partner{
+       background: #F7F8FA;
+       padding-bottom: 50px;
+        .partner-wrap{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0 300px;
+            .p-img{
+                cursor: pointer;
+                width:161px;
+                height: 55px;
+                margin-right: 50px;
+            }
+        }
     }
 }
 </style>

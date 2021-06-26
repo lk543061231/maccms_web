@@ -14,6 +14,9 @@ export default {
   components:{
     commonHead,
     commonFoot
+  },
+  created(){
+      this.$router.push({name:'index-home'})
   }
 }
 </script>
