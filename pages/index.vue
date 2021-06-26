@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-        <comHeader/>
+        <Header/>
 
     </div>
   </div>
@@ -9,9 +9,11 @@
 
 <script>
 import comHeader from '@/components/comHeader.vue'
+import Header from '@/components/home/head.vue'
 export default {
   components:{
-    comHeader
+    comHeader,
+    Header
   }
 }
 </script>
