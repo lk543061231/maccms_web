@@ -91,8 +91,8 @@
                 <img class="p-img mt30" 
                 v-for="(img,iIndex) in partnerList" 
                 :key="iIndex" :src="img.img" 
-                @mouseleave="mouseLeave(img,iIndex+1)"
-                @mouseenter="mouseEnter(img,iIndex+1)">
+                @mouseleave="mouseLeave(img,img.value)"
+                @mouseenter="mouseEnter(img,img.value)">
             </div>
         </div>
     </div>
@@ -135,22 +135,22 @@ export default {
                 ]
             ],
             partnerList:[
-                {img:require('@/assets/images/home/home-i1.png')},
-                {img:require('@/assets/images/home/home-i2.png')},
-                // {img:require('@/assets/images/home/home-i3.png')},
-                // {img:require('@/assets/images/home/home-i4.png')},
-                {img:require('@/assets/images/home/home-i5.png')},
-                // {img:require('@/assets/images/home/home-i6.png')},
-                {img:require('@/assets/images/home/home-i7.png')},
+                {img:require('@/assets/images/home/home-i1.png'),value:1},
+                {img:require('@/assets/images/home/home-i2.png'),value:2},
+                // {img:require('@/assets/images/home/home-i3.png'),value:3},
+                // {img:require('@/assets/images/home/home-i4.png'),value:4},
+                {img:require('@/assets/images/home/home-i5.png'),value:5},
+                // {img:require('@/assets/images/home/home-i6.png'),value:6},
+                {img:require('@/assets/images/home/home-i7.png'),value:7},
             ]
         }
     },
     methods:{
-        mouseEnter(img,index){
-            img.img=require( '@/assets/images/home/home-i'+ index+'-a.png')
+        mouseEnter(img,value){
+            img.img=require( '@/assets/images/home/home-i'+ value+'-a.png')
         },
-        mouseLeave(img,index){
-            img.img=require( '@/assets/images/home/home-i'+ index+'.png')
+        mouseLeave(img,value){
+            img.img=require( '@/assets/images/home/home-i'+ value+'.png')
         }
     }
 }
@@ -334,7 +334,8 @@ export default {
                     .ai-st{
                         margin-top: 10px;
                         font-size: 16px;
-                        width: 370px;
+                        min-width: 320px;
+                        max-width: 360px;
                         white-space: normal;
                     }
                     &:last-child{
