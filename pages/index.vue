@@ -2,7 +2,7 @@
   <div class="container">
     
     <commonHead/>
-    
+
 
     <commonFoot/>
     
@@ -25,6 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .container{
+    min-width: 1200px;
 
 }
 </style>

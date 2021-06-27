@@ -6,9 +6,9 @@
                 <p class="p2 f60-c172335">已成为全球影视站长首选！</p>
                 <p class="p3">
                     <span class="p3-s1 f28-cF7502D">Pro版</span>
-                    <span class="p3-s3 f28-c172335">版本号（v3.2.3)</span>
+                    <span class="p3-s3 f28-c172335">版本号（2021.1000.1090)</span>
                 </p>
-                <p class="p4 f16-c172335">更新时间（2020-12-23)</p>
+                <p class="p4 f16-c172335">更新时间（2021-06-27)</p>
                 <div class="package-list">
                     <el-popover
                         placement="bottom"
@@ -137,10 +137,10 @@ export default {
             partnerList:[
                 {img:require('@/assets/images/home/home-i1.png')},
                 {img:require('@/assets/images/home/home-i2.png')},
-                {img:require('@/assets/images/home/home-i3.png')},
-                {img:require('@/assets/images/home/home-i4.png')},
+                // {img:require('@/assets/images/home/home-i3.png')},
+                // {img:require('@/assets/images/home/home-i4.png')},
                 {img:require('@/assets/images/home/home-i5.png')},
-                {img:require('@/assets/images/home/home-i6.png')},
+                // {img:require('@/assets/images/home/home-i6.png')},
                 {img:require('@/assets/images/home/home-i7.png')},
             ]
         }
@@ -158,7 +158,9 @@ export default {
 
 <style lang="less" scoped>
 .page-wrap{
+    
     .home-top{
+        min-width: 1200px;
         width: 100%;
         height: 710px;
         background: url('@/assets/images/home/home4.png') no-repeat;
@@ -207,6 +209,7 @@ export default {
         }
     }
     .home-step{
+        min-width: 1200px;
         width: 100%;
         height: 170px;
         display: flex;
@@ -256,6 +259,7 @@ export default {
         
     }
     .content{
+        min-width: 1200px;
         display: flex;
         flex-direction: column;
         padding-top: 50px;
@@ -348,8 +352,9 @@ export default {
         }
     }
     .partner{
-       background: #F7F8FA;
-       padding-bottom: 50px;
+        min-width: 1200px;
+        background: #F7F8FA;
+        padding-bottom: 50px;
         .partner-wrap{
             display: flex;
             flex-wrap: wrap;

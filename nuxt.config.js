@@ -1,4 +1,12 @@
-export default {
+import path from 'path'
+import fs from 'fs'
+module.exports = {
+    server: {
+        https: {
+            key: fs.readFileSync(path.resolve(__dirname, 'ca.key')),
+            cert: fs.readFileSync(path.resolve(__dirname, 'ca.crt'))
+        }
+    },
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         title: 'maccms_Pro',
