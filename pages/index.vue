@@ -1,9 +1,11 @@
 <template>
   <div class="container">
-    <div class="dd">
-        <commonHead/>
-        <commonFoot/>
-    </div>
+    
+    <commonHead/>
+    
+
+    <commonFoot/>
+    
   </div>
 </template>
 
@@ -23,8 +25,6 @@ export default {
 
 <style lang="scss" scoped>
 .container{
-  .dd{
-    color: #000;
-  }
+
 }
 </style>

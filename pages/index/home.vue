@@ -13,17 +13,29 @@
                     <el-popover
                         placement="bottom"
                         trigger="hover"
+                        popper-class="area_popper"
                     >
-                        <div>
-                            <p>123</p>
-                            <p>123</p>
-                            <p>123</p>
+                        <div class="home-upload-wrap">
+                            <p class="home-upload-item" 
+                            v-for="item,index in packageUploadList" :key="index">
+                                {{item}}
+                                <i v-if="index!=0" class="el-icon-right"></i>
+                            </p>
                         </div>
                         <p slot="reference" class="pl-item f16-c172335 pl-item-1">安装包下载 </p>
                     </el-popover>
                     
                     <p class="pl-item f16-c172335 pl-item-2">升级包下载 </p>
-                    <p class="pl-item f16-c172335 pl-item-2">部署详情 </p>
+                    <el-popover
+                        placement="bottom"
+                        trigger="hover"
+                    >
+                        <div class="home-deploy-wrap">
+                            <p class="home-deploy-1">支持系统：Windows、Mac、Linux部署环境：PHP（5.6+）+MySql(5.5+)</p>
+                            <p class="home-deploy-2">PHP必须在非安全模式下运行</p>
+                        </div>
+                        <p slot="reference" class="pl-item f16-c172335 pl-item-2">部署详情 </p>
+                    </el-popover>
                 </div>
             </div>
         </div>
@@ -96,6 +108,9 @@ export default {
                 {label:'升级包下载',value:1},
                 {label:'部署详情',value:2},
             ],
+            packageUploadList:[
+                '官方下载','Github','Jsdelivr'
+            ],
             stepList:[
                 {title:'99%',subTitle:'占有率',img:require('@/assets/images/home/home-s1.png')},
                 {title:'300W+',subTitle:'安装量',img:require('@/assets/images/home/home-s2.png')},
@@ -103,9 +118,9 @@ export default {
             ],
             conList:[
                 {label:'增加API开发文档',img:require('@/assets/images/home/home-con1.png')},
-                {label:'提升二次开发的效率',img:require('@/assets/images/home/home-con1.png')},
-                {label:'WebPack等原生开发',img:require('@/assets/images/home/home-con1.png')},
-                {label:'支持APP开发',img:require('@/assets/images/home/home-con1.png')},
+                {label:'提升二次开发的效率',img:require('@/assets/images/home/home-con2.png')},
+                {label:'WebPack等原生开发',img:require('@/assets/images/home/home-con3.png')},
+                {label:'支持APP开发',img:require('@/assets/images/home/home-con4.png')},
             ],
             advantageList:[
                 [
@@ -180,7 +195,7 @@ export default {
                     background: linear-gradient(270deg, #F53E2D 0%, #FE6232 100%);
                     box-shadow: 0px 5px 12px 0px rgba(253, 95, 49, 0.29);
                     &:hover{
-                        opacity: 0.09;
+                        background: linear-gradient(270deg, #DC3828 0%, #E5552D 100%);
                     }
                 }
                 .pl-item-2{

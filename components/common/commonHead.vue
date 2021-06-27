@@ -144,6 +144,12 @@ export default {
           margin: 0 20px;
           padding: 0;
           font-size: 16px;
+          &:hover{
+            background-color: transparent;
+          }
+          &:focus{
+            background-color: transparent;
+          }
         }
         .is-active {
           font-size: 20px;
