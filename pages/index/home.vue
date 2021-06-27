@@ -5,7 +5,7 @@
                 <p class="p1 f32-c172335">免费开源Maccms Pro版</p>
                 <p class="p2 f60-c172335">已成为全球影视站长首选！</p>
                 <p class="p3">
-                    <span class="p3-s1 f28-cF7502D">Pro版</span>
+                    <span class="p3-s1 f28-cF7502D">{{packageTitle}}</span>
                     <span class="p3-s3 f28-c172335">版本号（2021.1000.1090)</span>
                 </p>
                 <p class="p4 f16-c172335">更新时间（2021-06-27)</p>
@@ -13,14 +13,25 @@
                     <el-popover
                         placement="bottom"
                         trigger="hover"
-                        popper-class="area_popper"
                     >
                         <div class="home-upload-wrap">
-                            <p class="home-upload-item" 
-                            v-for="item,index in packageUploadList" :key="index">
-                                {{item}}
-                                <i v-if="index!=0" class="el-icon-right"></i>
-                            </p>
+                            <div v-for="(item,index) in  packageUploadList" :key="index">
+                                <el-popover
+                                    placement="right"
+                                    trigger="hover"
+                                    popper-class="area_popper"
+                                >
+                                    <div class="home-upload-edition" v-if="index!=0">
+                                        <p class="hu-item" v-for="el,eI in packageVersion" :key="eI">
+                                            {{el}}
+                                        </p>
+                                    </div>
+                                    <div v-else class="home-upload-edition">
+                                        <p class="hu-item">近期将发布上线</p>
+                                    </div>
+                                    <p slot="reference" class="home-upload-item" @mouseenter="packEnete(item)">{{item}} <i  class="el-icon-right"></i></p>
+                                </el-popover>
+                            </div>
                         </div>
                         <p slot="reference" class="pl-item f16-c172335 pl-item-1">安装包下载 </p>
                     </el-popover>
@@ -32,7 +43,7 @@
                     >
                         <div class="home-deploy-wrap">
                             <p class="home-deploy-1">支持系统：Windows、Mac、Linux部署环境：PHP（5.6+）+MySql(5.5+)</p>
-                            <p class="home-deploy-2">PHP必须在非安全模式下运行</p>
+                            <p class="home-deploy-1">PHP必须在非安全模式下运行</p>
                         </div>
                         <p slot="reference" class="pl-item f16-c172335 pl-item-2">部署详情 </p>
                     </el-popover>
@@ -103,13 +114,17 @@ export default {
     name:'home',
     data(){
         return{
+            packageTitle:'V10',
             packageList:[
                 {label:'安装包下载',value:0},
                 {label:'升级包下载',value:1},
                 {label:'部署详情',value:2},
             ],
-            packageUploadList:[
+            packageVersion:[
                 '官方下载','Github','Jsdelivr'
+            ],
+            packageUploadList:[
+                'Pro版','V10','V8'
             ],
             stepList:[
                 {title:'99%',subTitle:'占有率',img:require('@/assets/images/home/home-s1.png')},
@@ -146,6 +161,9 @@ export default {
         }
     },
     methods:{
+        packEnete(item){
+            this.packageTitle=item
+        },
         mouseEnter(img,value){
             img.img=require( '@/assets/images/home/home-i'+ value+'-a.png')
         },
@@ -183,6 +201,7 @@ export default {
                 margin-top:40px;
                 display: flex;
                 align-items: center;
+                
                 .pl-item{
                     margin-right: 40px;
                     padding: 13px 55px;
@@ -369,4 +388,5 @@ export default {
         }
     }
 }
+
 </style>

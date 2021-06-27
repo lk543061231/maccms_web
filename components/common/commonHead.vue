@@ -1,4 +1,4 @@
-/*
+
 <template>
   <div class="page-wrap">
     <div class="head_container flex-between-center" ref="head">
@@ -16,7 +16,7 @@
           >
             <el-menu-item
               index="1"
-              @click="$router.push({ name: 'index-home' })"
+              @click="$router.push({ name: 'index' })"
               >首页</el-menu-item
             >
             <el-submenu index="2" @click.native="toApplication" ref="submenu">
@@ -119,7 +119,6 @@ export default {
     }
   },
   created() {
-    this.$router.push({ name: "index-home" });
   },
   mounted() {
     document.addEventListener("scroll", e => {
