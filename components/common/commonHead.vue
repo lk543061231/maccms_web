@@ -9,27 +9,21 @@
         <div class="menu">
           <el-menu
             :default-active="activeIndex"
-            class=""
             mode="horizontal"
             text-color="#596371"
             active-text-color="#F7502D"
+            @select="subMenuSelect"
           >
             <el-menu-item
               index="1"
               @click="$router.push({ name: 'index-home' })"
               >首页</el-menu-item
             >
-            <el-submenu index="2">
+            <el-submenu index="2" @click.native="toApplication" ref="submenu">
               <template slot="title">应用市场</template>
-              <el-menu-item index="2-1">选项1</el-menu-item>
-              <el-menu-item index="2-2">选项2</el-menu-item>
-              <el-menu-item index="2-3">选项3</el-menu-item>
+              <el-menu-item index="2-1">开发者中心</el-menu-item>
             </el-submenu>
-            <el-menu-item
-              index="3"
-              @click="$router.push({ name: 'index-devDocument' })"
-              >开发文档</el-menu-item
-            >
+            <el-menu-item index="3">开发文档</el-menu-item>
             <el-menu-item index="4">域名真伪</el-menu-item>
             <el-menu-item index="5">资源库</el-menu-item>
             <el-menu-item index="6">帮助中心</el-menu-item>
@@ -39,7 +33,7 @@
       <div class="right flex-between-center">
         <el-dropdown trigger="click" @visible-change="visibleChange">
           <div class="language">
-            <img :src="languageSrc" alt="language"/>
+            <img :src="languageSrc" alt="language" />
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
@@ -57,8 +51,9 @@
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <div class="user">
-          <img src="~/assets/images/home/user.png" alt="user" />
+        <div class="user" @click.stop="clickUser">
+          <!-- <img src="~/assets/images/common/common-user.png" alt="user" /> -->
+          <img :src="userSrc" alt="user" />
         </div>
         <div class="primary-btn register">
           注册
@@ -77,12 +72,50 @@ export default {
   data() {
     return {
       activeIndex: "1",
-      languageSrc:require("~/assets/images/home/language.png")
+      languageSrc: require("~/assets/images/common/common-qiu.png"),
+      userSrc: require("~/assets/images/common/common-user.png"),
     };
   },
-  methods:{
-    visibleChange(bol){
-      bol?this.languageSrc = require("~/assets/images/home/user.png"):this.languageSrc = require("~/assets/images/home/language.png");
+  methods: {
+    visibleChange(bol) {
+      bol
+        ? (this.languageSrc = require("~/assets/images/common/common-qiu-active.png"))
+        : (this.languageSrc = require("~/assets/images/common/common-qiu.png"));
+    },
+    clickUser(){
+      this.userSrc = require("~/assets/images/common/common-user-active.png")
+    },
+    subMenuSelect(index, indexPath) {
+      console.log(index, indexPath);
+      if (index != 1) {
+        this.$message.info("敬请期待");
+      }
+      // 去除应用市场的激活样式
+      if(this.$refs.submenu.$el.firstChild.className.indexOf("is-active")!=-1){
+        this.$refs.submenu.$el.firstChild.className = "el-submenu__title"
+      }
+      if(index == "2-1"){
+        this.$router.push({
+          path:""
+        })
+      }
+    },
+    toApplication() {
+      this.$message.info("敬请期待");
+      let menuList = document.getElementsByClassName("el-menu-item");
+      menuList = Array.prototype.slice.call(menuList);
+      menuList.map(item => {
+        if(item.className.indexOf("is-active")!=-1){
+          item.className = "el-menu-item";
+          item.style = "color:#596371;border-bottom:none;"
+        }
+      });
+      this.$refs.submenu.$el.firstChild.className = "el-submenu__title is-active"
+      console.log(this.$refs.submenu)
+      return;
+      this.$router.push({
+        path: "/applicationMarket"
+      });
     }
   },
   created() {
@@ -103,6 +136,10 @@ export default {
         head.className = "head_container flex-between-center";
       }
     });
+
+    document.addEventListener("click", e=>{
+      this.userSrc = require("~/assets/images/common/common-user.png")
+    })
   }
 };
 </script>
@@ -144,10 +181,10 @@ export default {
           margin: 0 20px;
           padding: 0;
           font-size: 16px;
-          &:hover{
+          &:hover {
             background-color: transparent;
           }
-          &:focus{
+          &:focus {
             background-color: transparent;
           }
         }
@@ -155,6 +192,7 @@ export default {
           font-size: 20px;
           font-weight: 500;
           border: none;
+          color: #f7502d !important;
           &::after {
             content: "";
             display: block;

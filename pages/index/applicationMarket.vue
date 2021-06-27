@@ -1,5 +1,5 @@
 <template>
-    <div>应用市场</div>
+    <div class="application-wrap">应用市场</div>
 </template>
 
 <script>
@@ -10,5 +10,7 @@ export default {
 </script>
 
 <style>
-
+.application-wrap{
+    padding-top:118px;
+}
 </style>

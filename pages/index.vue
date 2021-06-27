@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import commonHead from '@/components/common/commonHead.vue'
-import commonFoot from '@/components/common/commonFoot.vue'
+import commonHead from '@/components/common/commonHead.vue';
+import commonFoot from '@/components/common/commonFoot.vue';
 export default {
   components:{
     commonHead,
