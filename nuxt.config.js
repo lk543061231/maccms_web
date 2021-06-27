@@ -1,19 +1,21 @@
 import path from 'path'
 import fs from 'fs'
 module.exports = {
-    server: {
-        https: {
-            key: fs.readFileSync(path.resolve(__dirname, 'ca.key')),
-            cert: fs.readFileSync(path.resolve(__dirname, 'ca.crt'))
-        }
-    },
+    // server: {
+    //     https: {
+    //         key: fs.readFileSync(path.resolve(__dirname, 'ca.key')),
+    //         cert: fs.readFileSync(path.resolve(__dirname, 'ca.crt'))
+    //     }
+    // },
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
-        title: 'maccms_Pro',
+        title: 'MacCMS Pro',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: '' }
+            { hid: 'description', name: 'description', content: 'MacCms Pro版12年技术沉淀，打造免费开源专业影视平台提供给全球站长,影视站点市场占有率高达99%、安装量超过300W+，深受许多站长的喜爱。' },
+            { hid: 'og:image', property: 'og:image', content: '/static/logo.png' },
+            { hid: 'og:title', property: 'og:title', content: 'MacCms Pro版12年技术沉淀，打造免费开源专业影视平台提供给全球站长,影视站点市场占有率高达99%、安装量超过300W+，深受许多站长的喜爱。' },
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

@@ -209,7 +209,6 @@ export default {
         }
     }
     .home-step{
-        min-width: 1200px;
         width: 100%;
         height: 170px;
         display: flex;
@@ -218,12 +217,12 @@ export default {
         .step-list{
             display: flex;
             width: 100%;
-            justify-content: center;
-            
+            justify-content: space-around;
+            padding: 0 100px;
             .step-item{
                 display: flex;
                 align-items: center;
-                margin-right: 200px;
+                // margin-right: 200px;
                 position: relative;
                 .si-s1{
                     font-size: 50px;
@@ -246,7 +245,7 @@ export default {
                     width: 1px ;
                     height: 70px;
                     background-color: #FC996B;
-                    right: -100px;
+                    right: -50%;
                 }
                 &:last-child{
                     margin-right: 0;

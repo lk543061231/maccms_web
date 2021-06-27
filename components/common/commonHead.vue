@@ -157,6 +157,7 @@ export default {
 }
 .head_container {
   width: 100%;
+  min-width: 1200px;
   height: 118px;
   padding: 32px 58px 32px 62px;
   position: absolute;
