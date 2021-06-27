@@ -160,7 +160,7 @@ export default {
 .page-wrap{
     
     .home-top{
-        min-width: 1200px;
+        min-width: 1630px;
         width: 100%;
         height: 710px;
         background: url('@/assets/images/home/home4.png') no-repeat;
@@ -258,7 +258,7 @@ export default {
         
     }
     .content{
-        min-width: 1200px;
+        min-width: 1630px;
         display: flex;
         flex-direction: column;
         padding-top: 50px;

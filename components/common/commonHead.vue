@@ -35,10 +35,10 @@
           <div class="language">
             <img :src="languageSrc" alt="language" />
           </div>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>
+          <el-dropdown-menu slot="dropdown" >
+            <el-dropdown-item style="width:100px">
               <!-- <img src="~/assets/images/home/language.png" alt="中国"> -->
-              <span>中文简体</span>
+              <span >中文简体</span>
             </el-dropdown-item>
             <el-dropdown-item>
               <span>Deutsch</span>
@@ -157,7 +157,7 @@ export default {
 }
 .head_container {
   width: 100%;
-  min-width: 1200px;
+  min-width: 1630px;
   height: 118px;
   padding: 32px 58px 32px 62px;
   position: absolute;
