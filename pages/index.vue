@@ -717,6 +717,7 @@ export default {
             .p3{
                 color: #FF172A;
                 font-size: 16px;
+                width: 100%;
             }
             .n2-img{
                 width: 100%;
