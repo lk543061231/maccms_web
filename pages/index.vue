@@ -415,7 +415,7 @@ export default {
         .home-top{
             min-width: 1300px;
             width: 100%;
-            height: 710px;
+            height: 580px;
             background: url('@/assets/images/home/home4.png') no-repeat;
             background-size: 100% 100%;
             position: relative;
@@ -737,5 +737,20 @@ export default {
         }
     }
 
+}
+@media screen and (min-width:1200px)  {
+    .home-top{
+        height:710px !important;
+        
+    }
+}
+@media screen and (max-width:980px)  {
+    .home-top{
+        height:580px !important;
+        .top-content{
+            margin: 140px !important;
+        }
+        
+    }
 }
 </style>
