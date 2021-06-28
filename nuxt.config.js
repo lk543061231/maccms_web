@@ -15,7 +15,6 @@ module.exports = {
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             { hid: 'description', name: 'description', content: 'MacCms Pro版12年技术沉淀，打造免费开源专业影视平台提供给全球站长,影视站点市场占有率高达99%、安装量超过300W+，深受许多站长的喜爱。' },
             { hid: 'og:image', property: 'og:image', content: '/static/logo.png' },
-            { hid: 'og:title', property: 'og:title', content: 'MacCms Pro版12年技术沉淀，打造免费开源专业影视平台提供给全球站长,影视站点市场占有率高达99%、安装量超过300W+，深受许多站长的喜爱。' },
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

@@ -52,17 +52,13 @@
           </div>
           <el-dropdown-menu slot="dropdown" >
             <el-dropdown-item style="width:100px">
-              <!-- <img src="~/assets/images/home/language.png" alt="中国"> -->
-              <span >中文简体</span>
+              <span @click="changeLang(1)">中文简体</span>
             </el-dropdown-item>
             <el-dropdown-item>
-              <span>Deutsch</span>
+              <span  @click="changeLang(1)">中文繁体</span>
             </el-dropdown-item>
             <el-dropdown-item>
-              <span>English</span>
-            </el-dropdown-item>
-            <el-dropdown-item>
-              <span>English</span>
+              <span @click="changeLang(1)">English</span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -117,6 +113,9 @@ export default {
     },
     clickUser(){
       this.userSrc = require("~/assets/images/common/common-user-active.png")
+    },
+    changeLang(){
+      this.$message.info("敬请期待");
     },
     subMenuSelect(index, indexPath) {
       if (index != 1) {
