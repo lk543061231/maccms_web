@@ -66,7 +66,7 @@
           <!-- <img src="~/assets/images/common/common-user.png" alt="user" /> -->
           <img :src="userSrc" alt="user" />
         </div>
-        <div class="primary-btn register">
+        <div class="primary-btn register" @click="register">
           注册
           <i class="el-icon-right"></i>
         </div>
@@ -113,6 +113,9 @@ export default {
     },
     clickUser(){
       this.userSrc = require("~/assets/images/common/common-user-active.png")
+    },
+    register(){
+      this.$message.info("敬请期待");
     },
     changeLang(){
       this.$message.info("敬请期待");
