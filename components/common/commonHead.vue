@@ -7,31 +7,46 @@
           <img src="~/assets/images/home/logo.png" alt="maccms-pro" />
         </div>
         <div class="menu">
-          <el-menu
-            :default-active="activeIndex"
-            mode="horizontal"
-            text-color="#596371"
-            active-text-color="#F7502D"
-            @select="subMenuSelect"
+          <div 
+            class="menu-item"
+            v-for="(item,index) in menuList"
+            :key="index"
           >
-            <el-menu-item
-              index="1"
-              @click="$router.push({ name: 'index' })"
-              >首页</el-menu-item
+            <p 
+              v-if="index!=1"
+              class="menu-name"
+              slot="reference"
+              @mouseenter="mouseEnter(item,index)"
+              @click="selectRouter(item,index)"
+              :class="activeIndex == index && 'is-active'"
             >
-            <el-submenu index="2" @click.native="toApplication" ref="submenu">
-              <template slot="title">应用市场</template>
-              <el-menu-item index="2-1">开发者中心</el-menu-item>
-            </el-submenu>
-            <el-menu-item index="3">开发文档</el-menu-item>
-            <el-menu-item index="4">域名真伪</el-menu-item>
-            <el-menu-item index="5">资源库</el-menu-item>
-            <el-menu-item index="6">帮助中心</el-menu-item>
-          </el-menu>
+              {{item.label}} 
+            </p>
+
+            <el-popover
+              v-else
+              placement="bottom"
+              trigger="hover"
+            >
+              <div class="app-wrap">
+                <p class="app-item">开发者中心</p>
+              </div>
+              <p 
+                class="menu-name"
+                slot="reference"
+                @mouseenter="mouseEnter(item,index)"
+                @click="selectRouter(item,index)"
+                :class="activeIndex == index && 'is-active'"
+              >{{item.label}} 
+
+                  <i  class="el-icon-arrow-down"></i>
+              </p>
+            </el-popover>
+          </div>
         </div>
       </div>
       <div class="right flex-between-center">
-        <el-dropdown trigger="click" @visible-change="visibleChange">
+        <el-dropdown  @visible-change="visibleChange">
           <div class="language">
             <img :src="languageSrc" alt="language" />
           </div>
@@ -71,9 +86,17 @@
 export default {
   data() {
     return {
-      activeIndex: "1",
+      activeIndex: 0,
       languageSrc: require("~/assets/images/common/common-qiu.png"),
       userSrc: require("~/assets/images/common/common-user.png"),
+      menuList:[
+        {label:'首页',value:0,name:'index'},
+        {label:'应用市场',value:1,name:'index'},
+        {label:'开发文档',value:2,name:'index'},
+        {label:'域名真伪',value:3,name:'index'},
+        {label:'资源库',value:4,name:'index'},
+        {label:'帮助中心',value:5,name:'index'},
+      ]
     };
   },
   methods: {
@@ -82,11 +105,20 @@ export default {
         ? (this.languageSrc = require("~/assets/images/common/common-qiu-active.png"))
         : (this.languageSrc = require("~/assets/images/common/common-qiu.png"));
     },
+    selectRouter(item,index){
+      if(index!=0){
+        this.$message.info("敬请期待");
+        return
+      }
+      this.$router.push({name:item.name})
+    },
+    mouseEnter(item,index){
+      this.activeIndex=index
+    },
     clickUser(){
       this.userSrc = require("~/assets/images/common/common-user-active.png")
     },
     subMenuSelect(index, indexPath) {
-      console.log(index, indexPath);
       if (index != 1) {
         this.$message.info("敬请期待");
       }
@@ -100,6 +132,7 @@ export default {
         })
       }
     },
+ 
     toApplication() {
       this.$message.info("敬请期待");
       let menuList = document.getElementsByClassName("el-menu-item");
@@ -111,7 +144,7 @@ export default {
         }
       });
       this.$refs.submenu.$el.firstChild.className = "el-submenu__title is-active"
-      console.log(this.$refs.submenu)
+      
       return;
       this.$router.push({
         path: "/applicationMarket"
@@ -173,20 +206,18 @@ export default {
       }
     }
     .menu {
-      /deep/.el-menu--horizontal {
-        border-bottom: none;
-        background-color: transparent;
-        .el-menu-item,
-        .el-submenu__title {
-          margin: 0 20px;
-          padding: 0;
+        display: flex;
+        height: 40px;
+        align-items: center;
+        .menu-name{
+          cursor: pointer;
+          margin-right: 50px;
           font-size: 16px;
-          &:hover {
-            background-color: transparent;
-          }
-          &:focus {
-            background-color: transparent;
-          }
+          color: #596371;
+          width: auto;
+          position: relative;
+          padding: 10px 0;
+          line-height: 40px;
         }
         .is-active {
           font-size: 20px;
@@ -197,7 +228,7 @@ export default {
             content: "";
             display: block;
             position: absolute;
-            width: 90%;
+            width: 100%;
             height: 3px;
             background: #f7502d;
             left: 50%;
@@ -206,7 +237,6 @@ export default {
           }
         }
       }
-    }
   }
   .right {
     width: 220px;
@@ -227,9 +257,13 @@ export default {
   }
 }
 
+
 .slideUp {
   position: fixed;
   background-color: #ffffff;
   box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.06);
+}
+:focus{
+  outline: none;
 }
 </style>
