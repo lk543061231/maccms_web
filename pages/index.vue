@@ -192,14 +192,14 @@
                 <i class="el-icon-warning-outline"></i>
                 以下是冒充官方诈骗信息（擦亮双眼 请勿轻信）
             </p>
-            <img class="n2-img mt20" src="@/assets/images/home/home-n2.png" >
-            <div class="img-wrap mt10" >
+            <img class="n2-img" src="@/assets/images/home/home-n2.png" >
+            <div class="img-wrap " >
                 <img class="n5-img" src="@/assets/images/home/home-n5.png" >
                 <img class="n3-img" src="@/assets/images/home/home-n3.png" >
             </div>
             <img class="n6-img mt10" src="@/assets/images/home/home-n6.png" >
-            <img style="width:100%" class="n8-img mt10" src="@/assets/images/home/home-n8.png" >
-            <img class="n4-img mt30" src="@/assets/images/home/home-n4.png" @click="jump">
+            <img style="width:100%" class="n8-img " src="@/assets/images/home/home-n8.png" >
+            <img class="n4-img " src="@/assets/images/home/home-n4.png" @click="jump">
 
         </div>
     </div>
@@ -721,21 +721,28 @@ export default {
             }
             .n2-img{
                 width: 100%;
+                margin-top: 10px;
             }
             .img-wrap{
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
+                margin-top: 7px;
                 img{
                     width: 225px;
                 }
             }
             .n6-img {
                 width: 100%;
+                margin-top: 7px;
+            }
+            .n8-img{
+                margin-top: 16px;
             }
             .n4-img{
                 width: 300px;
                 cursor: pointer;
+                margin-top: 24px;
             }
         }
     }
