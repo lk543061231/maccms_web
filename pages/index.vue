@@ -727,6 +727,7 @@ export default {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
+                height: 80px;
                 margin-top: 7px;
                 img{
                     width: 225px;
