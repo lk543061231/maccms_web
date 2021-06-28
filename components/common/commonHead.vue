@@ -159,10 +159,8 @@ export default {
         document.documentElement.scrollTop ||
         window.pageYOffset ||
         document.body.scrollTop;
-      console.log(scrollTop);
       let head = this.$refs.head;
       if (scrollTop > 110) {
-        console.log(head.className);
         head.className = "head_container flex-between-center slideUp";
       } else {
         head.className = "head_container flex-between-center";
@@ -189,7 +187,7 @@ export default {
 }
 .head_container {
   width: 100%;
-  min-width: 1630px;
+  min-width: 1300px;
   height: 118px;
   padding: 32px 58px 32px 62px;
   position: absolute;

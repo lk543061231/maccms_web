@@ -5,83 +5,109 @@
      <div class="page-wrap">
         <div class="home-top">
             <div class="top-content">
-                <p class="p1 f32-c172335">免费开源Maccms Pro版</p>
+                <p class="p1 f32-c172335">免费开源MacCMS Pro版</p>
                 <p class="p2 f60-c172335">已成为全球影视站长首选！</p>
                 <p class="p3">
                     <span class="p3-s1 f28-cF7502D">{{packageTitle}}</span>
-                    <span class="p3-s3 f28-c172335">版本号（2021.1000.1090)</span>
+                    <span class="p3-s3 f28-c172335">版本号 （{{version}}）</span>
                 </p>
                 <p class="p4 f16-c172335">更新时间（2021-06-27)</p>
                 <div class="package-list">
                     <el-popover
                         placement="bottom"
-                        trigger="hover"
+                        v-model="showPop"
                     >
                         <div class="home-upload-wrap">
-                            <div v-for="(item,index) in  packageUploadList" :key="index">
+                            <div 
+                                v-for="(item,index) in  packageUploadList" :key="index" 
+                                @mouseleave="popChildLeave(index,1)"
+                                @mouseenter="popChildEnter(index,1)">
                                 <el-popover
                                     placement="right"
-                                    trigger="hover"
+                                    v-model="item['showChildPop']"
                                     popper-class="area_popper"
                                 >
-                                    <div class="home-upload-edition" v-if="index!=0">
+                                    <div class="home-upload-edition"
+                                    @mouseleave="popVersionLeave(index,1)"
+                                    @mouseenter="popVersionEnter(index,1)"
+                                    v-if="index!=0">
                                         <p class="hu-item"
                                             v-for="el,eI in packageVersion" :key="eI"
+                                            
                                             @click="toDown(item,eI)" 
                                             >
                                             {{el}}
                                         </p>
                                     </div>
-                                    <div v-else class="home-upload-edition">
+
+                                    <div 
+                                    @mouseleave="popVersionLeave(index,1)"
+                                    @mouseenter="popVersionEnter(index,1)"
+                                    v-else class="home-upload-edition">
                                         <p class="hu-item">近期将发布上线</p>
                                     </div>
+
                                     <p slot="reference" 
                                     class="home-upload-item" 
                                     @mouseleave="packLeave(item,index)"
                                     @mouseenter="packEnete(item,index)">
-                                        {{item.label}} <i :class="hoveIndex===index && 'move-ing'" class="el-icon-right"></i>
+                                        {{item.label}}
+                                        <i :class="hoveIndex===index && 'move-ing'" class="el-icon-right"></i>
                                     </p>
                                 </el-popover>
                             </div>
                         </div>
-                        <p slot="reference" class="pl-item f16-c172335 pl-item-1" >安装包下载 </p>
+                        <p slot="reference" @mouseenter="popEnter(1)" @mouseleave="popLeave" class="pl-item f16-c172335 pl-item-1" >安装包下载 </p>
                     </el-popover>
 
                     <el-popover
                         placement="bottom"
-                        trigger="hover"
+                        v-model="showPopnext"
                     >
                         <div class="home-upload-wrap">
-                            <div v-for="(item,index) in  upgradePackageList" :key="index">
+                            <div 
+                                v-for="(item,index) in upgradePackageList" :key="index" 
+                                @mouseleave="popChildLeave(index,2)"
+                                @mouseenter="popChildEnter(index,2)">
                                 <el-popover
                                     placement="right"
-                                    trigger="hover"
+                                    v-model="item['showChildPop']"
                                     popper-class="area_popper"
                                 >
-                                    <div class="home-upload-edition" v-if="index!=0">
+                                    <div class="home-upload-edition"
+                                    @mouseleave="popVersionLeave(index,2)"
+                                    @mouseenter="popVersionEnter(index,2)"
+                                    v-if="index!=0">
                                         <p class="hu-item"
                                             v-for="el,eI in packageVersion" :key="eI"
+                                            
                                             @click="toDown(item,eI)" 
                                             >
                                             {{el}}
                                         </p>
                                     </div>
-                                    <div v-else class="home-upload-edition">
+
+                                    <div 
+                                    @mouseleave="popVersionLeave(index,2)"
+                                    @mouseenter="popVersionEnter(index,2)"
+                                    v-else class="home-upload-edition">
                                         <p class="hu-item">近期将发布上线</p>
                                     </div>
+
                                     <p slot="reference" 
                                     class="home-upload-item" 
                                     @mouseleave="packLeave(item,index)"
                                     @mouseenter="packEnete(item,index)">
-                                        {{item.label}} <i :class="hoveIndex===index && 'move-ing'" class="el-icon-right"></i>
+                                        {{item.label}}
+                                        <i :class="hoveIndex===index && 'move-ing'" class="el-icon-right"></i>
                                     </p>
                                 </el-popover>
                             </div>
                         </div>
-                        <p slot="reference" class="pl-item f16-c172335 pl-item-2" >升级包下载 </p>
+                        <p slot="reference" @mouseenter="popEnter(2)" @mouseleave="popLeave" class="pl-item f16-c172335 pl-item-2" >升级包下载 </p>
                     </el-popover>
+
                     
-                    <!-- <p class="pl-item f16-c172335 pl-item-2">升级包下载 </p> -->
                     <el-popover
                         placement="bottom"
                         trigger="hover"
@@ -90,7 +116,7 @@
                             <p class="home-deploy-1">支持系统：Windows、Mac、Linux部署环境：PHP（5.6+）+MySql(5.5+)</p>
                             <p class="home-deploy-1">PHP必须在非安全模式下运行</p>
                         </div>
-                        <p slot="reference" class="pl-item f16-c172335 pl-item-2">部署详情 </p>
+                        <p slot="reference" @mouseenter="popEnter(3)" class="pl-item f16-c172335 pl-item-2">部署详情 </p>
                     </el-popover>
                 </div>
             </div>
@@ -108,7 +134,7 @@
         <div class="content bg1">
             <img src="@/assets/images/home/home-p2.png" class="p2-img">
             <p class="f38-c172335">Pro版UI设计 交互体验大更新</p>
-            <p class="f20-c172335 mt20">永久免费开源专业影视MACCMS Pro版</p>
+            <p class="f20-c172335 mt20">永久免费开源专业影视MacCMS Pro版</p>
             <p class="f20-c8F8F8F mt30">新版本默认模版对应用户体验，UI，UX都是的最先反馈出平台高 留存的核心因素，能够大幅度提神站长的盈利目标。</p>
             <div class="con-list mt30">
                 <div class="con-item" v-for="(item,index) in conList" :key="index">
@@ -155,21 +181,24 @@
             </div>
         </div>
     </div>
-    <div class="notice" v-if="false">
+    <div class="notice" v-if="showNotice">
         <div class="notice-wrap">
-            <p>重要公告 谨防诈骗</p>
-            <p>近期发现不法份子冒充Maccms官方进行诈骗，合作伙伴务必小心！可以通过下方链接进入官网群频道</p>
-            <p>
+            <img class="n7-img" src="@/assets/images/home/home-n7.png" >
+            <img class="n1-img" src="@/assets/images/home/home-n1.png" @click="showNotice=false">
+            <p class="p1">重要公告 谨防诈骗</p>
+
+            <p class="p2 mt20">近期发现不法份子冒充MacCMS官方进行诈骗，合作伙伴务必小心！可以通过下方链接进入官网群频道</p>
+            <p class="p3 mt10">
                 <i class="el-icon-warning-outline"></i>
                 以下是冒充官方诈骗信息（擦亮双眼 请勿轻信）
             </p>
-            <div>
-                <p>域名：MacCms.la</p>
-                <p>管理员：甜甜</p>
-                <p>TG群：开源cms交流群</p>
-                <p>GitHub地址：https://github.com/magicblack</p>
+            <img class="n2-img mt20" src="@/assets/images/home/home-n2.png" >
+            <div class="img-wrap mt10" >
+                <img class="n5-img" src="@/assets/images/home/home-n5.png" >
+                <img class="n3-img" src="@/assets/images/home/home-n3.png" >
             </div>
-            <div></div>
+            <img class="n6-img mt10" src="@/assets/images/home/home-n6.png" >
+            <img class="n4-img mt30" src="@/assets/images/home/home-n4.png" @click="jump">
         </div>
     </div>
 
@@ -188,9 +217,15 @@ export default {
     },
     data(){
         return{
+            showPop:false,
+            showPopnext:false,
+            showChildPop:false,
             lookMove:false,
             hoveIndex:'',
             packageTitle:'V10',
+            version:'2021.1000.1090',
+            inOne:false,
+            inTwo:false,
             packageList:[
                     {label:'安装包下载',value:0},
                     {label:'升级包下载',value:1},
@@ -199,46 +234,54 @@ export default {
             packageVersion:[
                 '官方下载','Github','Jsdelivr'
             ],
+            // 安装包
             packageUploadList:[
                 {
                     label:'Pro版',
-                    value:0,
+                    version:'近期发布',
                     officialDown:'',
                     gitDown:'',
                     jsDown:'',
+                    showChildPop:false,
                 },{
                     label:'V10',
-                    value:0,
-                    officialDown:'',
-                    gitDown:'https://down.maccms.pro/v10/maccms_v10_latest_full.zip',
-                    jsDown:'',
+                    version:'2021.1000.1090',
+                    officialDown:'https://down.maccms.pro/v10/maccms_v10_latest_full.zip',
+                    gitDown:'https://github.com/maccmspro/',
+                    jsDown:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.1090_full.zip',
+                    showChildPop:false,
                 },{
                     label:'V8',
-                    value:0,
-                    officialDown:'',
-                    gitDown:'https://down.maccms.pro/v8/maccms_v8_latest_full.zip',
-                    jsDown:'',
+                    version:'2021.1050',
+                    officialDown:'https://down.maccms.pro/v8/maccms_v8_latest_full.zip',
+                    gitDown:'https://github.com/maccmspro/',
+                    jsDown:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v8_v2021.1050_full.zip',
+                    showChildPop:false,
                 }
             ],
+            // 升级包
             upgradePackageList:[
                 {
                     label:'Pro版',
-                    value:0,
+                    version:'近期发布',
                     officialDown:'',
                     gitDown:'',
                     jsDown:'',
+                    showChildPop:false,
                 },{
                     label:'V10',
-                    value:0,
-                    officialDown:'',
-                    gitDown:'https://down.maccms.pro/v10/maccms_v10_latest_update.zip',
-                    jsDown:'',
+                    version:'2021.1000.1090',
+                    officialDown:'https://down.maccms.pro/v10/maccms_v10_latest_update.zip',
+                    gitDown:'https://github.com/maccmspro/',
+                    jsDown:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.1090_update.zip',
+                    showChildPop:false,
                 },{
                     label:'V8',
-                    value:0,
-                    officialDown:'',
-                    gitDown:'https://down.maccms.pro/v8/maccms_v8_latest_update.zip',
-                    jsDown:'',
+                    version:'2021.1050',
+                    officialDown:'https://down.maccms.pro/v8/maccms_v8_latest_update.zip',
+                    gitDown:'https://github.com/maccmspro/',
+                    jsDown:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v8_v2021.1050_update.zip',
+                    showChildPop:false,
                 }
             ],
             stepList:[
@@ -272,12 +315,70 @@ export default {
                     {img:require('@/assets/images/home/home-i5.png'),value:5},
                     // {img:require('@/assets/images/home/home-i6.png'),value:6},
                     {img:require('@/assets/images/home/home-i7.png'),value:7},
-            ]
+            ],
+            showNotice:false
         }
     },
     created(){
+        this.showNotice=true
     },
     methods:{
+        jump(){
+            window.open('https://t.me/maccms_news')
+        },
+        // 外层弹出框
+        popEnter(type){
+            console.log(type)
+            if(type==1){
+                this.showPop=true
+                this.showPopnext=false
+            }else if(type==2){
+                this.showPopnext=true
+                this.showPop=false
+            }else{
+                this.showPop=false
+                this.showPopnext=false
+            }
+            
+        },
+        popLeave(){
+            // this.showPop=false
+        },
+        // 一级弹出框移入
+        popChildEnter(index,type){
+            if(type==1){
+                this.packageUploadList[index].showChildPop=true
+            }else{
+                this.upgradePackageList[index].showChildPop=true
+            }
+            
+        },
+        // 一级弹出框移出
+        popChildLeave(index,type){
+            if(type==1){
+                this.packageUploadList[index].showChildPop=false
+            }else{
+                this.upgradePackageList[index].showChildPop=false
+            }
+        },
+        // 二级弹出框移入
+        popVersionEnter(index,type){
+            if(type==1){
+                this.packageUploadList[index].showChildPop=true
+            }else{
+                this.upgradePackageList[index].showChildPop=true
+            }
+        },
+        // 二级弹出框移出
+        popVersionLeave(index,type){
+            if(type==1){
+                this.packageUploadList[index].showChildPop=false
+                this.showPop=false
+            }else{
+                this.upgradePackageList[index].showChildPop=false
+                this.showPopnext=false
+            }
+        },
         toDown(item,eI){
             if(eI==0){
                 item.officialDown && (window.open(item.officialDown))
@@ -286,9 +387,12 @@ export default {
             }else{
                 item.jsDown && (window.open(item.jsDown))
             }
+            this.showPop=false
+            this.showPopnext=false
         },
         packEnete(item,index){
             this.packageTitle=item.label
+            this.version=item.version
             this.hoveIndex=index
         },
         packLeave(item,index){
@@ -306,11 +410,10 @@ export default {
 
 <style lang="scss" scoped>
 .container{
-    min-width: 1630px;
+    min-width: 1300px;
     .page-wrap{
-    
         .home-top{
-            min-width: 1630px;
+            min-width: 1300px;
             width: 100%;
             height: 710px;
             background: url('@/assets/images/home/home4.png') no-repeat;
@@ -417,7 +520,7 @@ export default {
             
         }
         .content{
-            min-width: 1630px;
+            min-width: 1300px;
             display: flex;
             flex-direction: column;
             padding-top: 50px;
@@ -583,6 +686,54 @@ export default {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 40px 20px;
+            .n7-img{
+                position: absolute;
+                top:-40px;
+                left: 50%; 
+                width: 72px;
+                height: 72px;
+                transform: translateX(-36px);
+            }
+            .n1-img{
+                position: absolute;
+                top:10px;
+                right: 20px;
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
+            }
+            .p1{
+                font-size: 20px;
+                color: #333;
+                font-weight: 500;
+            }
+            .p2{
+                color: #596371;
+                font-size: 16px;
+            }
+            .p3{
+                color: #FF172A;
+                font-size: 16px;
+            }
+            .n2-img{
+                width: 100%;
+            }
+            .img-wrap{
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                img{
+                    width: 225px;
+                }
+            }
+            .n6-img {
+                width: 100%;
+            }
+            .n4-img{
+                width: 300px;
+                cursor: pointer;
+            }
         }
     }
 
