@@ -198,7 +198,9 @@
                 <img class="n3-img" src="@/assets/images/home/home-n3.png" >
             </div>
             <img class="n6-img mt10" src="@/assets/images/home/home-n6.png" >
+            <img style="width:100%" class="n8-img mt10" src="@/assets/images/home/home-n8.png" >
             <img class="n4-img mt30" src="@/assets/images/home/home-n4.png" @click="jump">
+
         </div>
     </div>
 
@@ -748,7 +750,7 @@ export default {
     .home-top{
         height:580px !important;
         .top-content{
-            margin: 140px !important;
+            margin: 140px 20px !important;
         }
         
     }
