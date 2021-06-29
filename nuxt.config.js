@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs'
+import I18N from './config/i18n'
 module.exports = {
     // server: {
     //     https: {
@@ -47,6 +48,7 @@ module.exports = {
         '@nuxtjs/pwa',
         // https://go.nuxtjs.dev/content
         '@nuxt/content',
+        '@/config/i18n',
     ],
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
