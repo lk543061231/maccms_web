@@ -198,7 +198,7 @@
                 <img class="n3-img" src="@/assets/images/home/home-n3.png" >
             </div>
             <img class="n6-img mt10" src="@/assets/images/home/home-n6.png" >
-            <img style="width:100%" class="n8-img " src="@/assets/images/home/home-n8.png" >
+            <img  class="n8-img " src="@/assets/images/home/home-n8.png" >
             <img class="n4-img " src="@/assets/images/home/home-n4.png" @click="jump">
 
         </div>
@@ -738,6 +738,8 @@ export default {
                 margin-top: 7px;
             }
             .n8-img{
+                // width: 100%;
+                width: 460px;
                 margin-top: 16px;
             }
             .n4-img{
