@@ -187,7 +187,7 @@
             <img class="n1-img" src="@/assets/images/home/home-n1.png" @click="showNotice=false">
             <p class="p1">重要公告 谨防诈骗</p>
 
-            <p class="p2 mt20">近期发现不法份子冒充MacCMS官方进行诈骗，合作伙伴务必小心！可以通过下方链接进入官网群频道</p>
+            <p class="p2 mt20">近期发现不法份子冒充MacCMS官方进行诈骗，小伙伴们务必小心！可以通过下方链接进入官网群频道</p>
             <p class="p3 mt10">
                 <i class="el-icon-warning-outline"></i>
                 以下是冒充官方诈骗信息（擦亮双眼 请勿轻信）
