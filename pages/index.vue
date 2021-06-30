@@ -2,7 +2,7 @@
   <div class="container">
     
     <commonHead/>
-     <div class="page-wrap">
+    <div class="page-wrap">
         <div class="home-top">
             <div class="top-content">
                 <p class="p1 f32-c172335">免费开源MacCMS Pro版</p>
@@ -11,7 +11,7 @@
                     <span class="p3-s1 f28-cF7502D">{{packageTitle}}</span>
                     <span class="p3-s3 f28-c172335">版本号 （{{version}}）</span>
                 </p>
-                <p class="p4 f16-c172335">更新时间（2021-06-27)</p>
+                <p class="p4 f16-c172335">更新时间（2021-06-30)</p>
                 <div class="package-list">
                     <el-popover
                         placement="bottom"
