@@ -250,7 +250,7 @@ export default {
                     version:'2021.1000.2000',
                     officialDown:'https://down.maccms.pro/v10/maccms_v10_latest_full.zip',
                     gitDown:'https://github.com/maccmspro/',
-                    jsDown:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.1090_full.zip',
+                    jsDown:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.2000_full.zip',
                     showChildPop:false,
                 },{
                     label:'V8',
