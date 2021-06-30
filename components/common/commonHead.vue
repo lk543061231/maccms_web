@@ -1,7 +1,7 @@
 
 <template>
   <div class="page-wrap">
-    <div class="head_container flex-between-center" ref="head">
+    <div class="head_container flex-between-center" ref="head" >
       <div class="left flex-between-center">
         <div class="logo">
           <img src="~/assets/images/home/logo.png" alt="maccms-pro" />
@@ -13,7 +13,7 @@
             :key="index"
           >
             <p 
-              v-if="index!=1"
+              v-if="index!=1 && index!=3"
               class="menu-name"
               slot="reference"
               @mouseenter="mouseEnter(item,index)"
@@ -28,8 +28,12 @@
               placement="bottom"
               trigger="hover"
             >
-              <div class="app-wrap">
+              <div class="app-wrap" v-if="index==1">
                 <p class="app-item">开发者中心</p>
+              </div>
+              <div class="app-wrap" v-else-if="index==3">
+                <p class="app-item">域名真伪</p>
+                <p class="app-item">漏洞检测</p>
               </div>
               <p 
                 class="menu-name"
@@ -38,10 +42,11 @@
                 @click="selectRouter(item,index)"
                 :class="activeIndex == index && 'is-active'"
               >{{item.label}} 
-
                   <i  class="el-icon-arrow-down"></i>
               </p>
             </el-popover>
+
+
           </div>
         </div>
       </div>
@@ -72,9 +77,7 @@
         </div>
       </div>
     </div>
-    <div class="body-container">
-      <nuxt-child></nuxt-child>
-    </div>
+    
   </div>
 </template>
 
@@ -86,10 +89,10 @@ export default {
       languageSrc: require("~/assets/images/common/common-qiu.png"),
       userSrc: require("~/assets/images/common/common-user.png"),
       menuList:[
-        {label:'首页',value:0,name:'index'},
+        {label:'首页',value:0,name:'index-home'},
         {label:'应用市场',value:1,name:'index'},
         {label:'开发文档',value:2,name:'index'},
-        {label:'域名真伪',value:3,name:'index'},
+        {label:'域名检测',value:3,name:'index-domainDetection'},
         {label:'资源库',value:4,name:'index'},
         {label:'帮助中心',value:5,name:'index'},
       ]
@@ -102,7 +105,7 @@ export default {
         : (this.languageSrc = require("~/assets/images/common/common-qiu.png"));
     },
     selectRouter(item,index){
-      if(index!=0){
+      if(index!=0 && index!=3){
         this.$message.info("敬请期待");
         return
       }
