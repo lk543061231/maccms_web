@@ -225,7 +225,7 @@ export default {
             lookMove:false,
             hoveIndex:'',
             packageTitle:'V10',
-            version:'2021.1000.1090',
+            version:'2021.1000.2000',
             inOne:false,
             inTwo:false,
             packageList:[
@@ -247,7 +247,7 @@ export default {
                     showChildPop:false,
                 },{
                     label:'V10',
-                    version:'2021.1000.1090',
+                    version:'2021.1000.2000',
                     officialDown:'https://down.maccms.pro/v10/maccms_v10_latest_full.zip',
                     gitDown:'https://github.com/maccmspro/',
                     jsDown:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.1090_full.zip',
@@ -272,7 +272,7 @@ export default {
                     showChildPop:false,
                 },{
                     label:'V10',
-                    version:'2021.1000.1090',
+                    version:'2021.1000.2000',
                     officialDown:'https://down.maccms.pro/v10/maccms_v10_latest_update.zip',
                     gitDown:'https://github.com/maccmspro/',
                     jsDown:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.1090_update.zip',
