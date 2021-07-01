@@ -10,13 +10,13 @@ module.exports = {
     // Global page headers: https://go.nuxtjs.dev/config-head
     proxy: {
         '/api': {
-          target: 'https://www.maccms.pro',
-          // target: 'http://gya.c',
-          // pathRewrite: {
-          //   '^/api': '/v1'
-          // },
-          secure: false,
-          changeOrigin: true
+            target: 'https://www.maccms.pro',
+            // target: 'http://gya.c',
+            // pathRewrite: {
+            //   '^/api': '/v1'
+            // },
+            secure: false,
+            changeOrigin: true
         }
     },
     head: {

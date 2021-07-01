@@ -85,24 +85,24 @@
 export default {
   data() {
     return {
-      activeIndex: 0,
+      activeIndex:  0,
       languageSrc: require("~/assets/images/common/common-qiu.png"),
       userSrc: require("~/assets/images/common/common-user.png"),
       menuList:[
-        {label:this.$t('home.首页'),value:0,name:'index-home'},
-        {label:'应用市场',value:1,name:'index'},
-        {label:'开发文档',value:2,name:'index-devDocument'},
-        {label:'域名检测',value:3,name:'index-domainDetection'},
-        {label:'资源库',value:4,name:'index'},
-        {label:'帮助中心',value:5,name:'index'},
+        {label:'首页',value:0,name:'index'},
+        {label:'应用市场',value:1,name:'applicationMarket'},
+        {label:'开发文档',value:2,name:'devDocument'},
+        {label:'域名检测',value:3,name:'domainDetection'},
+        {label:'资源库',value:4,name:''},
+        {label:'帮助中心',value:5,name:''},
       ]
     };
   },
-   computed: {
-      language () {
-        return this.$i18n.locale === 'en'
-      },
-    },
+  computed: {
+     language () {
+       return this.$i18n.locale === 'en'
+     },
+  },
   methods: {
     visibleChange(bol) {
       bol
@@ -115,7 +115,7 @@ export default {
         return
       }
       this.$router.push({name:item.name})
-      localStorage.setItem('routerName',item.name)
+      sessionStorage.setItem('routerName',item.name)
     },
     mouseEnter(item,index){
       this.activeIndex=index
@@ -127,9 +127,6 @@ export default {
       this.$message.info("敬请期待");
     },
     changeLang(lang){
-      // localStorage.setItem('VueI18n-lang', lang)
-      // this.$i18n.locale = lang
-      // this.$store.commit('SET_LANG',lang)
       this.$message.info("敬请期待");
     },
     subMenuSelect(index, indexPath) {
@@ -165,9 +162,13 @@ export default {
       });
     }
   },
-  created() {
-  },
   mounted() {
+    this.menuList.forEach((item,index)=>{
+      let routerName=sessionStorage.getItem('routerName')
+      if(routerName==item.name){
+        this.activeIndex=index
+      }
+    })
     document.addEventListener("scroll", e => {
       var scrollTop =
         document.documentElement.scrollTop ||
