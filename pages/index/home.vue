@@ -309,7 +309,7 @@ export default {
                     // {img:require('@/assets/images/home/home-i6.png'),value:6},
                     {img:require('@/assets/images/home/home-i7.png'),value:7},
             ],
-            showNotice:false
+            showNotice:true
         }
     },
     created(){
