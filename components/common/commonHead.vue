@@ -32,7 +32,8 @@
                 <p class="app-item">开发者中心</p>
               </div>
               <div class="app-wrap" v-else-if="index==3">
-                <p class="app-item" @click="$router.push('/domainDetection')">域名真伪</p>
+                <!--  @click="$router.push('/domainDetection')" -->
+                <p class="app-item">域名真伪</p>
                 <p class="app-item">漏洞检测</p>
               </div>
               <p 
