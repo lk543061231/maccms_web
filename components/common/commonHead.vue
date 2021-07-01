@@ -1,7 +1,7 @@
 
 <template>
   <div class="page-wrap">
-    <div class="head_container flex-between-center" ref="head" >
+    <div class="head_container flex-between-center" ref="head" :class="slide && 'slideUp'">
       <div class="left flex-between-center">
         <div class="logo">
           <img src="~/assets/images/home/logo.png" alt="maccms-pro" />
@@ -85,6 +85,7 @@
 export default {
   data() {
     return {
+      slide:false,
       activeIndex:  0,
       languageSrc: require("~/assets/images/common/common-qiu.png"),
       userSrc: require("~/assets/images/common/common-user.png"),
@@ -174,11 +175,10 @@ export default {
         document.documentElement.scrollTop ||
         window.pageYOffset ||
         document.body.scrollTop;
-      let head = this.$refs.head;
       if (scrollTop > 110) {
-        head.className = "head_container flex-between-center slideUp";
+        this.slide=true
       } else {
-        head.className = "head_container flex-between-center";
+        this.slide=false
       }
     });
 

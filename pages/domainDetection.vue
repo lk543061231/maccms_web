@@ -102,8 +102,8 @@ export default {
   },
   methods: {
     check(){
-      this.showResult=true
       if(this.activeIndex==1){
+        this.showResult=true
         // 域名检测
         var testDomainReg = /^mac(cms.com|cms.net|cms.pro|videojs.com)$/;
         if(testDomainReg.test(this.domainVal)){
