@@ -98,10 +98,11 @@ export default {
       this.showResult=true
       if(this.activeIndex==1){
         // 域名检测
-        if(this.passUrl.indexOf(this.domainVal)==-1){
-          this.checkResult=false
+        var testDomainReg = /^mac(cms.com|cms.net|cms.pro|videojs.com)$/;
+        if(testDomainReg.test(this.domainVal)){
+            this.checkResult=true
         }else{
-          this.checkResult=true
+            this.checkResult=false
         }
       }else{
         // 漏洞检测
