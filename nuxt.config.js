@@ -8,6 +8,17 @@ module.exports = {
     //     }
     // },
     // Global page headers: https://go.nuxtjs.dev/config-head
+    proxy: {
+        '/api': {
+          target: 'https://www.maccms.pro',
+          // target: 'http://gya.c',
+          // pathRewrite: {
+          //   '^/api': '/v1'
+          // },
+          secure: false,
+          changeOrigin: true
+        }
+    },
     head: {
         title: 'MacCMS Pro',
         meta: [
@@ -30,7 +41,8 @@ module.exports = {
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
-        '@/plugins/element-ui'
+        '@/plugins/element-ui',
+        '~/plugins/i18n.js',
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
@@ -48,9 +60,15 @@ module.exports = {
         // https://go.nuxtjs.dev/content
         '@nuxt/content',
     ],
+    router: {
+        // customize nuxt.js router (vue-router).
+        middleware: 'i18n' // middleware all pages of the application
+    },
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
-    axios: {},
+    axios: {
+        proxy: true
+    },
 
     // PWA module configuration: https://go.nuxtjs.dev/pwa
     pwa: {

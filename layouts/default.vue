@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nuxt/>
+    <Nuxt  keep-alive/>
     <!-- <commonLoading v-show="loadingShow"/> -->
   </div>
 </template>

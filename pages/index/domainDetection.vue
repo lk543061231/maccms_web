@@ -28,14 +28,14 @@
               placeholder="请输入检测域名"
             ></el-input>
           </div>
-          <div class="btn">检测一下</div>
+          <div class="btn" @click="check">检测一下</div>
         </div>
         <div class="tip">
           市面已有很多假冒MACCMS平台，为保证您能找到正版网址可输入即可辨别真伪哦！
         </div>
       </div>
     </div>
-    <div class="domain-bottom">
+    <div class="domain-bottom" v-if="showResult">
       <!-- <div class="success">
         <div class="img-div">
           <img src="~/assets/images/common/domain-success.png" />
@@ -44,10 +44,13 @@
       </div> -->
       <div class="error">
         <div class="img-div">
-          <img src="~/assets/images/common/domain-error.png" />
+          <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
+          <img v-else src="~/assets/images/common/domain-error.png" />
         </div>
-        <p class="text error-color">此域名是假冒域名!</p>
-        <div class="btns-div">
+
+        <p class="text success-color" v-if="checkResult">此域名是官方域名</p>
+        <p class="text error-color"  v-else>此域名是假冒域名!</p>
+        <div class="btns-div" v-if="!checkResult">
           <p class="text">官方域名</p>
           <div class="btns flex-between-center">
             <div class="website-btn">www.maccms1.pro</div>
@@ -69,9 +72,61 @@ export default {
     return {
       activeIndex: 1,
       domainVal: "",
+      passUrl:[
+        'maccms.com',
+        'maccms.net',
+        'maccms.pro',
+        'macvideojs.com',
+      ],
+      checkResult:'',
+      showResult:false
     };
   },
+  created(){
+    let query=this.$route.query
+    if(query && query.activeIndex){
+      this.activeIndex=query.activeIndex
+    }
+  },
+  watch:{
+    $route:function(val){
+      this.activeIndex=val.query.activeIndex
+    }
+  },
   methods: {
+    check(){
+      this.showResult=true
+      if(this.activeIndex==1){
+        // 域名检测
+        if(this.passUrl.indexOf(this.domainVal)==-1){
+          this.checkResult=false
+        }else{
+          this.checkResult=true
+        }
+      }else{
+        // 漏洞检测
+        return
+        let t=new Date().getTime()
+        this.$axios.post(this.domainVal+'/static/js/admin_common.js?t='+t,'no-referrer').then(res => {
+          console.log(res)
+        })
+        // this.ajaxRquest(this.domainVal+'/static/js/admin_common.js?t='+t,(res)=>{
+        //   console.log(res)
+        // })
+      }
+    },
+    ajaxRquest(url,callback){
+      var xhr=new XMLHttpRequest();
+        xhr.open('GET',url,false);
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4){
+                if(xhr.status==200 || xhr.status==304){
+                    callback(xhr.responseText);
+                }
+            }
+        }
+        xhr.send()
+    },
     choiceSearch(i) {
       this.activeIndex = i;
     },
@@ -172,8 +227,8 @@ export default {
   }
   .domain-bottom {
     width: 100%;
-    height: 618px;
-    padding-top: 40px;
+    // height: 618px;
+    padding: 40px 0;
     .success,
     .error {
       @include flex-center;

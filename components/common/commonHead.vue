@@ -32,9 +32,8 @@
                 <p class="app-item">开发者中心</p>
               </div>
               <div class="app-wrap" v-else-if="index==3">
-                <!--  @click="$router.push('/domainDetection')" -->
-                <p class="app-item">域名真伪</p>
-                <p class="app-item">漏洞检测</p>
+                <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:1}})">域名真伪</p>
+                <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:2}})">漏洞检测</p>
               </div>
               <p 
                 class="menu-name"
@@ -58,13 +57,13 @@
           </div>
           <el-dropdown-menu slot="dropdown" >
             <el-dropdown-item style="width:100px">
-              <span @click="changeLang(1)">中文简体</span>
+              <span @click="changeLang('zh')">中文简体</span>
             </el-dropdown-item>
             <el-dropdown-item>
-              <span  @click="changeLang(1)">中文繁体</span>
+              <span  @click="changeLang('zh-tw')">中文繁体</span>
             </el-dropdown-item>
             <el-dropdown-item>
-              <span @click="changeLang(1)">English</span>
+              <span @click="changeLang('en')">English</span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -90,15 +89,20 @@ export default {
       languageSrc: require("~/assets/images/common/common-qiu.png"),
       userSrc: require("~/assets/images/common/common-user.png"),
       menuList:[
-        {label:'首页',value:0,name:'index-home'},
+        {label:this.$t('home.首页'),value:0,name:'index-home'},
         {label:'应用市场',value:1,name:'index'},
-        {label:'开发文档',value:2,name:'index'},
+        {label:'开发文档',value:2,name:'index-devDocument'},
         {label:'域名检测',value:3,name:'index-domainDetection'},
         {label:'资源库',value:4,name:'index'},
         {label:'帮助中心',value:5,name:'index'},
       ]
     };
   },
+   computed: {
+      language () {
+        return this.$i18n.locale === 'en'
+      },
+    },
   methods: {
     visibleChange(bol) {
       bol
@@ -106,11 +110,12 @@ export default {
         : (this.languageSrc = require("~/assets/images/common/common-qiu.png"));
     },
     selectRouter(item,index){
-      if(index!=0 ){
+      if(index!=0 && index!=3 && index!=2){
         this.$message.info("敬请期待");
         return
       }
       this.$router.push({name:item.name})
+      localStorage.setItem('routerName',item.name)
     },
     mouseEnter(item,index){
       this.activeIndex=index
@@ -121,7 +126,10 @@ export default {
     register(){
       this.$message.info("敬请期待");
     },
-    changeLang(){
+    changeLang(lang){
+      // localStorage.setItem('VueI18n-lang', lang)
+      // this.$i18n.locale = lang
+      // this.$store.commit('SET_LANG',lang)
       this.$message.info("敬请期待");
     },
     subMenuSelect(index, indexPath) {

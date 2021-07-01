@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container" v-loading="loading">
     <commonHead/>
-    <div class="body-container">
+    <div class="body-container" >
       <nuxt-child></nuxt-child>
     </div>
     <commonFoot/>
@@ -16,12 +16,30 @@ export default {
         commonHead,
         commonFoot
     },
+    data(){
+      return{
+        loading:true
+      }
+    },
     beforeCreate(){
-        this.$router.push({
+       this.$router.push({
             name:'index-home'
         })
+        
     },
     created(){
+      this.loading=false
+      // if(process.browser){
+      //   if(window.localStorage.getItem('routerName')){
+      //      this.$router.push({
+      //       name:window.localStorage.getItem('routerName')
+      //     })
+      //   }else{
+      //     this.$router.push({
+      //       name:'index-home'
+      //   })
+      //   }
+      // }
     },
  
 }
@@ -30,6 +48,8 @@ export default {
 <style lang="scss" scoped>
 .container{
     min-width: 1300px;
-
+    .body-container{
+      min-height: 400px;
+    }
 }
 </style>

@@ -1,0 +1,179 @@
+{
+  "links": {
+    "home": "Home"
+  },
+  "message": {
+    "success": "Congratulations, your submission was successful",
+    "warning": "Submit failed, please check the input",
+    "chinese": "Chinese",
+    "english": "English"
+  },
+  "home": {
+    "首页": "home",
+    "模版展示": "Template",
+    "banner1Title": "AceBet <br />Pioneer in High-End customized platforms",
+    "banner1Desc": "2020 AceBet brand ambassador - Kylian Mbappe",
+    "banner1Btn":"see more",
+    "banner2Title": "one-on-one deep dive into customer needs",
+    "banner2Desc": "BAT senior product manager digs into customer needs, we make sure to meet all your desires for customized products",
+    "banner3Title": "we take the lead with the most advanced business models",
+    "banner3Desc": "and Innovat in everyway possiable, we take you to build your empire with every step of the way",
+    "product-1-title": "我们的致力于在于提供给客户最佳水位的赛事\n以及每场比赛快速结算的优势",
+    "product-1-desc": "在X电竞平台，客户选择自己喜欢的队伍进行投注，在这里，客户可以得到最公平，\n公正，公开的赛过结算，拥有最佳的电竞投注体验",
+    "Diversified-title": "多元化游戏和年度精选赛事",
+    "Diversified-desc": "精选游戏和每月超百场赛事",
+    "info":{
+      "title1": "高杀数商户高收益",
+      "title2": "提供最多的滚球和\n水位最佳赛事",
+      "title3": "强大的运营后台和\n最全面的数据分析报表",
+      "title4": "即时结算注单",
+      "title5": "支持免转钱包\n简单快捷整合"
+    },
+    "build":{
+      "title1": "X电竞拥有最全面",
+      "title2": "最佳水位赛事",
+      "desc": "X电竞平台客户可以现场观看每场赛事直播，可以得到最公平、公正、公开 的赛事结算，\n拥有最佳的电竞投注体验！",
+      "desc1": "游戏赛事信息",
+      "desc2": "合作游戏厂商",
+      "desc3": "赛事水位",
+      "desc4": "支持货币"
+    },
+    "spot1":{
+      "title1": "WebSocket/API整合",
+      "desc1": "简单便捷整合",
+      "title2": "成员报告分析 ",
+      "desc2": "详细数据表示",
+      "title3": "7*24小时全天候 ",
+      "desc3": "客服服务"
+    }
+  },
+  "Games": {
+    "Games": "Games",
+    "真人": "Live Dealer",
+    "电子": "Slots",
+    "彩票": "Lottery",
+    "棋牌": "Chess Game",
+    "体育": "Sports",
+    "电竞": "E-Sports",
+    "捕鱼": "Fishing"
+  },
+  "ContactUs": {
+    "ContactUs": "Contact Us",
+    "T": "Contact us for business negotiation",
+    "D": "For related games, activities, cooperation and other matters, consult us and we will get in touch with you as soon as possible",
+    "B": "submit",
+    "T1": "Feel Interested? Contact us at anytime",
+    "D1": "Do you want to know us, our senior team and how do we operate? Contact us and let us create brilliant together.",
+    "input0": "Your name",
+    "inputP0": "please enter your name",
+    "input1": "Your Skype\\Telegram",
+    "inputP1": "please enter your Skype\\Telegram",
+    "input2": "Your WeChat / QQ",
+    "inputP2": "Please enter your WeChat / QQ",
+    "input3": "Your contact number",
+    "inputP3": "please enter your contact number"
+  },
+  "about": {
+    "title": "About",
+    "GC": "UK Gambling Commission",
+    "MGA": "Malta Gaming Authority",
+    "BVI": "The British Virgin Islands, B.V.I",
+    "菲律宾": "Philippine Amusement and Gaming Corporation"
+  },
+  "games": {
+    "B": "One time Integration. Wins all the unlimited possibilities",
+    "T": "Games",
+    "AG": "the leading brand in Asia. Baccarat, Three card brag, Sic Bo and many other games",
+    "BBIN": "Most Influential Live Dealer Platform",
+    "OG": "Close to Asian cultural market",
+    "ALLBET": "The first multi-table baccarat",
+    "SunBet": "Interactive all-in-one pleasure",
+    "Ebet": "Play Yibo and enjoy the wealthy life",
+    "VR彩票": "VR Lottery",
+    "SG-WIN彩票": "SG-WIN Lottery",
+    "IG彩票": "IG Lottery",
+    "FishingTAG": "AG Fishing King",
+    "FishingDAG": "Top Fishing Ground Gets Rich with single shoots of cannon",
+    "FishingTPT": "PT Deep Sea Winner",
+    "FishingDPT": "Fresh Fishing Pleasure",
+    "FishingTBB": "BB fishing master",
+    "FishingDBB": "master of fishing tools all within your reach",
+    "FishingTBBdr": "BB fishing expert",
+    "FishingDBBdr": "double the pleasure of diversified skills",
+    "FishingTMW": "MW Thousand Cannon Fishing",
+    "FishingDMW": "400 times maximum bonus",
+    "FishingTGG": "GG fishing world",
+    "FishingDGG": "every day catchs and every day wins"
+  },
+
+  "footer": {
+    "title": "AceBet has legal licenses issued by the Malta Gaming Authority (MGA) in Europe, the British GC Gambling Commission and the Philippine Amusement and Gaming Corporation (PAGCOR).<br /> Registered in the British Virgin Islands, it is a legal gaming company recognized by the International Gaming Association. Before registering and entertaining, make sure you are at least 18 years old!"
+  },
+  "header":{
+    "选择您的国家/地区":"Choose your country",
+    "亚太":"Asia",
+    "北美洲":"United States",
+    "United States":"United States",
+    "English":"English",
+    "中国大陆":"China",
+    "中国大陆|简体中文": "United States | English",
+    "简体中文": "English",
+    "首页": "Home",
+    "产品介绍": "Product",
+    "关于我们": "About us",
+    "联系我们": "Contact us"
+  },
+  "简体中文": "Chinese",
+
+
+
+  "X-SPORT": "ABOUT X GAMING",
+  "关于X电竞": "ABOUT X GAMING",
+  "关于X电竞Desc": "The package network service provides a full range of technical guidance and services for new business partners, saving partners the financial burden on the technical level and company construction levelTherefore, to provide customers with a tailor-made package network service project is our professional strength!",
+
+
+  "FIVE ADVANTAGES": "FIVE ADVANTAGES",
+  "五大优势": "FIVE ADVANTAGES",
+  "advantage":{
+    "title1":"最佳五分钟极速开站电竞赔率的赛事，快速\n结算",
+    "title2":"更多盘口选择，连串过关和\n冠军盘投注等",
+    "title3":"经验丰富电竞操盘团队打\n造风险管理",
+    "title4":"快速稳定系统，下注过程\n速度双倍",
+    "title5":"兼容各和设备，支持PC\n手机和平板",
+    "title6":"最佳的电竞产品体验"
+  },
+
+  "ONE-SPOT": "ONE-STOP PACKAGE NETWORK SERVICE",
+  "世界最齐 一站式包网服务": "ONE-STOP PACKAGE NETWORK SERVICE",
+  "spot":{
+    "单一免转钱包":"SINGLE NO-TRANSFER WALLET",
+    "玩家无需转换额度 登陆直接玩，畅玩各大游戏平台":"Players do not need to switch quota Log in and play directly, enjoy all major game platforms",
+    "最智能的APP推信功能":"THE SMARTEST APP PUSH FUNCTION",
+    "玩家钱包余额更动（放款/出款/优惠到账） 系统自动发送APP推送到玩家手机，娱乐 城省人力，玩家更满意":"Player wallet balance changes (disbursement/withdrawal/discount credit) The system automatically sends APP pushes to the player’s mobile phone, the entertainment city saves manpower, and the player is more satisfied",
+    "游戏推荐系统":"GAME RECOMMENDATION SYSTEM",
+    "平台系统在玩家登入后，自动推荐玩家喜好游戏，全网唯一玩家个人化大厅首页，像淘宝猜客户喜欢商品的机制":"After the player logs in, the platform system automatically recommends the game that the player likes, the only player in the entire network personalizes the lobby homepage, like the mechanism of Taobao guessing the product the customer likes",
+    "最赚钱的社交比赛系统":"THE MOST PROFITABLE SOCIAL GAME SYSTEM",
+    "平台内部举办比赛，依照玩家投注量/输赢金额，让玩家间相互竞技，前台排行榜，时时更新最新数据，周期时间到，彩金自动派发":"Competitions are held inside the platform. Players can compete with each other according to the amount of bets/wins and losses of the players. The front desk rankings are updated with the latest data. When the cycle time is up, the prizes are automatically distributed",
+    "防劫持娱乐APP":"HIJACKING ENTERTAINMENT APP",
+    "通信加密，数据转输安全可靠，玩家下载 APP到的机上不怕被劫持，不怕玩家流逝":"The communication is encrypted, and the data transmission is safe and reliable. Players are not afraid of being hijacked or passing by on the machine they download APP.",
+    "最流畅的平台线路":"THE SMOOTHEST PLATFORM LINE",
+    "专业团队，为平台防御与访问速度，维 持最佳的用户体验":"Professional team to maintain the best user experience for platform defense and access speed",
+    "有合法娱乐执照":"HAVE A LEGAL ENTERTAINMENT LICENSE",
+    "合法资质需高额资金担保，政府条件审 核，与有牌照的我们合作,保障您平台运 营的质量":"Legal qualifications require high capital guarantees, government conditions are reviewed, and we have a license to cooperate to ensure the quality of your platform operations",
+    "实体物业投资":"PHYSICAL PROPERTY INVESTMENT",
+    "冠赢为首家包网公司，开创包网特区 ,投资实体房地产，提供客户公司，舒 适的办公住宿场地":"Guanying is the first package network company to create a package network special zone, invest in physical real estate, provide client companies, and comfortable office accommodation"
+  },
+  "GIVE YOU THE BEST": "BAONET GIVES YOU THE BEST",
+  "游戏API和包网 都给你最好的": "BAONET GIVES YOU THE BEST",
+  "平台娱乐事业 更简单更上心": "Platform entertainment business is simpler and more attentive",
+  "展会得奖冠军": "Exhibition winner",
+  "Exhibition winner": "Exhibition winner",
+  "300家合作厂商": "300 cooperative manufacturers",
+  "为什么选择我们": "WHY CHOOSE US",
+  "WHY CHOOSE US": "WHY CHOOSE US",
+  "闪电般的快速更新": "Lightning fast update",
+  "比赛数据实时同步，系统能在最短的时间内做出反馈，给用户最好的": "Real-time synchronization of game data, the system can do it in the shortest time Give feedback to give users",
+
+  "一站式包网方案": "One-stop package network solution",
+  "平台完整配套 市场领先 包网服务": "Platforms, venues, complete supporting facilities,market-leading network services"
+}
