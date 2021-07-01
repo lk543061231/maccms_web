@@ -9,12 +9,11 @@ module.exports = {
     // },
     // Global page headers: https://go.nuxtjs.dev/config-head
     proxy: {
-        '/api': {
+        '/yapi': {
             target: 'https://www.maccms.pro',
-            // target: 'http://gya.c',
-            // pathRewrite: {
-            //   '^/api': '/v1'
-            // },
+            pathRewrite: {
+                '^/yapi': '/yapi'
+            },
             secure: false,
             changeOrigin: true
         }

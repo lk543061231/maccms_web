@@ -37,27 +37,46 @@
         </div>
       </div>
       <div class="domain-bottom" v-if="showResult">
-        <!-- <div class="success">
-          <div class="img-div">
-            <img src="~/assets/images/common/domain-success.png" />
-          </div>
-          <p class="text success-color">此域名是官方域名</p>
-        </div> -->
-        <div class="error">
+
+        <div class="error" 
+        v-if="showTxt"
+        >
           <div class="img-div">
             <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
             <img v-else src="~/assets/images/common/domain-error.png" />
           </div>
 
-          <p class="text success-color" v-if="checkResult">此域名是官方域名</p>
-          <p class="text error-color"  v-else>此域名是假冒域名!</p>
-          <div class="btns-div" v-if="!checkResult">
+          <div v-if="activeIndex==1">
+            <p class="text success-color" v-if="checkResult">此域名是官方域名</p>
+            <p class="text error-color"  v-else>此域名是假冒域名!</p>
+          </div>
+          <div v-if="activeIndex==2">
+            <p class="text success-color" v-if="checkResult">恭喜您，检测的网站版本不存在漏洞</p>
+            <div class="text error-color"  v-else>
+              <p v-if="code==1001">输入地址错误，无法进行检测</p>
+              <div v-else>
+                <p >当前网址已提供最新版本</p>
+                <p >网站版本异常存在后门漏洞挂马风险 请立即升级版本</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="btns-div" v-if="!checkResult && activeIndex==1">
             <p class="text">官方域名</p>
             <div class="btns flex-between-center">
               <div class="website-btn">maccms.com</div>
               <div class="website-btn">maccms.net</div>
               <div class="website-btn">maccms.pro</div>
               <div class="website-btn">macvideojs.com</div>
+            </div>
+          </div>
+
+          <div class="btns-div" v-if="!checkResult && activeIndex==2">
+            <p class="text">MacCMS Pro版下载渠道</p>
+            <div class="btns flex-between-center">
+              <div class="website-btn">官方下载</div>
+              <div class="website-btn">Github</div>
+              <div class="website-btn">Jsdelivr</div>
             </div>
           </div>
         </div>
@@ -86,7 +105,11 @@ export default {
         'macvideojs.com',
       ],
       checkResult:'',
-      showResult:false
+      showResult:false,
+      is_fake:false,
+      code:'',
+      loading:false,
+      showTxt:false
     };
   },
   created(){
@@ -112,11 +135,18 @@ export default {
             this.checkResult=false
         }
       }else{
+        this.showResult=true
         // 漏洞检测
-        return
+        // https://www.maccms.pro/yapi/maccms/isfake
+        this.loading=true
         let t=new Date().getTime()
-        this.$axios.post(this.domainVal+'/static/js/admin_common.js?t='+t,'no-referrer').then(res => {
-          console.log(res)
+        this.$axios.post('yapi/maccms/isfake',{url:this.domainVal,t:t}).then(res => {
+          this.code=res.data.code
+          if(res.data.code==1){
+            this.checkResult=!res.data.is_fake
+          }
+          this.loading=false
+          this.showTxt=true
         })
         // this.ajaxRquest(this.domainVal+'/static/js/admin_common.js?t='+t,(res)=>{
         //   console.log(res)
