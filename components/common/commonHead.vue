@@ -105,7 +105,7 @@ export default {
         : (this.languageSrc = require("~/assets/images/common/common-qiu.png"));
     },
     selectRouter(item,index){
-      if(index!=0 && index!=3){
+      if(index!=0 ){
         this.$message.info("敬请期待");
         return
       }
