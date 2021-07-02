@@ -231,16 +231,6 @@ export default {
           }
           this.showTxt=true
         })
-        return
-        this.$axios.post('yapi/maccms/isfake',{url:this.domainVal,t:t}).then(res => {
-          loading.close();
-          this.code=res.data.code
-          if(res.data.code==1){
-            this.checkResult=!res.data.info.is_fake
-          }
-          this.showTxt=true
-        })
-    
       }
     },
     toDown(item){
