@@ -2,7 +2,7 @@
     <div class="pt-118 container">
         <commonHead/>
         <div class="page-wrap">
-            <div>博客</div>
+            <div class="page-title">博客</div>
         </div>
         <commonFoot/>
     </div>

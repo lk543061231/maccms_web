@@ -1,7 +1,7 @@
 
 <template>
   <div class="page-wrap">
-    <div class="head_container flex-between-center" ref="head" :class="slide && 'slideUp'">
+    <div class="head_container flex-between-center" ref="head" :class="slide && 'slideUp'" >
       <div class="left flex-between-center">
         <div class="logo">
           <img src="~/assets/images/home/logo.png" alt="maccms-pro" />
@@ -117,6 +117,7 @@ export default {
         this.$message.info("敬请期待");
         return
       }
+      if(index)
       this.$router.push({name:item.name})
       sessionStorage.setItem('routerName',item.name)
     },
