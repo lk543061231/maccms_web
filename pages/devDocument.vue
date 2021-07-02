@@ -3808,12 +3808,14 @@ export default {
         this.isFixed=false
       }
     });
-    this.getLog()
+    let logType=this.$route.query.logType
+    if(logType){
+      this.getLog(logType) 
+    }
+    
   },
   methods: {
-    getLog(){
-
-      let logType=this.$route.query.logType
+    getLog(logType){
       if(logType=='V10'){
         this.activeVer='v10'
       }else if(logType=='V8'){

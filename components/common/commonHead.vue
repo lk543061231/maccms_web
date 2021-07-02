@@ -97,7 +97,7 @@ export default {
         {label:'开发文档',value:2,name:'devDocument'},
         {label:'域名检测',value:3,name:'domainDetection'},
         {label:'资源库',value:4,name:''},
-        {label:'博客',value:5,name:'blog'},
+        {label:'博客',value:5,name:'blog-blog'},
         {label:'帮助中心',value:6,name:''},
       ]
     };
