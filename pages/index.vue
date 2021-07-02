@@ -318,7 +318,13 @@ export default {
             showNotice:false
         }
     },
-    created(){
+    mounted(){
+        let href=window.location.href
+        if(href.indexOf('maccms.pro')!=-1){
+            this.showNotice=true
+        }else{
+            this.showNotice=false
+        }
     },
     methods:{
         jump(){

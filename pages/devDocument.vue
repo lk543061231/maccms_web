@@ -1,8 +1,9 @@
 <template>
   <div class="pt-118 page-wrap">
     <commonHead />
+    <div class="all-wrap">
     <div class="dev-container">
-      <div class="left">
+      <div class="left" :class="isFixed && 'fixed'">
         <div class="l-top">
           <div class="lt-t">{{ activeVer }}版</div>
           <el-popover placement="bottom-end" width="150" trigger="hover">
@@ -40,7 +41,7 @@
           </div>
         </div>
       </div>
-      <div class="right">
+      <div class="right" :class="isFixed && 'ml'">
         <div class="content">
           <div v-if="activeVer == 'v10'">
             <div v-if="activeNav == 0">
@@ -77,13 +78,28 @@
               <div class="c-d mt40">
                 <p class="c-t">获得 苹果CMS v10</p>
                 <p class="c-p">
-                  你可以在我们的 官网首页 下载到 苹果CMS
-                  的最新版，它经过了自动化构建，更适合用于生产环境。目录结构如下：
+                  你可以在我们的 官网首页 下载到 苹果CMS的最新版，它经过了自动化构建，更适合用于生产环境。目录结构如下：
                 </p>
-                <p class="c-p">
-                  2、Linux/Unix 平台： Apache + PHP (5.6 +) + MySQL(5.5 +)
-                  (PHP必须在非安全模式下运行)
-                </p>
+                <pre class="c-p">
+                <textarea style="width:100%;border:none;overflow-y:hidden;font-size: 16px;color: #666;height:200px">
+  │─application //应用目录
+  │  │─admin //后台模块
+  │  │─api //api模块
+  │  │─common //公共模块
+  │  │─extra //配置文件
+  │  │─index //前台模块
+  │  │─install //安装模块
+  │─extend  //扩展目录
+  │─runtime //缓存目录
+  │─static //静态文件目录
+  │─template //前台模板目录
+  │─thinkphp //tp目录
+  │─upload //附件目录
+  │─vendor //第三发库目录
+  └─index.php //入口文件                
+                </textarea>
+                </pre>
+          
               </div>
             </div>
 
@@ -209,7 +225,7 @@ opcache.enable_cli=1
               <div class="c-d mt40">
                  <p class="c-t">为什么播放器不能全屏？</p>
                  <pre class="c-p">
-<textarea class="why-txt" style="overflow-y:hidden;font-size: 16px;color: #666;">
+<textarea  class="why-txt" style="overflow-y:hidden;font-size: 16px;color: #666;height:200px">
 <h3 class="layui-code-h3">code</h3>
 <ol class="layui-code-ol">
 <li>如果播放器被包含在 iframe 里，尝试在 iframe 上添加 allowfullscreen 属性。</li><li>为了完善的浏览器兼容性，它应该是这样：</li><li><iframe src="example.com" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe></li>
@@ -2233,6 +2249,7 @@ level：推荐种类 1,2,3,4,5 /all
       </div>
     </div>
     <commonFoot />
+    </div>
   </div>
 </template>
 
@@ -2246,7 +2263,7 @@ export default {
   },
   data() {
     return {
-      activeVer: "v8",
+      activeVer: "v10",
       whyTxt:'<h3 class="layui-code-h3">code</h3><ol class="layui-code-ol">',
       verList: [ "v10", "v8"],
       navList: [
@@ -3775,14 +3792,30 @@ export default {
       ],
       activeNav: 0,
       dataFormat:'<?xml version="1.0" encoding="utf-8"?><rss version="5.0"><list page="1" pagecount="23" pagesize="20" recordcount="449"><video><last>2012-05-06 13:32:28</last><id>493</id><tid>9</tid><name><![CDATA[野人来袭]]></name><type>恐怖片</type><dt>qvod</dt><note><![CDATA[]]></note><vlink><![CDATA[http://localhost/maccms7_php/vod/?493.html]]></vlink><plink><![CDATA[http://localhost/maccms7_php/vodplay/?493-1-1.html]]></plink></video></list><class><ty id="1">电影</ty><ty id="2">连续剧</ty><ty id="3">综艺</ty><ty id="4">动漫</ty><ty id="5">动作片</ty><ty id="6">喜剧片</ty><ty id="7">爱情片</ty><ty id="8">科幻片</ty><ty id="9">恐怖片</ty><ty id="10">剧情片</ty><ty id="11">战争片</ty><ty id="12">国产剧</ty><ty id="13">港台剧</ty><ty id="14">日韩剧</ty><ty id="15">欧美剧</ty></class></rss>',
-      innerFormat:'<?xml version="1.0" encoding="utf-8"?><rss version="5.0"><list page="1" pagecount="1" pagesize="20" recordcount="1"><video><last>2012-05-06 13:32:28</last><id>493</id><tid>9</tid><name><![CDATA[野人来袭]]></name><type>恐怖片</type><pic>http://1img.joykk.com/Uploads/2009/11/30/20091130205750222.JPG</pic><lang>英语</lang><area>欧美</area><year>2012</year><state>0</state><note><![CDATA[]]></note><type>_9</type><actor><![CDATA[]]></actor><director><![CDATA[Ryan Schifrin]]></director><dl><dd from="qvod"><![CDATA[第1集$qvod://206850310|13CB4BC71DD6C3AA5DE0B081E1566992A1BA3F03|野人来袭_01.rmvb|#第2集$qvod://218787599|8E3EA62210F42B9B25EAFA761413587FCC4D8E14|野人来袭_02.rmvb|]]></dd></dl><des><![CDATA[<p>它已经在68个国家被目击了42000次。一个富有传奇色彩的生物，被冠以众多称呼：Yeti(雪人)、Sasquatch(萨斯科奇人)和著名的Bigfoot(大脚怪)！我们已经追捕它了很多年，但是当它决定猎捕我们时，会发生什么？　 <br /><br />　　一个从登山事故中恢复过来的家伙，被困在森林中一个偏僻的小屋里。他看见了传说中的怪物，因此必须在野兽展开血腥袭击前，说服人们相信他并拯救一群大学女生。 <br /></p>]]></des><vlink><![CDATA[http://localhost/maccms7_php/vod/?493.html]]></vlink><plink><![CDATA[http://localhost/maccms7_php/vodplay/?493-1-1.html]]></plink></video></list></rss>'
+      innerFormat:'<?xml version="1.0" encoding="utf-8"?><rss version="5.0"><list page="1" pagecount="1" pagesize="20" recordcount="1"><video><last>2012-05-06 13:32:28</last><id>493</id><tid>9</tid><name><![CDATA[野人来袭]]></name><type>恐怖片</type><pic>http://1img.joykk.com/Uploads/2009/11/30/20091130205750222.JPG</pic><lang>英语</lang><area>欧美</area><year>2012</year><state>0</state><note><![CDATA[]]></note><type>_9</type><actor><![CDATA[]]></actor><director><![CDATA[Ryan Schifrin]]></director><dl><dd from="qvod"><![CDATA[第1集$qvod://206850310|13CB4BC71DD6C3AA5DE0B081E1566992A1BA3F03|野人来袭_01.rmvb|#第2集$qvod://218787599|8E3EA62210F42B9B25EAFA761413587FCC4D8E14|野人来袭_02.rmvb|]]></dd></dl><des><![CDATA[<p>它已经在68个国家被目击了42000次。一个富有传奇色彩的生物，被冠以众多称呼：Yeti(雪人)、Sasquatch(萨斯科奇人)和著名的Bigfoot(大脚怪)！我们已经追捕它了很多年，但是当它决定猎捕我们时，会发生什么？　 <br /><br />　　一个从登山事故中恢复过来的家伙，被困在森林中一个偏僻的小屋里。他看见了传说中的怪物，因此必须在野兽展开血腥袭击前，说服人们相信他并拯救一群大学女生。 <br /></p>]]></des><vlink><![CDATA[http://localhost/maccms7_php/vod/?493.html]]></vlink><plink><![CDATA[http://localhost/maccms7_php/vodplay/?493-1-1.html]]></plink></video></list></rss>',
+      isFixed:false
     };
+  },
+  mounted(){
+    document.addEventListener("scroll", e => {
+      var scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop;
+      if (scrollTop > 110) {
+        this.isFixed=true
+      } else {
+        this.isFixed=false
+      }
+    });
   },
   methods: {
     selectVer(val) {
       this.activeVer = val;
+      window.scrollTo(0,0)
     },
     selectNav(item, index) {
+      window.scrollTo(0,0)
       this.activeNav = index;
     },
   },
@@ -3795,13 +3828,14 @@ export default {
   .dev-container {
     display: flex;
     background: #f7f8fa;
-    justify-content: space-between;
+    // justify-content: space-between;
     padding: 30px 260px 50px 260px;
     .left {
       width: 220px;
       height: 550px;
       background: #fff;
       padding: 30px 15px;
+      margin-right: 50px;
       .l-top {
         display: flex;
         align-items: center;
@@ -3868,12 +3902,12 @@ export default {
     }
     .right {
       width: 1080px;
-      height: 550px;
+      // height: 550px;
       background: #fff;
       padding: 30px;
       .content {
-        height: 100%;
-        overflow-y: scroll;
+        height: auto;
+        // overflow-y: scroll;
         .c-d {
           .c-t {
             color: #242424;
@@ -3917,11 +3951,18 @@ export default {
             .why-txt{
               width: 100%;
               border: none;
-              height: 80px;
             }
           }
         }
       }
+    }
+    .fixed{
+      position: fixed;
+      top: 135px;
+      width: 220px;
+    }
+    .ml{
+      margin-left: 270px;
     }
   }
 }

@@ -32,7 +32,7 @@
             <div class="btn" @click="check">检测一下</div>
           </div>
           <div class="tip">
-            市面已有很多假冒MACCMS平台，为保证您能找到正版网址可输入即可辨别真伪哦！
+            {{activeIndex==1?'市面已有很多假冒MACCMS平台，为保证您能找到正版网址可输入即可辨别真伪哦！':'快速检测网站当前使用版本是否存在漏洞'}}
           </div>
         </div>
       </div>
