@@ -3808,8 +3808,19 @@ export default {
         this.isFixed=false
       }
     });
+    this.getLog()
   },
   methods: {
+    getLog(){
+
+      let logType=this.$route.query.logType
+      if(logType=='V10'){
+        this.activeVer='v10'
+      }else if(logType=='V8'){
+        this.activeVer='v8'
+      }
+      this.activeNav=4
+    },
     selectVer(val) {
       this.activeVer = val;
       window.scrollTo(0,0)

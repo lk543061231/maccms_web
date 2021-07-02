@@ -9,6 +9,7 @@
                     <p class="p3">
                         <span class="p3-s1 f28-cF7502D">{{packageTitle}}</span>
                         <span class="p3-s3 f28-c172335">版本号 （{{version}}）</span>
+                        <span class="p3-s4 f20-c172335" v-if="packageTitle!='Pro版'" @click="toLog">更新日志</span>
                     </p>
                     <p class="p4 f16-c172335">更新时间（2021-06-30)</p>
                     <div class="package-list">
@@ -305,13 +306,13 @@ export default {
                     ]
             ],
             partnerList:[
-                    {img:require('@/assets/images/home/home-i1.png'),value:1},
-                    {img:require('@/assets/images/home/home-i2.png'),value:2},
-                    // {img:require('@/assets/images/home/home-i3.png'),value:3},
-                    // {img:require('@/assets/images/home/home-i4.png'),value:4},
-                    {img:require('@/assets/images/home/home-i5.png'),value:5},
-                    // {img:require('@/assets/images/home/home-i6.png'),value:6},
-                    {img:require('@/assets/images/home/home-i7.png'),value:7},
+                {img:require('@/assets/images/home/home-i1.png'),value:1},
+                {img:require('@/assets/images/home/home-i2.png'),value:2},
+                // {img:require('@/assets/images/home/home-i3.png'),value:3},
+                // {img:require('@/assets/images/home/home-i4.png'),value:4},
+                {img:require('@/assets/images/home/home-i5.png'),value:5},
+                // {img:require('@/assets/images/home/home-i6.png'),value:6},
+                {img:require('@/assets/images/home/home-i7.png'),value:7},
             ],
             showNotice:false
         }
@@ -325,6 +326,14 @@ export default {
         }
     },
     methods:{
+        toLog(){
+            this.$router.push({
+                path:'/devDocument',
+                query:{
+                    logType:this.packageTitle
+                }
+            })
+        },
         jump(){
             window.open('https://t.me/maccms_news')
         },
@@ -428,6 +437,10 @@ export default {
                     margin-top: 50px;
                     .p3-s1{
                         margin-right:5px;
+                    }
+                    .p3-s4{
+                        text-decoration: underline;
+                        cursor: pointer;
                     }
                 }
                 .p4{
