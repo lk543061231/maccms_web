@@ -34,6 +34,7 @@
               <div class="app-wrap" v-else-if="index==3">
                 <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:1}})">域名真伪</p>
                 <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:2}})">漏洞检测</p>
+                <!-- <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:3}})">挂马检测</p> -->
               </div>
               <p 
                 class="menu-name"
