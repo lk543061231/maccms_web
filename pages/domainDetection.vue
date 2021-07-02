@@ -55,7 +55,7 @@
             <div class="text error-color"  v-else>
               <p v-if="code==1001">输入地址错误，无法进行检测</p>
               <div v-else>
-                <p >当前网址已提供最新版本</p>
+                <p class="p-1">当前网址已提供最新版本</p>
                 <p >网站版本异常存在后门漏洞挂马风险 请立即升级版本</p>
               </div>
             </div>
@@ -73,10 +73,10 @@
 
           <div class="btns-div" v-if="!checkResult && activeIndex==2">
             <p class="text">MacCMS Pro版下载渠道</p>
-            <div class="btns flex-between-center">
-              <div class="website-btn">官方下载</div>
-              <div class="website-btn">Github</div>
-              <div class="website-btn">Jsdelivr</div>
+            <div class="btns flex-between-center pro" >
+              <div class="website-btn" @click="downLoad(1)">官方下载</div>
+              <div class="website-btn" @click="downLoad(2)">Github</div>
+              <div class="website-btn" @click="downLoad(3)">Jsdelivr</div>
             </div>
           </div>
         </div>
@@ -127,6 +127,7 @@ export default {
     check(){
       if(this.activeIndex==1){
         this.showResult=true
+        this.showTxt=true
         // 域名检测
         var testDomainReg = /^mac(cms.com|cms.net|cms.pro|videojs.com)$/;
         if(testDomainReg.test(this.domainVal)){
@@ -166,7 +167,11 @@ export default {
         xhr.send()
     },
     choiceSearch(i) {
+      this.showTxt=false
       this.activeIndex = i;
+    },
+    downLoad(type){
+      console.log(type)
     },
   },
 };
@@ -314,13 +319,26 @@ export default {
             opacity: 0.6;
           }
         }
+        
       }
+      .pro{
+        .website-btn{
+          &:hover {
+            border: 1px solid #F7502D;
+            color: #F7502D;
+          }
+        }
+        }
     }
     .success-color {
       color: #48d5b5;
     }
     .error-color {
       color: #f64a36;
+      .p-1{
+        font-size: 16px;
+        color: #333;
+      }
     }
   }
 }
