@@ -80,6 +80,7 @@
             </div>
           </div>
         </div>
+
         <div v-if="activeIndex == 3">
           <p class="text success-color" v-if="checkResult">
             恭喜您，域名通过大数据匹配特征没有被挂马
@@ -220,7 +221,7 @@ Location: http://www.baidu.com/
 </template>
 
 <script>
-import { getIsfake } from "@/utils/api";
+import { getIsfake,checkSiteInject } from "@/utils/api";
 import commonHead from "@/components/common/commonHead.vue";
 import commonFoot from "@/components/common/commonFoot.vue";
 import sampleDialog from "@/components/sampleDialog.vue";
@@ -327,15 +328,13 @@ export default {
         this.checkResult = this.passUrl.some((item) => {
           return this.domainVal.indexOf(item) != -1;
         });
-      } else {
+      } else{
         // 漏洞检测
-        // https://www.maccms.pro/yapi/maccms/isfake
         if (!this.domainVal) {
           return;
         } else if (this.domainVal.indexOf("http") == -1) {
           this.domainVal = "http://" + this.domainVal;
         }
-
         const loading = this.$loading({
           lock: true,
           text: "Loading",
@@ -343,18 +342,35 @@ export default {
           background: "rgba(0, 0, 0, 0.7)",
         });
         let t = new Date().getTime();
-        getIsfake({ url: this.domainVal, t: t }).then((res) => {
-          loading.close();
-          this.code = res.data.code;
-          if (res.data.code == 1) {
-            this.checkResult = !res.data.info.is_fake;
-          } else {
-            this.resMsg = res.data.msg;
-            this.checkResult = false;
-          }
-          this.showTxt = true;
-        });
-      }
+        if(this.activeIndex == 2){
+          getIsfake({ url: this.domainVal, t: t }).then((res) => {
+            loading.close();
+            this.code = res.data.code;
+            if (res.data.code == 1) {
+              this.checkResult = !res.data.info.is_fake;
+            } else {
+              this.resMsg = res.data.msg;
+              this.checkResult = false;
+            }
+            this.showTxt = true;
+          });
+        }else if(this.activeIndex == 3){
+          checkSiteInject({ url: this.domainVal, t: t }).then(res=>{
+            loading.close();
+            if(res.data.code==0){
+              if(res.data.info=='高清无码'){
+                this.checkResult=true
+              }else{
+                this.checkResult=false
+              }
+            }else{
+              this.checkResult=false
+            }
+            this.showTxt = true;
+          })
+        }
+
+      } 
     },
     toDown(item) {
       if (item.link) {

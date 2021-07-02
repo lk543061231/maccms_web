@@ -1,15 +1,19 @@
 import request from '@/plugins/server'
 
-export const getVerifyCode = () => {
-  return request({
-    url: '/user/getVerifyCode',
-    method: 'get'
-  })
+// let baseUrl = ''
+let baseUrl = 'https://www.maccms.pro/'
+export function getIsfake(data) {
+    return request({
+        url: baseUrl + 'yapi/maccms/isfake',
+        method: 'post',
+        data: data
+    })
 }
-export function getIsfake (data) {
-  return request({
-    url: 'yapi/maccms/isfake',
-    method: 'post',
-    data: data
-  })
+
+export function checkSiteInject(data) {
+    return request({
+        url: baseUrl + 'dapi/maccmspro/check_site_inject',
+        method: 'post',
+        data: data
+    })
 }

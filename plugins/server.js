@@ -5,39 +5,39 @@ import { Message, Notification } from 'element-ui' // 这里使用了element-ui�
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.headers.post['Content-Type'] = 'text/plain;charset=UTF-8'
 let service = axios.create({
-  // baseURL: '/',
-  timeout: 15000
+    // baseURL: '/',
+    timeout: 15000
 })
 
- // 请求拦截 可在请求头中加入token等
+// 请求拦截 可在请求头中加入token等
 service.interceptors.request.use(config => {
-  return config
+    return config
 }, error => {
-  return Promise.reject(error)
+    return Promise.reject(error)
 })
 
 // 响应拦截 对响应消息作初步的处理
 service.interceptors.response.use(resp => {
-//   if (resp.data) {
-//     if (resp.data.code !== '0') {
-//       Message({
-//         type: 'error',
-//         message: resp.data.msg,
-//         duration: 5000
-//       })
-//     }
-//     return { code: resp.data.code, data: resp.data.data, msg: resp.data.message }
-//   } else {
+    //   if (resp.data) {
+    //     if (resp.data.code !== '0') {
+    //       Message({
+    //         type: 'error',
+    //         message: resp.data.msg,
+    //         duration: 5000
+    //       })
+    //     }
+    //     return { code: resp.data.code, data: resp.data.data, msg: resp.data.message }
+    //   } else {
     return resp
-//   }
+        //   }
 }, error => {
-  if (error.response) {
+    if (error.response) {
         Message({
             type: 'error',
             message: '网络请求错误',
             duration: 5000
         })
-  }
+    }
 })
 
 export default service
