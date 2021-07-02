@@ -2,7 +2,7 @@
   <div class="pt-118 container">
     <commonHead />
     <div class="page-wrap">
-      <div class="page-title">博客主页</div>
+      <commonSteps :stepData="stepData" />
       <div class="page-inner">
         <div class="blog-list flex-between-center">
           <div class="blog-item" v-for="i in 8" :key="i">
@@ -45,10 +45,20 @@
 <script>
 import commonHead from "@/components/common/commonHead.vue";
 import commonFoot from "@/components/common/commonFoot.vue";
+import commonSteps from '@/components/common/commonSteps.vue';
 export default {
   components: {
     commonHead,
     commonFoot,
+    commonSteps
+  },
+  data(){
+    return{
+      stepData:{
+          type:'title',   //step表示路由位置，title表示当前页标题
+          stepName:'博客',  //type为title式显示
+      }
+    }
   },
   methods:{
       handleSizeChange(val) {
@@ -74,7 +84,7 @@ export default {
     color: #172335;
   }
   .page-inner {
-    padding: 0 260px 30px;
+    padding: 30px 260px ;
     .blog-list {
       width: 1388px;
       flex-wrap: wrap;
