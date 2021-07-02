@@ -28,7 +28,7 @@
                 v-model="domainVal"
                 @focus="inputCheck=true"
                 @blur="inputCheck=false"
-                placeholder="请输入检测域名"
+                :placeholder="palceHolder"
               ></el-input>
             </div>
             <div class="btn global-btn-hover" @click="check">检测一下</div>
@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div class="domain-bottom" v-if="showResult">
+      <div class="domain-bottom" >
 
         <div class="error" 
         v-if="showTxt"
@@ -76,9 +76,23 @@
           <div class="btns-div" v-if="!checkResult && activeIndex==2">
             <p class="text">MacCMS Pro版下载渠道</p>
             <div class="btns flex-between-center pro" >
-              <div class="website-btn" @click="downLoad(1)">官方下载</div>
-              <div class="website-btn" @click="downLoad(2)">Github</div>
-              <div class="website-btn" @click="downLoad(3)">Jsdelivr</div>
+              <el-popover
+                trigger="hover"
+                placement="bottom"
+                v-for="(item,index) in downList" :key="index"
+              >
+                <div class="app-wrap">
+                  <p class="app-item" 
+                  @click="toDown(ele)"
+                  @mouseleave="hoveIndex=''"
+                  @mouseenter="hoveIndex=elIndex"
+                  v-for="(ele,elIndex) in item.list" :key="elIndex">
+                    {{ele.ver}}
+                    <i v-if="elIndex!=0" :class="hoveIndex===elIndex && 'move-ing'" class="el-icon-right"></i>
+                  </p>
+                </div>
+                <div slot="reference" :class="index==1 && 'mlr'" class="website-btn">{{item.label}}</div>
+              </el-popover>
             </div>
           </div>
         </div>
@@ -107,11 +121,67 @@ export default {
         'maccms.pro',
         'macvideojs.com',
       ],
+      hoveIndex:'',
       checkResult:'',
       showResult:false,
       is_fake:false,
       code:'',
-      showTxt:false
+      showTxt:false,
+      palceHolder:'请输入检测域名',
+      // 安装包
+      downList:[
+        {
+          label:'官方下载',
+          list:[
+            {
+              ver:'Pro (近期发布)',
+              link:''
+            },
+            {
+              ver:'V10',
+              link:'https://down.maccms.pro/v10/maccms_v10_latest_full.zip'
+            },
+            {
+              ver:'V8',
+              link:'https://down.maccms.pro/v8/maccms_v8_latest_full.zip'
+            },
+          ]
+        },
+        {
+          label:'Github',
+          list:[
+            {
+              ver:'Pro (近期发布)',
+              link:''
+            },
+            {
+              ver:'V10',
+              link:'https://github.com/maccmspro/'
+            },
+            {
+              ver:'V8',
+              link:'https://github.com/maccmspro/'
+            },
+          ]
+        },
+        {
+          label:'Jsdelivr',
+          list:[
+            {
+              ver:'Pro (近期发布)',
+              link:''
+            },
+            {
+              ver:'V10',
+              link:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.2000_full.zip'
+            },
+            {
+              ver:'V8',
+              link:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v8_v2021.1050_full.zip'
+            },
+          ]
+        },
+      ],
     };
   },
   created(){
@@ -128,7 +198,6 @@ export default {
   methods: {
     check(){
       if(this.activeIndex==1){
-        this.showResult=true
         this.showTxt=true
         // 域名检测
         var testDomainReg = /^mac(cms.com|cms.net|cms.pro|videojs.com)$/;
@@ -138,9 +207,13 @@ export default {
             this.checkResult=false
         }
       }else{
-        this.showResult=true
         // 漏洞检测
         // https://www.maccms.pro/yapi/maccms/isfake
+        if(!this.domainVal){
+          return
+        }else if(this.domainVal.indexOf('http')==-1 ){
+          this.domainVal='http://'+this.domainVal
+        }
 
         const loading = this.$loading({
           lock: true,
@@ -158,26 +231,19 @@ export default {
           console.log(this.checkResult,res.data.is_fake)
           this.showTxt=true
         })
-        // this.ajaxRquest(this.domainVal+'/static/js/admin_common.js?t='+t,(res)=>{
-        //   console.log(res)
-        // })
+    
       }
     },
-    ajaxRquest(url,callback){
-      var xhr=new XMLHttpRequest();
-        xhr.open('GET',url,false);
-        xhr.onreadystatechange=function(){
-            if(xhr.readyState==4){
-                if(xhr.status==200 || xhr.status==304){
-                    callback(xhr.responseText);
-                }
-            }
-        }
-        xhr.send()
+    toDown(item){
+      if(item.link){
+        window.open(item.link)
+      }
     },
+   
     choiceSearch(i) {
       this.showTxt=false
       this.activeIndex = i;
+      this.palceHolder=i==1?'请输入检测域名':'检测域名请携带http或者https协议，默认携带http'
     },
     downLoad(type){
       console.log(type)
@@ -316,7 +382,7 @@ export default {
           font-size: 16px;
           font-weight: 400;
           color: #666666;
-          margin-right: 30px;
+          margin-right: 30px ;
           user-select: none;
           &:last-child {
             margin-right: 0;
@@ -337,7 +403,11 @@ export default {
             color: #F7502D;
           }
         }
+        .mlr{
+          margin:0 30px !important;
+          display: block;
         }
+      }
     }
     .success-color {
       color: #48d5b5;
@@ -351,5 +421,25 @@ export default {
       }
     }
   }
+}
+.move-ing{
+    animation: moveIng 2s infinite;
+}
+@keyframes moveIng {
+    0% {
+        transform: translate(-5px)
+    }
+    25% {
+        transform: translate(5px)
+    }
+    50% {
+        transform: translate(-5px)
+    }
+    75% {
+        transform: translate(5px)
+    }
+    100% {
+        transform: translate(-5px)
+    }
 }
 </style>

@@ -165,7 +165,7 @@ export default {
   },
   mounted() {
     this.menuList.forEach((item,index)=>{
-      let routerName=sessionStorage.getItem('routerName')
+      let routerName=sessionStorage.getItem('routerName') || this.$route.name
       if(routerName==item.name){
         this.activeIndex=index
       }

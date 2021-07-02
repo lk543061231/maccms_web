@@ -105,8 +105,6 @@
                             </div>
                             <p slot="reference" @mouseenter="popEnter(2)" @mouseleave="popLeave" class="pl-item f16-c172335 pl-item-2" >升级包下载 </p>
                         </el-popover>
-
-                        
                         <el-popover
                             placement="bottom"
                             trigger="hover"
@@ -414,7 +412,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.page-wrap{
+    .page-wrap{
         .home-top{
             min-width: 1300px;
             width: 100%;
@@ -669,7 +667,7 @@ export default {
                 }
             }
         }
-}
+    }
 .notice{
         position: fixed;
         top: 0;
