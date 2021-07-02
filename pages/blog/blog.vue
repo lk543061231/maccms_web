@@ -84,7 +84,9 @@ export default {
     color: #172335;
   }
   .page-inner {
-    padding: 30px 260px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .blog-list {
       width: 1388px;
       flex-wrap: wrap;
