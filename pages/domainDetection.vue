@@ -23,13 +23,15 @@
             </p>
           </div>
           <div class="input-div">
-            <div class="input-cls">
+            <div class="input-cls" :class="inputCheck && 'global-input-focus'" >
               <el-input
                 v-model="domainVal"
+                @focus="inputCheck=true"
+                @blur="inputCheck=false"
                 placeholder="请输入检测域名"
               ></el-input>
             </div>
-            <div class="btn" @click="check">检测一下</div>
+            <div class="btn global-btn-hover" @click="check">检测一下</div>
           </div>
           <div class="tip">
             {{activeIndex==1?'市面已有很多假冒MACCMS平台，为保证您能找到正版网址可输入即可辨别真伪哦！':'快速检测网站当前使用版本是否存在漏洞'}}
@@ -96,6 +98,7 @@ export default {
     },
   data() {
     return {
+      inputCheck:false,
       activeIndex: 1,
       domainVal: "",
       passUrl:[
@@ -108,7 +111,6 @@ export default {
       showResult:false,
       is_fake:false,
       code:'',
-      loading:false,
       showTxt:false
     };
   },
@@ -139,14 +141,21 @@ export default {
         this.showResult=true
         // 漏洞检测
         // https://www.maccms.pro/yapi/maccms/isfake
-        this.loading=true
+
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
         let t=new Date().getTime()
         this.$axios.post('yapi/maccms/isfake',{url:this.domainVal,t:t}).then(res => {
+          loading.close();
           this.code=res.data.code
           if(res.data.code==1){
-            this.checkResult=!res.data.is_fake
+            this.checkResult=!res.data.info.is_fake
           }
-          this.loading=false
+          console.log(this.checkResult,res.data.is_fake)
           this.showTxt=true
         })
         // this.ajaxRquest(this.domainVal+'/static/js/admin_common.js?t='+t,(res)=>{
@@ -338,6 +347,7 @@ export default {
       .p-1{
         font-size: 16px;
         color: #333;
+        margin-bottom: 5px;
       }
     }
   }
