@@ -39,10 +39,7 @@
         </div>
       </div>
       <div class="domain-bottom" >
-
-        <div class="error" 
-        v-if="showTxt"
-        >
+        <div class="error" v-if="showTxt" >
           <div class="img-div">
             <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
             <img v-else src="~/assets/images/common/domain-error.png" />
@@ -55,7 +52,7 @@
           <div v-if="activeIndex==2">
             <p class="text success-color" v-if="checkResult">恭喜您，检测的网站版本不存在漏洞</p>
             <div class="text error-color"  v-else>
-              <p v-if="code==1001">输入地址错误，无法进行检测</p>
+              <p v-if="code==1002">{{resMsg || '输入地址错误，无法进行检测'}} </p>
               <div v-else>
                 <p class="p-1">当前网址已提供最新版本</p>
                 <p >网站版本异常存在后门漏洞挂马风险 请立即升级版本</p>
@@ -72,9 +69,9 @@
               <div class="website-btn">macvideojs.com</div>
             </div>
           </div>
-
+          <!-- v-if="!checkResult && activeIndex==2" -->
           <div class="btns-div" v-if="!checkResult && activeIndex==2">
-            <p class="text">MacCMS Pro版下载渠道</p>
+            <p class="text">MacCMS更新包下载渠道</p>
             <div class="btns flex-between-center pro" >
               <el-popover
                 trigger="hover"
@@ -94,6 +91,7 @@
                 <div slot="reference" :class="index==1 && 'mlr'" class="website-btn">{{item.label}}</div>
               </el-popover>
             </div>
+            <p class="text-b">下载后手动覆盖即可完成后门漏洞修复</p>
           </div>
         </div>
         <div class="update"></div>
@@ -103,6 +101,7 @@
 </template>
 
 <script>
+import { getIsfake } from '@/utils/api'
 import commonHead from '@/components/common/commonHead.vue';
 import commonFoot from '@/components/common/commonFoot.vue';
 export default {
@@ -139,11 +138,11 @@ export default {
             },
             {
               ver:'V10',
-              link:'https://down.maccms.pro/v10/maccms_v10_latest_full.zip'
+              link:'https://down.maccms.pro/v10/maccms_v10_latest_update.zip'
             },
             {
               ver:'V8',
-              link:'https://down.maccms.pro/v8/maccms_v8_latest_full.zip'
+              link:'https://down.maccms.pro/v8/maccms_v8_latest_update.zip'
             },
           ]
         },
@@ -173,15 +172,16 @@ export default {
             },
             {
               ver:'V10',
-              link:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.2000_full.zip'
+              link:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.2000_update.zip'
             },
             {
               ver:'V8',
-              link:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v8_v2021.1050_full.zip'
+              link:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v8_v2021.1050_update.zip'
             },
           ]
         },
       ],
+      resMsg:'',
     };
   },
   created(){
@@ -201,13 +201,9 @@ export default {
     check(){
       if(this.activeIndex==1){
         this.showTxt=true
-        // 域名检测
-        var testDomainReg = /^mac(cms.com|cms.net|cms.pro|videojs.com)$/;
-        if(testDomainReg.test(this.domainVal)){
-            this.checkResult=true
-        }else{
-            this.checkResult=false
-        }
+        this.checkResult= this.passUrl.some(item=>{
+          return this.domainVal.indexOf(item)!=-1
+        })
       }else{
         // 漏洞检测
         // https://www.maccms.pro/yapi/maccms/isfake
@@ -224,13 +220,24 @@ export default {
           background: 'rgba(0, 0, 0, 0.7)'
         });
         let t=new Date().getTime()
+        getIsfake({url:this.domainVal,t:t}).then(res=>{
+          loading.close();
+          this.code=res.data.code
+          if(res.data.code==1){
+            this.checkResult=!res.data.info.is_fake
+          }else{
+            this.resMsg=res.data.msg
+            this.checkResult=false
+          }
+          this.showTxt=true
+        })
+        return
         this.$axios.post('yapi/maccms/isfake',{url:this.domainVal,t:t}).then(res => {
           loading.close();
           this.code=res.data.code
           if(res.data.code==1){
             this.checkResult=!res.data.info.is_fake
           }
-          console.log(this.checkResult,res.data.is_fake)
           this.showTxt=true
         })
     
@@ -370,6 +377,13 @@ export default {
     }
     .btns-div {
       margin-top: 60px;
+      .text-b{
+        color: #666;
+        font-size: 16px;
+        font-weight: normal;
+        text-align: center;
+        margin-top: 15px;
+      }
       .btns {
         margin-top: 30px;
         cursor: pointer;

@@ -81,7 +81,7 @@
                   你可以在我们的 官网首页 下载到 苹果CMS的最新版，它经过了自动化构建，更适合用于生产环境。目录结构如下：
                 </p>
                 <pre class="c-p">
-                <textarea style="width:100%;border:none;overflow-y:hidden;font-size: 16px;color: #666;height:200px">
+                <textarea style="width:100%;border:none;overflow-y:hidden;font-size: 16px;color: #666;height:350px">
   │─application //应用目录
   │  │─admin //后台模块
   │  │─api //api模块
