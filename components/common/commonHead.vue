@@ -95,7 +95,8 @@ export default {
         {label:'开发文档',value:2,name:'devDocument'},
         {label:'域名检测',value:3,name:'domainDetection'},
         {label:'资源库',value:4,name:''},
-        {label:'帮助中心',value:5,name:''},
+        {label:'博客',value:5,name:'blog'},
+        {label:'帮助中心',value:6,name:''},
       ]
     };
   },
@@ -111,7 +112,7 @@ export default {
         : (this.languageSrc = require("~/assets/images/common/common-qiu.png"));
     },
     selectRouter(item,index){
-      if(index!=0 && index!=3 && index!=2){
+      if(index!=0 && index!=3 && index!=2 & index!=5){
         this.$message.info("敬请期待");
         return
       }
