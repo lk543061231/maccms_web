@@ -1,7 +1,7 @@
 
 <template>
   <div class="page-wrap">
-    <div class="head_container flex-between-center" ref="head" :class="slide && 'slideUp'" >
+    <div class="head_container flex-between-center" ref="head" :class="[slide && 'slideUp',showBoxShadow && 'showboxshadow']" >
       <div class="left flex-between-center">
         <div class="logo">
           <img src="~/assets/images/home/logo.png" alt="maccms-pro" />
@@ -86,6 +86,7 @@
 export default {
   data() {
     return {
+      showBoxShadow:false,
       slide:false,
       activeIndex:  0,
       languageSrc: require("~/assets/images/common/common-qiu.png"),
@@ -117,7 +118,9 @@ export default {
         this.$message.info("敬请期待");
         return
       }
-      if(index)
+      if(index==5){
+        this.showBoxShadow=true
+      }
       this.$router.push({name:item.name})
       sessionStorage.setItem('routerName',item.name)
     },
@@ -212,6 +215,7 @@ export default {
   z-index: 1;
   left: 0;
   top: 0;
+  box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.06);
   .left {
     .logo {
       width: 103px;
