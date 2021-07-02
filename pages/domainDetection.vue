@@ -21,13 +21,13 @@
           >
             漏洞检测
           </p>
-          <!-- <p
+          <p
             class="tab-title"
             :class="{ active: activeIndex == 3 }"
             @click="choiceSearch(3)"
           >
             挂马检测
-          </p> -->
+          </p>
         </div>
         <div class="input-div">
           <div class="input-cls" :class="inputCheck && 'global-input-focus'">
@@ -306,7 +306,7 @@ export default {
     if (query && query.activeIndex) {
       this.activeIndex = query.activeIndex;
       this.palceHolder =
-        query.activeIndex == 1
+        query.activeIndex == 1 || query.activeIndex == 3
           ? "请输入检测域名"
           : "检测域名请携带http或者https协议，默认携带http";
     }

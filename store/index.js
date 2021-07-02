@@ -14,7 +14,16 @@ export const state = () => ({
     locales: ['en', 'zh'],
     locale: 'zh',
     routerName: '',
-    isMobile
+    isMobile: '',
+    menuList: [
+        { label: '首页', value: 0, name: 'index' },
+        { label: '应用市场', value: 1, name: 'applicationMarket' },
+        { label: '开发文档', value: 2, name: 'devDocument' },
+        { label: '域名检测', value: 3, name: 'domainDetection' },
+        { label: '资源库', value: 4, name: '' },
+        { label: '博客', value: 5, name: 'blog-blog' },
+        { label: '帮助中心', value: 6, name: '' },
+    ]
 })
 
 export const mutations = {
@@ -24,7 +33,11 @@ export const mutations = {
         }
     },
     setRouter(state, routerName) {
+        console.log(sessionStorage.getItem('routerName'))
         state.routerName = routerName
+    },
+    updateRouter() {
+
     },
     updatedIsMobile(state, isMobile) {
         state.isMobile = isMobile

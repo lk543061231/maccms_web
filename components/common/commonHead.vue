@@ -34,7 +34,7 @@
               <div class="app-wrap" v-else-if="index==3">
                 <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:1}})">域名真伪</p>
                 <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:2}})">漏洞检测</p>
-                <!-- <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:3}})">挂马检测</p> -->
+                <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:3}})">挂马检测</p>
               </div>
               <p 
                 class="menu-name"
@@ -91,21 +91,16 @@ export default {
       activeIndex:  0,
       languageSrc: require("~/assets/images/common/common-qiu.png"),
       userSrc: require("~/assets/images/common/common-user.png"),
-      menuList:[
-        {label:'首页',value:0,name:'index'},
-        {label:'应用市场',value:1,name:'applicationMarket'},
-        {label:'开发文档',value:2,name:'devDocument'},
-        {label:'域名检测',value:3,name:'domainDetection'},
-        {label:'资源库',value:4,name:''},
-        {label:'博客',value:5,name:'blog-blog'},
-        {label:'帮助中心',value:6,name:''},
-      ]
+     
     };
   },
   computed: {
      language () {
        return this.$i18n.locale === 'en'
      },
+     menuList(){
+       return this.$store.state.menuList
+     }
   },
   methods: {
     visibleChange(bol) {
@@ -121,6 +116,7 @@ export default {
       if(index==5){
         this.showBoxShadow=true
       }
+      this.$store.commit('setRouter','12313')
       this.$router.push({name:item.name})
       sessionStorage.setItem('routerName',item.name)
     },
@@ -151,23 +147,6 @@ export default {
       }
     },
  
-    toApplication() {
-      this.$message.info("敬请期待");
-      let menuList = document.getElementsByClassName("el-menu-item");
-      menuList = Array.prototype.slice.call(menuList);
-      menuList.map(item => {
-        if(item.className.indexOf("is-active")!=-1){
-          item.className = "el-menu-item";
-          item.style = "color:#596371;border-bottom:none;"
-        }
-      });
-      this.$refs.submenu.$el.firstChild.className = "el-submenu__title is-active"
-      
-      return;
-      this.$router.push({
-        path: "/applicationMarket"
-      });
-    }
   },
   mounted() {
     this.menuList.forEach((item,index)=>{
