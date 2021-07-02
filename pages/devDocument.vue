@@ -3834,6 +3834,7 @@ export default {
       width: 220px;
       height: 550px;
       background: #fff;
+      flex-shrink: 0;
       padding: 30px 15px;
       margin-right: 50px;
       .l-top {
