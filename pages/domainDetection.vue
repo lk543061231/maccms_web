@@ -188,11 +188,13 @@ export default {
     let query=this.$route.query
     if(query && query.activeIndex){
       this.activeIndex=query.activeIndex
+      this.palceHolder=query.activeIndex==1?'请输入检测域名':'检测域名请携带http或者https协议，默认携带http'
     }
   },
   watch:{
     $route:function(val){
       this.activeIndex=val.query.activeIndex
+      this.palceHolder=val.query.activeIndex==1?'请输入检测域名':'检测域名请携带http或者https协议，默认携带http'
     }
   },
   methods: {
