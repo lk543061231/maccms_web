@@ -9,9 +9,11 @@
                     <p class="p3">
                         <span class="p3-s1 f28-cF7502D">{{packageTitle}}</span>
                         <span class="p3-s3 f28-c172335">版本号 （{{version}}）</span>
+                        
+                    </p>
+                    <p class="p4 f16-c172335">更新时间（2021-06-30)
                         <span class="p3-s4 f20-c172335" v-if="packageTitle!='Pro版'" @click="toLog">更新日志</span>
                     </p>
-                    <p class="p4 f16-c172335">更新时间（2021-06-30)</p>
                     <div class="package-list">
                         <el-popover
                             placement="bottom"
@@ -438,13 +440,15 @@ export default {
                     .p3-s1{
                         margin-right:5px;
                     }
-                    .p3-s4{
-                        text-decoration: underline;
-                        cursor: pointer;
-                    }
+                    
                 }
                 .p4{
                     margin-top: 15px;
+                    .p3-s4{
+                        margin-left: 10px;
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
                 }
                 .package-list{
                     margin-top:40px;

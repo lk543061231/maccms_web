@@ -13,6 +13,7 @@ if (!process.server) {
 export const state = () => ({
   locales: ['en', 'zh'],
   locale: 'zh',
+  routerName:'',
   isMobile
 })
 
