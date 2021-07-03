@@ -17,3 +17,9 @@ export function checkSiteInject(data) {
         data: data
     })
 }
+export function getInjectList(data) {
+    return request({
+        url: baseUrl + 'dapi/maccmspro/inject_site_list',
+        method: 'post',
+    })
+}

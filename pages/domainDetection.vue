@@ -21,13 +21,13 @@
           >
             漏洞检测
           </p>
-          <!-- <p
+          <p
             class="tab-title"
             :class="{ active: activeIndex == 3 }"
             @click="choiceSearch(3)"
           >
             挂马检测
-          </p> -->
+          </p>
         </div>
         <div class="input-div">
           <div class="input-cls" :class="inputCheck && 'global-input-focus'">
@@ -155,11 +155,11 @@
             <div class="detection-success-bottom">
               <p class="f16-c242424 fw500">
                 <span>检测时间：</span>
-                <span>2020-12-12 23:23</span>
+                <span>{{checkTime}}</span>
               </p>
               <div class="detection-list">
-                <div class="detection-item" v-for="i in 12" :key="i">
-                  http://23.**.23.43
+                <div class="detection-item" v-for="(e,i) in inJEctList" :key="i">
+                  {{e}}
                 </div>
               </div>
             </div>
@@ -221,7 +221,8 @@ Location: http://www.baidu.com/
 </template>
 
 <script>
-import { getIsfake,checkSiteInject } from "@/utils/api";
+import { getIsfake,checkSiteInject,getInjectList } from "@/utils/api";
+import { timestampToTime } from "@/utils/index";
 import commonHead from "@/components/common/commonHead.vue";
 import commonFoot from "@/components/common/commonFoot.vue";
 import sampleDialog from "@/components/sampleDialog.vue";
@@ -300,6 +301,8 @@ export default {
       ],
       resMsg: "",
       visiable:false,
+      inJEctList:[],
+      checkTime:'',
     };
   },
   created() {
@@ -311,6 +314,7 @@ export default {
           ? "请输入检测域名"
           : "检测域名请携带http或者https协议，默认携带http";
     }
+    this.getInject()
   },
   watch: {
     $route: function (val) {
@@ -358,11 +362,9 @@ export default {
           checkSiteInject({ url: this.domainVal, t: t }).then(res=>{
             loading.close();
             if(res.data.code==0){
-              if(res.data.info=='高清无码'){
-                this.checkResult=true
-              }else{
-                this.checkResult=false
-              }
+              this.checkTime=timestampToTime(new Date().getTime())
+              this.checkResult=!res.data.is_inject
+              
             }else{
               this.checkResult=false
             }
@@ -371,6 +373,13 @@ export default {
         }
 
       } 
+    },
+    getInject(){
+      getInjectList().then(res=>{
+        if(res.data.code==0){
+          this.inJEctList=res.data.data
+        }
+      })
     },
     toDown(item) {
       if (item.link) {
