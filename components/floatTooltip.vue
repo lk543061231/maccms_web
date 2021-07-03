@@ -12,8 +12,9 @@
         </div>
       </div>
     </el-popover>
-    <div class="btn arrow">
+    <div class="btn arrow" v-if="scrollTop>800">
       <img
+        @click="toTop"
         :src="arrow"
         @mouseenter="arrow = require('~/assets/images/common/arrow-a.png')"
         @mouseleave="arrow = require('~/assets/images/common/arrow.png')"
@@ -28,12 +29,28 @@ export default {
     return {
       visiable:false,
       plane: require("~/assets/images/common/plane.png"),
-      arrow: require("~/assets/images/common/arrow.png")
+      arrow: require("~/assets/images/common/arrow.png"),
+      showTop:false,
+      scrollTop:''
     };
+  },
+  mounted(){
+    document.addEventListener("scroll", e => {
+      this.scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop;
+      console.log(this.scrollTop)
+    });
   },
   methods:{
     join(){
-      this.visiable = false;
+      // this.visiable = false;
+      window.open('https://t.me/maccms_news')
+    },
+    toTop(){
+      this.arrow=require("~/assets/images/common/arrow.png")
+      window.scrollTo(0,0)
     }
   }
 };
@@ -55,6 +72,7 @@ export default {
   .btn {
     padding: 0px 2px;
     width: 100%;
+    cursor: pointer;
     img {
       width: 100%;
     }

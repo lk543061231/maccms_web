@@ -34,7 +34,7 @@
               <div class="app-wrap" v-else-if="index==3">
                 <p class="app-item" @click="changeRouter('domainDetection',1)" >域名真伪</p>
                 <p class="app-item" @click="changeRouter('domainDetection',2)" >漏洞检测</p>
-                <p class="app-item" @click="changeRouter('domainDetection',3)">挂马检测</p>
+                <!-- <p class="app-item" @click="changeRouter('domainDetection',3)">挂马检测</p> -->
               </div>
               <p 
                 class="menu-name"
@@ -131,8 +131,7 @@ export default {
       if(index!=0 && index!=3 && index!=2 ){
         this.$message.info("敬请期待");
         return
-      }
-      if(index==5){
+      }else if(index==5){
         this.showBoxShadow=true
       }
       this.$store.commit('setRouter','12313')
@@ -208,7 +207,6 @@ export default {
   z-index: 1;
   left: 0;
   top: 0;
-  box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.06);
   .left {
     .logo {
       width: 103px;
@@ -270,8 +268,9 @@ export default {
     }
   }
 }
-
-
+.showboxshadow{
+  box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.06);
+}
 .slideUp {
   position: fixed;
   background-color: #ffffff;

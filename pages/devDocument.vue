@@ -2305,6 +2305,18 @@ export default {
       ],
       logList: [
         {
+          timestamp: "2020.1000.2000",
+          type: "multiple",
+          list: [
+            "1，player已解密。",
+            "2，修复la版本自动更新后门漏洞。",
+            "3，增加默认模版。",
+            "4，优化多语言支持。",
+            "5，优化部分冗余代码。",
+            "6，其他细节。",
+          ],
+        },
+        {
           timestamp: "2020.1000.1060",
           type: "multiple",
           list: [

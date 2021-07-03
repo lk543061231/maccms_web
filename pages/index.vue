@@ -12,7 +12,7 @@
                         
                     </p>
                     <p class="p4 f16-c172335">更新时间（2021-06-30)
-                        <span class="p3-s4 f20-c172335" v-if="packageTitle!='Pro版'" @click="toLog">更新日志</span>
+                        <span class="p3-s4 f16-c172335" v-if="packageTitle!='Pro版'" @click="toLog">更新日志</span>
                     </p>
                     <div class="package-list">
                         <el-popover
@@ -775,17 +775,27 @@ export default {
 
 @media screen and (min-width:1200px)  {
     .home-top{
-        height:710px !important;
+        height:720px !important;
         
     }
 }
 @media screen and (max-width:980px)  {
     .home-top{
-        height:580px !important;
+        height:540px !important;
         .top-content{
-            margin: 140px 20px !important;
+            margin: 140px 50px !important;
         }
         
     }
 }
+@media screen and (min-width:980px) and (max-width:1200px)  {
+    .home-top{
+        height:540px !important;
+        .top-content{
+            margin: 140px 50px !important;
+        }
+        
+    }
+}
+
 </style>
