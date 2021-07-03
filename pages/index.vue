@@ -204,16 +204,19 @@
             </div>
         </div>
       <commonFoot/>
+      <floatTooltip/>
     </div>
 </template>
 
 <script>
 import commonHead from '@/components/common/commonHead.vue';
 import commonFoot from '@/components/common/commonFoot.vue';
+import floatTooltip from '@/components/floatTooltip.vue';
 export default {
     components:{
         commonHead,
-        commonFoot
+        commonFoot,
+        floatTooltip
     },
     data(){
         return{
