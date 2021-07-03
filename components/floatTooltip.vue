@@ -60,7 +60,7 @@ export default {
 .float-tooltip {
   position: fixed;
   z-index: 1000;
-  bottom: 60px;
+  bottom: 120px;
   right: 80px;
   width: 40px;
   padding: 6px 5px 4px;
