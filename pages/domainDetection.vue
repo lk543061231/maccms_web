@@ -38,7 +38,7 @@
               :placeholder="palceHolder"
             ></el-input>
           </div>
-          <div class="btn global-btn-hover" @click="check">检测一下</div>
+          <div class="btn global-btn-hover1" @click="check">检测一下</div>
         </div>
         <div class="tip">
           {{
@@ -98,47 +98,10 @@
             <div class="website-btn">macvideojs.com</div>
           </div>
         </div>
-        <!-- v-if="!checkResult && activeIndex==2" -->
-        <div class="btns-div" v-if="!checkResult && activeIndex == 2">
-          <p class="text">MacCMS更新包下载渠道</p>
-          <div class="btns flex-between-center pro">
-            <el-popover
-              trigger="hover"
-              placement="bottom"
-              v-for="(item, index) in downList"
-              :key="index"
-            >
-              <div class="app-wrap">
-                <p
-                  class="app-item"
-                  @click="toDown(ele)"
-                  @mouseleave="hoveIndex = ''"
-                  @mouseenter="hoveIndex = elIndex"
-                  v-for="(ele, elIndex) in item.list"
-                  :key="elIndex"
-                >
-                  {{ ele.ver }}
-                  <i
-                    v-if="elIndex != 0"
-                    :class="hoveIndex === elIndex && 'move-ing'"
-                    class="el-icon-right"
-                  ></i>
-                </p>
-              </div>
-              <div
-                slot="reference"
-                :class="index == 1 && 'mlr'"
-                class="website-btn"
-              >
-                {{ item.label }}
-              </div>
-            </el-popover>
-          </div>
-          <p class="text-b">下载后手动覆盖即可完成后门漏洞修复</p>
-        </div>
+        
         <!-- 挂马检测 -->
         <div class="detection" v-if="activeIndex == 3">
-          <div class="detection-success" v-if="!checkResult && activeIndex == 3">
+          <div class="detection-success" v-if="checkResult && activeIndex == 3">
             <div class="detection-success-top flex-between-center">
               <div class="detection-success-top-left fw500">
                 <span class="f18-c172335">挂马站点总数：</span>
@@ -164,7 +127,7 @@
               </div>
             </div>
           </div>
-          <div class="detection-error" v-else-if="checkResult && activeIndex == 3">
+          <div class="detection-error" v-else-if="!checkResult && activeIndex == 3">
             <div class="detection-error-top fw500">
               <span class="f18-c242424">Head 请求头/返回头</span>
               <span class="f18-cF7502D" style="margin-left: 14px">0.3883</span>
@@ -211,6 +174,47 @@ Location: http://www.baidu.com/
               </div>
             </div>
           </div>
+        </div>
+
+        <!--  v-if="!checkResult && (activeIndex == 2 || activeIndex == 3)" -->
+        <div class="btns-div" v-if="!checkResult && (activeIndex == 2 || activeIndex == 3)">
+          <p class="text">MacCMS更新包下载渠道</p>
+          <div class="btns flex-between-center pro">
+            <el-popover
+              trigger="hover"
+              placement="bottom"
+              v-for="(item, index) in downList"
+              :key="index"
+            >
+              <div class="app-wrap">
+                <p
+                  class="app-item"
+                  @click="toDown(ele)"
+                  @mouseleave="hoveIndex = ''"
+                  @mouseenter="hoveIndex = elIndex"
+                  v-for="(ele, elIndex) in item.list"
+                  :key="elIndex"
+                >
+                  {{ ele.ver }}
+                  <i
+                    v-if="elIndex != 0"
+                    :class="hoveIndex === elIndex && 'move-ing'"
+                    class="el-icon-right"
+                  ></i>
+                </p>
+              </div>
+              <div
+                slot="reference"
+                :class="index == 1 && 'mlr'"
+                class="website-btn"
+              > 
+                <img class="b-img" :src="item.img" v-if="item.img">
+                <span>{{ item.label }}</span>
+                
+              </div>
+            </el-popover>
+          </div>
+          <p class="text-b">下载后手动覆盖即可完成后门漏洞修复</p>
         </div>
       </div>
       <div class="update"></div>
@@ -266,6 +270,7 @@ export default {
         },
         {
           label: "Github",
+          img:require('@/assets/images/common/common-git.png'),
           list: [
             {
               ver: "Pro (近期发布)",
@@ -283,6 +288,7 @@ export default {
         },
         {
           label: "Jsdelivr",
+          img:require('@/assets/images/common/common-js.png'),
           list: [
             {
               ver: "Pro (近期发布)",
@@ -472,7 +478,7 @@ export default {
         width: 120px;
         height: 50px;
         line-height: 50px;
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0);
         text-align: center;
         border-radius: 25px;
         border: 1px solid #ffffff;
@@ -497,6 +503,7 @@ export default {
     width: 100%;
     // height: 618px;
     padding: 40px 0;
+    background: #F7F8FA;
     .success,
     .error {
       @include flex-center;
@@ -518,6 +525,10 @@ export default {
     }
     .btns-div {
       margin-top: 60px;
+      width: 1200px;
+      background: #fff;
+      padding-bottom: 30px;
+      border-radius: 8px;
       .text-b {
         color: #666;
         font-size: 16px;
@@ -528,6 +539,7 @@ export default {
       .btns {
         margin-top: 30px;
         cursor: pointer;
+        justify-content: center !important;
         .website-btn {
           width: 240px;
           height: 45px;
@@ -550,10 +562,15 @@ export default {
           &:active {
             opacity: 0.6;
           }
+          
         }
       }
       .pro {
         .website-btn {
+          display: flex;
+          align-items: center;
+          text-align: center;
+          justify-content: center;
           &:hover {
             border: 1px solid #f7502d;
             color: #f7502d;
@@ -563,6 +580,12 @@ export default {
           margin: 0 30px !important;
           display: block;
         }
+        .b-img{
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+          }
+        
       }
     }
     .detection {
