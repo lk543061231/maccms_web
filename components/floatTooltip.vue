@@ -1,7 +1,11 @@
 <template>
   <div class="float-tooltip">
     <el-popover placement="left-start" trigger="hover" v-model="visiable">
-      <p class="f14-cF7502D tip-text" @click="join">加入TG交流群</p>
+      <div class="app-wrap">
+        <p class="f14-cF7502D tip-text app-item" @click="join(1)">加入TG通知群</p>
+        <p class="f14-cF7502D tip-text app-item" @click="join(2)">加入TG交流群</p>
+      </div>
+      
       <div slot="reference">
         <div class="btn">
           <img
@@ -44,9 +48,8 @@ export default {
     });
   },
   methods:{
-    join(){
-      // this.visiable = false;
-      window.open('https://t.me/maccms_news')
+    join(type){
+      window.open(type==1? 'https://t.me/maccms_news':'https://t.me/maccms_pro')
     },
     toTop(){
       this.arrow=require("~/assets/images/common/arrow.png")
@@ -60,7 +63,7 @@ export default {
 .float-tooltip {
   position: fixed;
   z-index: 1000;
-  bottom: 120px;
+  bottom: 220px;
   right: 80px;
   width: 40px;
   padding: 6px 5px 4px;
@@ -85,9 +88,8 @@ export default {
 }
 .tip-text {
   text-align: center;
-  color: #F7502D;
-  font-size: 16px;
   cursor: pointer;
   user-select: none;
+  
 }
 </style>

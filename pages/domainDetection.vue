@@ -578,7 +578,6 @@ export default {
         }
         .mlr {
           margin: 0 30px !important;
-          display: block;
         }
         .b-img{
             width: 24px;
