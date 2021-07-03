@@ -46,6 +46,7 @@ export default {
 <style lang="less" scoped>
 .foot-wrap {
   width: 100%;
+  min-width: 1300px;
   height: 350px;
   padding: 41px 253px 55px 266px;
   background: #ffffff;

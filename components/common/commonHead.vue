@@ -32,9 +32,9 @@
                 <p class="app-item">开发者中心</p>
               </div>
               <div class="app-wrap" v-else-if="index==3">
-                <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:1}})">域名真伪</p>
-                <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:2}})">漏洞检测</p>
-                <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:3}})">挂马检测</p>
+                <p class="app-item" @click="changeRouter('domainDetection',1)" >域名真伪</p>
+                <p class="app-item" @click="changeRouter('domainDetection',2)" >漏洞检测</p>
+                <!-- <p class="app-item" @click="$router.push({path:'/domainDetection',query:{activeIndex:3}})">挂马检测</p> -->
               </div>
               <p 
                 class="menu-name"
@@ -94,15 +94,34 @@ export default {
      
     };
   },
+  
   computed: {
      language () {
        return this.$i18n.locale === 'en'
      },
      menuList(){
        return this.$store.state.menuList
-     }
+     },
   },
   methods: {
+    changeRouter(name,type){
+      this.$router.push({
+        name:name,
+        query:{
+          activeIndex:type
+        }
+      })
+      sessionStorage.setItem('routerName',name)
+      this.changeActive()
+    },
+    changeActive(){
+      this.menuList.forEach((item,index)=>{
+        let routerName=sessionStorage.getItem('routerName') || this.$route.name
+        if(routerName==item.name){
+          this.activeIndex=index
+        }
+      })
+    },
     visibleChange(bol) {
       bol
         ? (this.languageSrc = require("~/assets/images/common/common-qiu-active.png"))
@@ -149,12 +168,7 @@ export default {
  
   },
   mounted() {
-    this.menuList.forEach((item,index)=>{
-      let routerName=sessionStorage.getItem('routerName') || this.$route.name
-      if(routerName==item.name){
-        this.activeIndex=index
-      }
-    })
+    this.changeActive()
     document.addEventListener("scroll", e => {
       var scrollTop =
         document.documentElement.scrollTop ||
@@ -208,6 +222,7 @@ export default {
         display: flex;
         height: 40px;
         align-items: center;
+        flex-shrink: 0;
         .menu-name{
           cursor: pointer;
           margin-right: 50px;

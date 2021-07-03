@@ -23,7 +23,8 @@ export const state = () => ({
         { label: '资源库', value: 4, name: '' },
         { label: '博客', value: 5, name: 'blog-blog' },
         { label: '帮助中心', value: 6, name: '' },
-    ]
+    ],
+    showMenuIndex: 0
 })
 
 export const mutations = {
@@ -33,11 +34,16 @@ export const mutations = {
         }
     },
     setRouter(state, routerName) {
-        console.log(sessionStorage.getItem('routerName'))
         state.routerName = routerName
     },
-    updateRouter() {
+    updateRouter(state, data) {
+        let list = state.menuList
 
+        list.forEach((item, index) => {
+            if (item.name == data) {
+                state.showMenuIndex = index
+            }
+        })
     },
     updatedIsMobile(state, isMobile) {
         state.isMobile = isMobile

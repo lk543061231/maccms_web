@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <commonHead/>
+      <commonHead ref="commonHead" />
         <div class="page-wrap">
             <div class="home-top">
                 <div class="top-content">
@@ -273,7 +273,7 @@ export default {
                     version:'2021.1000.2000',
                     officialDown:'https://down.maccms.pro/v10/maccms_v10_latest_update.zip',
                     gitDown:'https://github.com/maccmspro/',
-                    jsDown:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.1090_update.zip',
+                    jsDown:'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.2000_update.zip',
                     showChildPop:false,
                 },{
                     label:'V8',
@@ -316,7 +316,8 @@ export default {
                 // {img:require('@/assets/images/home/home-i6.png'),value:6},
                 {img:require('@/assets/images/home/home-i7.png'),value:7},
             ],
-            showNotice:false
+            showNotice:false,
+            changeRouterName:''
         }
     },
     mounted(){
@@ -335,6 +336,8 @@ export default {
                     logType:this.packageTitle
                 }
             })
+            sessionStorage.setItem('routerName','devDocument')
+            this.$refs.commonHead.changeActive()
         },
         jump(){
             window.open('https://t.me/maccms_news')
