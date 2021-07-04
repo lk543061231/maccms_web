@@ -27,7 +27,6 @@ export default {
         }
     },
     created(){
-        console.log(this.$route)
     },
     methods:{
         toLink(item){
@@ -35,6 +34,7 @@ export default {
                 this.$router.push({
                     name:item.name
                 })
+                sessionStorage.setItem('routerName',item.name)
             }
         }
     }

@@ -2,13 +2,12 @@ import path from 'path'
 import fs from 'fs'
 module.exports = {
     proxy: {
-        '/yapi': {
+        '/api': {
             target: 'https://www.maccms.pro',
             pathRewrite: {
-                '^/yapi': '/yapi',
+                '^/api': '/',
                 // '^/dapi': '/dapi',
             },
-            secure: false,
             changeOrigin: true
         }
     },
@@ -50,7 +49,9 @@ module.exports = {
         middleware: 'i18n' // middleware all pages of the application
     },
     axios: {
-        proxy: true
+        proxy: true,
+        prefix: '/',
+        credentials: true
     },
     pwa: {
         manifest: {

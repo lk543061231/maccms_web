@@ -44,7 +44,6 @@ export default {
         document.documentElement.scrollTop ||
         window.pageYOffset ||
         document.body.scrollTop;
-      console.log(this.scrollTop)
     });
   },
   methods:{

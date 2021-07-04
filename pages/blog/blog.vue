@@ -1,25 +1,26 @@
 <template>
   <div class="pt-118 container">
-    <commonHead />
+    <commonHead ref="commonHead" />
     <div class="page-wrap">
       <commonSteps :stepData="stepData" />
-      <div class="page-inner">
+      <div class="page-inner mt30">
         <div class="blog-list flex-between-center">
-          <div class="blog-item" v-for="i in 8" :key="i">
+          <div class="blog-item" v-for="(item,i) in list" :key="i" >
             <div class="blog-item-left">
               <el-image
-                src="https://w.wallhaven.cc/full/28/wallhaven-281d5y.png"
+                :src="item.image_url"
                 fit="contain"
               ></el-image>
             </div>
             <div class="blog-item-right">
-              <p class="f16-c172335">织梦响应式金融投资理财类网站织梦模板</p>
-              <p class="f14-c8F8F8F mt10">
-                古有唐僧西行取真经，今有TSRC西行会群英。上周六，TSRC一路向西再度来到古都西安。坤哥携分布式扫描神器分享创业phithon以四大…
+              <p class="f16-c172335 oneHidden">{{item.title}}</p>
+              <p class="f14-c8F8F8F mt10 threeHidden">
+                {{item.content_abbr}}
               </p>
               <p class="flex-between-center f16-c8F8F8F mt30">
-                <span>2021-07-01</span>
+                <span >{{item.create_time}}</span>
                 <span class="look-more"
+                  @click="toDetail(item)"
                   >查看更多<i class="el-icon-arrow-right"></i
                 ></span>
               </p>
@@ -30,7 +31,7 @@
           <el-pagination
             background
             layout="prev, pager, next, jumper"
-            :total="100"
+            :total="total"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
           >
@@ -46,6 +47,8 @@
 import commonHead from "@/components/common/commonHead.vue";
 import commonFoot from "@/components/common/commonFoot.vue";
 import commonSteps from '@/components/common/commonSteps.vue';
+import {getArticleList} from '@/utils/api'
+import {timestampToTime} from '@/utils/index'
 export default {
   components: {
     commonHead,
@@ -56,16 +59,59 @@ export default {
     return{
       stepData:{
           type:'title',   //step表示路由位置，title表示当前页标题
-          stepName:'博客',  //type为title式显示
-      }
+          stepName:'博客主页',  //type为title式显示
+      },
+      pages:{
+        offset:0,
+        limit:8
+      },
+      list:[],
+      total:0
     }
   },
+  mounted(){
+    this.getList()
+    this.$refs.commonHead.showBoxShadow=true
+  },
   methods:{
+      getList(){
+        let queryStr=''
+        for(var key in this.pages){
+          queryStr+=key +'='+this.pages[key]+'&'
+        }
+        queryStr=queryStr.substring(0,queryStr.length-1)
+        const loading = this.$loading({
+          lock: true,
+          text: "Loading",
+          spinner: "el-icon-loading",
+          background: "rgba(0, 0, 0, 0.7)",
+        });
+        getArticleList(queryStr).then(res=>{
+          loading.close()
+          if(res.data.code==1){
+            res.data.info.rows.forEach(item=>{
+              item.create_time=timestampToTime(item.create_time*1000,'yy-mm-dd')
+            })
+            this.list=res.data.info.rows
+            this.total=res.data.info.total
+          }
+        })
+      },
+      toDetail(item){
+        this.$router.push({
+          name:'blog-blogDetail',
+          query:{
+            id:item.article_id
+          }
+        })
+      },
       handleSizeChange(val) {
+        this.pages.limit=val
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
+        this.pages.offset=val
+        this.getList()
       }
   }
 };
@@ -120,6 +166,7 @@ export default {
       display: flex;
       justify-content: center;
       margin-top: 50px;
+      margin-bottom: 30px;
       /deep/.el-pagination.is-background {
         .el-pager li,.btn-next,.btn-prev {
           background: #f7f8fa;

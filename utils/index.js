@@ -1,4 +1,5 @@
-export function timestampToTime(timestamp) {
+export function timestampToTime(timestamp, type) {
+    let timeType = type || 'yy-mm-dd hh-mm-ss'
     var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
     var Y = date.getFullYear() + '-';
     var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
@@ -6,5 +7,10 @@ export function timestampToTime(timestamp) {
     var h = date.getHours() + ':';
     var m = date.getMinutes() + ':';
     var s = date.getSeconds();
-    return Y + M + D + h + m + s;
+    if (timeType == 'yy-mm-dd hh-mm-ss') {
+        return Y + M + D + h + m + s;
+    } else if (timeType == 'yy-mm-dd') {
+        return Y + M + D;
+    }
+
 }

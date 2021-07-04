@@ -91,7 +91,6 @@ export default {
       activeIndex:  0,
       languageSrc: require("~/assets/images/common/common-qiu.png"),
       userSrc: require("~/assets/images/common/common-user.png"),
-     
     };
   },
   
@@ -102,6 +101,7 @@ export default {
      menuList(){
        return this.$store.state.menuList
      },
+
   },
   methods: {
     changeRouter(name,type){
@@ -128,10 +128,11 @@ export default {
         : (this.languageSrc = require("~/assets/images/common/common-qiu.png"));
     },
     selectRouter(item,index){
-      if(index!=0 && index!=3 && index!=2 && index!=6 ){
+      if(index!=0 && index!=3 && index!=2 && index!=5 ){
         this.$message.info("敬请期待");
         return
-      }else if(index==5){
+      }
+      if(index==5){
         this.showBoxShadow=true
       }
       this.$router.push({name:item.name})
@@ -163,7 +164,6 @@ export default {
         })
       }
     },
- 
   },
   mounted() {
     this.changeActive()

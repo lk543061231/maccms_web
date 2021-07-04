@@ -1,16 +1,16 @@
 <template>
     <div class="pt-118 container">
-        <commonHead/>
+        <commonHead ref="commonHead" />
         <div class="page-wrap">
             <commonSteps :stepData="stepData" />
             <div class="page-container">
                 <div class="detail">
-                    <p class="d-p1 f30-c172335">龙踞长安，安全英豪铸盛世</p>
-                    <p class="d-p2 f16-c8F8F8F mt10">公布时间：2015-07-06</p>
+                    <p class="d-p1 f30-c172335 oneHidden">{{detail.title}}</p>
+                    <p class="d-p2 f16-c8F8F8F mt10">公布时间：{{detail.create_time}}</p>
                     <div class="article">
-                        <p class="a-p1 f16-c8F8F8F mt20">古有唐僧西行取真经，今有TSRC西行会群英。7月4日，TSRC安全群英汇从上海一路向西，再度来到古都西安，在屹立不倒的大雁塔边聚众英豪论道抒怀。沙龙中有坤哥携分布式扫描神器分享创业点滴，有技术帝phithon以四大案例大谈安全漏洞，还有西电杨超老师等各位前辈为大家破解职业发展迷茫，各种精彩尽在TSRC安全群英汇。</p>
-                        <p class="a-p2 f16-c172335 mt30">坤哥：执着拼搏创业梦</p>
-                        <p class="a-p1 f16-c8F8F8F mt20">古有唐僧西行取真经，今有TSRC西行会群英。7月4日，TSRC安全群英汇从上海一路向西，再度来到古都西安，在屹立不倒的大雁塔边聚众英豪论道抒怀。沙龙中有坤哥携分布式扫描神器分享创业点滴，有技术帝phithon以四大案例大谈安全漏洞，还有西电杨超老师等各位前辈为大家破解职业发展迷茫，各种精彩尽在TSRC安全群英汇。</p>
+                        <p class="a-p1 f16-c8F8F8F mt20">{{detail.content_abbr}}</p>
+                        <p class="a-p1 f16-c8F8F8F mt20" v-html="detail.content"></p>
+                        <img :src="detail.image_url" class="a-img mt20">
                     </div>
                 </div >
             </div>
@@ -23,6 +23,8 @@
 import commonHead from '@/components/common/commonHead.vue';
 import commonFoot from '@/components/common/commonFoot.vue';
 import commonSteps from '@/components/common/commonSteps.vue';
+import {getArticleDetail} from '@/utils/api'
+import {timestampToTime} from '@/utils/index'
 export default {
     components:{
         commonHead,
@@ -46,7 +48,38 @@ export default {
                         value:1
                     },
                 ]
-            }
+            },
+            detail:{}
+        }
+    },
+    mounted(){
+        let query=this.$route.query
+        if(query && query.id){
+            this.getDetail(query.id)
+        }
+        this.$refs.commonHead.showBoxShadow=true
+    },
+    methods:{
+        getDetail(id){
+            const loading = this.$loading({
+                lock: true,
+                text: "Loading",
+                spinner: "el-icon-loading",
+                background: "rgba(0, 0, 0, 0.7)",
+            });
+            let query='id='+id
+            getArticleDetail(query).then(res=>{
+                loading.close()
+                if(res.data.code==1){
+                    this.detail=res.data.info.detail
+                }
+                let setpObj={
+                    label:this.detail.title,
+                    name:'',
+                }
+                this.stepData.stepList.push(setpObj)
+                this.detail.create_time=timestampToTime(this.detail.create_time*1000,'yy-mm-dd')
+            })
         }
     }
 
@@ -70,6 +103,12 @@ export default {
         }
         .article{
             width: 80%;
+            .a-p1{
+                word-wrap:break-word
+            }
+            .a-img{
+                width: 100%;
+            }
         }
     }
 }
