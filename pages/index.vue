@@ -135,7 +135,7 @@
                 <img src="@/assets/images/home/home-p2.png" class="p2-img">
                 <p class="f38-c172335">Pro版UI设计 交互体验大更新</p>
                 <p class="f20-c172335 mt20">永久免费开源专业影视MacCMS Pro版</p>
-                <p class="f20-c8F8F8F mt30">新版本默认模版对应用户体验，UI，UX都是的最先反馈出平台高 留存的核心因素，能够大幅度提神站长的盈利目标。</p>
+                <p class="f20-c8F8F8F mt30">新版本默认模版对应用户体验，UI，UX都是的最先反馈出平台高留存的核心因素，能够大幅度提神站长的盈利目标。</p>
                 <div class="con-list mt30">
                     <div class="con-item" v-for="(item,index) in conList" :key="index">
                         <div class="con-img-wrap">
