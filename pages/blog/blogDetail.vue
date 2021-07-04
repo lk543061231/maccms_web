@@ -8,7 +8,7 @@
                     <p class="d-p1 f30-c172335 ">{{detail.title}}</p>
                     <p class="d-p2 f16-c8F8F8F mt10">公布时间：{{detail.create_time}}</p>
                     <div class="article">
-                        <p class="a-p1 f16-c8F8F8F mt20">{{detail.content_abbr}}</p>
+                        <!-- <p class="a-p1 f16-c8F8F8F mt20">{{detail.content_abbr}}</p> -->
                         <p class="a-p1 f16-c8F8F8F mt20" v-html="detail.content" id="content"></p>
                         <!-- <img :src="detail.image_url" class="a-img mt20"> -->
                     </div>
@@ -30,6 +30,10 @@ export default {
         commonHead,
         commonFoot,
         commonSteps
+    },
+    asyncData ({ app }, callback) {
+        app.head.title = '博客详情'
+        callback(null, {})
     },
     data(){
         return{
@@ -104,13 +108,18 @@ export default {
             position: relative;
         }
         .article{
-            width: 80%;
+            width: 100%;
             .a-p1{
                 word-wrap:break-word;
                 p{
+                    padding: 0;
+                    color: #000;
                     img{
                         width: 100%;
                     }
+                }
+                pre{
+                    color: #000;
                 }
             }
             .a-img{
@@ -122,6 +131,9 @@ export default {
 @media screen and (max-width:1200px)  {
     .page-container-blod-detail{
         padding:30px !important;
+        .detail{
+            width: 80%;
+        }
     }
 }
 </style>
