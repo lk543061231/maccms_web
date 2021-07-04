@@ -108,9 +108,14 @@ export default {
             .a-p1{
                 word-wrap:break-word;
                 p{
+                    padding: 0;
+                    color: #000;
                     img{
                         width: 100%;
                     }
+                }
+                pre{
+                    color: #000;
                 }
             }
             .a-img{
