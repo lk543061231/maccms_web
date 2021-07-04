@@ -20,7 +20,7 @@ export const state = () => ({
         { label: '应用市场', value: 1, name: 'applicationMarket' },
         { label: '开发文档', value: 2, name: 'devDocument' },
         { label: '域名检测', value: 3, name: 'domainDetection' },
-        { label: '资源库', value: 4, name: '' },
+        { label: '资源库', value: 4, name: 'resource' },
         { label: '博客', value: 5, name: 'blog-blog' },
         { label: '帮助中心', value: 6, name: '' },
     ],
