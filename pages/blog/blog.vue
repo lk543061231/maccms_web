@@ -7,10 +7,9 @@
         <div class="blog-list flex-between-center">
           <div class="blog-item" v-for="(item,i) in list" :key="i" >
             <div class="blog-item-left">
-              <el-image
+              <img
                 :src="item.image_url"
-                fit="contain"
-              ></el-image>
+              >
             </div>
             <div class="blog-item-right">
               <p class="f16-c172335 oneHidden">{{item.title}}</p>
@@ -145,6 +144,7 @@ export default {
         border-radius: 6px;
         margin: 0 8px 20px 0;
         padding: 20px 40px 20px 20px;
+        cursor: pointer;
         .blog-item-left {
           width: 320px;
           border-radius: 6px;
@@ -159,6 +159,9 @@ export default {
         }
         &:nth-child(even) {
           margin-right: 0;
+        }
+        &:hover{
+          box-shadow: 0px 2px 8px 10px rgba(0, 0, 0, 0.04);
         }
       }
     }

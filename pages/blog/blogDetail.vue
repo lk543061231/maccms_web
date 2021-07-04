@@ -3,14 +3,14 @@
         <commonHead ref="commonHead" />
         <div class="page-wrap">
             <commonSteps :stepData="stepData" />
-            <div class="page-container">
+            <div class="page-container-blod-detail">
                 <div class="detail">
-                    <p class="d-p1 f30-c172335 oneHidden">{{detail.title}}</p>
+                    <p class="d-p1 f30-c172335 ">{{detail.title}}</p>
                     <p class="d-p2 f16-c8F8F8F mt10">公布时间：{{detail.create_time}}</p>
                     <div class="article">
                         <p class="a-p1 f16-c8F8F8F mt20">{{detail.content_abbr}}</p>
-                        <p class="a-p1 f16-c8F8F8F mt20" v-html="detail.content"></p>
-                        <img :src="detail.image_url" class="a-img mt20">
+                        <p class="a-p1 f16-c8F8F8F mt20" v-html="detail.content" id="content"></p>
+                        <!-- <img :src="detail.image_url" class="a-img mt20"> -->
                     </div>
                 </div >
             </div>
@@ -80,14 +80,14 @@ export default {
                 this.stepData.stepList.push(setpObj)
                 this.detail.create_time=timestampToTime(this.detail.create_time*1000,'yy-mm-dd')
             })
-        }
+        },
     }
 
 }
 </script>
 
-<style scoped lang="scss">
-.page-container{
+<style  lang="scss">
+.page-container-blod-detail{
     width: 100%;
     background: #F7F8FA;
     padding: 30px 260px;
@@ -104,12 +104,22 @@ export default {
         .article{
             width: 80%;
             .a-p1{
-                word-wrap:break-word
+                word-wrap:break-word;
+                p{
+                    img{
+                        width: 100%;
+                    }
+                }
             }
             .a-img{
                 width: 100%;
             }
         }
+    }
+}
+@media screen and (max-width:1200px)  {
+    .page-container{
+        padding:30px !important;
     }
 }
 </style>
