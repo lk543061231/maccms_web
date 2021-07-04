@@ -128,13 +128,12 @@ export default {
         : (this.languageSrc = require("~/assets/images/common/common-qiu.png"));
     },
     selectRouter(item,index){
-      if(index!=0 && index!=3 && index!=2  ){
+      if(index!=0 && index!=3 && index!=2 && index!=6 ){
         this.$message.info("敬请期待");
         return
       }else if(index==5){
         this.showBoxShadow=true
       }
-      this.$store.commit('setRouter','12313')
       this.$router.push({name:item.name})
       sessionStorage.setItem('routerName',item.name)
     },

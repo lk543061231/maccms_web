@@ -22,7 +22,7 @@ export const state = () => ({
         { label: '域名检测', value: 3, name: 'domainDetection' },
         { label: '资源库', value: 4, name: 'resource' },
         { label: '博客', value: 5, name: 'blog-blog' },
-        { label: '帮助中心', value: 6, name: '' },
+        { label: '帮助中心', value: 6, name: 'helpCenter' },
     ],
     showMenuIndex: 0
 })
