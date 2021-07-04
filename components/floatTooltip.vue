@@ -2,8 +2,8 @@
   <div class="float-tooltip">
     <el-popover placement="left-start" trigger="hover" v-model="visiable">
       <div class="app-wrap">
-        <p class="f14-cF7502D tip-text app-item" @click="join(1)">加入TG通知群</p>
-        <p class="f14-cF7502D tip-text app-item" @click="join(2)">加入TG交流群</p>
+        <p class=" tip-text app-item" @click="join(1)">加入TG通知群</p>
+        <p class=" tip-text app-item" @click="join(2)">加入TG交流群</p>
       </div>
       
       <div slot="reference">

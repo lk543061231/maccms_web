@@ -181,7 +181,7 @@
                 </div>
             </div>
         </div>
-        <div class="notice" v-if="showNotice">
+        <div class="notice" v-if="showNotice" @click.self="showNotice=false">
             <div class="notice-wrap">
                 <img class="n7-img" src="@/assets/images/home/home-n7.png" >
                 <img class="n1-img" src="@/assets/images/home/home-n1.png" @click="showNotice=false">
