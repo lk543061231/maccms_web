@@ -92,7 +92,9 @@ export default {
     background: #F7F8FA;
     padding: 30px 260px;
     .detail{
-        min-width: 1200px;
+        // min-width: 1200px;
+        margin: auto;
+        width: 90%;
         padding: 60px;
         background: #fff;
         border-radius: 4px;
@@ -118,7 +120,7 @@ export default {
     }
 }
 @media screen and (max-width:1200px)  {
-    .page-container{
+    .page-container-blod-detail{
         padding:30px !important;
     }
 }
