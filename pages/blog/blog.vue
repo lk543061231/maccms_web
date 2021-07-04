@@ -5,7 +5,7 @@
       <commonSteps :stepData="stepData" />
       <div class="page-inner mt30">
         <div class="blog-list flex-between-center">
-          <div class="blog-item" v-for="(item,i) in list" :key="i" >
+          <div class="blog-item" v-for="(item,i) in list" :key="i" @click="toDetail(item)">
             <div class="blog-item-left">
               <img
                 :src="item.image_url"
@@ -19,7 +19,7 @@
               <p class="flex-between-center f16-c8F8F8F mt30">
                 <span >{{item.create_time}}</span>
                 <span class="look-more"
-                  @click="toDetail(item)"
+                  
                   >查看更多<i class="el-icon-arrow-right"></i
                 ></span>
               </p>
