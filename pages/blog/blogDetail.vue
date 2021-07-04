@@ -31,6 +31,10 @@ export default {
         commonFoot,
         commonSteps
     },
+    asyncData ({ app }, callback) {
+        app.head.title = '博客详情'
+        callback(null, {})
+    },
     data(){
         return{
             stepData:{
