@@ -26,6 +26,7 @@
             <p class="f18-c242424">开发文档</p>
             <p class="f18-c242424">应用市场</p>
             <p class="f18-c242424">影视资源</p>
+            <p class="f18-c242424" @click="join">加入TG通知群</p>
         </div>
         <div class="bottom-right f14-c8F8F8F">
             MACCMS Pro  永久免费影视源码
@@ -39,6 +40,11 @@ export default {
     data(){
         return{
         }
+    },
+    methods:{
+        join(type){
+            window.open(type==1? 'https://t.me/maccms_news':'https://t.me/maccms_pro')
+        },
     }
 };
 </script>
@@ -72,6 +78,7 @@ export default {
           display: flex;
           p{
               margin-right: 20px;
+              cursor: pointer;
               &:last-child{
                   margin-right:0;
               }

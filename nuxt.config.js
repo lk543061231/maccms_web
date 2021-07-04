@@ -2,11 +2,11 @@ import path from 'path'
 import fs from 'fs'
 module.exports = {
     proxy: {
-        '/dapi': {
+        '/yapi': {
             target: 'https://www.maccms.pro',
             pathRewrite: {
-                // '^/yapi': '/yapi',
-                '^/dapi': '/dapi',
+                '^/yapi': '/yapi',
+                // '^/dapi': '/dapi',
             },
             secure: false,
             changeOrigin: true
