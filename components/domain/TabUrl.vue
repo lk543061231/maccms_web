@@ -38,7 +38,7 @@ export default {
 
 <style scoped lang="less">
 .text {
-  margin-top: 20px;
+  padding-top: 20px;
   font-size: 24px;
   font-weight: 500;
   color: #242424;

@@ -46,10 +46,10 @@
             <TabUrl :checkResult="checkResult"></TabUrl>
           </div>
           <div v-if="activeIndex === 2">
-            <TabBug :checkResult="checkResult"></TabBug>
+            <TabBug :resMsg="resMsg" :checkResult="checkResult" :code="String(code)"></TabBug>
           </div>
           <div v-if="activeIndex === 3">
-            <TabHorse :checkResult="checkResult"></TabHorse>
+            <TabHorse :code="String(code)" :checkTime="checkTime" :checkResult="checkResult"></TabHorse>
           </div>
         </div>
         <!--  v-if="!checkResult && (activeIndex == 2 || activeIndex == 3)" -->
@@ -89,17 +89,15 @@ export default {
       activeIndex: 1,
       domainVal: '',
       passUrl: ['maccms.com', 'maccms.net', 'maccms.pro', 'macvideojs.com'],
-      hoveIndex: '',
+
       checkResult: '',
-      showResult: false,
-      is_fake: false,
-      code: '',
+      code: 0,
       showTxt: false,
       palceHolder: '请输入检测域名',
 
       resMsg: '',
       visiable: false,
-      inJEctList: [],
+
       checkTime: ''
     };
   },
@@ -110,7 +108,6 @@ export default {
       this.palceHolder =
         query.activeIndex == 1 || query.activeIndex == 3 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
     }
-    this.getInject();
   },
   watch: {
     $route: function(val) {
@@ -165,26 +162,11 @@ export default {
         }
       }
     },
-    getInject() {
-      getInjectList().then(res => {
-        if (res.data.code == 0) {
-          this.inJEctList = res.data.data;
-        }
-      });
-    },
-    toDown(item) {
-      if (item.link) {
-        window.open(item.link);
-      }
-    },
 
     choiceSearch(i) {
       this.showTxt = false;
       this.activeIndex = i;
       this.palceHolder = i == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
-    },
-    downLoad(type) {
-      console.log(type);
     }
   }
 };
