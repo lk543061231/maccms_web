@@ -201,11 +201,11 @@ export default {
     }
   }
 }
-// @media screen and (max-width: 1400px) {
-//   .blog-list {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//   }
-// }
+@media screen and (max-width: 500px) {
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
 </style>
