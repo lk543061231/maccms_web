@@ -5,7 +5,6 @@
       <Step2></Step2>
       <Step3></Step3>
       <Step4></Step4>
-      <Step5></Step5>
     </div>
     <Step5></Step5>
     <commonFoot />
