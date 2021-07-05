@@ -13,9 +13,9 @@
             漏洞检测
           </p>
 
-          <p class="tab-title" :class="{ active: activeIndex == 3 }" @click="choiceSearch(3)">
+          <!-- <p class="tab-title" :class="{ active: activeIndex == 3 }" @click="choiceSearch(3)">
             挂马检测
-          </p>
+          </p> -->
         </div>
         <div class="input-div">
           <div class="input-cls" :class="inputCheck && 'global-input-focus'">

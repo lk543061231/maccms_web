@@ -86,15 +86,38 @@ export default {
   },
   watch: {
     $route(newV) {
+      this.checkRoute(newV);
+    }
+  },
+  mounted() {
+    this.checkRoute(this.$route);
+    document.addEventListener('scroll', e => {
+      var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+      if (scrollTop > 110) {
+        let routerName = this.$route.name;
+        if (this.noSildeRouters.includes(routerName)) {
+          this.showBoxShadow = true;
+          return;
+        }
+        this.slide = true;
+      } else {
+        this.slide = false;
+      }
+    });
+
+    document.addEventListener('click', e => {
+      this.userSrc = require('~/assets/images/common/common-user.png');
+    });
+  },
+  methods: {
+    checkRoute(newV) {
       console.log(newV, 'newV');
       if (newV) {
         let name = newV.name;
         let index = this.menuList.findIndex(item => item.name === name);
         this.activeIndex = index;
       }
-    }
-  },
-  methods: {
+    },
     changeRouter(name, type) {
       this.$router.push({
         name: name,
@@ -148,25 +171,6 @@ export default {
         });
       }
     }
-  },
-  mounted() {
-    document.addEventListener('scroll', e => {
-      var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-      if (scrollTop > 110) {
-        let routerName = this.$route.name;
-        if (this.noSildeRouters.includes(routerName)) {
-          this.showBoxShadow = true;
-          return;
-        }
-        this.slide = true;
-      } else {
-        this.slide = false;
-      }
-    });
-
-    document.addEventListener('click', e => {
-      this.userSrc = require('~/assets/images/common/common-user.png');
-    });
   }
 };
 </script>
