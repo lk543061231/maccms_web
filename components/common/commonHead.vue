@@ -117,6 +117,11 @@ export default {
         let index = this.menuList.findIndex(item => item.name === name);
         this.activeIndex = index;
       }
+      if (this.noSildeRouters.includes(newV.name)) {
+        this.showBoxShadow = true;
+      } else {
+        this.showBoxShadow = false;
+      }
     },
     changeRouter(name, type) {
       this.$router.push({
