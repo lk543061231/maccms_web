@@ -1,18 +1,20 @@
 import path from 'path';
 import fs from 'fs';
+import autoprefixer from 'autoprefixer';
+import pxtorem from 'postcss-pxtorem';
 module.exports = {
-  devServer: {
-    proxy: {
-      'https://www.maccms.pro': {
-        target: 'https://www.maccms.pro',
-        pathRewrite: {
-          // '^/api': '/'
-          // '^/dapi': '/dapi',
-        },
-        changeOrigin: true
-      }
+  // devServer: {
+  proxy: {
+    '/api': {
+      target: 'https://www.maccms.pro',
+      pathRewrite: {
+        '^/api': '/'
+        // '^/dapi': '/dapi',
+      },
+      changeOrigin: true
     }
   },
+  // },
 
   head: {
     // title: 'MacCMS Pro',
@@ -30,7 +32,8 @@ module.exports = {
       { hid: 'apple-mobile-web-app-title', name: 'apple-mobile-web-app-title', content: 'MacCMS Pro' },
       { hid: 'og:site_name', property: 'og:site_name', content: 'MacCMS Pro' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [{ src: '/rem.js', type: 'text/javascript', charset: 'utf-8' }]
   },
   css: [
     'element-ui/lib/theme-chalk/index.css',
@@ -66,6 +69,19 @@ module.exports = {
   },
   content: {},
   build: {
-    transpile: [/^element-ui/]
+    transpile: [/^element-ui/],
+    postcss: {
+      plugins: [
+        autoprefixer(),
+        pxtorem({
+          rootValue: 192,
+          propList: ['*'],
+          replace: true
+          // 该项仅在使用 Circle 组件时需要
+          // 原因参见 https://github.com/youzan/vant/issues/1948
+          // selectorBlackList: ['van-circle__layer'],
+        })
+      ]
+    }
   }
 };

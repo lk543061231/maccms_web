@@ -127,7 +127,7 @@ export default {
 <style scoped lang="less">
 .page-wrap {
   background: #f7f8fa;
-  min-width: 1380px;
+  min-width: 1350px;
   .page-title {
     height: 78px;
     line-height: 78px;
@@ -141,8 +141,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     .blog-list {
-      width: 1388px;
+      // width: 1388px;
       flex-wrap: wrap;
       .blog-item {
         display: flex;
@@ -200,4 +201,11 @@ export default {
     }
   }
 }
+// @media screen and (max-width: 1400px) {
+//   .blog-list {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//   }
+// }
 </style>
