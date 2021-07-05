@@ -148,7 +148,7 @@ export default {
       flex-wrap: wrap;
       .blog-item {
         display: flex;
-        width: 690px;
+        flex: 1;
         height: 180px;
         background: #ffffff;
         box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.04);
@@ -160,7 +160,7 @@ export default {
           margin-right: 0;
         }
         .blog-item-left {
-          width: 320px;
+          width: 50%;
           border-radius: 6px;
           overflow: hidden;
           img {
@@ -168,7 +168,7 @@ export default {
           }
         }
         .blog-item-right {
-          width: 300px;
+          width: 40%;
           margin-left: 20px;
         }
         &:nth-child(even) {
