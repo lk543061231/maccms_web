@@ -58,7 +58,7 @@ export default {
 <style scoped lang="less">
 .float-tooltip {
   position: fixed;
-  z-index: 1000;
+  z-index: 1;
   bottom: 220px;
   right: 80px;
   width: 40px;
