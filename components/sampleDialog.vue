@@ -1,11 +1,5 @@
 <template>
-  <el-dialog
-    :visible.sync="visiable"
-    width="600px"
-    center
-    class="sample-dialog"
-    :show-close="false"
-  >
+  <el-dialog :visible.sync="visiable" width="600px" center class="sample-dialog" :show-close="false">
     <div slot="title" class="sample-dialog-title">
       <span>特征样本提交</span>
       <i class="el-icon-close close-btn" @click="close"></i>
@@ -13,11 +7,7 @@
     <div class="sample-dialog-body">
       <el-form ref="form" :model="form">
         <el-form-item label="域名:">
-          <el-input
-            v-model="form.domain"
-            placeholder="请输入域名"
-            @blur="domainBlur"
-          ></el-input>
+          <el-input v-model="form.domain" placeholder="请输入域名" @blur="domainBlur"></el-input>
         </el-form-item>
         <el-form-item label="特征内容:">
           <el-input
@@ -34,12 +24,7 @@
       </el-form>
     </div>
     <span slot="footer" class="sample-dialog-footer">
-      <el-button
-        class="submit-btn"
-        @click="submit"
-        :disabled="disabled"
-        >确定提交</el-button
-      >
+      <el-button class="submit-btn" @click="submit" :disabled="disabled">确定提交</el-button>
     </span>
   </el-dialog>
 </template>
@@ -49,44 +34,44 @@ export default {
   props: {
     visiable: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
       form: {
-        domain: "",
-        content: "",
+        domain: '',
+        content: ''
       },
-      disabled: true,
+      disabled: true
     };
   },
   methods: {
     close() {
-      this.$emit("update:visiable", false);
+      this.$emit('update:visiable', false);
     },
     domainBlur() {
-      if (this.form.domain != "" && this.form.content != "") {
+      if (this.form.domain != '' && this.form.content != '') {
         this.disabled = false;
       } else {
         this.disabled = true;
       }
     },
     contentBlur() {
-      if (this.form.domain != "" && this.form.content != "") {
+      if (this.form.domain != '' && this.form.content != '') {
         this.disabled = false;
       } else {
         this.disabled = true;
       }
     },
-    submit(){
-        this.close();
+    submit() {
+      this.close();
     }
-  },
+  }
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 .sample-dialog {
   /deep/.el-dialog {
     border-radius: 10px;
@@ -132,7 +117,7 @@ export default {
       color: #ffffff;
       width: 200px;
       border-radius: 20px;
-      background: linear-gradient(270deg, #DC3828 0%, #E5552D 100%);
+      background: linear-gradient(270deg, #dc3828 0%, #e5552d 100%);
       &.is-disabled {
         background: #faa89a;
         &:hover {

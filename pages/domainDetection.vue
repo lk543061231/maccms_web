@@ -1,24 +1,15 @@
 <template>
   <div class="pt-118 page-wrap">
-    <commonHead />
     <div class="domain-top">
       <div class="logo-img">
         <img src="~/assets/images/domain/logo-white.png" alt="macCms" />
       </div>
       <div class="search-div">
         <div class="tab-div">
-          <p
-            class="tab-title"
-            :class="{ active: activeIndex == 1 }"
-            @click="choiceSearch(1)"
-          >
+          <p class="tab-title" :class="{ active: activeIndex == 1 }" @click="choiceSearch(1)">
             域名真伪
           </p>
-          <p
-            class="tab-title"
-            :class="{ active: activeIndex == 2 }"
-            @click="choiceSearch(2)"
-          >
+          <p class="tab-title" :class="{ active: activeIndex == 2 }" @click="choiceSearch(2)">
             漏洞检测
           </p>
           <!-- <p
@@ -31,22 +22,17 @@
         </div>
         <div class="input-div">
           <div class="input-cls" :class="inputCheck && 'global-input-focus'">
-            <el-input
-              v-model="domainVal"
-              @focus="inputCheck = true"
-              @blur="inputCheck = false"
-              :placeholder="palceHolder"
-            ></el-input>
+            <el-input v-model="domainVal" @focus="inputCheck = true" @blur="inputCheck = false" :placeholder="palceHolder"></el-input>
           </div>
           <div class="btn global-btn-hover1" @click="check">检测一下</div>
         </div>
         <div class="tip">
           {{
             activeIndex == 1
-              ? "市面已有很多假冒MACCMS平台，为保证您能找到正版网址可输入即可辨别真伪哦！"
+              ? '市面已有很多假冒MACCMS平台，为保证您能找到正版网址可输入即可辨别真伪哦！'
               : activeIndex == 2
-              ? "快速检测网站当前使用版本是否存在漏洞"
-              : "因.la版本挂马问题而自研大数据全网采集系统指纹识别MacCMS并实时监测被挂马的网站第一时间云端同步预警"
+              ? '快速检测网站当前使用版本是否存在漏洞'
+              : '因.la版本挂马问题而自研大数据全网采集系统指纹识别MacCMS并实时监测被挂马的网站第一时间云端同步预警'
           }}
         </div>
       </div>
@@ -55,10 +41,7 @@
       <!-- <div class="error" v-if="showTxt"> -->
       <div class="error" v-if="showTxt">
         <div class="img-div">
-          <img
-            v-if="checkResult"
-            src="~/assets/images/common/domain-success.png"
-          />
+          <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
           <img v-else src="~/assets/images/common/domain-error.png" />
         </div>
 
@@ -72,7 +55,7 @@
           </p>
           <div class="text error-color" v-else>
             <p v-if="code == 1002">
-              {{ resMsg || "输入地址错误，无法进行检测" }}
+              {{ resMsg || '输入地址错误，无法进行检测' }}
             </p>
             <div v-else>
               <p class="p-1">当前网址已提供最新版本</p>
@@ -98,7 +81,7 @@
             <div class="website-btn">macvideojs.com</div>
           </div>
         </div>
-        
+
         <!-- 挂马检测 -->
         <div class="detection" v-if="activeIndex == 3">
           <div class="detection-success" v-if="checkResult && activeIndex == 3">
@@ -106,11 +89,9 @@
               <div class="detection-success-top-left fw500">
                 <span class="f18-c172335">挂马站点总数：</span>
                 <span class="f18-cF7502D">200002</span>
-                <span class="f12-cC7C7C7" style="margin-left: 10px"
-                  >(全网大数据扫描实时动态更新）</span
-                >
+                <span class="f12-cC7C7C7" style="margin-left: 10px">(全网大数据扫描实时动态更新）</span>
               </div>
-              <div class="detection-success-top-right f14-c172335" @click="visiable=true">
+              <div class="detection-success-top-right f14-c172335" @click="visiable = true">
                 <span>特征样本提交</span>
                 <i class="el-icon-arrow-right"></i>
               </div>
@@ -118,11 +99,11 @@
             <div class="detection-success-bottom">
               <p class="f16-c242424 fw500">
                 <span>检测时间：</span>
-                <span>{{checkTime}}</span>
+                <span>{{ checkTime }}</span>
               </p>
               <div class="detection-list">
-                <div class="detection-item" v-for="(e,i) in inJEctList" :key="i">
-                  {{e}}
+                <div class="detection-item" v-for="(e, i) in inJEctList" :key="i">
+                  {{ e }}
                 </div>
               </div>
             </div>
@@ -180,12 +161,7 @@ Location: http://www.baidu.com/
         <div class="btns-div" v-if="!checkResult && (activeIndex == 2 || activeIndex == 3)">
           <p class="text">MacCMS更新包下载渠道</p>
           <div class="btns flex-between-center pro">
-            <el-popover
-              trigger="hover"
-              placement="bottom"
-              v-for="(item, index) in downList"
-              :key="index"
-            >
+            <el-popover trigger="hover" placement="bottom" v-for="(item, index) in downList" :key="index">
               <div class="app-wrap">
                 <p
                   class="app-item"
@@ -196,21 +172,12 @@ Location: http://www.baidu.com/
                   :key="elIndex"
                 >
                   {{ ele.ver }}
-                  <i
-                    v-if="elIndex != 0"
-                    :class="hoveIndex === elIndex && 'move-ing'"
-                    class="el-icon-right"
-                  ></i>
+                  <i v-if="elIndex != 0" :class="hoveIndex === elIndex && 'move-ing'" class="el-icon-right"></i>
                 </p>
               </div>
-              <div
-                slot="reference"
-                :class="index == 1 && 'mlr'"
-                class="website-btn"
-              > 
-                <img class="b-img" :src="item.img" v-if="item.img">
+              <div slot="reference" :class="index == 1 && 'mlr'" class="website-btn">
+                <img class="b-img" :src="item.img" v-if="item.img" />
                 <span>{{ item.label }}</span>
-                
               </div>
             </el-popover>
           </div>
@@ -220,100 +187,100 @@ Location: http://www.baidu.com/
       <div class="update"></div>
     </div>
     <commonFoot />
-    <sampleDialog :visiable.sync="visiable"/>
+    <sampleDialog :visiable.sync="visiable" />
   </div>
 </template>
 
 <script>
-import { getIsfake,checkSiteInject,getInjectList } from "@/utils/api";
-import { timestampToTime } from "@/utils/index";
-import commonHead from "@/components/common/commonHead.vue";
-import commonFoot from "@/components/common/commonFoot.vue";
-import sampleDialog from "@/components/sampleDialog.vue";
+import { getIsfake, checkSiteInject, getInjectList } from '@/utils/api';
+import { timestampToTime } from '@/utils/index';
+import commonHead from '@/components/common/commonHead.vue';
+import commonFoot from '@/components/common/commonFoot.vue';
+import sampleDialog from '@/components/sampleDialog.vue';
 export default {
   components: {
     commonHead,
     commonFoot,
     sampleDialog
   },
-  head(){
-      return {
-          title:'MacCMS Pro-域名检测',
-      }
+  head() {
+    return {
+      title: 'MacCMS Pro-域名检测'
+    };
   },
   data() {
     return {
       inputCheck: false,
       activeIndex: 1,
-      domainVal: "",
-      passUrl: ["maccms.com", "maccms.net", "maccms.pro", "macvideojs.com"],
-      hoveIndex: "",
-      checkResult: "",
+      domainVal: '',
+      passUrl: ['maccms.com', 'maccms.net', 'maccms.pro', 'macvideojs.com'],
+      hoveIndex: '',
+      checkResult: '',
       showResult: false,
       is_fake: false,
-      code: "",
+      code: '',
       showTxt: false,
-      palceHolder: "请输入检测域名",
+      palceHolder: '请输入检测域名',
       // 安装包
       downList: [
         {
-          label: "官方下载",
+          label: '官方下载',
           list: [
             {
-              ver: "Pro (近期发布)",
-              link: "",
+              ver: 'Pro (近期发布)',
+              link: ''
             },
             {
-              ver: "V10",
-              link: "https://down.maccms.pro/v10/maccms_v10_latest_update.zip",
+              ver: 'V10',
+              link: 'https://down.maccms.pro/v10/maccms_v10_latest_update.zip'
             },
             {
-              ver: "V8",
-              link: "https://down.maccms.pro/v8/maccms_v8_latest_update.zip",
-            },
-          ],
+              ver: 'V8',
+              link: 'https://down.maccms.pro/v8/maccms_v8_latest_update.zip'
+            }
+          ]
         },
         {
-          label: "Github",
-          img:require('@/assets/images/common/common-git.png'),
+          label: 'Github',
+          img: require('@/assets/images/common/common-git.png'),
           list: [
             {
-              ver: "Pro (近期发布)",
-              link: "",
+              ver: 'Pro (近期发布)',
+              link: ''
             },
             {
-              ver: "V10",
-              link: "https://github.com/maccmspro/",
+              ver: 'V10',
+              link: 'https://github.com/maccmspro/'
             },
             {
-              ver: "V8",
-              link: "https://github.com/maccmspro/",
-            },
-          ],
+              ver: 'V8',
+              link: 'https://github.com/maccmspro/'
+            }
+          ]
         },
         {
-          label: "Jsdelivr",
-          img:require('@/assets/images/common/common-js.png'),
+          label: 'Jsdelivr',
+          img: require('@/assets/images/common/common-js.png'),
           list: [
             {
-              ver: "Pro (近期发布)",
-              link: "",
+              ver: 'Pro (近期发布)',
+              link: ''
             },
             {
-              ver: "V10",
-              link: "https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.2000_update.zip",
+              ver: 'V10',
+              link: 'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v10_v2021.1000.2000_update.zip'
             },
             {
-              ver: "V8",
-              link: "https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v8_v2021.1050_update.zip",
-            },
-          ],
-        },
+              ver: 'V8',
+              link: 'https://cdn.jsdelivr.net/gh/maccmspro/download@master/maccms_v8_v2021.1050_update.zip'
+            }
+          ]
+        }
       ],
-      resMsg: "",
-      visiable:false,
-      inJEctList:[],
-      checkTime:'',
+      resMsg: '',
+      visiable: false,
+      inJEctList: [],
+      checkTime: ''
     };
   },
   created() {
@@ -321,44 +288,39 @@ export default {
     if (query && query.activeIndex) {
       this.activeIndex = query.activeIndex;
       this.palceHolder =
-        query.activeIndex == 1 || query.activeIndex == 3
-          ? "请输入检测域名"
-          : "检测域名请携带http或者https协议，默认携带http";
+        query.activeIndex == 1 || query.activeIndex == 3 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
     }
-    this.getInject()
+    this.getInject();
   },
   watch: {
-    $route: function (val) {
+    $route: function(val) {
       this.activeIndex = val.query.activeIndex;
-      this.palceHolder =
-        val.query.activeIndex == 1
-          ? "请输入检测域名"
-          : "检测域名请携带http或者https协议，默认携带http";
-    },
+      this.palceHolder = val.query.activeIndex == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
+    }
   },
   methods: {
     check() {
       if (this.activeIndex == 1) {
         this.showTxt = true;
-        this.checkResult = this.passUrl.some((item) => {
+        this.checkResult = this.passUrl.some(item => {
           return this.domainVal.indexOf(item) != -1;
         });
-      } else{
+      } else {
         // 漏洞检测
         if (!this.domainVal) {
           return;
-        } else if (this.domainVal.indexOf("http") == -1) {
-          this.domainVal = "http://" + this.domainVal;
+        } else if (this.domainVal.indexOf('http') == -1) {
+          this.domainVal = 'http://' + this.domainVal;
         }
         const loading = this.$loading({
           lock: true,
-          text: "Loading",
-          spinner: "el-icon-loading",
-          background: "rgba(0, 0, 0, 0.7)",
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
         });
         let t = new Date().getTime();
-        if(this.activeIndex == 2){
-          getIsfake({ url: this.domainVal, t: t }).then((res) => {
+        if (this.activeIndex == 2) {
+          getIsfake({ url: this.domainVal, t: t }).then(res => {
             loading.close();
             this.code = res.data.code;
             if (res.data.code == 1) {
@@ -369,28 +331,26 @@ export default {
             }
             this.showTxt = true;
           });
-        }else if(this.activeIndex == 3){
-          checkSiteInject({ url: this.domainVal, t: t }).then(res=>{
+        } else if (this.activeIndex == 3) {
+          checkSiteInject({ url: this.domainVal, t: t }).then(res => {
             loading.close();
-            if(res.data.code==0){
-              this.checkTime=timestampToTime(new Date().getTime())
-              this.checkResult=!res.data.is_inject
-              
-            }else{
-              this.checkResult=false
+            if (res.data.code == 0) {
+              this.checkTime = timestampToTime(new Date().getTime());
+              this.checkResult = !res.data.is_inject;
+            } else {
+              this.checkResult = false;
             }
             this.showTxt = true;
-          })
+          });
         }
-
-      } 
+      }
     },
-    getInject(){
-      getInjectList().then(res=>{
-        if(res.data.code==0){
-          this.inJEctList=res.data.data
+    getInject() {
+      getInjectList().then(res => {
+        if (res.data.code == 0) {
+          this.inJEctList = res.data.data;
         }
-      })
+      });
     },
     toDown(item) {
       if (item.link) {
@@ -401,19 +361,16 @@ export default {
     choiceSearch(i) {
       this.showTxt = false;
       this.activeIndex = i;
-      this.palceHolder =
-        i == 1
-          ? "请输入检测域名"
-          : "检测域名请携带http或者https协议，默认携带http";
+      this.palceHolder = i == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
     },
     downLoad(type) {
       console.log(type);
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -423,7 +380,7 @@ export default {
   .domain-top {
     width: 100%;
     height: 400px;
-    background: url("~/assets/images/domain/domain-bg.png");
+    background: url('~/assets/images/domain/domain-bg.png');
     background-size: contain;
     display: flex;
     flex-direction: column;
@@ -508,7 +465,7 @@ export default {
     width: 100%;
     // height: 618px;
     padding: 40px 0;
-    background: #F7F8FA;
+    background: #f7f8fa;
     .success,
     .error {
       @include flex-center;
@@ -567,7 +524,6 @@ export default {
           &:active {
             opacity: 0.6;
           }
-          
         }
       }
       .pro {
@@ -584,12 +540,11 @@ export default {
         .mlr {
           margin: 0 30px !important;
         }
-        .b-img{
-            width: 24px;
-            height: 24px;
-            margin-right: 5px;
-          }
-        
+        .b-img {
+          width: 24px;
+          height: 24px;
+          margin-right: 5px;
+        }
       }
     }
     .detection {
@@ -634,27 +589,28 @@ export default {
           }
         }
       }
-      .detection-error{
-        .detection-error-top{
+      .detection-error {
+        .detection-error-top {
           padding-bottom: 23px;
-          border-bottom: 1px solid #eaeaea;}
-        .detection-error-bottom{
+          border-bottom: 1px solid #eaeaea;
+        }
+        .detection-error-bottom {
           margin-top: 17px;
           display: flex;
-          .detection-error-bottom-left{
+          .detection-error-bottom-left {
             width: 525px;
             height: 570px;
             color: #666666;
             font-size: 14px;
-            pre{
+            pre {
               line-height: 25px;
             }
           }
-          .detection-error-bottom-right{
+          .detection-error-bottom-right {
             color: #666666;
             margin-left: 80px;
             font-size: 14px;
-            pre{
+            pre {
               line-height: 25px;
             }
           }

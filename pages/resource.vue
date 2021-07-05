@@ -1,6 +1,5 @@
 <template>
   <div class="pt-118 page-wrap">
-    <commonHead />
     <div class="resource-contain">
       <div class="resource-contain-top">
         <div class="resource-contain-top-1 flex-between-center">
@@ -31,17 +30,8 @@
         <div class="resource-contain-bottom-header">
           <p class="f28-c172335">最新电影</p>
           <div class="btns mt40">
-            <div
-              class="btn"
-              v-for="(item, i) of btnList"
-              :key="i"
-              @click="choiceBtn(i)"
-              :class="{ active: activeIndex == i }"
-            >
-              <img
-                src="~/assets/images/resource/home.png"
-                v-if="item.label == '首页'"
-              />
+            <div class="btn" v-for="(item, i) of btnList" :key="i" @click="choiceBtn(i)" :class="{ active: activeIndex == i }">
+              <img src="~/assets/images/resource/home.png" v-if="item.label == '首页'" />
               <span>{{ item.label }}</span>
             </div>
           </div>
@@ -75,21 +65,21 @@
             <el-table-column prop="name" label="电影名称"></el-table-column>
             <el-table-column prop="address" label="电影类型"></el-table-column>
             <el-table-column label="快捷操作">
-                <template slot-scope="scoped">
-                    获取地址
-                </template>
+              <template slot-scope="scoped">
+                获取地址
+              </template>
             </el-table-column>
           </el-table>
           <div class="pagination">
             <el-pagination
-                background
-                layout="prev, pager, next, jumper"
-                :total="100"
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
+              background
+              layout="prev, pager, next, jumper"
+              :total="100"
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
             >
             </el-pagination>
-        </div>
+          </div>
         </div>
       </div>
     </div>
@@ -98,12 +88,12 @@
 </template>
 
 <script>
-import commonHead from "@/components/common/commonHead.vue";
-import commonFoot from "@/components/common/commonFoot.vue";
+import commonHead from '@/components/common/commonHead.vue';
+import commonFoot from '@/components/common/commonFoot.vue';
 export default {
   components: {
     commonHead,
-    commonFoot,
+    commonFoot
   },
   data() {
     return {
@@ -111,66 +101,66 @@ export default {
       btnList: [
         {
           id: 1,
-          label: "首页",
+          label: '首页'
         },
         {
           id: 2,
-          label: "国产",
+          label: '国产'
         },
         {
           id: 3,
-          label: "三级",
+          label: '三级'
         },
         {
           id: 4,
-          label: "人兽",
-        },
+          label: '人兽'
+        }
       ],
       tableData: [
         {
-          date: "2016-05-02",
-          name: "作品精選來啦!",
-          address: "三级",
+          date: '2016-05-02',
+          name: '作品精選來啦!',
+          address: '三级'
         },
         {
-          date: "2016-05-04",
-          name: "作品精選來啦!",
-          address: "三级",
+          date: '2016-05-04',
+          name: '作品精選來啦!',
+          address: '三级'
         },
         {
-          date: "2016-05-01",
-          name: "作品精選來啦!",
-          address: "三级",
+          date: '2016-05-01',
+          name: '作品精選來啦!',
+          address: '三级'
         },
         {
-          date: "2016-05-03",
-          name: "作品精選來啦!",
-          address: "三级",
-        },
-      ],
+          date: '2016-05-03',
+          name: '作品精選來啦!',
+          address: '三级'
+        }
+      ]
     };
   },
   methods: {
     choiceBtn(i) {
       this.activeIndex = i;
     },
-    cellStyle({row, column, rowIndex, columnIndex}){
-        console.log({row, column, rowIndex, columnIndex});
-        if(columnIndex == 3){
-            return "color:#F7502D"
-        }
+    cellStyle({ row, column, rowIndex, columnIndex }) {
+      console.log({ row, column, rowIndex, columnIndex });
+      if (columnIndex == 3) {
+        return 'color:#F7502D';
+      }
     },
     handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      }
-  },
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .resource-contain {
   background: #f7f8fa;
   .resource-contain-top {
@@ -232,7 +222,7 @@ export default {
     }
     .resource-contain-bottom-body {
       .data-statistics {
-          margin-bottom: 30px;
+        margin-bottom: 30px;
         .data-statistics-item {
           background-color: #ffffff;
           text-align: center;
@@ -253,26 +243,28 @@ export default {
         color: #172335;
       }
       /deep/.movie-table-header {
-          background: #f8f8f9;
+        background: #f8f8f9;
       }
       .pagination {
         display: flex;
         justify-content: center;
         margin-top: 50px;
         /deep/.el-pagination.is-background {
-            .el-pager li,.btn-next,.btn-prev {
+          .el-pager li,
+          .btn-next,
+          .btn-prev {
             background: #f7f8fa;
             border: 1px solid #dadada;
             color: #666666;
             border-radius: 4px;
             &:not(.disabled).active {
-                background: #f7f8fa;
-                color: #f7502d;
-                border: 1px solid #f7502d;
+              background: #f7f8fa;
+              color: #f7502d;
+              border: 1px solid #f7502d;
             }
-            }
+          }
         }
-        }
+      }
     }
   }
   @media screen and (min-width: 1201px) {

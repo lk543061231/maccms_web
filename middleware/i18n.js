@@ -1,4 +1,4 @@
-export default function ({req, isHMR, app, store, route, params, error, redirect}) {
+export default function({ req, isHMR, app, store, route, params, error, redirect }) {
   // if (isHMR) {
   //   // ignore if called from hot module replacement
   //   return
@@ -10,15 +10,15 @@ export default function ({req, isHMR, app, store, route, params, error, redirect
   // const locale = params.lang || 'zh'
   // store.commit('SET_LANG', locale) // set store
   if (req && req.headers) {
-    const deviceAgent = (req.headers['user-agent'] || req.headers['User-Agent']).toLowerCase()
-    const agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/)
-    let isMobile = false
+    const deviceAgent = (req.headers['user-agent'] || req.headers['User-Agent']).toLowerCase();
+    const agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/);
+    let isMobile = false;
     if (agentID) {
-      isMobile = true
+      isMobile = true;
     } else {
-      isMobile = false
+      isMobile = false;
     }
-    store.commit('updatedIsMobile', isMobile)
+    store.commit('common/SET_IS_MOBILE', isMobile);
   }
 
   // app.i18n.locale = store.state.locale

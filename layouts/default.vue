@@ -1,22 +1,23 @@
 <template>
   <div>
-    <Nuxt  />
+    <commonHead ref="commonHead" />
+    <Nuxt />
     <!-- <commonLoading v-show="loadingShow"/> -->
   </div>
 </template>
 
 <script>
-import commonLoading from "@/components/common/commonLoading.vue";
+import { commonLoading, commonHead } from '@/components/common';
 export default {
   components: {
     commonLoading
   },
-  data(){
-    return{
-      loadingShow:true,
-    }
+  data() {
+    return {
+      loadingShow: true
+    };
   },
-  mounted(){
+  mounted() {
     /* setInterval(()=>{
       this.loadingShow = !this.loadingShow;
     },1000) */
@@ -26,8 +27,7 @@ export default {
 
 <style>
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

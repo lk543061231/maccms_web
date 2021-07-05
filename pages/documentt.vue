@@ -1,6 +1,5 @@
 <template>
   <div class="pt-118 page-wrap">
-    <commonHead />
     <div class="all-wrap">
     <div class="dev-container">
       <div class="left" :class="isFixed && 'fixed'">
@@ -2256,6 +2255,7 @@ level：推荐种类 1,2,3,4,5 /all
 <script>
 import commonHead from "@/components/common/commonHead.vue";
 import commonFoot from "@/components/common/commonFoot.vue";
+
 export default {
   components: {
     commonHead,
@@ -3805,6 +3805,7 @@ export default {
       activeNav: 0,
       dataFormat:'<?xml version="1.0" encoding="utf-8"?><rss version="5.0"><list page="1" pagecount="23" pagesize="20" recordcount="449"><video><last>2012-05-06 13:32:28</last><id>493</id><tid>9</tid><name><![CDATA[野人来袭]]></name><type>恐怖片</type><dt>qvod</dt><note><![CDATA[]]></note><vlink><![CDATA[http://localhost/maccms7_php/vod/?493.html]]></vlink><plink><![CDATA[http://localhost/maccms7_php/vodplay/?493-1-1.html]]></plink></video></list><class><ty id="1">电影</ty><ty id="2">连续剧</ty><ty id="3">综艺</ty><ty id="4">动漫</ty><ty id="5">动作片</ty><ty id="6">喜剧片</ty><ty id="7">爱情片</ty><ty id="8">科幻片</ty><ty id="9">恐怖片</ty><ty id="10">剧情片</ty><ty id="11">战争片</ty><ty id="12">国产剧</ty><ty id="13">港台剧</ty><ty id="14">日韩剧</ty><ty id="15">欧美剧</ty></class></rss>',
       innerFormat:'<?xml version="1.0" encoding="utf-8"?><rss version="5.0"><list page="1" pagecount="1" pagesize="20" recordcount="1"><video><last>2012-05-06 13:32:28</last><id>493</id><tid>9</tid><name><![CDATA[野人来袭]]></name><type>恐怖片</type><pic>http://1img.joykk.com/Uploads/2009/11/30/20091130205750222.JPG</pic><lang>英语</lang><area>欧美</area><year>2012</year><state>0</state><note><![CDATA[]]></note><type>_9</type><actor><![CDATA[]]></actor><director><![CDATA[Ryan Schifrin]]></director><dl><dd from="qvod"><![CDATA[第1集$qvod://206850310|13CB4BC71DD6C3AA5DE0B081E1566992A1BA3F03|野人来袭_01.rmvb|#第2集$qvod://218787599|8E3EA62210F42B9B25EAFA761413587FCC4D8E14|野人来袭_02.rmvb|]]></dd></dl><des><![CDATA[<p>它已经在68个国家被目击了42000次。一个富有传奇色彩的生物，被冠以众多称呼：Yeti(雪人)、Sasquatch(萨斯科奇人)和著名的Bigfoot(大脚怪)！我们已经追捕它了很多年，但是当它决定猎捕我们时，会发生什么？　 <br /><br />　　一个从登山事故中恢复过来的家伙，被困在森林中一个偏僻的小屋里。他看见了传说中的怪物，因此必须在野兽展开血腥袭击前，说服人们相信他并拯救一群大学女生。 <br /></p>]]></des><vlink><![CDATA[http://localhost/maccms7_php/vod/?493.html]]></vlink><plink><![CDATA[http://localhost/maccms7_php/vodplay/?493-1-1.html]]></plink></video></list></rss>',
+      
       isFixed:false
     };
   },
@@ -3852,7 +3853,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .page-wrap {
   background: #fff;
   .dev-container {
@@ -3860,77 +3861,7 @@ export default {
     background: #f7f8fa;
     // justify-content: space-between;
     padding: 30px 260px 50px 260px;
-    .left {
-      width: 220px;
-      height: 550px;
-      background: #fff;
-      flex-shrink: 0;
-      padding: 30px 15px;
-      margin-right: 50px;
-      .l-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-        padding: 10px 20px;
-        .lt-t {
-          font-size: 16px;
-          color: #333;
-        }
-        .d1-img {
-          display: block;
-          width: 22px;
-          height: 22px;
-          cursor: pointer;
-        }
-      }
-      .l-list {
-        .nav-item {
-          padding: 20px 0;
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-          position: relative;
-          .nav-img {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-          }
-          .nav-tit {
-            .zh-t {
-              font-size: 16px;
-              color: #242424;
-            }
-            .en-t {
-              margin-top: 3px;
-              font-size: 12px;
-              color: #999;
-            }
-          }
-          &::after {
-            content: "";
-            display: block;
-            position: absolute;
-            width: 100%;
-            height: 1px;
-            background: #eaeaea;
-            bottom: 0px;
-          }
-          &:last-child {
-            &::after {
-              display: none;
-            }
-          }
-        }
-        .activeNav {
-          .zh-t,
-          .en-t {
-            color: #f7502d !important;
-          }
-        }
-      }
-    }
+    
     .right {
       width: 1080px;
       // height: 550px;

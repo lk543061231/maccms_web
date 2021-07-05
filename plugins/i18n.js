@@ -1,31 +1,31 @@
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 
-import enLocale from 'element-ui/lib/locale/lang/en'
-import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
-import ElementLocale from 'element-ui/lib/locale'
+import enLocale from 'element-ui/lib/locale/lang/en';
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN';
+import ElementLocale from 'element-ui/lib/locale';
 
-Vue.use(VueI18n)
+Vue.use(VueI18n);
 
 export default ({ app, store }) => {
   // Set i18n instance on app
   // This way we can use it in middleware and pages asyncData/fetch
-  let lang = 'zh'
+  let lang = 'zh';
   if (!process.server) {
-    lang = window.localStorage.getItem('VueI18n-lang') || 'zh'
-    
-    const setHtmlFontSize = function() {
-      const deviceWidth = document.documentElement.clientWidth
+    lang = window.localStorage.getItem('VueI18n-lang') || 'zh';
 
-      let isMobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
+    const setHtmlFontSize = function() {
+      const deviceWidth = document.documentElement.clientWidth;
+
+      let isMobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
 
       if (isMobile || deviceWidth <= 900) {
-        isMobile = true
+        isMobile = true;
       } else {
-        isMobile = false
+        isMobile = false;
       }
-      store.commit('updatedIsMobile', isMobile)
-    }
+      store.commit('common/SET_IS_MOBILE', isMobile);
+    };
 
     // setHtmlFontSize()
 
@@ -33,10 +33,10 @@ export default ({ app, store }) => {
       window.addEventListener(
         'resize',
         function() {
-          setHtmlFontSize()
+          setHtmlFontSize();
         },
         false
-      )
+      );
     }
   }
   app.i18n = new VueI18n({
@@ -52,17 +52,17 @@ export default ({ app, store }) => {
         ...zhLocale
       }
     }
-  })
-  app.i18n.path = (link) => {
+  });
+  app.i18n.path = link => {
     if (app.i18n.locale === app.i18n.fallbackLocale) {
-      return `/${link}`
+      return `/${link}`;
     }
-    return `/${app.i18n.locale}/${link}`
-  }
+    return `/${app.i18n.locale}/${link}`;
+  };
 
-  Vue.filter('T', (value) => {
-    return app.i18n.t(value)
-  })
+  Vue.filter('T', value => {
+    return app.i18n.t(value);
+  });
 
-  ElementLocale.i18n((key, value) => app.i18n.t(key, value))
-}
+  ElementLocale.i18n((key, value) => app.i18n.t(key, value));
+};

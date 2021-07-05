@@ -1,67 +1,43 @@
-
 <template>
   <div class="page-wrap">
-    <div class="head_container flex-between-center" ref="head" :class="[slide && 'slideUp',showBoxShadow && 'showboxshadow']" >
+    <div class="head_container flex-between-center" ref="head" :class="[slide && 'slideUp', showBoxShadow && 'showboxshadow']">
       <div class="left flex-between-center">
         <div class="logo">
           <img src="~/assets/images/home/logo.png" alt="maccms-pro" />
         </div>
         <div class="menu">
-          <div 
-            class="menu-item"
-            v-for="(item,index) in menuList"
-            :key="index"
-          >
-            <p 
-              v-if="index!=1 && index!=3"
-              class="menu-name"
-              slot="reference"
-              @mouseenter="mouseEnter(item,index)"
-              @click="selectRouter(item,index)"
-              :class="activeIndex == index && 'is-active'"
-            >
-              {{item.label}} 
-            </p>
-
-            <el-popover
-              v-else
-              placement="bottom"
-              trigger="hover"
-            >
-              <div class="app-wrap" v-if="index==1">
+          <div class="menu-item" v-for="(item, index) in menuList" :key="index">
+            <el-popover v-if="item.hasPop" placement="bottom" trigger="hover">
+              <div class="app-wrap" v-if="index == 1">
                 <p class="app-item">开发者中心</p>
               </div>
-              <div class="app-wrap" v-else-if="index==3">
-                <p class="app-item" @click="changeRouter('domainDetection',1)" >域名真伪</p>
-                <p class="app-item" @click="changeRouter('domainDetection',2)" >漏洞检测</p>
+              <div class="app-wrap" v-else-if="index == 3">
+                <p class="app-item" @click="changeRouter('domainDetection', 1)">域名真伪</p>
+                <p class="app-item" @click="changeRouter('domainDetection', 2)">漏洞检测</p>
                 <!-- <p class="app-item" @click="changeRouter('domainDetection',3)">挂马检测</p> -->
               </div>
-              <p 
-                class="menu-name"
-                slot="reference"
-                @mouseenter="mouseEnter(item,index)"
-                @click="selectRouter(item,index)"
-                :class="activeIndex == index && 'is-active'"
-              >{{item.label}} 
-                  <i  class="el-icon-arrow-down"></i>
+              <p class="menu-name" slot="reference" @click="selectRouter(item, index)" :class="activeIndex == index && 'is-active'">
+                {{ item.label }}
+                <i class="el-icon-arrow-down"></i>
               </p>
             </el-popover>
-
-
+            <p v-else class="menu-name" slot="reference" @click="selectRouter(item, index)" :class="activeIndex == index && 'is-active'">
+              {{ item.label }}
+            </p>
           </div>
         </div>
       </div>
       <div class="right flex-between-center">
-        <el-dropdown  @visible-change="visibleChange">
+        <el-dropdown @visible-change="visibleChange">
           <div class="language">
             <img :src="languageSrc" alt="language" />
           </div>
-          <el-dropdown-menu slot="dropdown" >
+          <el-dropdown-menu slot="dropdown">
             <el-dropdown-item style="width:100px">
               <span @click="changeLang('zh')">中文简体</span>
             </el-dropdown-item>
             <el-dropdown-item>
-              <span  @click="changeLang('zh-tw')">中文繁体</span>
+              <span @click="changeLang('zh-tw')">中文繁体</span>
             </el-dropdown-item>
             <el-dropdown-item>
               <span @click="changeLang('en')">English</span>
@@ -78,7 +54,6 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -86,110 +61,107 @@
 export default {
   data() {
     return {
-      showBoxShadow:false,
-      slide:false,
-      activeIndex:  0,
-      languageSrc: require("~/assets/images/common/common-qiu.png"),
-      userSrc: require("~/assets/images/common/common-user.png"),
-      noSildeRouters:[
-        'blog-blog',
-        'blog-blogDetail'
+      showBoxShadow: false,
+      slide: false,
+      activeIndex: 0,
+      languageSrc: require('~/assets/images/common/common-qiu.png'),
+      userSrc: require('~/assets/images/common/common-user.png'),
+      noSildeRouters: ['blog-blog', 'blog-blogDetail'],
+      menuList: [
+        { label: '首页', value: 0, name: 'index' },
+        { label: '应用市场', value: 1, name: 'applicationMarket', hasPop: true },
+        { label: '开发文档', value: 2, name: 'document' },
+        { label: '域名检测', value: 3, name: 'domainDetection', hasPop: true },
+        { label: '资源库', value: 4, name: 'resource' },
+        { label: '博客', value: 5, name: 'blog-blog' },
+        { label: '帮助中心', value: 6, name: 'helpCenter' }
       ]
     };
   },
-  
+
   computed: {
-     language () {
-       return this.$i18n.locale === 'en'
-     },
-     menuList(){
-       return this.$store.state.menuList
-     },
+    language() {
+      return this.$i18n.locale === 'en';
+    }
   },
-  watch:{
-    
+  watch: {
+    $route(newV) {
+      console.log(newV, 'newV');
+      if (newV) {
+        let name = newV.name;
+        let index = this.menuList.findIndex(item => item.name === name);
+        this.activeIndex = index;
+      }
+    }
   },
   methods: {
-    changeRouter(name,type){
+    changeRouter(name, type) {
       this.$router.push({
-        name:name,
-        query:{
-          activeIndex:type
+        name: name,
+        query: {
+          activeIndex: type
         }
-      })
-      sessionStorage.setItem('routerName',name)
-      this.changeActive()
+      });
     },
-    changeActive(){
-      this.menuList.forEach((item,index)=>{
-        let routerName=sessionStorage.getItem('routerName') || this.$route.name
-        if(routerName==item.name){
-          this.activeIndex=index
-        }
-      })
-    },
+
     visibleChange(bol) {
       bol
-        ? (this.languageSrc = require("~/assets/images/common/common-qiu-active.png"))
-        : (this.languageSrc = require("~/assets/images/common/common-qiu.png"));
+        ? (this.languageSrc = require('~/assets/images/common/common-qiu-active.png'))
+        : (this.languageSrc = require('~/assets/images/common/common-qiu.png'));
     },
-    selectRouter(item,index){
-      if(index!=0 && index!=3 && index!=2 && index!=5 ){
-        this.$message.info("敬请期待");
-        return
+    selectRouter(item, index) {
+      if (index != 0 && index != 3 && index != 2 && index != 5) {
+        this.$message.info('敬请期待');
+        return;
       }
-      if(index==5){
-        this.showBoxShadow=true
+      if (index == 5) {
+        this.showBoxShadow = true;
       }
-      this.$router.push({name:item.name})
-      sessionStorage.setItem('routerName',item.name)
+      this.$router.push({ name: item.name });
     },
-    mouseEnter(item,index){
-      this.activeIndex=index
+
+    clickUser() {
+      this.userSrc = require('~/assets/images/common/common-user-active.png');
     },
-    clickUser(){
-      this.userSrc = require("~/assets/images/common/common-user-active.png")
+    register() {
+      this.$message.info('敬请期待');
     },
-    register(){
-      this.$message.info("敬请期待");
-    },
-    changeLang(lang){
-      this.$message.info("敬请期待");
+    changeLang(lang) {
+      this.$message.info('敬请期待');
     },
     subMenuSelect(index, indexPath) {
       if (index != 1) {
-        this.$message.info("敬请期待");
+        this.$message.info('敬请期待');
       }
       // 去除应用市场的激活样式
-      if(this.$refs.submenu.$el.firstChild.className.indexOf("is-active")!=-1){
-        this.$refs.submenu.$el.firstChild.className = "el-submenu__title"
+      if (this.$refs.submenu.$el.firstChild.className.indexOf('is-active') != -1) {
+        this.$refs.submenu.$el.firstChild.className = 'el-submenu__title';
       }
-      if(index == "2-1"){
+      if (index == '2-1') {
         this.$router.push({
-          path:""
-        })
+          path: ''
+        });
       }
-    },
+    }
   },
   mounted() {
-    this.changeActive()
-    let routerName=this.$route.name
-    if(this.noSildeRouters.indexOf(routerName)==-1){
-      document.addEventListener("scroll", e => {
-        var scrollTop =
-          document.documentElement.scrollTop ||
-          window.pageYOffset ||
-          document.body.scrollTop;
-        if (scrollTop > 110) {
-          this.slide=true
-        } else {
-          this.slide=false
+    document.addEventListener('scroll', e => {
+      var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+      if (scrollTop > 110) {
+        let routerName = this.$route.name;
+        if (this.noSildeRouters.includes(routerName)) {
+          this.showBoxShadow = true;
+          return;
         }
-      });
-    }
-    document.addEventListener("click", e=>{
-      this.userSrc = require("~/assets/images/common/common-user.png")
-    })
+        this.slide = true;
+      } else {
+        this.slide = false;
+      }
+    });
+
+    document.addEventListener('click', e => {
+      this.userSrc = require('~/assets/images/common/common-user.png');
+    });
   }
 };
 </script>
@@ -224,27 +196,43 @@ export default {
       }
     }
     .menu {
-        display: flex;
-        height: 40px;
-        align-items: center;
-        flex-shrink: 0;
-        .menu-name{
-          cursor: pointer;
-          margin-right: 50px;
-          font-size: 16px;
-          color: #596371;
-          width: auto;
-          position: relative;
-          padding: 10px 0;
-          line-height: 40px;
-        }
-        .is-active {
+      display: flex;
+      height: 40px;
+      align-items: center;
+      flex-shrink: 0;
+      .menu-name {
+        cursor: pointer;
+        margin-right: 50px;
+        font-size: 16px;
+        color: #596371;
+        width: auto;
+        position: relative;
+        padding: 10px 0;
+        line-height: 40px;
+        &.is-active {
           font-size: 20px;
           font-weight: 500;
           border: none;
           color: #f7502d !important;
           &::after {
-            content: "";
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #f7502d;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+          }
+        }
+        &:hover {
+          font-size: 20px;
+          font-weight: 500;
+          border: none;
+          color: #f7502d !important;
+          &::after {
+            content: '';
             display: block;
             position: absolute;
             width: 100%;
@@ -256,6 +244,7 @@ export default {
           }
         }
       }
+    }
   }
   .right {
     width: 220px;
@@ -275,7 +264,7 @@ export default {
     }
   }
 }
-.showboxshadow{
+.showboxshadow {
   box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.06);
 }
 .slideUp {
@@ -283,7 +272,7 @@ export default {
   background-color: #ffffff;
   box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.06);
 }
-:focus{
+:focus {
   outline: none;
 }
 </style>

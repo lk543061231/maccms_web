@@ -1,27 +1,21 @@
 <template>
   <div class="pt-118 container">
-    <commonHead ref="commonHead" />
     <div class="page-wrap">
-      <commonSteps :stepData="stepData" :slide="slide"/>
+      <commonSteps :stepData="stepData" :slide="slide" />
       <div class="page-inner mt30">
         <div class="blog-list flex-between-center">
-          <div class="blog-item" v-for="(item,i) in list" :key="i" @click="toDetail(item)">
+          <div class="blog-item" v-for="(item, i) in list" :key="i" @click="toDetail(item)">
             <div class="blog-item-left">
-              <img
-                :src="item.image_url"
-              >
+              <img :src="item.image_url" />
             </div>
             <div class="blog-item-right">
-              <p class="f16-c172335 oneHidden">{{item.title}}</p>
+              <p class="f16-c172335 oneHidden">{{ item.title }}</p>
               <p class="f14-c8F8F8F mt10 threeHidden">
-                {{item.content_abbr}}
+                {{ item.content_abbr }}
               </p>
               <p class="flex-between-center f16-c8F8F8F mt30">
-                <span >{{item.create_time}}</span>
-                <span class="look-more"
-                  
-                  >查看更多<i class="el-icon-arrow-right"></i
-                ></span>
+                <span>{{ item.create_time }}</span>
+                <span class="look-more">查看更多<i class="el-icon-arrow-right"></i></span>
               </p>
             </div>
           </div>
@@ -43,100 +37,97 @@
 </template>
 
 <script>
-import commonHead from "@/components/common/commonHead.vue";
-import commonFoot from "@/components/common/commonFoot.vue";
+import commonHead from '@/components/common/commonHead.vue';
+import commonFoot from '@/components/common/commonFoot.vue';
 import commonSteps from '@/components/common/commonSteps.vue';
-import {getArticleList} from '@/utils/api'
-import {timestampToTime} from '@/utils/index'
+import { getArticleList } from '@/utils/api';
+import { timestampToTime } from '@/utils/index';
 export default {
   components: {
     commonHead,
     commonFoot,
     commonSteps
   },
-  head(){
-      return {
-          title:'MacCMS Pro-博客主页',
-      }
+  head() {
+    return {
+      title: 'MacCMS Pro-博客主页'
+    };
   },
-  data(){
-    return{
-      stepData:{
-          type:'title',   //step表示路由位置，title表示当前页标题
-          stepName:'博客主页',  //type为title式显示
+  data() {
+    return {
+      stepData: {
+        type: 'title', //step表示路由位置，title表示当前页标题
+        stepName: '博客主页' //type为title式显示
       },
-      pages:{
-        offset:0,
-        limit:8
+      pages: {
+        offset: 0,
+        limit: 8
       },
-      list:[],
-      total:0,
-      slide:false
-    }
+      list: [],
+      total: 0,
+      slide: false
+    };
   },
-  mounted(){
-    this.getList()
-    this.$refs.commonHead.showBoxShadow=true
-    this.pageScroll()
+  mounted() {
+    this.getList();
+
+    this.pageScroll();
   },
-  methods:{
-      pageScroll(){
-        document.addEventListener("scroll", e => {
-          var scrollTop =
-            document.documentElement.scrollTop ||
-            window.pageYOffset ||
-            document.body.scrollTop;
-          if (scrollTop > 220) {
-            this.slide=true
-          } else {
-            this.slide=false
-          }
-        });
-      },
-      getList(){
-        let queryStr=''
-        for(var key in this.pages){
-          queryStr+=key +'='+this.pages[key]+'&'
+  methods: {
+    pageScroll() {
+      document.addEventListener('scroll', e => {
+        var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+        if (scrollTop > 220) {
+          this.slide = true;
+        } else {
+          this.slide = false;
         }
-        queryStr=queryStr.substring(0,queryStr.length-1)
-        const loading = this.$loading({
-          lock: true,
-          text: "Loading",
-          spinner: "el-icon-loading",
-          background: "rgba(0, 0, 0, 0.7)",
-        });
-        getArticleList(queryStr).then(res=>{
-          loading.close()
-          if(res.data.code==1){
-            res.data.info.rows.forEach(item=>{
-              item.create_time=timestampToTime(item.create_time*1000,'yy-mm-dd')
-            })
-            this.list=res.data.info.rows
-            this.total=res.data.info.total
-          }
-        })
-      },
-      toDetail(item){
-        this.$router.push({
-          name:'blog-blogDetail',
-          query:{
-            id:item.article_id
-          }
-        })
-      },
-      handleSizeChange(val) {
-        this.pages.limit=val
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        this.pages.offset=val
-        this.getList()
+      });
+    },
+    getList() {
+      let queryStr = '';
+      for (var key in this.pages) {
+        queryStr += key + '=' + this.pages[key] + '&';
       }
+      queryStr = queryStr.substring(0, queryStr.length - 1);
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      getArticleList(queryStr).then(res => {
+        loading.close();
+        if (res.data.code == 1) {
+          res.data.info.rows.forEach(item => {
+            item.create_time = timestampToTime(item.create_time * 1000, 'yy-mm-dd');
+          });
+          this.list = res.data.info.rows;
+          this.total = res.data.info.total;
+        }
+      });
+    },
+    toDetail(item) {
+      this.$router.push({
+        name: 'blog-blogDetail',
+        query: {
+          id: item.article_id
+        }
+      });
+    },
+    handleSizeChange(val) {
+      this.pages.limit = val;
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      this.pages.offset = val;
+      this.getList();
+    }
   }
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 .page-wrap {
   background: #f7f8fa;
   .page-title {
@@ -180,7 +171,7 @@ export default {
         &:nth-child(even) {
           margin-right: 0;
         }
-        &:hover{
+        &:hover {
           box-shadow: 0px 2px 8px 10px rgba(0, 0, 0, 0.04);
         }
       }
@@ -191,7 +182,9 @@ export default {
       margin-top: 50px;
       margin-bottom: 30px;
       /deep/.el-pagination.is-background {
-        .el-pager li,.btn-next,.btn-prev {
+        .el-pager li,
+        .btn-next,
+        .btn-prev {
           background: #f7f8fa;
           border: 1px solid #dadada;
           color: #666666;

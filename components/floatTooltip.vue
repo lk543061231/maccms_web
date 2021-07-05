@@ -5,7 +5,7 @@
         <p class=" tip-text app-item" @click="join(1)">加入TG通知群</p>
         <p class=" tip-text app-item" @click="join(2)">加入TG交流群</p>
       </div>
-      
+
       <div slot="reference">
         <div class="btn">
           <img
@@ -16,7 +16,7 @@
         </div>
       </div>
     </el-popover>
-    <div class="btn arrow" v-if="scrollTop>800">
+    <div class="btn arrow" v-if="scrollTop > 800">
       <img
         @click="toTop"
         :src="arrow"
@@ -31,34 +31,31 @@
 export default {
   data() {
     return {
-      visiable:false,
-      plane: require("~/assets/images/common/plane.png"),
-      arrow: require("~/assets/images/common/arrow.png"),
-      showTop:false,
-      scrollTop:''
+      visiable: false,
+      plane: require('~/assets/images/common/plane.png'),
+      arrow: require('~/assets/images/common/arrow.png'),
+      showTop: false,
+      scrollTop: ''
     };
   },
-  mounted(){
-    document.addEventListener("scroll", e => {
-      this.scrollTop =
-        document.documentElement.scrollTop ||
-        window.pageYOffset ||
-        document.body.scrollTop;
+  mounted() {
+    document.addEventListener('scroll', e => {
+      this.scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
     });
   },
-  methods:{
-    join(type){
-      window.open(type==1? 'https://t.me/maccms_news':'https://t.me/maccms_pro')
+  methods: {
+    join(type) {
+      window.open(type == 1 ? 'https://t.me/maccms_news' : 'https://t.me/maccms_pro');
     },
-    toTop(){
-      this.arrow=require("~/assets/images/common/arrow.png")
-      window.scrollTo(0,0)
+    toTop() {
+      this.arrow = require('~/assets/images/common/arrow.png');
+      window.scrollTo(0, 0);
     }
   }
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 .float-tooltip {
   position: fixed;
   z-index: 1000;
@@ -79,9 +76,9 @@ export default {
       width: 100%;
     }
   }
-  .arrow{
+  .arrow {
     margin-top: 2px;
-    border-top: 2px solid #CDD0D4;
+    border-top: 2px solid #cdd0d4;
     padding-top: 6px;
   }
 }
@@ -89,6 +86,5 @@ export default {
   text-align: center;
   cursor: pointer;
   user-select: none;
-  
 }
 </style>
