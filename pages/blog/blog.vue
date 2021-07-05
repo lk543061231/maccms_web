@@ -156,6 +156,9 @@ export default {
         margin: 0 8px 20px 0;
         padding: 20px 40px 20px 20px;
         cursor: pointer;
+        &:nth-child(2n) {
+          margin-right: 0;
+        }
         .blog-item-left {
           width: 320px;
           border-radius: 6px;

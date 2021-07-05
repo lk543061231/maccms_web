@@ -5,7 +5,7 @@
         <LeftNav :activeNav="activeNav" @selectNav="selectNav" @selectVer="selectVer"></LeftNav>
       </div>
 
-      <div class="right" :class="isFixed && 'fixed'">
+      <div class="right" :class="isFixed && 'ml'">
         <RightBegin v-if="activeNav === 0"></RightBegin>
         <RightFaq v-if="activeNav === 1"></RightFaq>
         <RightTem v-if="activeNav === 2"></RightTem>
@@ -33,7 +33,16 @@ export default {
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+    document.addEventListener('scroll', e => {
+      var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+      if (scrollTop > 110) {
+        this.isFixed = true;
+      } else {
+        this.isFixed = false;
+      }
+    });
+  },
   watch: {},
   methods: {
     selectNav(index) {
@@ -114,5 +123,13 @@ export default {
       }
     }
   }
+}
+.fixed {
+  position: fixed;
+  top: 135px;
+  width: 220px;
+}
+.ml {
+  margin-left: 270px;
 }
 </style>
