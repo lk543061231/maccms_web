@@ -13,7 +13,7 @@
               <p class="f14-c8F8F8F mt10 threeHidden">
                 {{ item.content_abbr }}
               </p>
-              <p class="flex-between-center f16-c8F8F8F mt30">
+              <p class="flex-between-center f16-c8F8F8F mt20">
                 <span>{{ item.create_time }}</span>
                 <span class="look-more">查看更多<i class="el-icon-arrow-right"></i></span>
               </p>
@@ -127,7 +127,6 @@ export default {
 <style scoped lang="less">
 .page-wrap {
   background: #f7f8fa;
-  min-width: 1350px;
   .page-title {
     height: 78px;
     line-height: 78px;
