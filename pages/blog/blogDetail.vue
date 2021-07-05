@@ -2,7 +2,7 @@
     <div class="pt-118 container">
         <commonHead ref="commonHead" />
         <div class="page-wrap">
-            <commonSteps :stepData="stepData" />
+            <commonSteps :stepData="stepData"  :slide="slide" />
             <div class="page-container-blod-detail">
                 <div class="detail">
                     <p class="d-p1 f30-c172335 ">{{detail.title}}</p>
@@ -31,9 +31,10 @@ export default {
         commonFoot,
         commonSteps
     },
-    asyncData ({ app }, callback) {
-        app.head.title = '博客详情'
-        callback(null, {})
+    head(){
+      return {
+          title:'MacCMS Pro-博客详情',
+      }
     },
     data(){
         return{
@@ -53,7 +54,8 @@ export default {
                     },
                 ]
             },
-            detail:{}
+            detail:{},
+            slide:false
         }
     },
     mounted(){
@@ -62,8 +64,22 @@ export default {
             this.getDetail(query.id)
         }
         this.$refs.commonHead.showBoxShadow=true
+        this.pageScroll()
     },
     methods:{
+        pageScroll(){
+            document.addEventListener("scroll", e => {
+            var scrollTop =
+                document.documentElement.scrollTop ||
+                window.pageYOffset ||
+                document.body.scrollTop;
+            if (scrollTop > 220) {
+                this.slide=true
+            } else {
+                this.slide=false
+            }
+            });
+        },
         getDetail(id){
             const loading = this.$loading({
                 lock: true,

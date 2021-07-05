@@ -1,5 +1,5 @@
 <template>
-    <div class="step-wrap">
+    <div class="step-wrap" :class="slide && 'fixed'">
         <div v-if="stepData.type=='title'" class="step f20-c172335">{{stepData.stepName}}</div>
         <el-breadcrumb v-if="stepData.type=='step'" separator-class="el-icon-arrow-right">
             <el-breadcrumb-item 
@@ -18,6 +18,10 @@ export default {
         stepData:{
             type:Object,
             default:{}
+        },
+        slide:{
+            type:Boolean,
+            default:false
         }
     },
     data(){
@@ -49,5 +53,10 @@ export default {
     .step{
         cursor: pointer;
     }
+}
+.fixed{
+    position: fixed;
+    width: 100%;
+    top: 0;
 }
 </style>

@@ -81,6 +81,11 @@ export default {
     commonHead,
     commonFoot,
   },
+  head(){
+      return {
+          title:'MacCMS Pro-帮助中心',
+      }
+  },
 };
 </script>
 

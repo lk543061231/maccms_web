@@ -236,6 +236,11 @@ export default {
     commonFoot,
     sampleDialog
   },
+  head(){
+      return {
+          title:'MacCMS Pro-域名检测',
+      }
+  },
   data() {
     return {
       inputCheck: false,

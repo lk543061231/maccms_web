@@ -218,6 +218,11 @@ export default {
         commonFoot,
         floatTooltip
     },
+    head(){
+        return {
+            title:'MacCMS Pro-首页',
+        }
+    },
     data(){
         return{
             showPop:false,

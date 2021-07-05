@@ -2,7 +2,7 @@
   <div class="pt-118 container">
     <commonHead ref="commonHead" />
     <div class="page-wrap">
-      <commonSteps :stepData="stepData" />
+      <commonSteps :stepData="stepData" :slide="slide"/>
       <div class="page-inner mt30">
         <div class="blog-list flex-between-center">
           <div class="blog-item" v-for="(item,i) in list" :key="i" @click="toDetail(item)">
@@ -54,6 +54,11 @@ export default {
     commonFoot,
     commonSteps
   },
+  head(){
+      return {
+          title:'MacCMS Pro-博客主页',
+      }
+  },
   data(){
     return{
       stepData:{
@@ -65,14 +70,29 @@ export default {
         limit:8
       },
       list:[],
-      total:0
+      total:0,
+      slide:false
     }
   },
   mounted(){
     this.getList()
     this.$refs.commonHead.showBoxShadow=true
+    this.pageScroll()
   },
   methods:{
+      pageScroll(){
+        document.addEventListener("scroll", e => {
+          var scrollTop =
+            document.documentElement.scrollTop ||
+            window.pageYOffset ||
+            document.body.scrollTop;
+          if (scrollTop > 220) {
+            this.slide=true
+          } else {
+            this.slide=false
+          }
+        });
+      },
       getList(){
         let queryStr=''
         for(var key in this.pages){

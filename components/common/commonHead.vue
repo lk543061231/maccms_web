@@ -91,6 +91,10 @@ export default {
       activeIndex:  0,
       languageSrc: require("~/assets/images/common/common-qiu.png"),
       userSrc: require("~/assets/images/common/common-user.png"),
+      noSildeRouters:[
+        'blog-blog',
+        'blog-blogDetail'
+      ]
     };
   },
   
@@ -101,7 +105,9 @@ export default {
      menuList(){
        return this.$store.state.menuList
      },
-
+  },
+  watch:{
+    
   },
   methods: {
     changeRouter(name,type){
@@ -167,18 +173,20 @@ export default {
   },
   mounted() {
     this.changeActive()
-    document.addEventListener("scroll", e => {
-      var scrollTop =
-        document.documentElement.scrollTop ||
-        window.pageYOffset ||
-        document.body.scrollTop;
-      if (scrollTop > 110) {
-        this.slide=true
-      } else {
-        this.slide=false
-      }
-    });
-
+    let routerName=this.$route.name
+    if(this.noSildeRouters.indexOf(routerName)==-1){
+      document.addEventListener("scroll", e => {
+        var scrollTop =
+          document.documentElement.scrollTop ||
+          window.pageYOffset ||
+          document.body.scrollTop;
+        if (scrollTop > 110) {
+          this.slide=true
+        } else {
+          this.slide=false
+        }
+      });
+    }
     document.addEventListener("click", e=>{
       this.userSrc = require("~/assets/images/common/common-user.png")
     })

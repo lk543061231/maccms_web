@@ -3808,6 +3808,11 @@ export default {
       isFixed:false
     };
   },
+  head(){
+      return {
+          title:'MacCMS Pro-开发文档',
+      }
+  },
   mounted(){
     document.addEventListener("scroll", e => {
       var scrollTop =
