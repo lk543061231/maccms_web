@@ -267,6 +267,7 @@ export default {
       cursor: pointer;
       width: 30px;
       height: 30px;
+      display: flex;
       img {
         width: 100%;
       }
