@@ -3913,14 +3913,5 @@ export default {
     }
   }
 }
-@media screen and (min-width:1200px)  {
-    .dev-container{
-        padding: 30px 260px 50px 260px !important;
-    }
-}
-@media screen and (max-width:980px)  {
-    .dev-container{
-        padding: 30px !important;
-    }
-}
+
 </style>
