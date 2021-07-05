@@ -80,26 +80,10 @@
                 <p class="c-p">
                   你可以在我们的 官网首页 下载到 苹果CMS的最新版，它经过了自动化构建，更适合用于生产环境。目录结构如下：
                 </p>
-                <pre class="c-p">
-                <textarea style="width:100%;border:none;overflow-y:hidden;font-size: 16px;color: #666;height:350px">
-  │─application //应用目录
-  │  │─admin //后台模块
-  │  │─api //api模块
-  │  │─common //公共模块
-  │  │─extra //配置文件
-  │  │─index //前台模块
-  │  │─install //安装模块
-  │─extend  //扩展目录
-  │─runtime //缓存目录
-  │─static //静态文件目录
-  │─template //前台模板目录
-  │─thinkphp //tp目录
-  │─upload //附件目录
-  │─vendor //第三发库目录
-  └─index.php //入口文件                
-                </textarea>
-                </pre>
-          
+                <div class="site-text">
+               
+                <pre class=" c-p layui-code layui-box layui-code-view"><h3 class="layui-code-h3">code</h3><ol class="layui-code-ol"><li>  │─application //应用目录</li><li>  │  │─admin //后台模块</li><li>  │  │─api //api模块</li><li>  │  │─common //公共模块</li><li>  │  │─extra //配置文件</li><li>  │  │─index //前台模块</li><li>  │  │─install //安装模块</li><li>  │─extend  //扩展目录</li><li>  │─runtime //缓存目录</li><li>  │─static //静态文件目录</li><li>  │─template //前台模板目录</li><li>  │─thinkphp //tp目录</li><li>  │─upload //附件目录</li><li>  │─vendor //第三发库目录</li><li>  └─index.php //入口文件</li><li>       </li></ol></pre>
+            </div>
               </div>
             </div>
 
@@ -3853,8 +3837,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/css/code.css';
+@import '@/assets/css/global.css';
+@import '@/assets/css/layui.css';
 .page-wrap {
   background: #fff;
+  padding-top: 50px;
   .dev-container {
     display: flex;
     background: #f7f8fa;
