@@ -1,16 +1,19 @@
 import path from 'path';
 import fs from 'fs';
 module.exports = {
-  proxy: {
-    'https://www.maccms.pro': {
-      target: 'https://www.maccms.pro',
-      pathRewrite: {
-        // '^/api': '/'
-        // '^/dapi': '/dapi',
-      },
-      changeOrigin: true
+  devServer: {
+    proxy: {
+      'https://www.maccms.pro': {
+        target: 'https://www.maccms.pro',
+        pathRewrite: {
+          // '^/api': '/'
+          // '^/dapi': '/dapi',
+        },
+        changeOrigin: true
+      }
     }
   },
+
   head: {
     // title: 'MacCMS Pro',
     meta: [

@@ -109,10 +109,7 @@ export default {
     },
     toDetail(item) {
       this.$router.push({
-        name: 'blog-blogDetail',
-        query: {
-          id: item.article_id
-        }
+        path: `blog/${item.article_id}`
       });
     },
     handleSizeChange(val) {
@@ -130,6 +127,7 @@ export default {
 <style scoped lang="less">
 .page-wrap {
   background: #f7f8fa;
+  min-width: 1380px;
   .page-title {
     height: 78px;
     line-height: 78px;
@@ -148,7 +146,7 @@ export default {
       flex-wrap: wrap;
       .blog-item {
         display: flex;
-        flex: 1;
+        width: 690px;
         height: 180px;
         background: #ffffff;
         box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.04);
@@ -160,7 +158,7 @@ export default {
           margin-right: 0;
         }
         .blog-item-left {
-          width: 50%;
+          width: 320px;
           border-radius: 6px;
           overflow: hidden;
           img {
@@ -168,7 +166,7 @@ export default {
           }
         }
         .blog-item-right {
-          width: 40%;
+          width: 300px;
           margin-left: 20px;
         }
         &:nth-child(even) {

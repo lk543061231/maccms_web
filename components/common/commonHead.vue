@@ -66,14 +66,14 @@ export default {
       activeIndex: 0,
       languageSrc: require('~/assets/images/common/common-qiu.png'),
       userSrc: require('~/assets/images/common/common-user.png'),
-      noSildeRouters: ['blog-blog', 'blog-blogDetail'],
+      noSildeRouters: ['blog', 'blog-id'],
       menuList: [
         { label: '首页', value: 0, name: 'index' },
-        { label: '应用市场', value: 1, name: 'applicationMarket', hasPop: true },
+        { label: '应用市场', value: 1, name: 'market', hasPop: true },
         { label: '开发文档', value: 2, name: 'document' },
         { label: '域名检测', value: 3, name: 'domainDetection', hasPop: true },
         { label: '资源库', value: 4, name: 'resource' },
-        { label: '博客', value: 5, name: 'blog-blog' },
+        { label: '博客', value: 5, name: 'blog' },
         { label: '帮助中心', value: 6, name: 'helpCenter' }
       ]
     };
@@ -101,6 +101,11 @@ export default {
         query: {
           activeIndex: type
         }
+      });
+    },
+    goToPage(route) {
+      this.$router.push({
+        name: route
       });
     },
 

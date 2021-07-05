@@ -49,7 +49,7 @@ export default {
           },
           {
             label: '博客主页',
-            name: 'blog-blog',
+            name: 'blog',
             value: 1
           }
         ]
@@ -58,8 +58,11 @@ export default {
       slide: false
     };
   },
+  created() {
+    console.log(123);
+  },
   mounted() {
-    let query = this.$route.query;
+    let query = this.$route.params;
     if (query && query.id) {
       this.getDetail(query.id);
     }
@@ -110,7 +113,7 @@ export default {
   .detail {
     // min-width: 1200px;
     margin: auto;
-    width: 90%;
+
     padding: 60px;
     background: #fff;
     border-radius: 4px;
