@@ -2,15 +2,15 @@
   <div class="pt-118 page-wrap">
     <div class="dev-container">
       <div class="left" :class="isFixed && 'fixed'">
-        <LeftNav :activeNav="activeNav" @selectNav="selectNav" @selectVer="selectVer"></LeftNav>
+        <LeftNav :activeNav="activeNav" :activeVer="activeVer" @selectNav="selectNav" @selectVer="selectVer"></LeftNav>
       </div>
 
       <div class="right" :class="isFixed && 'ml'">
-        <RightBegin v-if="activeNav === 0"></RightBegin>
-        <RightFaq v-if="activeNav === 1"></RightFaq>
-        <RightTem v-if="activeNav === 2"></RightTem>
-        <RightApi v-if="activeNav === 3"></RightApi>
-        <RightLog v-if="activeNav === 4"></RightLog>
+        <RightBegin :activeVer="activeVer" v-if="activeNav === 0"></RightBegin>
+        <RightFaq :activeVer="activeVer" v-if="activeNav === 1"></RightFaq>
+        <RightTem :activeVer="activeVer" v-if="activeNav === 2"></RightTem>
+        <RightApi :activeVer="activeVer" v-if="activeNav === 3"></RightApi>
+        <RightLog :activeVer="activeVer" v-if="activeNav === 4"></RightLog>
       </div>
     </div>
     <commonFoot />
@@ -50,6 +50,7 @@ export default {
       this.activeNav = index;
     },
     selectVer(val) {
+      console.log(val, 'val');
       this.activeVer = val;
       window.scrollTo(0, 0);
     }
