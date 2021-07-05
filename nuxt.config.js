@@ -29,6 +29,10 @@ module.exports = {
     css: [
         'element-ui/lib/theme-chalk/index.css',
         './assets/css/common.less',
+        // './assets/css/global.css',
+        // './assets/css/code.css',
+        // './assets/css/layer.css',
+        // './assets/css/layui.css',
     ],
     plugins: [
         '@/plugins/element-ui',
