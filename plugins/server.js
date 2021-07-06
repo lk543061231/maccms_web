@@ -5,11 +5,10 @@ import { Message, Notification } from 'element-ui' // 这里使用了element-ui�
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.headers.post['Content-Type'] = 'text/plain;charset=UTF-8'
 let service = axios.create({
-    // baseURL: '/',
-    timeout: 15000
-})
-
-// 请求拦截 可在请求头中加入token等
+        // baseURL: '/',
+        timeout: 15000
+    })
+    // 请求拦截 可在请求头中加入token等
 service.interceptors.request.use(config => {
     return config
 }, error => {

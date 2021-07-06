@@ -107,7 +107,7 @@ export default {
         if (!this.domainVal) {
           return;
         } else if (this.domainVal.indexOf('http') == -1) {
-          this.domainVal = 'http://' + this.domainVal;
+          this.domainVal = 'http://' + this.domainVal.trim();
         }
         if (this.activeIndex == 2) {
           this.$refs.tabBug && this.$refs.tabBug.check();

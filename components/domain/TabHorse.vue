@@ -25,44 +25,30 @@
         <div class="detection-error-bottom">
           <div class="detection-error-bottom-left">
             <pre class="layui-code layui-box layui-code-view">
-cookie:PHPSESSID=vrcumdiciv2c9grrjkjcb5a5ko; 
-Hm_lvt_eeefc29d9170f544beeda563028e2687=1625198886; 
-Hm_lpvt_eeefc29d9170f544beeda563028e2687=1625198886; 
-Hm_lvt_8bf597d1c539847203a70f79408f01a8=1625198886; 
-Hm_lpvt_8bf597d1c539847203a70f79408f01a8=1625198886; 
-Ant=https%253A%252F%252Fbaidu.com
-accept-language:zh-CN,zh;q=0.9
-accept-encoding:gzip, deflate, br
-referer:https://www.aicesu.cn/http/
-sec-fetch-dest:empty
-sec-fetch-mode:cors
-sec-fetch-site:same-origin
-origin:https://www.aicesu.cn
-user-agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) 
-AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 
-Safari/537.36sec-ch-ua-mobile:?0
-x-requested-with:XMLHttpRequest
-sec-ch-ua:" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"
-                </pre
-            >
-            <p class="f16-c242424">匹配特征内容</p>
-            <pre class="layui-code layui-box layui-code-view">
-x-requested-with:XMLHttpRequest
-sec-ch-ua:" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"
-                </pre
-            >
+{{detail.response_header}}
+            </pre>
+            
           </div>
           <div class="detection-error-bottom-right">
             <pre class="layui-code layui-box layui-code-view">
-HTTP/1.1 302 Moved Temporarily
-Server: bfe/1.0.8.18
-Date: Fri, 02 Jul 2021 04:08:30 GMT
-Content-Type: text/html
-Content-Length: 161
-Connection: keep-alive
-Location: http://www.baidu.com/
-                </pre
-            >
+{{detail.request_header}}
+            </pre>
+          </div>
+        </div>
+        <div class="detection-b">
+          <p class="f16-c242424">匹配特征内容</p>
+            <pre class="layui-code layui-box layui-code-view">
+{{detail.response_body}}
+            </pre>
+        </div>
+        <div class="xiufu">
+          <div class="x-left">
+            <i class="el-icon-warning-outline"></i>
+            <span style="font-size:16px">修复方案</span>
+            
+          </div>
+          <div class="x-right">
+            下载最新pro版能够自动修复
           </div>
         </div>
       </div>
@@ -123,7 +109,8 @@ export default {
       visiable: false,
       showTxt: false,
       checkResult: true,
-      checkTime:''
+      checkTime:'',
+      detail:{}
     };
   },
   computed: {},
@@ -150,10 +137,10 @@ export default {
       let t = new Date().getTime();
       checkSiteInject({ url: this.domainVal, t: t }).then(res => {
         loading.close();
-        
         if (res.data.code == 0) {
           this.checkTime = timestampToTime(new Date().getTime());
           this.checkResult = res.data && !res.data.data.is_inject;
+          this.detail=res.data.data
         } else {
           this.checkResult = false;
         }
@@ -310,24 +297,48 @@ export default {
     border-bottom: 1px solid #eaeaea;
   }
   .detection-error-bottom {
-    margin-top: 17px;
+    // margin-top: 17px;
     display: flex;
+    justify-content: space-between;
     .detection-error-bottom-left {
+      padding: 16px 40px;
       width: 525px;
-      height: 570px;
+      // height: 570px;
       color: #666666;
+      background: #FBFBFB;
+      width: 48%;
       font-size: 14px;
+      text-align: left;
       pre {
         line-height: 25px;
       }
     }
     .detection-error-bottom-right {
+      padding: 16px 40px;
       color: #666666;
-      margin-left: 80px;
       font-size: 14px;
+      width: 48%;
+      background: #FBFBFB;
+      text-align: left;
       pre {
         line-height: 25px;
       }
+    }
+  }
+  .detection-b{
+    margin-top: 30px;
+    pre{
+      color: #666;
+      font-size: 14px;
+    }
+  }
+  .xiufu{
+    color: #F64A36;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    .x-left{
+      margin-right: 10px;
     }
   }
 }
