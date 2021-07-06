@@ -164,12 +164,16 @@ export default {
   }
   .CodeMirror-code {
     margin-top: 20px;
+    padding: 15px 0;
     background: #f2f2f2;
   }
   .CodeMirror-activeline {
     .CodeMirror-activeline-background {
       background: #f2f2f2;
     }
+  }
+  .CodeMirror-linenumber {
+    font-size: 14px;
   }
 }
 
