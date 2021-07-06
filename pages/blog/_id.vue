@@ -129,6 +129,7 @@ export default {
         p {
           padding: 0;
           color: #000;
+          margin-bottom: 16px !important;
           img {
             width: 100%;
           }
