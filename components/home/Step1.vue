@@ -12,17 +12,19 @@
         <span class="p3-s4 f16-c172335" v-if="packageTitle != 'Pro版'" @click="toLog">更新日志</span>
       </p>
       <div class="package-list">
-        <el-popover placement="bottom" v-model="showPop">
+        <el-popover placement="bottom" v-model="showPop" trigger="hover">
           <div class="home-upload-wrap">
             <div
               v-for="(item, index) in packageUploadList"
               :key="index"
+              @touchstart.stop.prevent="popChildEnter(index, 1)"
               @mouseleave="popChildLeave(index, 1)"
               @mouseenter="popChildEnter(index, 1)"
             >
               <el-popover placement="right" v-model="item['showChildPop']" popper-class="area_popper">
                 <div
                   class="home-upload-edition"
+                  @touchstart.stop.prevent="popVersionEnter(index, 1)"
                   @mouseleave="popVersionLeave(index, 1)"
                   @mouseenter="popVersionEnter(index, 1)"
                   v-if="index != 0"
@@ -51,12 +53,14 @@
             <div
               v-for="(item, index) in upgradePackageList"
               :key="index"
+              @touchstart.stop.prevent="popChildEnter(index, 2)"
               @mouseleave="popChildLeave(index, 2)"
               @mouseenter="popChildEnter(index, 2)"
             >
               <el-popover placement="right" v-model="item['showChildPop']" popper-class="area_popper">
                 <div
                   class="home-upload-edition"
+                  @touchstart.stop.prevent="popVersionEnter(index, 2)"
                   @mouseleave="popVersionLeave(index, 2)"
                   @mouseenter="popVersionEnter(index, 2)"
                   v-if="index != 0"
@@ -217,6 +221,7 @@ export default {
     },
     // 一级弹出框移入
     popChildEnter(index, type) {
+      console.log('click');
       if (type == 1) {
         this.packageUploadList[index].showChildPop = true;
       } else {
