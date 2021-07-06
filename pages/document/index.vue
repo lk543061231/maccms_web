@@ -158,7 +158,21 @@ export default {
 }
 /deep/ .CodeMirror {
   z-index: 0;
+  .CodeMirror-line {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .CodeMirror-code {
+    margin-top: 20px;
+    background: #f2f2f2;
+  }
+  .CodeMirror-activeline {
+    .CodeMirror-activeline-background {
+      background: #f2f2f2;
+    }
+  }
 }
+
 /deep/ .h300 {
   .CodeMirror {
     height: 300px;

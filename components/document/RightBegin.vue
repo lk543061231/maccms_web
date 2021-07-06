@@ -6,7 +6,7 @@
         <p class="c-p" v-for="(conItem, conIndex) in item.label" :key="conIndex">
           {{ conItem }}
         </p>
-        <codemirror v-if="item.pre" ref="cmEditor" :value="item.pre" />
+        <codemirror v-if="item.pre" ref="cmEditor" :value="item.pre.con" :class="[item.pre.cls]" />
       </div>
     </div>
     <div v-if="activeVer === 1">
@@ -15,7 +15,7 @@
         <p class="c-p" v-for="(conItem, conIndex) in item.label" :key="conIndex">
           {{ conItem }}
         </p>
-        <codemirror v-if="item.pre" ref="cmEditor" :value="item.pre" />
+        <codemirror v-if="item.pre" ref="cmEditor" :value="item.pre.con" :class="[item.pre.cls]" />
       </div>
     </div>
   </div>
@@ -57,7 +57,9 @@ export default {
         {
           title: '获得 苹果CMS v10',
           label: ['你可以在我们的 官网首页 下载到 苹果CMS的最新版，它经过了自动化构建，更适合用于生产环境。目录结构如下：'],
-          pre: `│─application //应用目录
+          pre: {
+            cls: 'h400',
+            con: `│─application //应用目录
 │  │─admin //后台模块
 │  │─api //api模块
 │  │─common //公共模块
@@ -72,6 +74,7 @@ export default {
 │─upload //附件目录
 │─vendor //第三发库目录
 └─index.php //入口文件`
+          }
         }
       ],
       list2: [
@@ -99,7 +102,9 @@ export default {
         {
           title: '获得 苹果CMS v8',
           label: ['你可以在我们的 官网首页 下载到 苹果CMS 的最新版，它经过了自动化构建，更适合用于生产环境。目录结构如下：'],
-          pre: `│─admin //后台管理目录
+          pre: {
+            cls: 'h300',
+            con: `│─admin //后台管理目录
 │─cache  //缓存文件目录
 │─images //图片资源目录（苹果CMS系统自带）
 │─inc //模块核心目录
@@ -108,6 +113,7 @@ export default {
 │─template //前台模板目录
 │─upload //附件目录
 └─index.php //入口文件`
+          }
         }
       ]
     };

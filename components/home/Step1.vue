@@ -314,25 +314,25 @@ export default {
     }
   }
 }
-@media screen and (min-width: 1200px) {
-  .home-top {
-    height: 720px !important;
-  }
-}
-@media screen and (max-width: 980px) {
-  .home-top {
-    height: 540px !important;
-    .top-content {
-      margin: 140px 50px !important;
-    }
-  }
-}
-@media screen and (min-width: 980px) and (max-width: 1200px) {
-  .home-top {
-    height: 540px !important;
-    .top-content {
-      margin: 140px 50px !important;
-    }
-  }
-}
+// @media screen and (min-width: 1200px) {
+//   .home-top {
+//     height: 720px !important;
+//   }
+// }
+// @media screen and (max-width: 980px) {
+//   .home-top {
+//     height: 540px !important;
+//     .top-content {
+//       margin: 140px 50px !important;
+//     }
+//   }
+// }
+// @media screen and (min-width: 980px) and (max-width: 1200px) {
+//   .home-top {
+//     height: 540px !important;
+//     .top-content {
+//       margin: 140px 50px !important;
+//     }
+//   }
+// }
 </style>
