@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="btns-div" v-if="!checkResult">
+    <div class="btns-div">
       <p class="text">MacCMS更新包下载渠道</p>
       <div class="btns flex-between-center pro">
         <el-popover trigger="hover" placement="bottom" v-for="(item, index) in downList" :key="index">

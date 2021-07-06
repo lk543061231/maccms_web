@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { submitFeature } from '@/utils/api';
 export default {
   props: {
     visiable: {
@@ -42,29 +43,32 @@ export default {
       form: {
         domain: '',
         content: ''
-      },
-      disabled: true
+      }
     };
+  },
+  computed: {
+    disabled() {
+      return !this.form.domain || !this.form.content;
+    }
   },
   methods: {
     close() {
       this.$emit('update:visiable', false);
     },
-    domainBlur() {
-      if (this.form.domain != '' && this.form.content != '') {
-        this.disabled = false;
-      } else {
-        this.disabled = true;
-      }
-    },
-    contentBlur() {
-      if (this.form.domain != '' && this.form.content != '') {
-        this.disabled = false;
-      } else {
-        this.disabled = true;
-      }
-    },
+
     submit() {
+      let params = {
+        site: this.form.domain,
+        content: this.form.content
+      };
+      submitFeature(params).then(res => {
+        console.log(res);
+        if (res.data.code === 0) {
+          this.$message.success('提交成功');
+        } else {
+          this.$message.error('提交失败');
+        }
+      });
       this.close();
     }
   }

@@ -88,13 +88,16 @@ Location: http://www.baidu.com/
     <div class="btns-div" v-if="!checkResult">
       <DownPack :code="code"></DownPack>
     </div>
+    <sampleDialog :visiable.sync="visiable" />
   </div>
 </template>
 
 <script>
+import SampleDialog from './SampleDialog.vue';
+import DownPack from './DownPack.vue';
 import { getInjectList } from '@/utils/api';
 export default {
-  components: {},
+  components: { DownPack, SampleDialog },
   props: {
     checkResult: {
       type: Boolean,
@@ -112,7 +115,8 @@ export default {
   data() {
     return {
       inJEctList: [],
-      hoveIndex: ''
+      hoveIndex: '',
+      visiable: false
       // 安装包
     };
   },
@@ -214,6 +218,87 @@ export default {
       width: 24px;
       height: 24px;
       margin-right: 5px;
+    }
+  }
+}
+.detection {
+  padding: 30px 40px;
+  margin-top: 30px;
+  width: 1200px;
+  min-height: 374px;
+  background: #ffffff;
+  .detection-success {
+    .detection-success-top {
+      padding-bottom: 23px;
+      border-bottom: 1px solid #eaeaea;
+      .detection-success-top-left {
+        display: flex;
+        align-items: center;
+      }
+      .detection-success-top-right {
+        cursor: pointer;
+        user-select: none;
+        &:active {
+          opacity: 0.6;
+        }
+      }
+    }
+    .detection-success-bottom {
+      margin-top: 20px;
+      .detection-list {
+        margin-top: 23px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        .detection-item {
+          width: 270px;
+          height: 50px;
+          line-height: 50px;
+          color: #666666;
+          font-size: 16px;
+          text-align: left;
+          padding-right: 10px;
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+}
+.success-color {
+  color: #48d5b5;
+}
+.error-color {
+  color: #f64a36;
+  .p-1 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+}
+.detection-error {
+  .detection-error-top {
+    padding-bottom: 23px;
+    border-bottom: 1px solid #eaeaea;
+  }
+  .detection-error-bottom {
+    margin-top: 17px;
+    display: flex;
+    .detection-error-bottom-left {
+      width: 525px;
+      height: 570px;
+      color: #666666;
+      font-size: 14px;
+      pre {
+        line-height: 25px;
+      }
+    }
+    .detection-error-bottom-right {
+      color: #666666;
+      margin-left: 80px;
+      font-size: 14px;
+      pre {
+        line-height: 25px;
+      }
     }
   }
 }

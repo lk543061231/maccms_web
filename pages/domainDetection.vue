@@ -13,9 +13,9 @@
             漏洞检测
           </p>
 
-          <!-- <p class="tab-title" :class="{ active: activeIndex == 3 }" @click="choiceSearch(3)">
+          <p class="tab-title" :class="{ active: activeIndex == 3 }" @click="choiceSearch(3)">
             挂马检测
-          </p> -->
+          </p>
         </div>
         <div class="input-div">
           <el-input v-model="domainVal" :placeholder="palceHolder"></el-input>
@@ -48,7 +48,7 @@
             <TabBug :resMsg="resMsg" :checkResult="checkResult" :code="String(code)"></TabBug>
           </div>
           <div v-if="activeIndex === 3">
-            <TabHorse :code="String(code)" :checkTime="checkTime" :checkResult="checkResult"></TabHorse>
+            <TabHorse ref="horse" :code="String(code)" :checkTime="checkTime" :checkResult="checkResult"></TabHorse>
           </div>
         </div>
         <!--  v-if="!checkResult && (activeIndex == 2 || activeIndex == 3)" -->
@@ -57,7 +57,6 @@
       <div class="update"></div>
     </div>
     <commonFoot />
-    <sampleDialog :visiable.sync="visiable" />
   </div>
 </template>
 
@@ -66,13 +65,12 @@ import { getIsfake, checkSiteInject, getInjectList } from '@/utils/api';
 import { timestampToTime } from '@/utils/index';
 import commonHead from '@/components/common/commonHead.vue';
 import commonFoot from '@/components/common/commonFoot.vue';
-import sampleDialog from '@/components/sampleDialog.vue';
+
 import { TabUrl, TabBug, TabHorse } from '@/components/domain';
 export default {
   components: {
     commonHead,
     commonFoot,
-    sampleDialog,
     TabUrl,
     TabBug,
     TabHorse
@@ -95,7 +93,6 @@ export default {
       palceHolder: '请输入检测域名',
 
       resMsg: '',
-      visiable: false,
 
       checkTime: ''
     };
@@ -152,7 +149,8 @@ export default {
             loading.close();
             if (res.data.code == 0) {
               this.checkTime = timestampToTime(new Date().getTime());
-              this.checkResult = !res.data.is_inject;
+              console.log(res);
+              this.checkResult = res.data && !res.data.data.is_inject;
             } else {
               this.checkResult = false;
             }
@@ -347,87 +345,6 @@ export default {
           height: 24px;
           margin-right: 5px;
         }
-      }
-    }
-    .detection {
-      padding: 30px 40px;
-      margin-top: 30px;
-      width: 1200px;
-      min-height: 374px;
-      background: #ffffff;
-      .detection-success {
-        .detection-success-top {
-          padding-bottom: 23px;
-          border-bottom: 1px solid #eaeaea;
-          .detection-success-top-left {
-            display: flex;
-            align-items: center;
-          }
-          .detection-success-top-right {
-            cursor: pointer;
-            user-select: none;
-            &:active {
-              opacity: 0.6;
-            }
-          }
-        }
-        .detection-success-bottom {
-          margin-top: 20px;
-          .detection-list {
-            margin-top: 23px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            .detection-item {
-              width: 270px;
-              height: 50px;
-              line-height: 50px;
-              color: #666666;
-              font-size: 16px;
-              text-align: left;
-              padding-right: 10px;
-              margin-bottom: 8px;
-            }
-          }
-        }
-      }
-      .detection-error {
-        .detection-error-top {
-          padding-bottom: 23px;
-          border-bottom: 1px solid #eaeaea;
-        }
-        .detection-error-bottom {
-          margin-top: 17px;
-          display: flex;
-          .detection-error-bottom-left {
-            width: 525px;
-            height: 570px;
-            color: #666666;
-            font-size: 14px;
-            pre {
-              line-height: 25px;
-            }
-          }
-          .detection-error-bottom-right {
-            color: #666666;
-            margin-left: 80px;
-            font-size: 14px;
-            pre {
-              line-height: 25px;
-            }
-          }
-        }
-      }
-    }
-    .success-color {
-      color: #48d5b5;
-    }
-    .error-color {
-      color: #f64a36;
-      .p-1 {
-        font-size: 16px;
-        color: #333;
-        margin-bottom: 5px;
       }
     }
   }
