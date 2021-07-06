@@ -43,7 +43,13 @@ module.exports = {
     // './assets/css/layer.css',
     // './assets/css/layui.css'
   ],
-  plugins: ['@/plugins/element-ui', '~/plugins/i18n.js', '~/plugins/localStorage.js', { src: '~/plugins/codeEdit', ssr: false }],
+  plugins: [
+    '@/plugins/element-ui',
+    '~/plugins/i18n.js',
+    '~/plugins/localStorage.js',
+    { src: '~/plugins/codeEdit', ssr: false },
+    { src: '~/plugins/router', ssr: false }
+  ],
   components: true,
   buildModules: [],
   modules: [
