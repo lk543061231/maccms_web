@@ -1,9 +1,5 @@
 <template>
   <div class="">
-    <div class="text-wrap">
-      <p class="text success-color" v-if="checkResult">此域名是官方域名</p>
-      <p class="text error-color" v-else>此域名是假冒域名!</p>
-    </div>
     <div class="btns-div" v-if="!checkResult">
       <p class="text">官方域名</p>
       <div class="btns flex-between-center">
@@ -58,7 +54,7 @@ export default {
   }
 }
 .btns-div {
-  margin-top: 60px;
+  margin: 60px auto 0;
   width: 1200px;
   background: #fff;
   padding-bottom: 30px;

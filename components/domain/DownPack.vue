@@ -120,7 +120,7 @@ export default {
   text-align: center;
 }
 .btns-div {
-  margin-top: 60px;
+  margin: 60px auto 0;
   width: 1200px;
   background: #fff;
   padding-bottom: 30px;

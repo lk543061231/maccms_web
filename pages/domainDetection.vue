@@ -40,20 +40,23 @@
           <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
           <img v-else src="~/assets/images/common/domain-error.png" />
         </div>
-        <div>
-          <div v-if="activeIndex === 1">
-            <TabUrl :checkResult="checkResult"></TabUrl>
-          </div>
-          <div v-if="activeIndex === 2">
-            <TabBug :resMsg="resMsg" :checkResult="checkResult" :code="String(code)"></TabBug>
-          </div>
-          <div v-if="activeIndex === 3">
-            <TabHorse ref="horse" :code="String(code)" :checkTime="checkTime" :checkResult="checkResult"></TabHorse>
-          </div>
+        <div class="text-wrap" v-if="activeIndex === 1">
+          <p class="text success-color" v-if="checkResult">此域名是官方域名</p>
+          <p class="text error-color" v-else>此域名是假冒域名!</p>
         </div>
         <!--  v-if="!checkResult && (activeIndex == 2 || activeIndex == 3)" -->
       </div>
-
+      <div>
+        <div v-if="activeIndex === 1">
+          <TabUrl :checkResult="checkResult"></TabUrl>
+        </div>
+        <div v-if="activeIndex === 2">
+          <TabBug :resMsg="resMsg" :checkResult="checkResult" :code="String(code)"></TabBug>
+        </div>
+        <div v-if="activeIndex === 3">
+          <TabHorse ref="horse" :code="String(code)" :checkTime="checkTime" :checkResult="checkResult"></TabHorse>
+        </div>
+      </div>
       <div class="update"></div>
     </div>
     <commonFoot />

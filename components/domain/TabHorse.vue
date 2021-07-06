@@ -223,7 +223,7 @@ export default {
 }
 .detection {
   padding: 30px 40px;
-  margin-top: 30px;
+  margin: 30px auto 0;
   width: 1200px;
   min-height: 374px;
   background: #ffffff;
