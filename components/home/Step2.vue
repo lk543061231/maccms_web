@@ -8,6 +8,8 @@
           <p class="si-s2">{{ item.subTitle }}</p>
           <img class="si-img" :src="item.img" />
         </div>
+        <span class="line first"></span>
+        <span class="line second"></span>
       </div>
     </div>
     <div class="content bg1">
@@ -67,8 +69,8 @@ export default {
   .step-list {
     display: flex;
     width: 100%;
-    justify-content: space-around;
-    padding: 0 100px;
+    justify-content: space-evenly;
+    // padding: 0 100px;
     position: relative;
     .p1-img {
       position: absolute;
@@ -98,20 +100,36 @@ export default {
         width: 80px;
         height: 70px;
       }
-      &::after {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 1px;
-        height: 70px;
-        background-color: #fc996b;
-        right: -50%;
+      // &::after {
+      //   content: '';
+      //   display: block;
+      //   position: absolute;
+      //   width: 1px;
+      //   height: 70px;
+      //   background-color: #fc996b;
+      //   left: calc(100% + 50px);
+      //   @media screen and (max-width: 540px) {
+      //     right: -25%;
+      //   }
+      // }
+      // &:last-child {
+      //   margin-right: 0;
+      //   &::after {
+      //     display: none;
+      //   }
+      // }
+    }
+    .line {
+      position: absolute;
+      display: block;
+      width: 1px;
+      height: 70px;
+      background-color: #fc996b;
+      &.first {
+        left: 33%;
       }
-      &:last-child {
-        margin-right: 0;
-        &::after {
-          display: none;
-        }
+      &.second {
+        right: 33%;
       }
     }
   }
@@ -198,7 +216,9 @@ export default {
 }
 @media screen and (max-width: 750px) {
   .home-step .step-list .p1-img {
-    top: -120px;
+    top: -90px;
+    width: 200px;
+    height: 120px;
   }
 }
 </style>

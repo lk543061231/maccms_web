@@ -98,7 +98,7 @@ export default {
           name: ''
         };
         this.stepData.stepList.push(setpObj);
-        this.detail.create_time = timestampToTime(this.detail.create_time * 1000, 'yy-mm-dd');
+        this.detail.create_time = timestampToTime(this.detail.create_time * 1000, 'YYYY-MM-DD');
       });
     }
   }

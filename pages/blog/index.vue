@@ -100,7 +100,7 @@ export default {
         loading.close();
         if (res.data.code == 1) {
           res.data.info.rows.forEach(item => {
-            item.create_time = timestampToTime(item.create_time * 1000, 'yy-mm-dd');
+            item.create_time = timestampToTime(item.create_time * 1000, 'YYYY-MM-DD');
           });
           this.list = res.data.info.rows;
           this.total = res.data.info.total;
@@ -201,10 +201,32 @@ export default {
   }
 }
 @media screen and (max-width: 500px) {
-  .blog-list {
+  .page-wrap .page-inner .blog-list {
     display: flex;
     flex-direction: column;
     align-items: center;
+    // .blog-item {
+    //   display: flex;
+    //   width: 1380px;
+    //   height: 360px;
+    //   background: #ffffff;
+    //   padding: 40px 80px 40px 40px;
+    //   cursor: pointer;
+    //   &:nth-child(2n) {
+    //     margin-right: 0;
+    //   }
+    //   .blog-item-left {
+    //     width: 640px;
+    //     overflow: hidden;
+    //     img {
+    //       width: 100%;
+    //     }
+    //   }
+    //   .blog-item-right {
+    //     width: 600px;
+    //     margin-left: 40px;
+    //   }
+    // }
   }
 }
 </style>
