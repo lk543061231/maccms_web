@@ -1,12 +1,12 @@
 <template>
-  <div v-if="showTxt">
-    <div class="error" >
+  <div >
+    <div class="error"  v-if="showTxt">
       <div class="img-div">
         <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
         <img v-else src="~/assets/images/common/domain-error.png" />
       </div>
     </div>
-    <div class="text-wrap">
+    <div class="text-wrap"  v-if="showTxt">
       <p class="text success-color" v-if="checkResult">
         恭喜您，域名通过大数据匹配特征没有被挂马
       </p>
@@ -16,31 +16,7 @@
     </div>
     <!-- 挂马检测 -->
     <div class="detection">
-      <div class="detection-success" v-if="checkResult">
-        <div class="detection-success-top flex-between-center">
-          <div class="detection-success-top-left fw500">
-            <span class="f18-c172335">挂马站点总数：</span>
-            <span class="f18-cF7502D">200002</span>
-            <span class="f12-cC7C7C7" style="margin-left: 10px">(全网大数据扫描实时动态更新）</span>
-          </div>
-          <div class="detection-success-top-right f14-c172335" @click="visiable = true">
-            <span>特征样本提交</span>
-            <i class="el-icon-arrow-right"></i>
-          </div>
-        </div>
-        <div class="detection-success-bottom">
-          <p class="f16-c242424 fw500">
-            <span>检测时间：</span>
-            <span>{{ checkTime }}</span>
-          </p>
-          <div class="detection-list">
-            <div class="detection-item" v-for="(e, i) in inJEctList" :key="i">
-              {{ e }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="detection-error" v-else-if="!checkResult">
+      <div class="detection-error" v-if="!checkResult">
         <div class="detection-error-top fw500">
           <span class="f18-c242424">Head 请求头/返回头</span>
           <span class="f18-cF7502D" style="margin-left: 14px">0.3883</span>
@@ -90,6 +66,31 @@ Location: http://www.baidu.com/
           </div>
         </div>
       </div>
+      <div class="detection-success" v-else>
+        <div class="detection-success-top flex-between-center">
+          <div class="detection-success-top-left fw500">
+            <span class="f18-c172335">挂马站点总数：</span>
+            <span class="f18-cF7502D">200002</span>
+            <span class="f12-cC7C7C7" style="margin-left: 10px">(全网大数据扫描实时动态更新）</span>
+          </div>
+          <div class="detection-success-top-right f14-c172335" @click="visiable = true">
+            <span>特征样本提交</span>
+            <i class="el-icon-arrow-right"></i>
+          </div>
+        </div>
+        <div class="detection-success-bottom">
+          <p class="f16-c242424 fw500">
+            <span>检测时间：</span>
+            <span>{{ checkTime }}</span>
+          </p>
+          <div class="detection-list">
+            <div class="detection-item" v-for="(e, i) in inJEctList" :key="i">
+              {{ e }}
+            </div>
+          </div>
+        </div>
+      </div>
+      
     </div>
     <div class="btns-div" v-if="!checkResult">
       <DownPack :code="code"></DownPack>
@@ -121,7 +122,7 @@ export default {
       hoveIndex: '',
       visiable: false,
       showTxt: false,
-      checkResult: false,
+      checkResult: true,
       checkTime:''
     };
   },
@@ -149,6 +150,7 @@ export default {
       let t = new Date().getTime();
       checkSiteInject({ url: this.domainVal, t: t }).then(res => {
         loading.close();
+        
         if (res.data.code == 0) {
           this.checkTime = timestampToTime(new Date().getTime());
           this.checkResult = res.data && !res.data.data.is_inject;

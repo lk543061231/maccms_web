@@ -67,7 +67,7 @@ export default {
   },
   head() {
     return {
-      title: 'MacCMS Pro-域名检测'
+      title: 'MacCMS Pro-域名检测',
     };
   },
   data() {
