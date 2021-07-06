@@ -95,6 +95,7 @@ export default {
 
         word-wrap: break-word;
         white-space: pre-line;
+        margin-bottom: 20px;
       }
       .c-p {
         color: #666;
@@ -153,6 +154,39 @@ export default {
 @media screen and (max-width: 980px) {
   .dev-container {
     padding: 30px !important;
+  }
+}
+/deep/ .CodeMirror {
+  z-index: 0;
+}
+/deep/ .h300 {
+  .CodeMirror {
+    height: 300px;
+  }
+}
+/deep/ .h400 {
+  .CodeMirror {
+    height: 400px;
+  }
+}
+/deep/ .h500 {
+  .CodeMirror {
+    height: 500px;
+  }
+}
+/deep/ .h600 {
+  .CodeMirror {
+    height: 600px;
+  }
+}
+/deep/ .h800 {
+  .CodeMirror {
+    height: 800px;
+  }
+}
+/deep/ .h1000 {
+  .CodeMirror {
+    height: 1000px;
   }
 }
 </style>

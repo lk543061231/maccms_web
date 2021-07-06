@@ -42,7 +42,7 @@
         </div>
         <div class="detection-error-bottom">
           <div class="detection-error-bottom-left">
-            <pre>
+            <pre class="layui-code layui-box layui-code-view">
 cookie:PHPSESSID=vrcumdiciv2c9grrjkjcb5a5ko; 
 Hm_lvt_eeefc29d9170f544beeda563028e2687=1625198886; 
 Hm_lpvt_eeefc29d9170f544beeda563028e2687=1625198886; 
@@ -64,14 +64,14 @@ sec-ch-ua:" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"
                 </pre
             >
             <p class="f16-c242424">匹配特征内容</p>
-            <pre>
+            <pre class="layui-code layui-box layui-code-view">
 x-requested-with:XMLHttpRequest
 sec-ch-ua:" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"
                 </pre
             >
           </div>
           <div class="detection-error-bottom-right">
-            <pre>
+            <pre class="layui-code layui-box layui-code-view">
 HTTP/1.1 302 Moved Temporarily
 Server: bfe/1.0.8.18
 Date: Fri, 02 Jul 2021 04:08:30 GMT

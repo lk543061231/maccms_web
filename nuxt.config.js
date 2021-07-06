@@ -41,9 +41,9 @@ module.exports = {
     // './assets/css/global.css',
     // './assets/css/code.css',
     // './assets/css/layer.css',
-    // './assets/css/layui.css',
+    // './assets/css/layui.css'
   ],
-  plugins: ['@/plugins/element-ui', '~/plugins/i18n.js', '~/plugins/localStorage.js'],
+  plugins: ['@/plugins/element-ui', '~/plugins/i18n.js', '~/plugins/localStorage.js', { src: '~/plugins/codeEdit', ssr: false }],
   components: true,
   buildModules: [],
   modules: [

@@ -11,6 +11,10 @@
   height: 600px !important;
 }
 
+.CodeMirror {
+  z-index: 0;
+}
+
 /* 布局 */
 .site-inline {
   font-size: 0;

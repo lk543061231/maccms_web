@@ -15,7 +15,8 @@ export function getIsfake(data) {
 // 挂马
 export function checkSiteInject(data) {
   return request({
-    url: baseUrl + '/dapi/maccmspro/check_site_inject',
+    // url: baseUrl + '/dapi/maccmspro/check_site_inject',
+    url: baseUrl + '/dapi/maccmspro/submit_site_inject',
     method: 'post',
     data: data
   });

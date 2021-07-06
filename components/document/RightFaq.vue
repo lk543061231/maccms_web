@@ -4,70 +4,27 @@
       <div class="c-d" :class="{ mt40: index !== 0 }" v-for="(item, index) in list" :key="index">
         <p class="c-t">{{ item.title }}</p>
         <p class="c-pt" v-for="(conItem, conIndex) in item.con" :key="conIndex">
+          <codemirror v-if="conItem.pre" ref="cmEditor" :value="conItem.pre" />
+          <span v-else> {{ conItem }}</span>
+        </p>
+        <p class="c-p" v-for="(conItem, conIndex) in item.label" :key="conIndex">
+          {{ conItem }}
+        </p>
+        <codemirror v-if="item.pre" ref="cmEditor" :value="item.pre.con" :class="[item.pre.cls]" />
+      </div>
+    </div>
+    <div v-if="activeVer == 1">
+      <div class="c-d" :class="{ mt40: index !== 0 }" v-for="(item, index) in list2" :key="index">
+        <p class="c-t">{{ item.title }}</p>
+        <p class="c-pt" v-for="(conItem, conIndex) in item.con" :key="conIndex">
           {{ conItem }}
         </p>
         <p class="c-p" v-for="(conItem, conIndex) in item.label" :key="conIndex">
           {{ conItem }}
         </p>
-        <pre class="c-p" v-if="item.pre">
-              {{item.pre}}
-            <!-- <textarea style="width:100%;border:none;overflow-y:hidden;font-size: 16px;color: #666;height:350px">
-                    {{item.pre}}
-            </textarea> -->
-        </pre>
+        <codemirror v-if="item.pre" ref="cmEditor" :value="item.pre.con" :class="[item.pre.cls]" />
       </div>
     </div>
-           <div v-if="activeVer == 1">
-              <div class="c-d">
-                <p class="c-t">常见问题</p>
-                <p class="c-p">
-                  本篇将主要讲解使用过程中普遍遇到的“问题”，这些问题并非是BUG，通常是需要我们自己去注意的一些点。（会结合用户反馈持续补充）
-                </p>
-              </div>
-              <div class="c-d mt40">
-                <p class="c-t">快速安装</p>
-                <p class="c-p">
-                  获得 苹果CMS
-                  后，将其完整地部署到你的网站目录，然后访问网站，即可自动跳转到安装页面install.php。
-                </p>
-                <p class="c-p">
-                  输入事先准备好的mysql数据库账户密码，即可一键安装。
-                </p>
-              </div>
-              <div class="c-d mt40">
-                <p class="c-t">常用sql语句</p>
-                <p class="c-p">
-                  <pre>
-    1.查询数据
-    SELECT * FROM {pre}vod   查询所有数据
-    SELECT * FROM {pre}vod WHERE d_id=1000   查询指定ID数据
-    2.删除数据
-    DELETE  FROM {pre}vod   删除所有数据
-    DELETE  FROM {pre}vod WHERE d_id=1000   删除指定的第几条数据
-    DELETE  FROM {pre}vod WHERE d_starring LIKE '%刘德华%'   删除d_starring字段里有"刘德华"的数据
-    DELETE  FROM {pre}vod WHERE d_type=1   删除指定的分类ID的数据
-    DELETE  FROM {pre}vod WHERE d_area LIKE '%台湾%'   删除指定地区的数据
-    DELETE  FROM {pre}vod WHERE d_language LIKE '%粤语%'  删除指定语言的数据
-    3.修改数据
-    UPDATE {pre}vod SET d_hits=1   将所有d_hits字段里的值修改成1
-    UPDATE {pre}vod SET d_hits=1 WHERE d_id=1000  指定的第几条数据把d_hits字段里的值修改成1
-    4，把图片地址中的某个字符串替换为另外一个字符串
-    UPDATE {pre}vod SET d_pic=REPLACE(d_pic, '原始字符串', '替换成其他字符串')
-    5，删除数据库后自增ID重新从1开始
-    PHP： truncate {pre}vod
-    ASP： acc 用office打开数据库，删除数据后，压缩修复数据库即可。
-              或 ALTER TABLE {pre}vod ALTER COLUMN d_id COUNTER (1, 1)
-              mssql用   TRUNCATE TABLE  {pre}vod
-    6，删除数据库名称重复的数据
-    DELETE FROM {pre}vod where d_id not in ( SELECT d_id FROM {pre}vod GROUP BY d_name HAVING COUNT(*)>1)
-    7，php 7x 版本修复死锁的表
-    REPAIR TABLE `{pre}art` ,`{pre}art_topic` ,`{pre}art_type` ,`{pre}comment` ,`{pre}gbook` ,`{pre}link` ,
-    `{pre}manager` ,`{pre}mood` ,`{pre}user` ,`{pre}user_card` ,`{pre}user_group` ,`{pre}user_visit` ,`{pre}vod` ,
-    `{pre}vod_topic` ,`{pre}vod_type`
-                  </pre>
-                </p>
-              </div>
-            </div>
   </div>
 </template>
 
@@ -105,21 +62,25 @@ export default {
             '9，采集完数据后为何无法播放？？？\n RE:检查采集数据的播放地址，如果是完成的http地址，则需要开启播放器的解析状态用解析播放；如果采集的数据ID可会直接用本地播放器来播放。',
             '10，为何新增加了分类，前台页面进入提示没有权限？？？\n RE:因为新加的分类默认所有会员组都是没有权限的，需要进入会员组里配置每个组的分类权限，保存一下即可。',
             '11，路由规则改错了，页面权都打不开了，怎么恢复到默认的？？？\n RE:下载完整安装包，复制application/route.php 替换到网站里，就可以打开了，然后在后台重新修改下路由规则。',
-            `12，nginx下除了首页其他都是404怎么办？\n RE:修改一下伪静态规则，一般都可以解决了。 如果修改了后台文件入口admin.php，则改为对应的文件名。
-          if (!-e $request_filename) {
-            rewrite ^/index.php(.*)$ /index.php?s=$1 last;
-            rewrite ^/admin.php(.*)$ /admin.php?s=$1 last;
-            rewrite ^/api.php(.*)$ /api.php?s=$1 last;
-            rewrite ^(.*)$ /index.php?s=$1 last;
-            break;
-          }`,
+            '12，nginx下除了首页其他都是404怎么办？\n RE:修改一下伪静态规则，一般都可以解决了。 如果修改了后台文件入口admin.php，则改为对应的文件名。',
+            {
+              pre: `if (!-e $request_filename) {
+    rewrite ^/index.php(.*)$ /index.php?s=$1 last;
+    rewrite ^/admin.php(.*)$ /admin.php?s=$1 last;
+    rewrite ^/api.php(.*)$ /api.php?s=$1 last;
+    rewrite ^(.*)$ /index.php?s=$1 last;
+    break;
+  }`
+            },
             '13，安装提示“always_populate_raw_post_data”配置不支持解决方法 \n RE:编辑PHP-5.6 配置文件  php.ini， \n 查找 always_populate_raw_post_data \n 把前面的; 去掉保存，然后重启php5.6。',
             '本篇将主要讲解使用过程中普遍遇到的“问题”，这些问题并非是BUG，通常是需要我们自己去注意的一些点。（会结合用户反馈持续补充）'
           ]
         },
         {
           title: '常用sql语句',
-          pre: `
+          pre: {
+            cls: 'h600',
+            con: `
 1.查询数据
 SELECT * FROM {pre}vod   查询所有数据
 SELECT * FROM {pre}vod WHERE vod_id=1000   查询指定ID数据
@@ -149,6 +110,7 @@ DELETE FROM {pre}vod where vod_id not in ( SELECT vod_id FROM {pre}vod GROUP BY 
 
 7，修复死锁的表
 REPAIR TABLE \`{pre}art\` ,\`{pre}vod\` ,\`{pre}type\` ,\`{pre}comment\` ,\`{pre}gbook\` ,\`{pre}link\` ,\`{pre}admin\` ,\`{pre}topic\` ,\`{pre}user\` ,\`{pre}card\` ,\`{pre}group\` ,\`{pre}visit\``
+          }
         },
         {
           title: '页面提交数据后过段时间才生效？',
@@ -161,6 +123,61 @@ REPAIR TABLE \`{pre}art\` ,\`{pre}vod\` ,\`{pre}type\` ,\`{pre}comment\` ,\`{pre
           label: [
             `如果播放器被包含在 iframe 里，尝试在 iframe 上添加 allowfullscreen 属性。为了完善的浏览器兼容性，它应该是这样：</li><li><iframe src="example.com" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>`
           ]
+        }
+      ],
+      list2: [
+        {
+          title: '常见问题',
+          label: [
+            '本篇将主要讲解使用过程中普遍遇到的“问题”，这些问题并非是BUG，通常是需要我们自己去注意的一些点。（会结合用户反馈持续补充）'
+          ]
+        },
+        {
+          title: '快速安装',
+          label: [
+            '获得 苹果CMS后，将其完整地部署到你的网站目录，然后访问网站，即可自动跳转到安装页面install.php。',
+            '输入事先准备好的mysql数据库账户密码，即可一键安装。'
+          ]
+        },
+        {
+          title: '常用sql语句',
+          pre: {
+            cls: 'h600',
+            con: `
+    1.查询数据
+    SELECT * FROM {pre}vod   查询所有数据
+    SELECT * FROM {pre}vod WHERE d_id=1000   查询指定ID数据
+
+    2.删除数据
+    DELETE  FROM {pre}vod   删除所有数据
+    DELETE  FROM {pre}vod WHERE d_id=1000   删除指定的第几条数据
+    DELETE  FROM {pre}vod WHERE d_starring LIKE '%刘德华%'   删除d_starring字段里有"刘德华"的数据
+    DELETE  FROM {pre}vod WHERE d_type=1   删除指定的分类ID的数据
+    DELETE  FROM {pre}vod WHERE d_area LIKE '%台湾%'   删除指定地区的数据
+    DELETE  FROM {pre}vod WHERE d_language LIKE '%粤语%'  删除指定语言的数据
+
+    3.修改数据
+    UPDATE {pre}vod SET d_hits=1   将所有d_hits字段里的值修改成1
+    UPDATE {pre}vod SET d_hits=1 WHERE d_id=1000  指定的第几条数据把d_hits字段里的值修改成1
+
+    4，把图片地址中的某个字符串替换为另外一个字符串
+    UPDATE {pre}vod SET d_pic=REPLACE(d_pic, '原始字符串', '替换成其他字符串')
+
+    5，删除数据库后自增ID重新从1开始
+    PHP： truncate {pre}vod
+    ASP： acc 用office打开数据库，删除数据后，压缩修复数据库即可。
+          或 ALTER TABLE {pre}vod ALTER COLUMN d_id COUNTER (1, 1)
+          mssql用   TRUNCATE TABLE  {pre}vod
+
+    6，删除数据库名称重复的数据
+    DELETE FROM {pre}vod where d_id not in ( SELECT d_id FROM {pre}vod GROUP BY d_name HAVING COUNT(*)>1)
+    
+    7，php 7x 版本修复死锁的表
+    REPAIR TABLE \`{pre}art\` ,\`{pre}art_topic\` ,\`{pre}art_type\` ,\`{pre}comment\` ,\`{pre}gbook\` ,\`{pre}link\` ,
+    \`{pre}manager\` ,\`{pre}mood\` ,\`{pre}user\` ,\`{pre}user_card\` ,\`{pre}user_group\` ,\`{pre}user_visit\` ,\`{pre}vod\` ,
+    \`{pre}vod_topic\` ,\`{pre}vod_type\`
+    `
+          }
         }
       ]
     };
