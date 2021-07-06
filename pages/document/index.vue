@@ -26,6 +26,7 @@ export default {
   props: {},
   data() {
     return {
+      
       activeNav: 0,
       activeVer: 0,
       isFixed: false
@@ -42,9 +43,21 @@ export default {
         this.isFixed = false;
       }
     });
+    let logType=this.$route.query.logType
+    if(logType){
+      this.getLog(logType) 
+    }
   },
   watch: {},
   methods: {
+    getLog(logType){
+      if(logType=='V10'){
+        this.activeVer=0
+      }else if(logType=='V8'){
+        this.activeVer=1
+      }
+      this.activeNav=4
+    },
     selectNav(index) {
       window.scrollTo(0, 0);
       this.activeNav = index;
