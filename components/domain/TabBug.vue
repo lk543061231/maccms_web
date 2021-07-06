@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    <div class="error" v-if="showTxt">
+  <div v-if="showTxt">
+    <div class="error" >
       <div class="img-div">
         <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
         <img v-else src="~/assets/images/common/domain-error.png" />
@@ -28,23 +28,22 @@
 
 <script>
 import DownPack from './DownPack.vue';
+import { getIsfake} from '@/utils/api';
 export default {
   components: { DownPack },
   props: {
-    code: {
-      type: String,
-      default: ''
-    },
-    resMsg: {
-      type: String,
-      default: ''
+    domainVal:{
+      type:String,
+      default:''
     }
   },
   data() {
     return {
       hoveIndex: '',
       showTxt: false,
-      checkResult: false
+      checkResult: false,
+      code:'',
+      resMsg:''
     };
   },
   computed: {},
@@ -52,7 +51,26 @@ export default {
   mounted() {},
   watch: {},
   methods: {
-    check() {}
+    check() {
+      const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+      });
+      let t = new Date().getTime();
+      getIsfake({ url: this.domainVal, t: t }).then(res => {
+        loading.close();
+        this.code =String(res.data.code) ;
+        if (res.data.code == 1) {
+          this.checkResult = !res.data.info.is_fake;
+        } else {
+          this.checkResult = false;
+        }
+        this.resMsg=res.data.msg
+        this.showTxt = true;
+      });
+    }
   }
 };
 </script>

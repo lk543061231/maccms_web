@@ -14,7 +14,7 @@
               <div class="app-wrap" v-else-if="index == 3">
                 <p class="app-item" @click="changeRouter('domainDetection', 1)">域名真伪</p>
                 <p class="app-item" @click="changeRouter('domainDetection', 2)">漏洞检测</p>
-                <!-- <p class="app-item" @click="changeRouter('domainDetection',3)">挂马检测</p> -->
+                <p class="app-item" @click="changeRouter('domainDetection',3)">挂马检测</p>
               </div>
               <p class="menu-name" slot="reference" @click="selectRouter(item, index)" :class="activeIndex == index && 'is-active'">
                 {{ item.label }}

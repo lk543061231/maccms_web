@@ -35,14 +35,14 @@
     </div>
     <div class="domain-bottom">
       <div>
-        <div v-if="activeIndex === 1">
-          <TabUrl ref="tabUrl" :checkResult="checkResult"></TabUrl>
+        <div v-if="activeIndex == 1">
+          <TabUrl ref="tabUrl" :checkResult="checkResult" :domainVal="domainVal" ></TabUrl>
         </div>
-        <div v-if="activeIndex === 2">
-          <TabBug ref="tabBug" :resMsg="resMsg" :checkResult="checkResult" :code="String(code)"></TabBug>
+        <div v-if="activeIndex == 2">
+          <TabBug ref="tabBug"  :checkResult="checkResult" :domainVal="domainVal" ></TabBug>
         </div>
-        <div v-if="activeIndex === 3">
-          <TabHorse ref="horse" :code="String(code)" :checkTime="checkTime" :checkResult="checkResult"></TabHorse>
+        <div v-if="activeIndex == 3">
+          <TabHorse ref="horse" :code="String(code)"  :domainVal="domainVal" :checkResult="checkResult"></TabHorse>
         </div>
       </div>
       <div class="update"></div>
@@ -53,7 +53,6 @@
 
 <script>
 import { getIsfake, checkSiteInject, getInjectList } from '@/utils/api';
-import { timestampToTime } from '@/utils/index';
 import commonHead from '@/components/common/commonHead.vue';
 import commonFoot from '@/components/common/commonFoot.vue';
 
@@ -76,15 +75,11 @@ export default {
       inputCheck: false,
       activeIndex: 1,
       domainVal: '',
-      passUrl: ['maccms.com', 'maccms.net', 'maccms.pro', 'macvideojs.com'],
-
       checkResult: '',
       code: 0,
       showTxt: false,
       palceHolder: '请输入检测域名',
-
       resMsg: '',
-
       checkTime: ''
     };
   },
@@ -95,6 +90,8 @@ export default {
       this.palceHolder =
         query.activeIndex == 1 || query.activeIndex == 3 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
     }
+    this.showTxt = false;
+
   },
   watch: {
     $route: function(val) {
@@ -106,59 +103,29 @@ export default {
     check() {
       if (this.activeIndex == 1) {
         this.$refs.tabUrl && this.$refs.tabUrl.check();
-        // this.showTxt = true;
-        // this.checkResult = this.passUrl.some(item => {
-        //   return this.domainVal.indexOf(item) != -1;
-        // });
       } else {
         // 漏洞检测
-
         if (!this.domainVal) {
           return;
         } else if (this.domainVal.indexOf('http') == -1) {
           this.domainVal = 'http://' + this.domainVal;
         }
-        const loading = this.$loading({
-          lock: true,
-          text: 'Loading',
-          spinner: 'el-icon-loading',
-          background: 'rgba(0, 0, 0, 0.7)'
-        });
-        let t = new Date().getTime();
         if (this.activeIndex == 2) {
-          this.$refs.tabUrl && this.$refs.tabUrl.check();
-          // getIsfake({ url: this.domainVal, t: t }).then(res => {
-          //   loading.close();
-          //   this.code = res.data.code;
-          //   if (res.data.code == 1) {
-          //     this.checkResult = !res.data.info.is_fake;
-          //   } else {
-          //     this.resMsg = res.data.msg;
-          //     this.checkResult = false;
-          //   }
-          //   this.showTxt = true;
-          // });
+          this.$refs.tabBug && this.$refs.tabBug.check();
         } else if (this.activeIndex == 3) {
-          this.$refs.tabUrl && this.$refs.tabUrl.check();
-          // checkSiteInject({ url: this.domainVal, t: t }).then(res => {
-          //   loading.close();
-          //   if (res.data.code == 0) {
-          //     this.checkTime = timestampToTime(new Date().getTime());
-          //     console.log(res);
-          //     this.checkResult = res.data && !res.data.data.is_inject;
-          //   } else {
-          //     this.checkResult = false;
-          //   }
-          //   this.showTxt = true;
-          // });
+          this.$refs.horse && this.$refs.horse.check();
         }
       }
     },
-
     choiceSearch(i) {
-      this.showTxt = false;
-      this.activeIndex = i;
-      this.palceHolder = i == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
+      // this.activeIndex = i;
+      // this.palceHolder = i == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
+      this.$router.push({
+        path:'/domainDetection',
+        query:{
+          activeIndex:i
+        }
+      })
     }
   }
 };
@@ -259,6 +226,7 @@ export default {
   .domain-bottom {
     width: 100%;
     // height: 618px;
+    // text-align: center;
     padding: 40px 0;
     background: #f7f8fa;
     .success,
