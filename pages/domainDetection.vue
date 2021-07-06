@@ -36,13 +36,13 @@
     <div class="domain-bottom">
       <div>
         <div v-if="activeIndex == 1">
-          <TabUrl ref="tabUrl" :checkResult="checkResult" :domainVal="domainVal" ></TabUrl>
+          <TabUrl ref="tabUrl" :checkResult="checkResult" :domainVal="domainVal"></TabUrl>
         </div>
         <div v-if="activeIndex == 2">
-          <TabBug ref="tabBug"  :checkResult="checkResult" :domainVal="domainVal" ></TabBug>
+          <TabBug ref="tabBug" :checkResult="checkResult" :domainVal="domainVal"></TabBug>
         </div>
         <div v-if="activeIndex == 3">
-          <TabHorse ref="horse" :code="String(code)"  :domainVal="domainVal" :checkResult="checkResult"></TabHorse>
+          <TabHorse ref="horse" :code="String(code)" :domainVal="domainVal" :checkResult="checkResult"></TabHorse>
         </div>
       </div>
       <div class="update"></div>
@@ -91,7 +91,6 @@ export default {
         query.activeIndex == 1 || query.activeIndex == 3 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
     }
     this.showTxt = false;
-
   },
   watch: {
     $route: function(val) {
@@ -121,11 +120,11 @@ export default {
       // this.activeIndex = i;
       // this.palceHolder = i == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
       this.$router.push({
-        path:'/domainDetection',
-        query:{
-          activeIndex:i
+        path: '/domainDetection',
+        query: {
+          activeIndex: i
         }
-      })
+      });
     }
   }
 };
@@ -223,7 +222,7 @@ export default {
       color: #ffeae0;
     }
   }
-  .domain-bottom {
+  /deep/ .domain-bottom {
     width: 100%;
     // height: 618px;
     // text-align: center;
