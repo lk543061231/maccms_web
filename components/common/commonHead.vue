@@ -201,12 +201,15 @@ export default {
   left: 0;
   top: 0;
   .left {
+    flex: 1;
+    justify-content: flex-start;
     .logo {
       width: 103px;
       height: 58px;
       margin-right: 95px;
       img {
-        width: 100%;
+        width: 103px;
+        height: 58px;
       }
     }
     .menu {
@@ -262,6 +265,7 @@ export default {
   }
   .right {
     width: 220px;
+
     .language,
     .user {
       cursor: pointer;

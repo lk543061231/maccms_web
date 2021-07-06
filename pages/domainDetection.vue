@@ -18,9 +18,8 @@
           </p> -->
         </div>
         <div class="input-div">
-          <div class="input-cls" :class="inputCheck && 'global-input-focus'">
-            <el-input v-model="domainVal" @focus="inputCheck = true" @blur="inputCheck = false" :placeholder="palceHolder"></el-input>
-          </div>
+          <el-input v-model="domainVal" :placeholder="palceHolder"></el-input>
+
           <div class="btn global-btn-hover1" @click="check">检测一下</div>
         </div>
         <div class="tip">
@@ -219,22 +218,23 @@ export default {
     .input-div {
       .flex-center;
       margin-bottom: 19px;
-      .input-cls {
+      /deep/.el-input {
         width: 700px;
         height: 50px;
         margin-right: 15px;
         border-radius: 25px;
         overflow: hidden;
         color: #f7502d;
-        border: 1px solid #e1e1e1;
-        /deep/.el-input {
-          width: 101%;
-          .el-input__inner {
-            position: relative;
-            padding-left: 30px;
-            height: 52px;
-            top: -1px;
-            left: -1px;
+        // border: 1px solid #e1e1e1;
+        .el-input__inner {
+          // position: relative;
+          padding-left: 30px;
+          height: 50px;
+          border-radius: 25px;
+          // top: -1px;
+          // left: -1px;
+          &:focus {
+            border: 1px solid #e5552d !important;
           }
         }
       }
