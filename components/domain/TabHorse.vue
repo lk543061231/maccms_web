@@ -68,9 +68,10 @@
           <p class="f16-c242424 fw500">
             <span>检测时间：</span>
             <span>{{ checkTime }}</span>
+            <span style="font-size:12px;color:#666;margin-left:10px">(随机展示部分域名)</span>
           </p>
           <div class="detection-list">
-            <div class="detection-item" v-for="(e, i) in inJEctList" :key="i">
+            <div class="detection-item" v-for="(e, i) in inJEctList" :key="i" @click="toHref(e)">
               {{ e }}
             </div>
           </div>
@@ -116,10 +117,14 @@ export default {
   computed: {},
   created() {
     this.getInject();
+    this.checkTime = timestampToTime(new Date().getTime());
   },
   mounted() {},
   watch: {},
   methods: {
+    toHref(url){
+      window.open(url)
+    },
     getInject() {
       getInjectList().then(res => {
         if (res.data.code == 0) {
@@ -275,6 +280,7 @@ export default {
           text-align: left;
           padding-right: 10px;
           margin-bottom: 8px;
+          cursor: pointer;
         }
       }
     }
