@@ -6,7 +6,7 @@
         <p class="c-p" v-for="(conItem, conIndex) in item.label" :key="conIndex">
           {{ conItem }}
         </p>
-        <pre class="c-p" v-if="item.pre">
+        <pre class="c-p layui-code layui-box layui-code-view" v-if="item.pre">
               {{item.pre}}
             <!-- <textarea style="width:100%;border:none;overflow-y:hidden;font-size: 16px;color: #666;height:350px">
                     {{item.pre}}
