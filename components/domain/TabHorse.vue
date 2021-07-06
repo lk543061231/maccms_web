@@ -56,7 +56,7 @@
         <div class="detection-success-top flex-between-center">
           <div class="detection-success-top-left fw500">
             <span class="f18-c172335">挂马站点总数：</span>
-            <span class="f18-cF7502D">200002</span>
+            <span class="f18-cF7502D">{{total}}</span>
             <span class="f12-cC7C7C7" style="margin-left: 10px">(全网大数据扫描实时动态更新）</span>
           </div>
           <div class="detection-success-top-right f14-c172335" @click="visiable = true">
@@ -111,7 +111,8 @@ export default {
       showTxt: false,
       checkResult: true,
       checkTime:'',
-      detail:{}
+      detail:{},
+      total:''
     };
   },
   computed: {},
@@ -126,9 +127,17 @@ export default {
       window.open(url)
     },
     getInject() {
+      const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+      });
       getInjectList().then(res => {
+        loading.close();
         if (res.data.code == 0) {
-          this.inJEctList = res.data.data;
+          this.inJEctList = res.data.data.list;
+          this.total=res.data.data.total
         }
       });
     },
