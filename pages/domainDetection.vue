@@ -90,6 +90,8 @@ export default {
       this.palceHolder =
         query.activeIndex == 1 || query.activeIndex == 3 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
     }
+    this.showTxt = false;
+
   },
   watch: {
     $route: function(val) {
@@ -116,9 +118,14 @@ export default {
       }
     },
     choiceSearch(i) {
-      this.showTxt = false;
-      this.activeIndex = i;
-      this.palceHolder = i == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
+      // this.activeIndex = i;
+      // this.palceHolder = i == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
+      this.$router.push({
+        path:'/domainDetection',
+        query:{
+          activeIndex:i
+        }
+      })
     }
   }
 };
