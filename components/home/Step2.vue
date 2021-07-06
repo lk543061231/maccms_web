@@ -91,6 +91,8 @@ export default {
         font-size: 16px;
         color: #fff;
         margin-right: 30px;
+        position: relative;
+        top: 6px;
       }
       .si-img {
         width: 80px;

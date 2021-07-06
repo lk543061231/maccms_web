@@ -16,7 +16,7 @@
         </div>
       </div>
     </el-popover>
-    <div class="btn arrow" v-if="scrollTop > 800">
+    <div class="btn arrow" v-if="scrollTop > 250">
       <img
         @click="toTop"
         :src="arrow"
