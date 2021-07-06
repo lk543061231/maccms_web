@@ -196,4 +196,9 @@ export default {
     right: 0;
   }
 }
+@media screen and (max-width: 750px) {
+  .home-step .step-list .p1-img {
+    top: -120px;
+  }
+}
 </style>

@@ -150,7 +150,7 @@ export default {
   background: url('@/assets/images/home/home5.png') no-repeat;
   background-size: 103% 100%;
   width: 100%;
-  height: 700px;
+  // height: 700px;
   position: relative;
   .p3-img {
     position: absolute;

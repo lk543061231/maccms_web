@@ -16,7 +16,7 @@
         </div>
       </div>
     </el-popover>
-    <div class="btn arrow" v-if="scrollTop > 250">
+    <div class="btn arrow" v-if="scrollTop > 50">
       <img
         @click="toTop"
         :src="arrow"
@@ -61,19 +61,22 @@ export default {
   z-index: 1;
   bottom: 220px;
   right: 80px;
-  width: 40px;
-  padding: 6px 5px 4px;
+  width: 50px;
+
   // min-height: 80px;
   background: #ffffff;
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.11);
   border: 1px solid #e3e3e3;
   border-radius: 4px;
   .btn {
-    padding: 0px 2px;
     width: 100%;
+    height: 50px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
-      width: 100%;
+      width: 40px;
     }
   }
   .arrow {

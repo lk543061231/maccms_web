@@ -3,7 +3,7 @@
     <div v-if="activeVer == 0">
       <div class="c-d">
         <p class="c-t">更新日志</p>
-        <p class="c-p" style="margin-top: 30px">
+        <p class="c-p mt30">
           <el-timeline>
             <el-timeline-item :timestamp="item.timestamp" placement="top" v-for="(item, i) of logList" :key="i">
               <template v-if="item.type == 'single'">
@@ -22,7 +22,7 @@
     <div v-if="activeVer == 1">
       <div class="c-d">
         <p class="c-t">更新日志</p>
-        <p class="c-p" style="margin-top: 30px">
+        <p class="c-p mt30">
           <el-timeline>
             <el-timeline-item :timestamp="item.timestamp" placement="top" v-for="(item, i) of logListV8" :key="i">
               <template v-if="item.type == 'single'">
