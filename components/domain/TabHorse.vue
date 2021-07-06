@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    <div class="error" v-if="showTxt">
+  <div v-if="showTxt">
+    <div class="error" >
       <div class="img-div">
         <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
         <img v-else src="~/assets/images/common/domain-error.png" />
@@ -101,17 +101,18 @@ Location: http://www.baidu.com/
 <script>
 import SampleDialog from './SampleDialog.vue';
 import DownPack from './DownPack.vue';
-import { getInjectList } from '@/utils/api';
+import {  checkSiteInject, getInjectList } from '@/utils/api';
+import { timestampToTime } from '@/utils/index.js';
 export default {
   components: { DownPack, SampleDialog },
   props: {
-    checkTime: {
-      type: String,
-      default: ''
-    },
     code: {
       type: String,
       default: ''
+    },
+    domainVal:{
+      type:String,
+      default:''
     }
   },
   data() {
@@ -120,8 +121,8 @@ export default {
       hoveIndex: '',
       visiable: false,
       showTxt: false,
-      checkResult: false
-      // 安装包
+      checkResult: false,
+      checkTime:''
     };
   },
   computed: {},
@@ -138,12 +139,33 @@ export default {
         }
       });
     },
-    check() {}
+    check() {
+      const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+      });
+      let t = new Date().getTime();
+      checkSiteInject({ url: this.domainVal, t: t }).then(res => {
+        loading.close();
+        if (res.data.code == 0) {
+          this.checkTime = timestampToTime(new Date().getTime());
+          this.checkResult = res.data && !res.data.data.is_inject;
+        } else {
+          this.checkResult = false;
+        }
+        this.showTxt = true;
+      });
+    }
   }
 };
 </script>
 
 <style scoped lang="less">
+.error{
+  text-align: center; 
+}
 .text {
   margin-top: 20px;
   font-size: 24px;
@@ -306,5 +328,8 @@ export default {
       }
     }
   }
+}
+.fw500{
+  text-align: left;
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <div class="">
-    <div class="error" v-if="showTxt">
+  <div v-if="showTxt">
+    <div class="error" >
       <div class="img-div">
         <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
         <img v-else src="~/assets/images/common/domain-error.png" />
       </div>
     </div>
-    <div class="text-wrap" v-if="activeIndex === 1">
+    <div class="text-wrap" >
       <p class="text success-color" v-if="checkResult">此域名是官方域名</p>
       <p class="text error-color" v-else>此域名是假冒域名!</p>
     </div>
@@ -25,11 +25,17 @@
 <script>
 export default {
   components: {},
-  props: {},
+  props: {
+    domainVal:{
+      type:String,
+      default:''
+    }
+  },
   data() {
     return {
       showTxt: false,
-      checkResult: false
+      checkResult: false,
+      passUrl: ['maccms.com', 'maccms.net', 'maccms.pro', 'macvideojs.com'],
     };
   },
   computed: {},
@@ -37,7 +43,12 @@ export default {
   mounted() {},
   watch: {},
   methods: {
-    check() {}
+    check() {
+      this.showTxt = true;
+      this.checkResult = this.passUrl.some(item => {
+        return this.domainVal.indexOf(item) != -1;
+      });
+    }
   }
 };
 </script>

@@ -55,21 +55,28 @@ export default {
     close() {
       this.$emit('update:visiable', false);
     },
-
+    domainBlur(){},
+    contentBlur(){},
     submit() {
       let params = {
         site: this.form.domain,
         content: this.form.content
       };
+      const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+      });
       submitFeature(params).then(res => {
-        console.log(res);
+        loading.close()
         if (res.data.code === 0) {
           this.$message.success('提交成功');
         } else {
           this.$message.error('提交失败');
         }
+        this.close();
       });
-      this.close();
     }
   }
 };
