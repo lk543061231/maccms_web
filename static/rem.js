@@ -70,9 +70,9 @@
 
   function refreshRem() {
     let width = docEl.getBoundingClientRect().width;
-    if (width / dpr < 540) {
-      width = 540 * dpr;
-    }
+    // if (width / dpr < 540) {
+    //   width = 540 * dpr;
+    // }
     const rem = width / 10;
     docEl.style.fontSize = rem + 'px';
     flexible.rem = win.rem = rem;
