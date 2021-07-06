@@ -154,6 +154,9 @@ export default {
 @media screen and (max-width: 980px) {
   .dev-container {
     padding: 30px !important;
+    .right {
+      flex: 1;
+    }
   }
 }
 /deep/ .CodeMirror {
