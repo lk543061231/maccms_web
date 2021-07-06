@@ -147,13 +147,17 @@ export default {
       align-items: center;
       margin-right: 36px;
       .con-img-wrap {
-        padding: 6px;
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 6px;
         background: #f6e8e7;
         margin-right: 10px;
         .con-img {
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
         }
       }
     }
