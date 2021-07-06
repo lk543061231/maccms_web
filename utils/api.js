@@ -1,7 +1,7 @@
 import request from '@/plugins/server';
 
-let baseUrl = '/api';
-// let baseUrl = 'https://www.maccms.pro';
+// let baseUrl = '/api';
+let baseUrl = 'https://www.maccms.pro';
 
 // 是否有漏洞
 export function getIsfake(data) {

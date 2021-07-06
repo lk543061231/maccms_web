@@ -4,16 +4,16 @@ import autoprefixer from 'autoprefixer';
 import pxtorem from 'postcss-pxtorem';
 module.exports = {
   // devServer: {
-  proxy: {
-    '/api': {
-      target: 'https://www.maccms.pro',
-      pathRewrite: {
-        '^/api': '/'
-        // '^/dapi': '/dapi',
-      },
-      changeOrigin: true
-    }
-  },
+  // proxy: {
+  //   '/api': {
+  //     target: 'https://www.maccms.pro',
+  //     pathRewrite: {
+  //       '^/api': '/'
+  //       // '^/dapi': '/dapi',
+  //     },
+  //     changeOrigin: true
+  //   }
+  // },
   // },
 
   head: {
