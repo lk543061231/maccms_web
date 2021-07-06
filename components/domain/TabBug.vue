@@ -1,5 +1,11 @@
 <template>
   <div class="">
+    <div class="error" v-if="showTxt">
+      <div class="img-div">
+        <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
+        <img v-else src="~/assets/images/common/domain-error.png" />
+      </div>
+    </div>
     <div class="text-wrap">
       <p class="text success-color" v-if="checkResult">
         恭喜您，检测的网站版本不存在漏洞
@@ -25,10 +31,6 @@ import DownPack from './DownPack.vue';
 export default {
   components: { DownPack },
   props: {
-    checkResult: {
-      type: Boolean,
-      default: false
-    },
     code: {
       type: String,
       default: ''
@@ -40,14 +42,18 @@ export default {
   },
   data() {
     return {
-      hoveIndex: ''
+      hoveIndex: '',
+      showTxt: false,
+      checkResult: false
     };
   },
   computed: {},
   created() {},
   mounted() {},
   watch: {},
-  methods: {}
+  methods: {
+    check() {}
+  }
 };
 </script>
 

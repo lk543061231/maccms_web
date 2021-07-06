@@ -1,5 +1,15 @@
 <template>
   <div class="">
+    <div class="error" v-if="showTxt">
+      <div class="img-div">
+        <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
+        <img v-else src="~/assets/images/common/domain-error.png" />
+      </div>
+    </div>
+    <div class="text-wrap" v-if="activeIndex === 1">
+      <p class="text success-color" v-if="checkResult">此域名是官方域名</p>
+      <p class="text error-color" v-else>此域名是假冒域名!</p>
+    </div>
     <div class="btns-div" v-if="!checkResult">
       <p class="text">官方域名</p>
       <div class="btns flex-between-center">
@@ -15,20 +25,20 @@
 <script>
 export default {
   components: {},
-  props: {
-    checkResult: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: {},
   data() {
-    return {};
+    return {
+      showTxt: false,
+      checkResult: false
+    };
   },
   computed: {},
   created() {},
   mounted() {},
   watch: {},
-  methods: {}
+  methods: {
+    check() {}
+  }
 };
 </script>
 

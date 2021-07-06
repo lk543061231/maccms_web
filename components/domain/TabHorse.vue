@@ -1,5 +1,11 @@
 <template>
   <div class="">
+    <div class="error" v-if="showTxt">
+      <div class="img-div">
+        <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
+        <img v-else src="~/assets/images/common/domain-error.png" />
+      </div>
+    </div>
     <div class="text-wrap">
       <p class="text success-color" v-if="checkResult">
         恭喜您，域名通过大数据匹配特征没有被挂马
@@ -99,10 +105,6 @@ import { getInjectList } from '@/utils/api';
 export default {
   components: { DownPack, SampleDialog },
   props: {
-    checkResult: {
-      type: Boolean,
-      default: false
-    },
     checkTime: {
       type: String,
       default: ''
@@ -116,7 +118,9 @@ export default {
     return {
       inJEctList: [],
       hoveIndex: '',
-      visiable: false
+      visiable: false,
+      showTxt: false,
+      checkResult: false
       // 安装包
     };
   },
@@ -133,7 +137,8 @@ export default {
           this.inJEctList = res.data.data;
         }
       });
-    }
+    },
+    check() {}
   }
 };
 </script>

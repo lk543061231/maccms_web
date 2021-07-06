@@ -34,24 +34,12 @@
       </div>
     </div>
     <div class="domain-bottom">
-      <!-- <div class="error" v-if="showTxt"> -->
-      <div class="error" v-if="showTxt">
-        <div class="img-div">
-          <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
-          <img v-else src="~/assets/images/common/domain-error.png" />
-        </div>
-        <div class="text-wrap" v-if="activeIndex === 1">
-          <p class="text success-color" v-if="checkResult">此域名是官方域名</p>
-          <p class="text error-color" v-else>此域名是假冒域名!</p>
-        </div>
-        <!--  v-if="!checkResult && (activeIndex == 2 || activeIndex == 3)" -->
-      </div>
       <div>
         <div v-if="activeIndex === 1">
-          <TabUrl :checkResult="checkResult"></TabUrl>
+          <TabUrl ref="tabUrl" :checkResult="checkResult"></TabUrl>
         </div>
         <div v-if="activeIndex === 2">
-          <TabBug :resMsg="resMsg" :checkResult="checkResult" :code="String(code)"></TabBug>
+          <TabBug ref="tabBug" :resMsg="resMsg" :checkResult="checkResult" :code="String(code)"></TabBug>
         </div>
         <div v-if="activeIndex === 3">
           <TabHorse ref="horse" :code="String(code)" :checkTime="checkTime" :checkResult="checkResult"></TabHorse>
@@ -117,12 +105,14 @@ export default {
   methods: {
     check() {
       if (this.activeIndex == 1) {
-        this.showTxt = true;
-        this.checkResult = this.passUrl.some(item => {
-          return this.domainVal.indexOf(item) != -1;
-        });
+        this.$refs.tabUrl && this.$refs.tabUrl.check();
+        // this.showTxt = true;
+        // this.checkResult = this.passUrl.some(item => {
+        //   return this.domainVal.indexOf(item) != -1;
+        // });
       } else {
         // 漏洞检测
+
         if (!this.domainVal) {
           return;
         } else if (this.domainVal.indexOf('http') == -1) {
@@ -136,29 +126,31 @@ export default {
         });
         let t = new Date().getTime();
         if (this.activeIndex == 2) {
-          getIsfake({ url: this.domainVal, t: t }).then(res => {
-            loading.close();
-            this.code = res.data.code;
-            if (res.data.code == 1) {
-              this.checkResult = !res.data.info.is_fake;
-            } else {
-              this.resMsg = res.data.msg;
-              this.checkResult = false;
-            }
-            this.showTxt = true;
-          });
+          this.$refs.tabUrl && this.$refs.tabUrl.check();
+          // getIsfake({ url: this.domainVal, t: t }).then(res => {
+          //   loading.close();
+          //   this.code = res.data.code;
+          //   if (res.data.code == 1) {
+          //     this.checkResult = !res.data.info.is_fake;
+          //   } else {
+          //     this.resMsg = res.data.msg;
+          //     this.checkResult = false;
+          //   }
+          //   this.showTxt = true;
+          // });
         } else if (this.activeIndex == 3) {
-          checkSiteInject({ url: this.domainVal, t: t }).then(res => {
-            loading.close();
-            if (res.data.code == 0) {
-              this.checkTime = timestampToTime(new Date().getTime());
-              console.log(res);
-              this.checkResult = res.data && !res.data.data.is_inject;
-            } else {
-              this.checkResult = false;
-            }
-            this.showTxt = true;
-          });
+          this.$refs.tabUrl && this.$refs.tabUrl.check();
+          // checkSiteInject({ url: this.domainVal, t: t }).then(res => {
+          //   loading.close();
+          //   if (res.data.code == 0) {
+          //     this.checkTime = timestampToTime(new Date().getTime());
+          //     console.log(res);
+          //     this.checkResult = res.data && !res.data.data.is_inject;
+          //   } else {
+          //     this.checkResult = false;
+          //   }
+          //   this.showTxt = true;
+          // });
         }
       }
     },
