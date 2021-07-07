@@ -14,6 +14,7 @@
       <p class="text">官方域名</p>
       <div class="btns flex-between-center">
         <div class="website-btn">maccms.com</div>
+        <div class="website-btn">maccms.cn</div>
         <div class="website-btn">maccms.net</div>
         <div class="website-btn">maccms.pro</div>
         <div class="website-btn">macvideojs.com</div>
@@ -35,7 +36,7 @@ export default {
     return {
       showTxt: false,
       checkResult: false,
-      passUrl: ['maccms.com', 'maccms.net', 'maccms.pro', 'macvideojs.com'],
+      passUrl: ['maccms.com', 'maccms.cn','maccms.net', 'maccms.pro', 'macvideojs.com'],
     };
   },
   computed: {},
@@ -92,7 +93,7 @@ export default {
     cursor: pointer;
     justify-content: center !important;
     .website-btn {
-      width: 240px;
+      width: 200px;
       height: 45px;
       line-height: 45px;
       text-align: center;

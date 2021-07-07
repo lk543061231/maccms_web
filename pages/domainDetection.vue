@@ -99,12 +99,15 @@ export default {
     },
     domainVal:function(val){
       console.log(val)
-      if((val=='' || !val) && this.activeIndex==3){
-        this.$refs.horse.checkResult=true
-        this.$refs.horse.showTxt=false
-      }else{
-        this.check()
+      if(this.activeIndex==3){
+        if(val=='' || !val){
+          this.$refs.horse.checkResult=true
+          this.$refs.horse.showTxt=false
+        }else{
+          this.check()
+        }
       }
+      
     }
   },
   methods: {
@@ -269,54 +272,54 @@ export default {
         text-align: center;
         margin-top: 15px;
       }
-      .btns {
-        margin-top: 30px;
-        cursor: pointer;
-        justify-content: center !important;
-        .website-btn {
-          width: 240px;
-          height: 45px;
-          line-height: 45px;
-          text-align: center;
-          background: #f8f8f8;
-          border-radius: 28px;
-          border: 1px solid #cccccc;
-          font-size: 16px;
-          font-weight: 400;
-          color: #666666;
-          margin-right: 30px;
-          user-select: none;
-          &:last-child {
-            margin-right: 0;
-          }
-          &:hover {
-            opacity: 0.8;
-          }
-          &:active {
-            opacity: 0.6;
-          }
-        }
-      }
-      .pro {
-        .website-btn {
-          display: flex;
-          align-items: center;
-          text-align: center;
-          justify-content: center;
-          &:hover {
-            border: 1px solid #f7502d;
-            color: #f7502d;
-          }
-        }
-        .mlr {
-          margin: 0 30px !important;
-        }
-        .b-img {
-          width: 24px;
-          height: 24px;
-          margin-right: 5px;
-        }
-      }
+      // .btns {
+      //   margin-top: 30px;
+      //   cursor: pointer;
+      //   justify-content: center !important;
+      //   .website-btn {
+      //     width: 240px;
+      //     height: 45px;
+      //     line-height: 45px;
+      //     text-align: center;
+      //     background: #f8f8f8;
+      //     border-radius: 28px;
+      //     border: 1px solid #cccccc;
+      //     font-size: 16px;
+      //     font-weight: 400;
+      //     color: #666666;
+      //     margin-right: 30px;
+      //     user-select: none;
+      //     &:last-child {
+      //       margin-right: 0;
+      //     }
+      //     &:hover {
+      //       opacity: 0.8;
+      //     }
+      //     &:active {
+      //       opacity: 0.6;
+      //     }
+      //   }
+      // }
+      // .pro {
+      //   .website-btn {
+      //     display: flex;
+      //     align-items: center;
+      //     text-align: center;
+      //     justify-content: center;
+      //     &:hover {
+      //       border: 1px solid #f7502d;
+      //       color: #f7502d;
+      //     }
+      //   }
+      //   .mlr {
+      //     margin: 0 30px !important;
+      //   }
+      //   .b-img {
+      //     width: 24px;
+      //     height: 24px;
+      //     margin-right: 5px;
+      //   }
+      // }
     }
   }
 }
