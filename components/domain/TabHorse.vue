@@ -112,7 +112,8 @@ export default {
       checkResult: true,
       checkTime:'',
       detail:{},
-      total:''
+      total:'',
+      checkUrl:''
     };
   },
   computed: {},
@@ -124,7 +125,11 @@ export default {
   watch: {},
   methods: {
     toHref(url){
-      window.open(url)
+      if (url.indexOf('http') == -1) {
+          url = 'http://' + url.trim();
+        }
+      this.$emit('update:domainVal',url)
+      this.checkUrl=url
     },
     getInject() {
       const loading = this.$loading({
@@ -149,7 +154,7 @@ export default {
           background: 'rgba(0, 0, 0, 0.7)'
       });
       let t = new Date().getTime();
-      checkSiteInject({ url: this.domainVal, t: t }).then(res => {
+      checkSiteInject({ url: this.domainVal || this.checkUrl, t: t }).then(res => {
         loading.close();
         if (res.data.code == 0) {
           this.checkTime = timestampToTime(new Date().getTime());

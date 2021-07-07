@@ -42,7 +42,7 @@
           <TabBug ref="tabBug" :checkResult="checkResult" :domainVal="domainVal"></TabBug>
         </div>
         <div v-if="activeIndex == 3">
-          <TabHorse ref="horse" :code="String(code)" :domainVal="domainVal" :checkResult="checkResult"></TabHorse>
+          <TabHorse ref="horse" :code="String(code)" :domainVal.sync="domainVal" :checkResult="checkResult"></TabHorse>
         </div>
       </div>
       <div class="update"></div>
@@ -96,6 +96,15 @@ export default {
     $route: function(val) {
       this.activeIndex = val.query.activeIndex;
       this.palceHolder = val.query.activeIndex == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
+    },
+    domainVal:function(val){
+      console.log(val)
+      if((val=='' || !val) && this.activeIndex==3){
+        this.$refs.horse.checkResult=true
+        this.$refs.horse.showTxt=false
+      }else{
+        this.check()
+      }
     }
   },
   methods: {

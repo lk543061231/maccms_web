@@ -33,7 +33,7 @@ module.exports = {
       { hid: 'og:site_name', property: 'og:site_name', content: 'MacCMS Pro' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    script: [{ src: '/rem.js', type: 'text/javascript', charset: 'utf-8' }]
+    // script: [{ src: '/rem.js', type: 'text/javascript', charset: 'utf-8' }]
   },
   css: [
     'element-ui/lib/theme-chalk/index.css',
@@ -78,15 +78,15 @@ module.exports = {
     transpile: [/^element-ui/],
     postcss: {
       plugins: [
-        autoprefixer(),
-        pxtorem({
-          rootValue: 192,
-          propList: ['*'],
-          replace: true
-          // 该项仅在使用 Circle 组件时需要
-          // 原因参见 https://github.com/youzan/vant/issues/1948
-          // selectorBlackList: ['van-circle__layer'],
-        })
+        // autoprefixer(),
+        // pxtorem({
+        //   rootValue: 192,
+        //   propList: ['*'],
+        //   replace: true
+        //   // 该项仅在使用 Circle 组件时需要
+        //   // 原因参见 https://github.com/youzan/vant/issues/1948
+        //   // selectorBlackList: ['van-circle__layer'],
+        // })
       ]
     }
   }
