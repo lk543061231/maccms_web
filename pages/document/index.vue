@@ -168,6 +168,8 @@ export default {
   z-index: 0;
   background: #f2f2f2;
   height: auto;
+  border: 1px solid #e2e2e2;
+  border-left-width: 6px;
   .CodeMirror-line {
     font-size: 14px;
     line-height: 24px;
