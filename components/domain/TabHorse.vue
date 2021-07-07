@@ -1,12 +1,12 @@
 <template>
-  <div >
-    <div class="error"  v-if="showTxt">
+  <div>
+    <div class="error" v-if="showTxt">
       <div class="img-div">
         <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
         <img v-else src="~/assets/images/common/domain-error.png" />
       </div>
     </div>
-    <div class="text-wrap"  v-if="showTxt">
+    <div class="text-wrap" v-if="showTxt">
       <p class="text success-color" v-if="checkResult">
         恭喜您，域名通过大数据匹配特征没有被挂马
       </p>
@@ -24,29 +24,28 @@
         </div>
         <div class="detection-error-bottom">
           <div class="detection-error-bottom-left">
-            <pre class="layui-code layui-box layui-code-view">
-{{detail.request_header}}
+            <pre class="layui-code layui-box layui-code-view"
+              >{{ detail.request_header }}
             </pre>
-            
           </div>
           <div class="detection-error-bottom-right">
-            <pre class="layui-code layui-box layui-code-view">
-{{detail.response_header}}
+            <pre class="layui-code layui-box layui-code-view"
+              >{{ detail.response_header }}
             </pre>
           </div>
         </div>
         <div class="detection-b">
           <p class="f16-c242424">匹配特征内容</p>
-          <p class="f14-c242424 mt10">特征标题：{{detail.inject_name}}</p>
-            <pre class="layui-code layui-box layui-code-view">
-{{detail.response_body}}
-            </pre>
+          <p class="f14-c242424 mt10">特征标题：{{ detail.inject_name }}</p>
+          <pre class="layui-code layui-box layui-code-view"
+            >{{ detail.response_body }}
+            </pre
+          >
         </div>
         <div class="xiufu">
           <div class="x-left">
             <i class="el-icon-warning-outline"></i>
             <span style="font-size:16px">修复方案</span>
-            
           </div>
           <div class="x-right">
             下载最新更新包能够自动修复
@@ -57,7 +56,7 @@
         <div class="detection-success-top flex-between-center">
           <div class="detection-success-top-left fw500">
             <span class="f18-c172335">挂马站点总数：</span>
-            <span class="f18-cF7502D">{{total}}</span>
+            <span class="f18-cF7502D">{{ total }}</span>
             <span class="f12-cC7C7C7" style="margin-left: 10px">(全网大数据扫描实时动态更新）</span>
           </div>
           <div class="detection-success-top-right f14-c172335" @click="visiable = true">
@@ -78,9 +77,8 @@
           </div>
         </div>
       </div>
-      
     </div>
-    <div class="btns-div" v-if="!checkResult">
+    <div v-if="!checkResult">
       <DownPack :code="code"></DownPack>
     </div>
     <sampleDialog :visiable.sync="visiable" />
@@ -90,7 +88,7 @@
 <script>
 import SampleDialog from './SampleDialog.vue';
 import DownPack from './DownPack.vue';
-import {  checkSiteInject, getInjectList } from '@/utils/api';
+import { checkSiteInject, getInjectList } from '@/utils/api';
 import { timestampToTime } from '@/utils/index.js';
 export default {
   components: { DownPack, SampleDialog },
@@ -99,9 +97,9 @@ export default {
       type: String,
       default: ''
     },
-    domainVal:{
-      type:String,
-      default:''
+    domainVal: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -111,10 +109,10 @@ export default {
       visiable: false,
       showTxt: false,
       checkResult: true,
-      checkTime:'',
-      detail:{},
-      total:'',
-      checkUrl:''
+      checkTime: '',
+      detail: {},
+      total: '',
+      checkUrl: ''
     };
   },
   computed: {},
@@ -125,34 +123,34 @@ export default {
   mounted() {},
   watch: {},
   methods: {
-    toHref(url){
+    toHref(url) {
       if (url.indexOf('http') == -1) {
-          url = 'http://' + url.trim();
-        }
-      this.$emit('update:domainVal',url)
-      this.checkUrl=url
+        url = 'http://' + url.trim();
+      }
+      this.$emit('update:domainVal', url);
+      this.checkUrl = url;
     },
     getInject() {
       const loading = this.$loading({
-          lock: true,
-          text: 'Loading',
-          spinner: 'el-icon-loading',
-          background: 'rgba(0, 0, 0, 0.7)'
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
       });
       getInjectList().then(res => {
         loading.close();
         if (res.data.code == 0) {
           this.inJEctList = res.data.data.list;
-          this.total=res.data.data.total
+          this.total = res.data.data.total;
         }
       });
     },
     check() {
       const loading = this.$loading({
-          lock: true,
-          text: 'Loading',
-          spinner: 'el-icon-loading',
-          background: 'rgba(0, 0, 0, 0.7)'
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
       });
       let t = new Date().getTime();
       checkSiteInject({ url: this.domainVal || this.checkUrl, t: t }).then(res => {
@@ -160,7 +158,7 @@ export default {
         if (res.data.code == 0) {
           this.checkTime = timestampToTime(new Date().getTime());
           this.checkResult = res.data && !res.data.data.is_inject;
-          this.detail=res.data.data
+          this.detail = res.data.data;
         } else {
           this.checkResult = false;
         }
@@ -172,8 +170,8 @@ export default {
 </script>
 
 <style scoped lang="less">
-.error{
-  text-align: center; 
+.error {
+  text-align: center;
 }
 .text {
   margin-top: 20px;
@@ -326,7 +324,7 @@ export default {
       width: 525px;
       // height: 570px;
       color: #666666;
-      background: #FBFBFB;
+      background: #fbfbfb;
       width: 48%;
       font-size: 14px;
       text-align: left;
@@ -339,31 +337,31 @@ export default {
       color: #666666;
       font-size: 14px;
       width: 48%;
-      background: #FBFBFB;
+      background: #fbfbfb;
       text-align: left;
       pre {
         line-height: 25px;
       }
     }
   }
-  .detection-b{
+  .detection-b {
     margin-top: 30px;
-    pre{
+    pre {
       color: #666;
       font-size: 14px;
     }
   }
-  .xiufu{
-    color: #F64A36;
+  .xiufu {
+    color: #f64a36;
     font-size: 14px;
     display: flex;
     align-items: center;
-    .x-left{
+    .x-left {
       margin-right: 10px;
     }
   }
 }
-.fw500{
+.fw500 {
   text-align: left;
 }
 </style>
