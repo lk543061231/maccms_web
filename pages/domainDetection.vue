@@ -18,7 +18,10 @@
           </p>
         </div>
         <div class="input-div">
-          <el-input v-model="domainVal" :placeholder="palceHolder"></el-input>
+          <el-select v-model="activeIndex" clearable placeholder="请选择">
+            <el-option v-for="(item, index) in options" :key="item" :label="item" :value="index"> </el-option>
+          </el-select>
+          <el-input v-model="domainVal" :placeholder="palceHolder"> </el-input>
 
           <div class="btn global-btn-hover1" @click="check">检测一下</div>
         </div>
@@ -67,13 +70,14 @@ export default {
   },
   head() {
     return {
-      title: 'MacCMS Pro-域名检测',
+      title: 'MacCMS Pro-域名检测'
     };
   },
   data() {
     return {
       inputCheck: false,
       activeIndex: 1,
+      options: ['域名真伪', '漏洞检测', '挂马检测'],
       domainVal: '',
       checkResult: '',
       code: 0,
@@ -97,17 +101,16 @@ export default {
       this.activeIndex = val.query.activeIndex;
       this.palceHolder = val.query.activeIndex == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
     },
-    domainVal:function(val){
-      console.log(val)
-      if(this.activeIndex==3){
-        if(val=='' || !val){
-          this.$refs.horse.checkResult=true
-          this.$refs.horse.showTxt=false
-        }else{
-          this.check()
+    domainVal: function(val) {
+      console.log(val);
+      if (this.activeIndex == 3) {
+        if (val == '' || !val) {
+          this.$refs.horse.checkResult = true;
+          this.$refs.horse.showTxt = false;
+        } else {
+          this.check();
         }
       }
-      
     }
   },
   methods: {
@@ -189,6 +192,10 @@ export default {
     .input-div {
       .flex-center;
       margin-bottom: 19px;
+      position: relative;
+      /deep/ .el-select {
+        position: absolute;
+      }
       /deep/.el-input {
         width: 700px;
         height: 50px;

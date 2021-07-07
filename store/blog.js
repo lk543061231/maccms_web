@@ -1,7 +1,8 @@
 /** @format */
-
-import { getArticleList, getArticleDetail } from '@/utils/api';
+import { getArticleList, getArticleDetail, getInjectList } from '@/utils/api';
+import request from '@/plugins/server';
 import * as $utils from '@/utils/index.js';
+const isDev = process.env.NODE_ENV !== 'production';
 export default {
   state: () => ({
     blogList: [],

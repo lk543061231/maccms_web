@@ -89,7 +89,6 @@
 import SampleDialog from './SampleDialog.vue';
 import DownPack from './DownPack.vue';
 import { checkSiteInject, getInjectList } from '@/utils/api';
-import { timestampToTime } from '@/utils/index.js';
 export default {
   components: { DownPack, SampleDialog },
   props: {
@@ -118,7 +117,7 @@ export default {
   computed: {},
   created() {
     this.getInject();
-    this.checkTime = timestampToTime(new Date().getTime());
+    this.checkTime = this.$utils.formatTime(new Date().getTime());
   },
   mounted() {},
   watch: {},
@@ -156,7 +155,7 @@ export default {
       checkSiteInject({ url: this.domainVal || this.checkUrl, t: t }).then(res => {
         loading.close();
         if (res.data.code == 0) {
-          this.checkTime = timestampToTime(new Date().getTime());
+          this.checkTime = this.$utils.formatTime(new Date().getTime());
           this.checkResult = res.data && !res.data.data.is_inject;
           this.detail = res.data.data;
         } else {

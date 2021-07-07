@@ -5,7 +5,7 @@
       <div class="page-container-blod-detail">
         <div class="detail">
           <p class="d-p1 f30-c172335 ">{{ detail.title }}</p>
-          <p class="d-p2 f16-c8F8F8F mt10">公布时间：{{ detail.create_time }}</p>
+          <p class="d-p2 f16-c8F8F8F mt10">公布时间：{{ detail.create_time | formatTime }}</p>
           <div class="article">
             <!-- <p class="a-p1 f16-c8F8F8F mt20">{{detail.content_abbr}}</p> -->
             <p class="a-p1 f16-c8F8F8F mt20" v-html="detail.content" id="content"></p>
@@ -23,7 +23,8 @@ import commonHead from '@/components/common/commonHead.vue';
 import commonFoot from '@/components/common/commonFoot.vue';
 import commonSteps from '@/components/common/commonSteps.vue';
 import { getArticleDetail } from '@/utils/api';
-import { timestampToTime } from '@/utils/index';
+
+import { mapState } from 'vuex';
 export default {
   components: {
     commonHead,
@@ -54,20 +55,36 @@ export default {
           }
         ]
       },
-      detail: {},
+      // detail: {},
       slide: false
     };
   },
   created() {
     console.log(123);
   },
-  mounted() {
-    let query = this.$route.params;
-    if (query && query.id) {
-      this.getDetail(query.id);
+  async fetch({ store, params, query, error }) {
+    this.id = params.id;
+    console.log(store, 'storestore');
+    await store.dispatch('blog/GetBlogDetailServer', { id: params.id });
+    console.log(this, 'detail');
+
+    if (!store.state.blog.blogDetail) {
+      error({ statusCode: 404, message: '页面未找到或无数据' }); // 修改成这样就可以跳到错误提示页面
     }
+  },
+  mounted() {
+    let setpObj = {
+      label: this.detail.title,
+      name: ''
+    };
+    this.stepData.stepList.push(setpObj);
 
     this.pageScroll();
+  },
+  computed: {
+    ...mapState({
+      detail: state => state.blog.blogDetail
+    })
   },
   methods: {
     pageScroll() {
@@ -98,7 +115,6 @@ export default {
           name: ''
         };
         this.stepData.stepList.push(setpObj);
-        this.detail.create_time = timestampToTime(this.detail.create_time * 1000, 'YYYY-MM-DD');
       });
     }
   }

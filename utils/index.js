@@ -1,6 +1,6 @@
 import moment from 'moment';
-export function timestampToTime(timestamp, type = 'YY-MM-DD hh:mm:ss') {
-  return moment(timestamp).format(type);
+export function formatTime(timestamp, type = 'YYYY-MM-DD hh:mm:ss') {
+  return moment(timestamp * 1000).format(type);
   // let timeType = type || 'yy-mm-dd hh-mm-ss'
   // var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
   // var Y = date.getFullYear() + '-';
@@ -14,4 +14,12 @@ export function timestampToTime(timestamp, type = 'YY-MM-DD hh:mm:ss') {
   // } else if (timeType == 'yy-mm-dd') {
   //     return Y + M + D;
   // }
+}
+/**
+ * 异常处理
+ * @param {boolean} condition
+ * @param {string} msg
+ */
+export function assert(condition, msg) {
+  if (!condition) throw new Error(`[Apior] ${msg}`);
 }

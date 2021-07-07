@@ -14,7 +14,7 @@
                 {{ item.content_abbr }}
               </p>
               <p class="flex-between-center f16-c8F8F8F mt20">
-                <span>{{ item.create_time }}</span>
+                <span>{{ item.create_time | formatTime }}</span>
                 <span class="look-more">查看更多<i class="el-icon-arrow-right"></i></span>
               </p>
             </div>
@@ -41,7 +41,6 @@ import commonHead from '@/components/common/commonHead.vue';
 import commonFoot from '@/components/common/commonFoot.vue';
 import commonSteps from '@/components/common/commonSteps.vue';
 import { getArticleList } from '@/utils/api';
-import { timestampToTime } from '@/utils/index';
 export default {
   components: {
     commonHead,
@@ -100,9 +99,6 @@ export default {
       getArticleList(queryStr).then(res => {
         loading.close();
         if (res.data.code == 1) {
-          res.data.info.rows.forEach(item => {
-            item.create_time = timestampToTime(item.create_time * 1000, 'YYYY-MM-DD');
-          });
           this.list = res.data.info.rows;
           this.total = res.data.info.total;
         }

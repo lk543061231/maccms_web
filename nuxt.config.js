@@ -4,7 +4,6 @@ import autoprefixer from 'autoprefixer';
 import pxtorem from 'postcss-pxtorem';
 const isDev = process.env.NODE_ENV !== 'production';
 module.exports = {
-  // devServer: {
   proxy: isDev
     ? {
         '/api': {
@@ -17,7 +16,6 @@ module.exports = {
         }
       }
     : null,
-  // },
 
   head: {
     // title: 'MacCMS Pro',
@@ -50,6 +48,7 @@ module.exports = {
     '@/plugins/element-ui',
     '~/plugins/i18n.js',
     '~/plugins/localStorage.js',
+    '@/plugins/utils',
     { src: '~/plugins/codeEdit', ssr: false },
     { src: '~/plugins/router', ssr: false }
   ],
