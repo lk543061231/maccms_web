@@ -18,9 +18,9 @@
           </p>
         </div>
         <div class="input-div">
-          <el-select v-model="activeIndex" clearable placeholder="请选择">
+          <!-- <el-select v-model="activeIndex" clearable placeholder="请选择">
             <el-option v-for="(item, index) in options" :key="item" :label="item" :value="index"> </el-option>
-          </el-select>
+          </el-select> -->
           <el-input v-model="domainVal" :placeholder="palceHolder"> </el-input>
 
           <div class="btn global-btn-hover1" @click="check">检测一下</div>
