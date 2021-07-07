@@ -113,7 +113,7 @@ export default {
   computed: {},
   created() {
     this.getInject();
-    this.checkTime = this.$utils.formatTime(new Date().getTime());
+    this.checkTime = this.$utils.formatTime();
   },
   mounted() {},
   watch: {},
@@ -151,7 +151,7 @@ export default {
       checkSiteInject({ url: this.domainVal || this.checkUrl, t: t }).then(res => {
         loading.close();
         if (res.data.code == 0) {
-          this.checkTime = this.$utils.formatTime(new Date().getTime());
+          this.checkTime = this.$utils.formatTime();
           this.checkResult = res.data && !res.data.data.is_inject;
           this.detail = res.data.data;
         } else {
