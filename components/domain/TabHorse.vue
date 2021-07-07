@@ -25,18 +25,19 @@
         <div class="detection-error-bottom">
           <div class="detection-error-bottom-left">
             <pre class="layui-code layui-box layui-code-view">
-{{detail.response_header}}
+{{detail.request_header}}
             </pre>
             
           </div>
           <div class="detection-error-bottom-right">
             <pre class="layui-code layui-box layui-code-view">
-{{detail.request_header}}
+{{detail.response_header}}
             </pre>
           </div>
         </div>
         <div class="detection-b">
           <p class="f16-c242424">匹配特征内容</p>
+          <p class="f14-c242424 mt10">特征标题：{{detail.inject_name}}</p>
             <pre class="layui-code layui-box layui-code-view">
 {{detail.response_body}}
             </pre>
@@ -48,7 +49,7 @@
             
           </div>
           <div class="x-right">
-            下载最新pro版能够自动修复
+            下载最新更新包能够自动修复
           </div>
         </div>
       </div>
