@@ -42,7 +42,7 @@
           <TabBug ref="tabBug" :checkResult="checkResult" :domainVal="domainVal"></TabBug>
         </div>
         <div v-if="activeIndex == 3">
-          <TabHorse ref="horse" :code="String(code)" :domainVal="domainVal" :checkResult="checkResult"></TabHorse>
+          <TabHorse ref="horse" :code="String(code)" :domainVal.sync="domainVal" :checkResult="checkResult"></TabHorse>
         </div>
       </div>
       <div class="update"></div>
@@ -67,7 +67,7 @@ export default {
   },
   head() {
     return {
-      title: 'MacCMS Pro-域名检测'
+      title: 'MacCMS Pro-域名检测',
     };
   },
   data() {
@@ -96,6 +96,18 @@ export default {
     $route: function(val) {
       this.activeIndex = val.query.activeIndex;
       this.palceHolder = val.query.activeIndex == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
+    },
+    domainVal:function(val){
+      console.log(val)
+      if(this.activeIndex==3){
+        if(val=='' || !val){
+          this.$refs.horse.checkResult=true
+          this.$refs.horse.showTxt=false
+        }else{
+          this.check()
+        }
+      }
+      
     }
   },
   methods: {
@@ -107,7 +119,7 @@ export default {
         if (!this.domainVal) {
           return;
         } else if (this.domainVal.indexOf('http') == -1) {
-          this.domainVal = 'http://' + this.domainVal;
+          this.domainVal = 'http://' + this.domainVal.trim();
         }
         if (this.activeIndex == 2) {
           this.$refs.tabBug && this.$refs.tabBug.check();
@@ -260,54 +272,54 @@ export default {
         text-align: center;
         margin-top: 15px;
       }
-      .btns {
-        margin-top: 30px;
-        cursor: pointer;
-        justify-content: center !important;
-        .website-btn {
-          width: 240px;
-          height: 45px;
-          line-height: 45px;
-          text-align: center;
-          background: #f8f8f8;
-          border-radius: 28px;
-          border: 1px solid #cccccc;
-          font-size: 16px;
-          font-weight: 400;
-          color: #666666;
-          margin-right: 30px;
-          user-select: none;
-          &:last-child {
-            margin-right: 0;
-          }
-          &:hover {
-            opacity: 0.8;
-          }
-          &:active {
-            opacity: 0.6;
-          }
-        }
-      }
-      .pro {
-        .website-btn {
-          display: flex;
-          align-items: center;
-          text-align: center;
-          justify-content: center;
-          &:hover {
-            border: 1px solid #f7502d;
-            color: #f7502d;
-          }
-        }
-        .mlr {
-          margin: 0 30px !important;
-        }
-        .b-img {
-          width: 24px;
-          height: 24px;
-          margin-right: 5px;
-        }
-      }
+      // .btns {
+      //   margin-top: 30px;
+      //   cursor: pointer;
+      //   justify-content: center !important;
+      //   .website-btn {
+      //     width: 240px;
+      //     height: 45px;
+      //     line-height: 45px;
+      //     text-align: center;
+      //     background: #f8f8f8;
+      //     border-radius: 28px;
+      //     border: 1px solid #cccccc;
+      //     font-size: 16px;
+      //     font-weight: 400;
+      //     color: #666666;
+      //     margin-right: 30px;
+      //     user-select: none;
+      //     &:last-child {
+      //       margin-right: 0;
+      //     }
+      //     &:hover {
+      //       opacity: 0.8;
+      //     }
+      //     &:active {
+      //       opacity: 0.6;
+      //     }
+      //   }
+      // }
+      // .pro {
+      //   .website-btn {
+      //     display: flex;
+      //     align-items: center;
+      //     text-align: center;
+      //     justify-content: center;
+      //     &:hover {
+      //       border: 1px solid #f7502d;
+      //       color: #f7502d;
+      //     }
+      //   }
+      //   .mlr {
+      //     margin: 0 30px !important;
+      //   }
+      //   .b-img {
+      //     width: 24px;
+      //     height: 24px;
+      //     margin-right: 5px;
+      //   }
+      // }
     }
   }
 }

@@ -1,12 +1,12 @@
 <template>
-  <div v-if="showTxt">
-    <div class="error" >
+  <div >
+    <div class="error"  v-if="showTxt">
       <div class="img-div">
         <img v-if="checkResult" src="~/assets/images/common/domain-success.png" />
         <img v-else src="~/assets/images/common/domain-error.png" />
       </div>
     </div>
-    <div class="text-wrap">
+    <div class="text-wrap"  v-if="showTxt">
       <p class="text success-color" v-if="checkResult">
         恭喜您，域名通过大数据匹配特征没有被挂马
       </p>
@@ -16,11 +16,48 @@
     </div>
     <!-- 挂马检测 -->
     <div class="detection">
-      <div class="detection-success" v-if="checkResult">
+      <div class="detection-error" v-if="!checkResult">
+        <div class="detection-error-top fw500">
+          <span class="f18-c242424">Head 请求头/返回头</span>
+          <span class="f18-cF7502D" style="margin-left: 14px">0.3883</span>
+          <span class="f14-c242424">/秒</span>
+        </div>
+        <div class="detection-error-bottom">
+          <div class="detection-error-bottom-left">
+            <pre class="layui-code layui-box layui-code-view">
+{{detail.request_header}}
+            </pre>
+            
+          </div>
+          <div class="detection-error-bottom-right">
+            <pre class="layui-code layui-box layui-code-view">
+{{detail.response_header}}
+            </pre>
+          </div>
+        </div>
+        <div class="detection-b">
+          <p class="f16-c242424">匹配特征内容</p>
+          <p class="f14-c242424 mt10">特征标题：{{detail.inject_name}}</p>
+            <pre class="layui-code layui-box layui-code-view">
+{{detail.response_body}}
+            </pre>
+        </div>
+        <div class="xiufu">
+          <div class="x-left">
+            <i class="el-icon-warning-outline"></i>
+            <span style="font-size:16px">修复方案</span>
+            
+          </div>
+          <div class="x-right">
+            下载最新更新包能够自动修复
+          </div>
+        </div>
+      </div>
+      <div class="detection-success" v-else>
         <div class="detection-success-top flex-between-center">
           <div class="detection-success-top-left fw500">
             <span class="f18-c172335">挂马站点总数：</span>
-            <span class="f18-cF7502D">200002</span>
+            <span class="f18-cF7502D">{{total}}</span>
             <span class="f12-cC7C7C7" style="margin-left: 10px">(全网大数据扫描实时动态更新）</span>
           </div>
           <div class="detection-success-top-right f14-c172335" @click="visiable = true">
@@ -32,64 +69,16 @@
           <p class="f16-c242424 fw500">
             <span>检测时间：</span>
             <span>{{ checkTime }}</span>
+            <span style="font-size:12px;color:#666;margin-left:10px">(随机展示部分域名)</span>
           </p>
           <div class="detection-list">
-            <div class="detection-item" v-for="(e, i) in inJEctList" :key="i">
+            <div class="detection-item" v-for="(e, i) in inJEctList" :key="i" @click="toHref(e)">
               {{ e }}
             </div>
           </div>
         </div>
       </div>
-      <div class="detection-error" v-else-if="!checkResult">
-        <div class="detection-error-top fw500">
-          <span class="f18-c242424">Head 请求头/返回头</span>
-          <span class="f18-cF7502D" style="margin-left: 14px">0.3883</span>
-          <span class="f14-c242424">/秒</span>
-        </div>
-        <div class="detection-error-bottom">
-          <div class="detection-error-bottom-left">
-            <pre class="layui-code layui-box layui-code-view">
-cookie:PHPSESSID=vrcumdiciv2c9grrjkjcb5a5ko; 
-Hm_lvt_eeefc29d9170f544beeda563028e2687=1625198886; 
-Hm_lpvt_eeefc29d9170f544beeda563028e2687=1625198886; 
-Hm_lvt_8bf597d1c539847203a70f79408f01a8=1625198886; 
-Hm_lpvt_8bf597d1c539847203a70f79408f01a8=1625198886; 
-Ant=https%253A%252F%252Fbaidu.com
-accept-language:zh-CN,zh;q=0.9
-accept-encoding:gzip, deflate, br
-referer:https://www.aicesu.cn/http/
-sec-fetch-dest:empty
-sec-fetch-mode:cors
-sec-fetch-site:same-origin
-origin:https://www.aicesu.cn
-user-agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) 
-AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 
-Safari/537.36sec-ch-ua-mobile:?0
-x-requested-with:XMLHttpRequest
-sec-ch-ua:" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"
-                </pre
-            >
-            <p class="f16-c242424">匹配特征内容</p>
-            <pre class="layui-code layui-box layui-code-view">
-x-requested-with:XMLHttpRequest
-sec-ch-ua:" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"
-                </pre
-            >
-          </div>
-          <div class="detection-error-bottom-right">
-            <pre class="layui-code layui-box layui-code-view">
-HTTP/1.1 302 Moved Temporarily
-Server: bfe/1.0.8.18
-Date: Fri, 02 Jul 2021 04:08:30 GMT
-Content-Type: text/html
-Content-Length: 161
-Connection: keep-alive
-Location: http://www.baidu.com/
-                </pre
-            >
-          </div>
-        </div>
-      </div>
+      
     </div>
     <div class="btns-div" v-if="!checkResult">
       <DownPack :code="code"></DownPack>
@@ -121,21 +110,40 @@ export default {
       hoveIndex: '',
       visiable: false,
       showTxt: false,
-      checkResult: false,
-      checkTime:''
+      checkResult: true,
+      checkTime:'',
+      detail:{},
+      total:'',
+      checkUrl:''
     };
   },
   computed: {},
   created() {
     this.getInject();
+    this.checkTime = timestampToTime(new Date().getTime());
   },
   mounted() {},
   watch: {},
   methods: {
+    toHref(url){
+      if (url.indexOf('http') == -1) {
+          url = 'http://' + url.trim();
+        }
+      this.$emit('update:domainVal',url)
+      this.checkUrl=url
+    },
     getInject() {
+      const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+      });
       getInjectList().then(res => {
+        loading.close();
         if (res.data.code == 0) {
-          this.inJEctList = res.data.data;
+          this.inJEctList = res.data.data.list;
+          this.total=res.data.data.total
         }
       });
     },
@@ -147,11 +155,12 @@ export default {
           background: 'rgba(0, 0, 0, 0.7)'
       });
       let t = new Date().getTime();
-      checkSiteInject({ url: this.domainVal, t: t }).then(res => {
+      checkSiteInject({ url: this.domainVal || this.checkUrl, t: t }).then(res => {
         loading.close();
         if (res.data.code == 0) {
           this.checkTime = timestampToTime(new Date().getTime());
           this.checkResult = res.data && !res.data.data.is_inject;
+          this.detail=res.data.data
         } else {
           this.checkResult = false;
         }
@@ -286,6 +295,7 @@ export default {
           text-align: left;
           padding-right: 10px;
           margin-bottom: 8px;
+          cursor: pointer;
         }
       }
     }
@@ -308,24 +318,48 @@ export default {
     border-bottom: 1px solid #eaeaea;
   }
   .detection-error-bottom {
-    margin-top: 17px;
+    // margin-top: 17px;
     display: flex;
+    justify-content: space-between;
     .detection-error-bottom-left {
+      padding: 16px 40px;
       width: 525px;
-      height: 570px;
+      // height: 570px;
       color: #666666;
+      background: #FBFBFB;
+      width: 48%;
       font-size: 14px;
+      text-align: left;
       pre {
         line-height: 25px;
       }
     }
     .detection-error-bottom-right {
+      padding: 16px 40px;
       color: #666666;
-      margin-left: 80px;
       font-size: 14px;
+      width: 48%;
+      background: #FBFBFB;
+      text-align: left;
       pre {
         line-height: 25px;
       }
+    }
+  }
+  .detection-b{
+    margin-top: 30px;
+    pre{
+      color: #666;
+      font-size: 14px;
+    }
+  }
+  .xiufu{
+    color: #F64A36;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    .x-left{
+      margin-right: 10px;
     }
   }
 }

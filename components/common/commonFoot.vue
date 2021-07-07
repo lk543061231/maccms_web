@@ -62,8 +62,8 @@ export default {
   }
   .software-license-list{
       padding: 6px 0;
-      border-top: 1px solid #979797;
-      border-bottom: 1px solid #979797;
+      border-top: 1px solid #F7F8FA;
+      border-bottom: 1px solid #F7F8FA;
     .software-license-item{
         width: 217px;
         // height: 117px;
