@@ -168,7 +168,7 @@ export default {
   .CodeMirror-code {
     margin-top: 20px;
     padding: 15px 0;
-    background: #f2f2f2;
+    background: #fff;
   }
   .CodeMirror-activeline {
     .CodeMirror-activeline-background {
@@ -177,6 +177,9 @@ export default {
   }
   .CodeMirror-linenumber {
     font-size: 14px;
+  }
+  .CodeMirror-gutters {
+    background: #f2f2f2;
   }
 }
 
