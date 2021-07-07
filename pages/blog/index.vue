@@ -144,6 +144,7 @@ export default {
     .blog-list {
       // width: 1388px;
       flex-wrap: wrap;
+      padding: 0 350px;
       .blog-item {
         display: flex;
         width: 690px;
