@@ -161,18 +161,20 @@ export default {
 }
 /deep/ .CodeMirror {
   z-index: 0;
+  background: #f2f2f2;
   .CodeMirror-line {
     font-size: 14px;
     line-height: 24px;
   }
   .CodeMirror-code {
-    margin-top: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
     padding: 15px 0;
     background: #fff;
   }
   .CodeMirror-activeline {
     .CodeMirror-activeline-background {
-      background: #f2f2f2;
+      background: #fff;
     }
   }
   .CodeMirror-linenumber {
