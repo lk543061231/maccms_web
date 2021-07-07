@@ -33,10 +33,10 @@ export default {
   },
   computed: {},
   created() {},
-  head(){
-      return {
-          title:'MacCMS Pro-开发文档',
-      }
+  head() {
+    return {
+      title: 'MacCMS Pro-开发文档'
+    };
   },
   mounted() {
     document.addEventListener('scroll', e => {
@@ -167,6 +167,7 @@ export default {
 /deep/ .CodeMirror {
   z-index: 0;
   background: #f2f2f2;
+  height: auto;
   .CodeMirror-line {
     font-size: 14px;
     line-height: 24px;
@@ -190,34 +191,39 @@ export default {
   }
 }
 
-/deep/ .h300 {
-  .CodeMirror {
-    height: 300px;
-  }
-}
-/deep/ .h400 {
-  .CodeMirror {
-    height: 400px;
-  }
-}
-/deep/ .h500 {
-  .CodeMirror {
-    height: 500px;
-  }
-}
-/deep/ .h600 {
-  .CodeMirror {
-    height: 600px;
-  }
-}
-/deep/ .h800 {
-  .CodeMirror {
-    height: 800px;
-  }
-}
-/deep/ .h1000 {
-  .CodeMirror {
-    height: 1000px;
-  }
-}
+// /deep/ .h300 {
+//   .CodeMirror {
+//     height: 300px;
+//   }
+// }
+// /deep/ .h200 {
+//   .CodeMirror {
+//     height: 200px;
+//   }
+// }
+// /deep/ .h400 {
+//   .CodeMirror {
+//     height: 400px;
+//   }
+// }
+// /deep/ .h500 {
+//   .CodeMirror {
+//     height: 500px;
+//   }
+// }
+// /deep/ .h600 {
+//   .CodeMirror {
+//     height: 600px;
+//   }
+// }
+// /deep/ .h800 {
+//   .CodeMirror {
+//     height: 800px;
+//   }
+// }
+// /deep/ .h1000 {
+//   .CodeMirror {
+//     height: 1000px;
+//   }
+// }
 </style>

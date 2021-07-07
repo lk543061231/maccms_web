@@ -4,10 +4,10 @@
       <div class="c-d" :class="{ mt40: index !== 0 }" v-for="(item, index) in list" :key="index">
         <p class="c-t">{{ item.title }}</p>
         <p class="c-p" v-for="(conItem, conIndex) in item.label" :key="conIndex">
-          <codemirror v-if="conItem.pre" ref="cmEditor" :value="conItem.pre" />
+          <codemirror v-if="conItem.pre" ref="cmEditor" :value="conItem.pre.con" :class="[conItem.pre.cls]" />
           <span v-else> {{ conItem }}</span>
         </p>
-        <codemirror v-if="item.pre" ref="cmEditor" :value="item.pre" />
+        <codemirror v-if="item.pre" ref="cmEditor" :value="item.pre.con" :class="[item.pre.cls]" />
       </div>
     </div>
   </div>

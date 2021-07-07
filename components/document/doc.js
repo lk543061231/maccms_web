@@ -13,27 +13,29 @@ module.exports = {
       label: [
         '系统模板系统放在/template/目录下。在后台站点设置中，可以选择当前使用的模板',
         {
-          pre: ` 
-          │─template/1/  模板1
-          │  ├─ads   广告文件目录
-          │  ├─js    js文件
-          │  ├─css   css文件
-          │  ├─images   图片文件
-          │  └─html     模板文件目录
-          │      └─art     文章模块模板目录
-          │      └─comment  评论模块模板目录
-          │      └─gbook    留言本模块模板目录
-          │      └─index    首页模块模板目录
-          │      └─label    自定义页面模块模板目录
-          │      └─map      地图页模块模板目录
-          │      └─public   公共页面模板目录
-          │      └─rss      RSS和sitemap模板目录
-          │      └─topic    专题模块模板目录
-          │      └─user     用户中心模块模板目录
-          │      └─vod      视频模块模板目录
-          │─tempalte/2/  模板2
-          │─...
-          │─template/n/  模板N `
+          pre: {
+            cls: 'h500',
+            con: `│─template/1/  模板1
+│  ├─ads   广告文件目录
+│  ├─js    js文件
+│  ├─css   css文件
+│  ├─images   图片文件
+│  └─html     模板文件目录
+│      └─art     文章模块模板目录
+│      └─comment  评论模块模板目录
+│      └─gbook    留言本模块模板目录
+│      └─index    首页模块模板目录
+│      └─label    自定义页面模块模板目录
+│      └─map      地图页模块模板目录
+│      └─public   公共页面模板目录
+│      └─rss      RSS和sitemap模板目录
+│      └─topic    专题模块模板目录
+│      └─user     用户中心模块模板目录
+│      └─vod      视频模块模板目录
+│─tempalte/2/  模板2
+│─...
+│─template/n/  模板N `
+          }
         }
       ]
     },
@@ -42,84 +44,86 @@ module.exports = {
       label: [
         '系统规定默认模板文件名， 其中 分类、内容、播放等页面的模板是可以自定义的。',
         {
-          pre: `
-      全站公共样式文件，建议定义如何名称存放在模板的public目录下：
-      │
-      public/include.html   全站公共引入文件 引入js、css样式，还有系统JS变量
-      public/head.html      全站头部
-      public/foot.html      全站尾部
-      public/jump.html      跳转提示页模板
-      public/msg.html       错误提示页模板
-      public/paging.html    分页样式模板
-      public/digg.html      顶踩样式模板
-      public/score.html     普通评分样式模板
-      public/star.html      星星评分样式模板
-      │
-      comment/index.html    评论调用页
-      comment/ajax.html     评论页
-      gbook/index.html      留言本
-      gbook/report.html     报错页面
-      │
-      index/index.html      首页
-      │
-      map/rss.html          rss
-      map/baidu.html        百度sitemap
-      map/google.html       谷歌sitemap
-      │
-      topic/index.html      专题首页
-      topic/detail.html     专题详情页
-      │
-      art/detail.html       文章内容页
-      art/rss.html          文章内容rss
-      art/search.html       文章搜索页
-      art/type.html         文章分类页
-      art/show.html         文章分类筛选页
-      │
-      vod/confirm.html      确认支付积分页面
-      vod/detail.html       视频内容页
-      vod/rss.html          视频内容rss
-      vod/play.html         视频播放页
-      vod/player.html       试看页面播放页
-      vod/down.html         视频下载页
-      vod/search.html       视频搜索页面
-      vod/type.html         视频分类页面
-      vod/show.html         视频分类筛选页
-      │
-      user/ajax_info.html   用户弹出层登录详情
-      user/ajax_login.html  用户弹出层登录界面
-      user/buy.html         用户中心-在线充值
-      user/cards.html       用户中心-充值卡记录
-      user/downs.html       用户中心-下载记录
-      user/favs.html        用户中心-收藏记录
-      user/findpass.html    用户中心-找回密码
-      user/foot.html        用户中心-公共底部
-      user/head.html        用户中心-公共头部
-      user/include.html     用户中心-公共引入文件
-      user/index.html       用户中心-首页
-      user/info.html        用户中心-个人详情
-      user/login.html       用户中心-登录页
-      user/orders.html      用户中心-在线充值记录
-      user/pay.html         用户中心-支付页
-      user/plays.html       用户中心-点播记录
-      user/popedom.html     用户中心-权限列表
-      user/reg.html         用户中心-注册
-      user/upgrade.html     用户中心-会员升级
-      │
-      actor/detail.html     明星详情页
-      actor/index.html      明星首页
-      actor/search.html     明星搜索页
-      actor/type.html       明星分类页面
-      actor/show.html       明星分类筛选页
-      │
-      role/detail.html      角色详情页
-      role/index.html       角色首页
-      role/search.html      角色搜索页
-      role/type.html        角色分类页面
-      role/show.html        角色分类筛选页
-      │
-      vod/plot.html         视频分集剧情列表
-      plot/index.html       分集剧情首页
-      plot/detail.html      分集剧情详情页 `
+          pre: {
+            cls: 'h1000',
+            con: `全站公共样式文件，建议定义如何名称存放在模板的public目录下：
+│
+public/include.html   全站公共引入文件 引入js、css样式，还有系统JS变量
+public/head.html      全站头部
+public/foot.html      全站尾部
+public/jump.html      跳转提示页模板
+public/msg.html       错误提示页模板
+public/paging.html    分页样式模板
+public/digg.html      顶踩样式模板
+public/score.html     普通评分样式模板
+public/star.html      星星评分样式模板
+│
+comment/index.html    评论调用页
+comment/ajax.html     评论页
+gbook/index.html      留言本
+gbook/report.html     报错页面
+│
+index/index.html      首页
+│
+map/rss.html          rss
+map/baidu.html        百度sitemap
+map/google.html       谷歌sitemap
+│
+topic/index.html      专题首页
+topic/detail.html     专题详情页
+│
+art/detail.html       文章内容页
+art/rss.html          文章内容rss
+art/search.html       文章搜索页
+art/type.html         文章分类页
+art/show.html         文章分类筛选页
+│
+vod/confirm.html      确认支付积分页面
+vod/detail.html       视频内容页
+vod/rss.html          视频内容rss
+vod/play.html         视频播放页
+vod/player.html       试看页面播放页
+vod/down.html         视频下载页
+vod/search.html       视频搜索页面
+vod/type.html         视频分类页面
+vod/show.html         视频分类筛选页
+│
+user/ajax_info.html   用户弹出层登录详情
+user/ajax_login.html  用户弹出层登录界面
+user/buy.html         用户中心-在线充值
+user/cards.html       用户中心-充值卡记录
+user/downs.html       用户中心-下载记录
+user/favs.html        用户中心-收藏记录
+user/findpass.html    用户中心-找回密码
+user/foot.html        用户中心-公共底部
+user/head.html        用户中心-公共头部
+user/include.html     用户中心-公共引入文件
+user/index.html       用户中心-首页
+user/info.html        用户中心-个人详情
+user/login.html       用户中心-登录页
+user/orders.html      用户中心-在线充值记录
+user/pay.html         用户中心-支付页
+user/plays.html       用户中心-点播记录
+user/popedom.html     用户中心-权限列表
+user/reg.html         用户中心-注册
+user/upgrade.html     用户中心-会员升级
+│
+actor/detail.html     明星详情页
+actor/index.html      明星首页
+actor/search.html     明星搜索页
+actor/type.html       明星分类页面
+actor/show.html       明星分类筛选页
+│
+role/detail.html      角色详情页
+role/index.html       角色首页
+role/search.html      角色搜索页
+role/type.html        角色分类页面
+role/show.html        角色分类筛选页
+│
+vod/plot.html         视频分集剧情列表
+plot/index.html       分集剧情首页
+plot/detail.html      分集剧情详情页 `
+          }
         }
       ]
     },
@@ -128,81 +132,85 @@ module.exports = {
       label: [
         '系统模板系统放在/template/目录下。在后台站点设置中，可以选择当前使用的模板',
         {
-          pre: `
-      文件：home.js
-      MAC.Url当前网页地址
-      MAC.Title当前网页标题
-      MAC.UserAgent获取浏览器类型
-      MAC.Copy(s)复制内容到剪切板
-      MAC.Home(obj,url)设置网址为浏览器主页
-      MAC.Fav(url,name)加入网址到收藏夹
-      MAC.Open(w,h,u)弹出网址
-      MAC.Cookie.Set(name,val,day)设置cookie
-      MAC.Cookie.Get(name)获取cookie
-      MAC.Cookie.Del(name)删除cookie
-      MAC.GoBack()返回上个页面
-      MAC.Qrcode() 重写class="mac_qrcode" 的图片地址为一个二维码
-      MAC.Image.Lazyload.Show()异步载入图片
-      MAC.Image.Lazyload.Box(id)载入指定id内部的图片
-      MAC.Verify.Init() 把class="mac_verify" 的input框后边插入图片验证码class="mac_verify_img"
-      MAC.PageGo()把class="mac_page_go"的按钮绑定事件切换分页
-      MAC.Hits()把class="mac_hits"的元素载入点击量
-      MAC.Score().Init()在class="mac_score"的内部初始化普通评分插件，class="score_btn"提交评分
-      MAC.Star().Init()在class="mac_star"的元素初始化星星评分插件
-      MAC.Digg.Init()在class="digg_link"的元素上绑定 点击事件
-      MAC.Gbook().Init()在class="gbook_content",class="gbook_submit"绑定事件留言本使用
-      MAC.Search().Init()在class="mac_search"的按钮上绑定事件，跳转到搜索页面
-      MAC.Suggest().Init()在class="mac_wd"的文本框内部加入搜索联想结果功能
-      MAC.History().Init()在class="mac_history"的元素上加入鼠标移入移除事件展示浏览日志
-      MAC.Ulog().Init()在class="mac_ulog"的元素上初始化用户日志相关操作，包含1浏览2收藏3想看4点播5下载
-      MAC.User().Init()在class="mac_user"的元素上初始化用户无刷新登录、用户详情
-      MAC.Pop().Show()弹出层插件
-      MAC.AdsWrap()输出占位符
-      MAC.Css()加载css文件
-      MAC.Desktop()跳转到保存到桌面
-      MAC.Comment()评论相关功能 `
+          pre: {
+            cls: 'h800',
+            con: `文件：home.js
+MAC.Url当前网页地址
+MAC.Title当前网页标题
+MAC.UserAgent获取浏览器类型
+MAC.Copy(s)复制内容到剪切板
+MAC.Home(obj,url)设置网址为浏览器主页
+MAC.Fav(url,name)加入网址到收藏夹
+MAC.Open(w,h,u)弹出网址
+MAC.Cookie.Set(name,val,day)设置cookie
+MAC.Cookie.Get(name)获取cookie
+MAC.Cookie.Del(name)删除cookie
+MAC.GoBack()返回上个页面
+MAC.Qrcode() 重写class="mac_qrcode" 的图片地址为一个二维码
+MAC.Image.Lazyload.Show()异步载入图片
+MAC.Image.Lazyload.Box(id)载入指定id内部的图片
+MAC.Verify.Init() 把class="mac_verify" 的input框后边插入图片验证码class="mac_verify_img"
+MAC.PageGo()把class="mac_page_go"的按钮绑定事件切换分页
+MAC.Hits()把class="mac_hits"的元素载入点击量
+MAC.Score().Init()在class="mac_score"的内部初始化普通评分插件，class="score_btn"提交评分
+MAC.Star().Init()在class="mac_star"的元素初始化星星评分插件
+MAC.Digg.Init()在class="digg_link"的元素上绑定 点击事件
+MAC.Gbook().Init()在class="gbook_content",class="gbook_submit"绑定事件留言本使用
+MAC.Search().Init()在class="mac_search"的按钮上绑定事件，跳转到搜索页面
+MAC.Suggest().Init()在class="mac_wd"的文本框内部加入搜索联想结果功能
+MAC.History().Init()在class="mac_history"的元素上加入鼠标移入移除事件展示浏览日志
+MAC.Ulog().Init()在class="mac_ulog"的元素上初始化用户日志相关操作，包含1浏览2收藏3想看4点播5下载
+MAC.User().Init()在class="mac_user"的元素上初始化用户无刷新登录、用户详情
+MAC.Pop().Show()弹出层插件
+MAC.AdsWrap()输出占位符
+MAC.Css()加载css文件
+MAC.Desktop()跳转到保存到桌面
+MAC.Comment()评论相关功能 `
+          }
         }
       ]
     },
     {
       title: '全局标签',
-      pre: `
-      {$maccms.site_name}        网站名称
-      {$maccms.site_url}         网站url
-      {$maccms.site_keywords}    网站关键字
-      {$maccms.site_description} 网站描述
-      {$maccms.site_icp}         备案号
-      {$maccms.site_qq}          站长qq
-      {$maccms.site_email}       站长email
-      {$maccms.site_tj}          统计代码
-      {$maccms.site_status}      网站状态1开启0关闭
-      {$maccms.site_close_tip}   网站关闭提示信息
-      {$maccms.path}             网站目录
-      {$maccms.path_tpl}         当前模板目录
-      {$maccms.search_hot}       热门搜索词
-      {$maccms.mid}模块id，1视频2文章3专题
-      {$maccms.aid}当前系统页面id
-      首页1
-      地图2
-      rss3
-      留言本4
-      评论5
-      用户中心6
-      自定义页面7
-      视频首页10
-      文章首页20
-      专题首页30
-      视频分类页11
-      视频分类筛选12
-      视频搜索13
-      视频详情14
-      视频播放15
-      视频下载16
-      文章分类21
-      文章分类筛选22
-      文章搜索23
-      文章详情24
-      专题详情31`
+      pre: {
+        cls: 'h1000',
+        con: `{$maccms.site_name}        网站名称
+{$maccms.site_url}         网站url
+{$maccms.site_keywords}    网站关键字
+{$maccms.site_description} 网站描述
+{$maccms.site_icp}         备案号
+{$maccms.site_qq}          站长qq
+{$maccms.site_email}       站长email
+{$maccms.site_tj}          统计代码
+{$maccms.site_status}      网站状态1开启0关闭
+{$maccms.site_close_tip}   网站关闭提示信息
+{$maccms.path}             网站目录
+{$maccms.path_tpl}         当前模板目录
+{$maccms.search_hot}       热门搜索词
+{$maccms.mid}模块id，1视频2文章3专题
+{$maccms.aid}当前系统页面id
+首页1
+地图2
+rss3
+留言本4
+评论5
+用户中心6
+自定义页面7
+视频首页10
+文章首页20
+专题首页30
+视频分类页11
+视频分类筛选12
+视频搜索13
+视频详情14
+视频播放15
+视频下载16
+文章分类21
+文章分类筛选22
+文章搜索23
+文章详情24
+专题详情31`
+      }
     },
     {
       title: '引入模板文件',
@@ -210,12 +218,13 @@ module.exports = {
     },
     {
       title: '条件判断if标签',
-      pre: `
-      由于if标签的condition属性里面基本上使用的是php语法，尽可能使用判断标签和Switch标签会更加简洁：
-      {if condition="($name == 1) OR ($name > 100) "} value1
-      {elseif condition="$name eq 2"/}value2
-      {else /} value3
-      {/if}
+      pre: {
+        cls: 'h400',
+        con: `由于if标签的condition属性里面基本上使用的是php语法，尽可能使用判断标签和Switch标签会更加简洁：
+{if condition="($name == 1) OR ($name > 100) "} value1
+{elseif condition="$name eq 2"/}value2
+{else /} value3
+{/if}
   empty标签用于判断某个变量是否为空，用法：
       {empty name="name"}
       name为空值
@@ -224,29 +233,32 @@ module.exports = {
       {notempty name="name"}
       name不为空
       {/notempty}`
+      }
     },
     {
       title: '友情链接标签',
-      pre: `
-      参数:
-      type:友情链接类型 font表示文字,pic表示图片
-      num: 获取数据条数
-  例:
+      pre: {
+        cls: 'h300',
+        con: `参数:
+type:友情链接类型 font表示文字,pic表示图片
+num: 获取数据条数。例:
       {maccms:link num="2" type="pic"}
           {$key}序号
           {$vo.link_name}名称
           {$vo.link_url}地址
           {$vo.link_pic}图片
       {/maccms:link}`
+      }
     },
     {
       title: '留言本标签',
-      pre: `
-  参数:
-      num:数据条数  默认值10
-      paging:是否开启分页yes
-      by:数据排序依据 id,time
-  例:
+      pre: {
+        cls: 'h500',
+        con: `参数:
+num:数据条数  默认值10
+paging:是否开启分页yes
+by:数据排序依据 id,time
+例:
       {maccms:gbook num="10" paging="no" order="desc" by="time"}
           {$key}序号
           {$vo.gbook_id}      编号id
@@ -257,38 +269,42 @@ module.exports = {
           {$vo.gbook_time}    留言时间
           {$vo.gbook_replytime} 回复时间
       {/maccms:gbook}`
+      }
     },
     {
       title: '评论标签',
-      pre: `
-参数:
-    num:数据条数  默认值10
-    paging:是否开启分页yes
-    by:数据排序依据 id,time
-例:
-    {maccms:comment num="10" paging="no" order="desc" by="time"}
-        {$key}      排序位
-        {$vo.comment_id}      编号id
-        {$vo.comment_name}    评论昵称
-        {$vo.comment_content} 评论内容
-        {$vo.comment_ip}      评论者IP
-        {$vo.comment_time}    评论时间
-        {$vo.childs}    回复评论项
-    {/maccms:comment}`
+      pre: {
+        cls: 'h400',
+        con: `参数:
+num:数据条数  默认值10
+paging:是否开启分页yes
+by:数据排序依据 id,time
+        例:
+            {maccms:comment num="10" paging="no" order="desc" by="time"}
+                {$key}      排序位
+                {$vo.comment_id}      编号id
+                {$vo.comment_name}    评论昵称
+                {$vo.comment_content} 评论内容
+                {$vo.comment_ip}      评论者IP
+                {$vo.comment_time}    评论时间
+                {$vo.childs}    回复评论项
+            {/maccms:comment}`
+      }
     },
     {
       title: '分类标签(视频，文章通用)',
-      pre: `
-      参数:
-      order排列顺序desc倒序，asc正序
-      by排序依据
-      start从第几条开始
-      num获取条数
-      ids指定分类parent获取一级分诶；child获取子分类；1,2,3一组指定ID；
-      flag视频=vod文章=art
-      {maccms:type num="10" order="asc" by="sort" ids="all"}
-         内部同下方，{$obj.改为{$vo.开头即可
-      {/maccms:type}
+      pre: {
+        cls: 'h800',
+        con: `参数:
+order排列顺序desc倒序，asc正序
+by排序依据
+start从第几条开始
+num获取条数
+ids指定分类parent获取一级分诶；child获取子分类；1,2,3一组指定ID；
+flag视频=vod文章=art
+{maccms:type num="10" order="asc" by="sort" ids="all"}
+   内部同下方，{$obj.改为{$vo.开头即可
+{/maccms:type}
   =======分类页独有标签=======
       {$obj.parent} 如果当前访问的是二级分类，这个是一级分类对象，也同样包含以下属性，如{$obj.parent.type_id}一级分类id
       {$obj.type_id}分类id
@@ -308,27 +324,29 @@ module.exports = {
       {$obj.type_title}标题
       {$obj.type_extend}扩展配置json
       {:mac_url_type($obj)} 分类链接`
+      }
     },
     {
       title: '专题列表标签',
-      pre: `
-      参数:
-      order排列顺序desc倒序，asc正序
-      by排序依据
-      start从第几条开始
-      num获取条数
-      ids指定1,2,3一组指定ID；
-      timeadd添加时间 一天前 -1 day，一周前-1 week，一月前-1 month，一小时前-1 hour
-      timehits点击时间 一天前 -1 day，一周前-1 week，一月前-1 month，一小时前-1 hour
-      time更新时间 一天前 -1 day，一周前-1 week，一月前-1 month，一小时前-1 hour
-      hitsmonth月点击量 大于一千 gt 1000, 小于一千 lt 1000，区间一千二千之间 between 1000,2000
-      hitsweek周点击量 大于一千 gt 1000, 小于一千 lt 1000，区间一千二千之间 between 1000,2000
-      hitsday日点击量 大于一千 gt 1000, 小于一千 lt 1000，区间一千二千之间 between 1000,2000
-      hits总点击量 大于一千 gt 1000, 小于一千 lt 1000，区间一千二千之间 between 1000,2000
-      paging是否分页yes
-      {maccms:topic num="10" paging="no" order="asc" by="sort" ids="all"}
-         内部同下方，{$obj.改为{$vo.开头即可
-      {/maccms:topic}
+      pre: {
+        cls: 'h1000',
+        con: `参数:
+order排列顺序desc倒序，asc正序
+by排序依据
+start从第几条开始
+num获取条数
+ids指定1,2,3一组指定ID；
+timeadd添加时间 一天前 -1 day，一周前-1 week，一月前-1 month，一小时前-1 hour
+timehits点击时间 一天前 -1 day，一周前-1 week，一月前-1 month，一小时前-1 hour
+time更新时间 一天前 -1 day，一周前-1 week，一月前-1 month，一小时前-1 hour
+hitsmonth月点击量 大于一千 gt 1000, 小于一千 lt 1000，区间一千二千之间 between 1000,2000
+hitsweek周点击量 大于一千 gt 1000, 小于一千 lt 1000，区间一千二千之间 between 1000,2000
+hitsday日点击量 大于一千 gt 1000, 小于一千 lt 1000，区间一千二千之间 between 1000,2000
+hits总点击量 大于一千 gt 1000, 小于一千 lt 1000，区间一千二千之间 between 1000,2000
+paging是否分页yes
+{maccms:topic num="10" paging="no" order="asc" by="sort" ids="all"}
+   内部同下方，{$obj.改为{$vo.开头即可
+{/maccms:topic}
   =======专题页独有标签=======
       {$obj.topic_id}专题id
       {$obj.topic_name}名称
@@ -364,10 +382,13 @@ module.exports = {
       {$obj.topic_extend}扩展配置json
       {:mac_url_topic_detail($obj)} 专题详情页链接
       {:mac_url_topic_index()}  专题首页链接`
+      }
     },
     {
       title: '剧情分类、地区、语言、年代、版本、资源标签',
-      pre: `
+      pre: {
+        cls: 'h1000',
+        con: `
   剧情分类标签参数：
       order: 排序desc倒序，asc正序
       num:显示条数
@@ -416,10 +437,13 @@ module.exports = {
           {$vo.state_name} 状态名称，如正片,预告片
           {$vo.state_link} 链接地址
       {/maccms:state}`
+      }
     },
     {
       title: '分页标签详解',
-      pre: `
+      pre: {
+        cls: 'h500',
+        con: `
       分页标签可用在，首页、分类页、筛选页、专题首页、搜索页、文章内容页、留言本、评论
       其中包含隐藏参数pageurl=""，视频默认是vod/type，文章分页默认是art/type，分页时必须加入此参数以免分页出错！！！
       例如：{maccms:vod num="10" paging="yes" pageurl="vod/type" half="3"} {/maccms:vod}
@@ -434,10 +458,13 @@ module.exports = {
       参数详解:
            系统提供了$__PAGING__分页变量，可以来进行diy定制。
            例子：`
+      }
     },
     {
       title: '视频搜索页参数和标签详解',
-      pre: `
+      pre: {
+        cls: 'h500',
+        con: `
 参数详解:
     wd:名称或主演
     ids:数据id支持多个逗号分割 1,2,3
@@ -463,10 +490,13 @@ module.exports = {
     {$param.actor}演员
     {$param.director}导演
     {$param.class}扩展分类`
+      }
     },
     {
       title: '视频列表标签',
-      pre: `
+      pre: {
+        cls: 'h1000',
+        con: `
       参数
     order排列顺序desc倒序，asc正序
     by排序依据
@@ -569,10 +599,13 @@ module.exports = {
     {:mac_url_vod_detail($obj)}  视频详情页链接
     {:mac_url_vod_play($obj,['sid'=>1,'nid'=>1])}   视频播放页链接
     {:mac_url_vod_down($obj,['sid'=>1,'nid'=>1])}   视频下载页链接`
+      }
     },
     {
       title: '视频内容页、播放页标签',
-      pre: `
+      pre: {
+        cls: 'h1000',
+        con: `
       列出播放地址
       {maccms:foreach name="obj.vod_play_list" id="vo"}
       <div class="ui-box marg" id="playlist_{$key}">
@@ -642,10 +675,13 @@ module.exports = {
           {/maccms:art}
       </ul>
     `
+      }
     },
     {
       title: '文章列表标签',
-      pre: `
+      pre: {
+        cls: 'h1000',
+        con: `
       参数：
           order排列顺序desc倒序，asc正序
           by排序依据
@@ -728,10 +764,13 @@ module.exports = {
           {/maccms:art}
       </ul>
       `
+      }
     },
     {
       title: '分页内容标签',
-      pre: `
+      pre: {
+        cls: 'h600',
+        con: `
 分页代码可用在分类页、筛选页、搜索页、文章内容页、留言本、评论、专题首页等页面，使用前提是页面有包含paging='yes'获取分页数据的标签。
 其中包含隐藏参数pageurl=""，视频默认是vod/type，文章分页默认是art/type，分页时必须加入此参数以免分页出错！！！
 例如：{maccms:vod num="10" paging="yes" pageurl="vod/type"} {/maccms:vod}
@@ -761,10 +800,13 @@ module.exports = {
           </div>
       </div>
       `
+      }
     },
     {
       title: '常用处理函数',
-      pre: `允许使用多个函数，都使用|分隔开
+      pre: {
+        cls: 'h500',
+        con: `允许使用多个函数，都使用|分隔开
       {:mac_data_count(0,'all','vod')} 获取视频总数量
       {:mac_data_count(0,'today','vod')} 获取今日更新视频总数量
       {:mac_data_count(0,'all','art')} 获取文章总数量
@@ -780,18 +822,24 @@ module.exports = {
       {$vo.vod_time|mac_friend_date} 友好时间提醒 几秒前，几分前，几小时前，几天前。。。
       {$vo.vod_year|mac_default='未知'}如果字符串为空，则返回默认字符串
       {$user.user_login_ip|mac_long2ip}返回格式化ip地址`
+      }
     },
     {
       title: '预留ajax数据接口，方便瀑布流加载',
-      pre: `参数
+      pre: {
+        cls: 'h200',
+        con: `参数
       mid:模块1视频2文章3专题
       limit:每页条数，支持10,20,30
       page:页码，最多不超过20页，防止非法采集
       接口地址是index.php/ajax/data.html?mid=1&page=1&limit=10`
+      }
     },
     {
       title: '常用标签技巧',
-      pre: `1，在循环中获取每个分类的数据量
+      pre: {
+        cls: 'h300',
+        con: `1，在循环中获取每个分类的数据量
       {maccms:type ids="1,2,3,4" order="asc" by="sort" id="vo1" key="key1"}
       分成：{$vo1.type_name}；总数量： {$vo1.type_id|mac_data_count=all}；今日数量：{$vo1.type_id|mac_data_count=today}。
       {/maccms:type}
@@ -801,6 +849,7 @@ module.exports = {
               {$vo1.type_name}:{$vo2.vod_name}；
           {/maccms:vod}
       {/maccms:type}`
+      }
     }
   ],
   tem2: [
@@ -811,7 +860,9 @@ module.exports = {
     {
       title: '模板目录',
       label: ['系统模板系统放在/template/目录下。在后台站点设置中，可以选择当前使用的模板'],
-      pre: `  │─template/1/  模板1
+      pre: {
+        cls: 'h300',
+        con: `  │─template/1/  模板1
       │  ├─ads   广告文件目录
       │  ├─js    js文件
       │  ├─css   css文件
@@ -820,11 +871,14 @@ module.exports = {
       │─tempalte/2/  模板2
       │─...
       │─template/n/  模板N`
+      }
     },
     {
       title: '模板文件',
       label: ['系统规定默认模板文件名， 其中 分类、内容、播放等页面的模板是可以自定义的。'],
-      pre: `home_include.html    全站公共引入文件 引入js、css样式，还有系统JS变量
+      pre: {
+        cls: 'h600',
+        con: `home_include.html    全站公共引入文件 引入js、css样式，还有系统JS变量
       home_head.html       全站头部
       home_foot.html       全站尾部
       home_gbook.html      留言本
@@ -848,11 +902,14 @@ module.exports = {
       vod_topicindex.html  视频专题首页
       vod_topiclist.html   视频专题数据列表页
       vod_type.html        视频分类页面`
+      }
     },
     {
       title: '系统内置JS、CSS说明',
       label: [''],
-      pre: `文件：js/home.js
+      pre: {
+        cls: 'h500',
+        con: `文件：js/home.js
       MAC.Url         当前网页的链接
       MAC.Title       当前网页的标题
       MAC.Copy(s)     复制内容到剪切板; s=字符串
@@ -867,11 +924,14 @@ module.exports = {
       html元素ID为history：  自动设置为鼠标移动滑入滑出  显示隐藏 历史记录。
       html元素ID为wd： 自动设置联想搜索功能。
       延迟加载图片： img元素不要使用src调用图片地址，而是用data-original。  < img class="lazy" data-original="[vod:pic]" src="{maccms:path}images/blank.png" />`
+      }
     },
     {
       title: '全局标签',
       label: [''],
-      pre: `{maccms:runtime}       页面运行时间、查询次数、占用内存
+      pre: {
+        cls: 'h1000',
+        con: `{maccms:runtime}       页面运行时间、查询次数、占用内存
       {maccms:date}          当前日期
       {maccms:siteaid}       当前所在模块ID
       {maccms:url}           网站域名
@@ -935,11 +995,14 @@ module.exports = {
       系统留言本  30
       系统评论    31
       系统用户中心  40`
+      }
     },
     {
       title: '条件判断if标签',
       label: [''],
-      pre: `if标签,支持多重嵌套,每个层级的if标签不能相同
+      pre: {
+        cls: 'h500',
+        con: `if标签,支持多重嵌套,每个层级的if标签不能相同
       例:
       {if-A:[vod:num] > 1 }....{endif-A}
       {if-A:[vod:num] mod 2=0}....{else-A}....{endif-A}
@@ -956,11 +1019,14 @@ module.exports = {
       {endif-B}
       {else-A}
       {endif-A}`
+      }
     },
     {
       title: '用户登陆页面标签',
       label: [''],
-      pre: `用户登录窗口iframe调用:
+      pre: {
+        cls: 'h500',
+        con: `用户登录窗口iframe调用:
       src="{maccms:path}index.php?m=user-iframe.html"
       特有标签:
       {maccms:userid}        会员ID
@@ -976,11 +1042,14 @@ module.exports = {
       {maccms:usergroupid}     会员组ID
       {maccms:usergroupname}   会员组名称
       {maccms:userloginip}     最后登录IP`
+      }
     },
     {
       title: '友情链接标签',
       label: [''],
-      pre: `参数:
+      pre: {
+        cls: 'h300',
+        con: `参数:
       type:友情链接类型 font表示文字,pic表示图片
               num: 获取数据条数
       例:
@@ -990,11 +1059,14 @@ module.exports = {
       [link:link]地址
       [link:pic]图片
       {/maccms:link}`
+      }
     },
     {
       title: '留言本标签',
       label: [''],
-      pre: `参数:
+      pre: {
+        cls: 'h300',
+        con: `参数:
       num:数据条数  默认值10，非分页时使用
       pagesize:每页数据条数,分页时使用
       by:数据排序依据 id,time
@@ -1012,11 +1084,14 @@ module.exports = {
       [gbook:replytime] 回复时间
       [gbook:color]     随机颜色
       {/maccms:gbook}`
+      }
     },
     {
       title: '评论标签',
       label: [''],
-      pre: `参数:
+      pre: {
+        cls: 'h500',
+        con: `参数:
       num:数据条数  默认值10，非分页时使用
       pagesize:每页数据条数,分页时使用
       by:数据排序依据 id,time
@@ -1032,11 +1107,14 @@ module.exports = {
       [comment:time]    评论时间
       [comment:color]   随机颜色
       {/maccms:comment}`
+      }
     },
     {
       title: '数据区域块标签(首页、地图页的栏目块双层循环)',
       label: [``],
-      pre: `参数:
+      pre: {
+        cls: 'h500',
+        con: `参数:
       type: all获取所有分类包含父子，parent获取所有父分类，child获取所有子分类, 1,2,3 指定分类id
       by:数据排序依据 id,sort 默认sort
       order: 数据排序方式 desc(倒序) asc (正序)
@@ -1054,11 +1132,14 @@ module.exports = {
          {maccms:vod num=5 type=[matrix:id] start=1 order=desc by=time}
          {/maccms:vod}
       {/maccms:matrix}`
+      }
     },
     {
       title: '分类标签(视频，文章通用)',
       label: [''],
-      pre: `参数:
+      pre: {
+        cls: 'h500',
+        con: `参数:
       type:all获取所有分类包含父子，parenet获取所有父分类，child获取所有子分类 ,auto 在分类页、搜索页使用（将进入分类筛选页面和搜索筛选页，自动筛选一二级分类）
       by:数据排序依据 id,sort 默认sort
       order: 数据排序方式 desc(倒序) asc (正序)
@@ -1076,11 +1157,14 @@ module.exports = {
       [menu:title]:seo标题
       [menu:link]:链接
       {/maccms:menu}`
+      }
     },
     {
       title: '专题列表标签(视频，文章通用)',
       label: [''],
-      pre: `参数:
+      pre: {
+        cls: 'h800',
+        con: `参数:
       num:数据条数  默认值10，非分页时使用
       pagesize:每页数据条数,分页时使用
       id:all表示调出所有专题;id为指定专题ID表示调出某个专题;调出指定多个专题使用英文逗号隔开;默认值为all
@@ -1115,10 +1199,13 @@ module.exports = {
       {/maccms:topic}
       特有标签：
       {page:hits}     动态载入专题的点击量`
+      }
     },
     {
       title: '剧情小分类标签(视频)',
-      pre: `参数:
+      pre: {
+        cls: 'h500',
+        con: `参数:
       type:指定视频顶级分类ID ,auto 在分类页、搜索页使用（将进入分类筛选页面和搜索筛选页，自动筛选一二级分类）
       by:数据排序依据 id,sort 默认sort
       order: 数据排序方式 desc(倒序) asc (正序)
@@ -1132,10 +1219,13 @@ module.exports = {
       [class:name]:名称
       [class:link]:链接
       {/maccms:class`
+      }
     },
     {
       title: '视频地区、语言、年代标签',
-      pre: `  地区标签参数：
+      pre: {
+        cls: 'h800',
+        con: `  地区标签参数：
       order: 排序desc倒序，asc正序
               type:auto时，分类筛选、搜索页面使用、自动补齐筛选参数
       {maccms:area order=desc type=auto}
@@ -1169,10 +1259,13 @@ module.exports = {
       {maccms:year order=desc type=auto start=2000 end=2012}
       <a href="[year:link]">[year:name]</a>
       {/maccms:year}`
+      }
     },
     {
       title: '视频搜索参数和标签详解',
-      pre: `参数详解:
+      pre: {
+        cls: 'h1000',
+        con: `参数详解:
       wd:名称或主演
       ids:数据id支持多个逗号分割 1,2,3
       letter:首字母
@@ -1214,10 +1307,13 @@ module.exports = {
       {page:datacount}   搜索结果总数量
       {page:size}        搜索结果每页显示数量
       {page:count}       搜索数据分页总数`
+      }
     },
     {
       title: '分类列表页参数详解',
-      pre: `参数详解:
+      pre: {
+        cls: 'h500',
+        con: `参数详解:
       id:分类id
       pg:页码
       支持标签:
@@ -1233,10 +1329,13 @@ module.exports = {
       {page:linkbytime}  进入分页筛选页面，按照时间排序链接
       {page:linkbyhits}  进入分页筛选页面，按照人气排序链接
       {page:linkbyscore} 进入分页筛选页面，按照评分排序链接`
+      }
     },
     {
       title: '视频分类筛选页参数详解',
-      pre: `参数详解:
+      pre: {
+        cls: 'h800',
+        con: `参数详解:
       id:数据id
       pg:页码
       letter:首字母
@@ -1273,10 +1372,13 @@ module.exports = {
       {page:linkbytime}  筛选链接-按照时间排序
       {page:linkbyhits}  筛选链接-按照人气排序
       {page:linkbyscore} 筛选链接-按照评分排序`
+      }
     },
     {
       title: '分页标签详解',
-      pre: `  分页标签可用在，首页、分类页、筛选页、专题首页、专题数据列表、搜索页、文章内容页、留言本、评论
+      pre: {
+        cls: 'h500',
+        con: `  分页标签可用在，首页、分类页、筛选页、专题首页、专题数据列表、搜索页、文章内容页、留言本、评论
       参数详解:
       len:显示几个数字链接
       linktype:分类类型,只在首页分页时用到linktype=index
@@ -1285,10 +1387,13 @@ module.exports = {
       <div class="page">{maccms:pages len=6}</div>
       解析后:
       <div class="page">共10002条数据 当前:1/834页 <em>首页</em> <em>上一页</em> <span class="pagenow">1</span> <a target="_self" class="pagelink_b" href="?m=vod-type-id-1-pg-2.html">2</a> <a target="_self" class="pagelink_b" href="?m=vod-type-id-1-pg-3.html">3</a> <a target="_self" class="pagelink_b" href="?m=vod-type-id-1-pg-4.html">4</a> <a target="_self" class="pagelink_b" href="?m=vod-type-id-1-pg-5.html">5</a> <a target="_self" class="pagelink_b" href="?m=vod-type-id-1-pg-6.html">6</a> <a target="_self" href="?m=vod-type-id-1-pg-2.html" class="pagelink_a">下一页</a> <a target="_self" href="?m=vod-type-id-1-pg-834.html" class="pagelink_a">尾页</a> <input type="input" name="page" id="page" size="4" class="pagego"><input type="button" value="跳 转" onclick="pagego('?m=vod-type-id-1-pg-{pg}.html',834)" class="pagebtn"></div>`
+      }
     },
     {
       title: '视频列表标签',
-      pre: `num:数据条数  默认值10，非分页时使用
+      pre: {
+        cls: 'h1000',
+        con: `num:数据条数  默认值10，非分页时使用
       pagesize:每页数据条数,分页时使用
       state: 影片连载 series(连载)
       level：推荐种类 1,2,3,4,5 /all
@@ -1383,10 +1488,13 @@ module.exports = {
       [vod:topiclink]  专题链接
       [vod:userfav]   用户收藏链接
       {/maccms:vod}`
+      }
     },
     {
       title: '视频内容页、播放页标签',
-      pre: `调用当前视频数据的标签，同vod标签, 例如[vod:id]  [vod:name]
+      pre: {
+        cls: 'h1000',
+        con: `调用当前视频数据的标签，同vod标签, 例如[vod:id]  [vod:name]
       支持标签:
       [vod:comment] 评论
       [vod:hits] 动态载入点击量并更新点击量，如不使用该标签点击量将不会增加
@@ -1478,10 +1586,13 @@ module.exports = {
       [url:path] 下载片源地址
               {/maccms:url}
       {/maccms:down}`
+      }
     },
     {
       title: '文章分类列表页参数详解',
-      pre: `参数详解:
+      pre: {
+        cls: 'h500',
+        con: `参数详解:
       id:分类id
       pg:页码
       支持标签:
@@ -1494,10 +1605,13 @@ module.exports = {
       {page:title}  当前分类seo标题
       {page:link}   当前分类链接
       {page:textlink}    当前位置导航链接  例如当前位置:首页  >>  电影 >> 动作片`
+      }
     },
     {
       title: '文章列表标签',
-      pre: `参数：
+      pre: {
+        cls: 'h500',
+        con: `参数：
       num:数据条数  默认值10，非分页时使用
   pagesize:每页数据条数,分页时使用
   by:数据排序依据 id,hits总点击,dayhits日点击,weekhits周点击,monthhits月点击,addtime添加时间,time更新时间
@@ -1549,10 +1663,13 @@ module.exports = {
   [art:typetitle]  分类seo标题
   [art:link]      链接
   {/maccms:art}`
+      }
     },
     {
       title: '文章内容页标签',
-      pre: `调用当前视频数据的标签，同art标签, 例如[art:id]  [art:name]
+      pre: {
+        cls: 'h500',
+        con: `调用当前视频数据的标签，同art标签, 例如[art:id]  [art:name]
       [art:comment]     评论
       [art:hits]        动态载入点击量并更新点击量，如不使用该标签点击量将不会增加
       [art:prelink]     上一条记录
@@ -1563,6 +1680,7 @@ module.exports = {
       [art:prelink]     上一条记录
       [art:nextlink]    下一跳记录
       [art:textlink]    当前位置导航链接  例如当前位置:首页  >>  新闻 >> 第一条文章`
+      }
     }
   ],
   api: [
@@ -1595,7 +1713,9 @@ module.exports = {
     },
     {
       title: '列表数据格式：',
-      pre: `          {"code":1,"msg":"数据列表","page":1,"pagecount":1,"limit":"20","total":15,"list":[{"vod_id":21,"vod_name":"情剑","type_id":6,"type_name":"动作片","vod_en":"qingjian","vod_time":"2018-03-29
+      pre: {
+        cls: 'h500',
+        con: `{"code":1,"msg":"数据列表","page":1,"pagecount":1,"limit":"20","total":15,"list":[{"vod_id":21,"vod_name":"情剑","type_id":6,"type_name":"动作片","vod_en":"qingjian","vod_time":"2018-03-29
       20:50:19","vod_remarks":"超清","vod_play_from":"youku"},{"vod_id":20,"vod_name":"暴力街区","type_id":6,"type_name":"动作片","vod_en":"baolijiequ","vod_time":"2018-03-27
       21:17:52","vod_remarks":"超清","vod_play_from":"youku"},{"vod_id":19,"vod_name":"超凡蜘蛛侠2","type_id":6,"type_name":"动作片","vod_en":"chaofanzhizhuxia2","vod_time":"2018-03-27
       21:17:51","vod_remarks":"高清","vod_play_from":"youku"},{"vod_id":18,"vod_name":"木星上行","type_id":6,"type_name":"动作片","vod_en":"muxingshangxing","vod_time":"2018-03-27
@@ -1611,6 +1731,7 @@ module.exports = {
       21:31:41","vod_remarks":"高清","vod_play_from":"sohu,pptv"},{"vod_id":8,"vod_name":"跃影江湖之森罗万象","type_id":6,"type_name":"动作片","vod_en":"yueyingjianghuzhisenluowanxiang","vod_time":"2018-03-20
       21:31:41","vod_remarks":"高清","vod_play_from":"qq"},{"vod_id":4,"vod_name":"我的青春遇见你","type_id":13,"type_name":"国产剧","vod_en":"wodeqingchunyujianni","vod_time":"2018-03-20
       19:26:54","vod_remarks":"56集全","vod_play_from":"youku,xigua"}],"class":[{"type_id":1,"type_name":"电影"},{"type_id":2,"type_name":"连续剧"},{"type_id":3,"type_name":"综艺"},{"type_id":4,"type_name":"动漫"},{"type_id":5,"type_name":"资讯"},{"type_id":6,"type_name":"动作片"},{"type_id":7,"type_name":"喜剧片"},{"type_id":8,"type_name":"爱情片"},{"type_id":9,"type_name":"科幻片"},{"type_id":10,"type_name":"恐怖片"},{"type_id":11,"type_name":"剧情片"},{"type_id":12,"type_name":"战争片"},{"type_id":13,"type_name":"国产剧"},{"type_id":14,"type_name":"港台剧"},{"type_id":15,"type_name":"日韩剧"},{"type_id":16,"type_name":"欧美剧"},{"type_id":17,"type_name":"公告"},{"type_id":18,"type_name":"头条"}]}`
+      }
     },
     {
       title: '列表接收参数：',
@@ -1625,7 +1746,9 @@ module.exports = {
     },
     {
       title: '内容数据格式：',
-      pre: ` {"code":1,"msg":"数据列表","page":1,"pagecount":1,"limit":"20","total":1,"list":[{"vod_id":21,"vod_name":"情剑","type_id":6,"type_name":"动作片","vod_en":"qingjian","vod_time":"2018-03-29
+      pre: {
+        cls: 'h500',
+        con: ` {"code":1,"msg":"数据列表","page":1,"pagecount":1,"limit":"20","total":1,"list":[{"vod_id":21,"vod_name":"情剑","type_id":6,"type_name":"动作片","vod_en":"qingjian","vod_time":"2018-03-29
       20:50:19","vod_remarks":"超清","vod_play_from":"youku","vod_pic":"https:\/\/img1.doubanio.com\/view\/photo\/s_ratio_poster\/public\/p2259384068.jpg","vod_area":"大陆","vod_lang":"国语","vod_year":"2018","vod_serial":"0","vod_actor":"谢霆锋,钟欣潼,乔振宇,伊能静,谭耀文,赵鸿飞,周莉","vod_director":"陈咏歌","vod_content":"<p
       style=\"margin: 5px 12px; padding: 0px; color: rgb(24, 55, 120); font-family: Verdana, Arial, Helvetica,
       sans-serif;\">一位手执名剑“长光”的年轻剑客（谢霆锋
@@ -1643,6 +1766,7 @@ module.exports = {
       src=\"http:\/\/dy2.fahai1.club\/dianying\/dongzuopian\/qingjian\/2.jpg\" alt=\"\"\/> <img
       src=\"http:\/\/dy2.fahai1.club\/dianying\/dongzuopian\/qingjian\/3.jpg\" alt=\"\"\/>
       <\/p>","vod_play_url":"正片$http:\/\/v.youku.com\/v_show\/id_XMTM0NTczNDExMg==.html"}]}`
+      }
     },
     {
       title: '内容接收参数：',
@@ -1666,7 +1790,26 @@ module.exports = {
     },
     {
       title: '列表数据格式：',
-      pre: `<?xml version="1.0" encoding="utf-8"?><rss version="5.0"><list page="1" pagecount="23" pagesize="20" recordcount="449"><video><last>2012-05-06 13:32:28</last><id>493</id><tid>9</tid><name><![CDATA[野人来袭]]></name><type>恐怖片</type><dt>qvod</dt><note><![CDATA[]]></note><vlink><![CDATA[http://localhost/maccms7_php/vod/?493.html]]></vlink><plink><![CDATA[http://localhost/maccms7_php/vodplay/?493-1-1.html]]></plink></video></list><class><ty id="1">电影</ty><ty id="2">连续剧</ty><ty id="3">综艺</ty><ty id="4">动漫</ty><ty id="5">动作片</ty><ty id="6">喜剧片</ty><ty id="7">爱情片</ty><ty id="8">科幻片</ty><ty id="9">恐怖片</ty><ty id="10">剧情片</ty><ty id="11">战争片</ty><ty id="12">国产剧</ty><ty id="13">港台剧</ty><ty id="14">日韩剧</ty><ty id="15">欧美剧</ty></class></rss>`
+      pre: {
+        cls: 'h500',
+        con: `<?xml version="1.0" encoding="utf-8"?>
+        <rss version="5.0">
+          <list page="1" pagecount="23" pagesize="20" recordcount="449">
+            <video>
+              <last>2012-05-06 13:32:28</last>
+              <id>493</id>
+              <tid>9</tid>
+              <name><![CDATA[野人来袭]]></name>
+              <type>恐怖片</type>
+              <dt>qvod</dt>
+              <note><![CDATA[]]></note>
+              <vlink><![CDATA[http://localhost/maccms7_php/vod/?493.html]]></vlink>
+              <plink><![CDATA[http://localhost/maccms7_php/vodplay/?493-1-1.html]]></plink>
+            </video>
+          </list>
+          <class><ty id="1">电影</ty><ty id="2">连续剧</ty><ty id="3">综艺</ty><ty id="4">动漫</ty><ty id="5">动作片</ty><ty id="6">喜剧片</ty><ty id="7">爱情片</ty><ty id="8">科幻片</ty><ty id="9">恐怖片</ty><ty id="10">剧情片</ty><ty id="11">战争片</ty><ty id="12">国产剧</ty><ty id="13">港台剧</ty><ty id="14">日韩剧</ty><ty id="15">欧美剧</ty></class>
+        </rss>`
+      }
     },
     {
       title: '列表接收参数：',
@@ -1681,7 +1824,34 @@ module.exports = {
     },
     {
       title: '内容数据格式：',
-      pre: ` '<?xml version="1.0" encoding="utf-8"?><rss version="5.0"><list page="1" pagecount="1" pagesize="20" recordcount="1"><video><last>2012-05-06 13:32:28</last><id>493</id><tid>9</tid><name><![CDATA[野人来袭]]></name><type>恐怖片</type><pic>http://1img.joykk.com/Uploads/2009/11/30/20091130205750222.JPG</pic><lang>英语</lang><area>欧美</area><year>2012</year><state>0</state><note><![CDATA[]]></note><type>_9</type><actor><![CDATA[]]></actor><director><![CDATA[Ryan Schifrin]]></director><dl><dd from="qvod"><![CDATA[第1集$qvod://206850310|13CB4BC71DD6C3AA5DE0B081E1566992A1BA3F03|野人来袭_01.rmvb|#第2集$qvod://218787599|8E3EA62210F42B9B25EAFA761413587FCC4D8E14|野人来袭_02.rmvb|]]></dd></dl><des><![CDATA[<p>它已经在68个国家被目击了42000次。一个富有传奇色彩的生物，被冠以众多称呼：Yeti(雪人)、Sasquatch(萨斯科奇人)和著名的Bigfoot(大脚怪)！我们已经追捕它了很多年，但是当它决定猎捕我们时，会发生什么？　 <br /><br />　　一个从登山事故中恢复过来的家伙，被困在森林中一个偏僻的小屋里。他看见了传说中的怪物，因此必须在野兽展开血腥袭击前，说服人们相信他并拯救一群大学女生。 <br /></p>]]></des><vlink><![CDATA[http://localhost/maccms7_php/vod/?493.html]]></vlink><plink><![CDATA[http://localhost/maccms7_php/vodplay/?493-1-1.html]]></plink></video></list></rss>'`
+      pre: {
+        cls: 'h500',
+        con: ` '<?xml version="1.0" encoding="utf-8"?>
+        <rss version="5.0">
+        <list page="1" pagecount="1" pagesize="20" recordcount="1">
+          <video>
+            <last>2012-05-06 13:32:28</last>
+            <id>493</id>
+            <tid>9</tid>
+            <name><![CDATA[野人来袭]]></name>
+            <type>恐怖片</type>
+            <pic>http://1img.joykk.com/Uploads/2009/11/30/20091130205750222.JPG</pic>
+            <lang>英语</lang>
+            <area>欧美</area>
+            <year>2012</year>
+            <state>0</state>
+            <note><![CDATA[]]></note>
+            <type>_9</type>
+            <actor><![CDATA[]]></actor>
+            <director><![CDATA[Ryan Schifrin]]></director>
+            <dl><dd from="qvod"><![CDATA[第1集$qvod://206850310|13CB4BC71DD6C3AA5DE0B081E1566992A1BA3F03|野人来袭_01.rmvb|#第2集$qvod://218787599|8E3EA62210F42B9B25EAFA761413587FCC4D8E14|野人来袭_02.rmvb|]]></dd></dl>
+            <des><![CDATA[<p>它已经在68个国家被目击了42000次。一个富有传奇色彩的生物，被冠以众多称呼：Yeti(雪人)、Sasquatch(萨斯科奇人)和著名的Bigfoot(大脚怪)！我们已经追捕它了很多年，但是当它决定猎捕我们时，会发生什么？　 <br /><br />　　一个从登山事故中恢复过来的家伙，被困在森林中一个偏僻的小屋里。他看见了传说中的怪物，因此必须在野兽展开血腥袭击前，说服人们相信他并拯救一群大学女生。 <br /></p>]]></des>
+            <vlink><![CDATA[http://localhost/maccms7_php/vod/?493.html]]></vlink>
+            <plink><![CDATA[http://localhost/maccms7_php/vodplay/?493-1-1.html]]></plink>
+          </video>
+        </list>
+        </rss>'`
+      }
     },
     {
       title: '内容接收参数',
