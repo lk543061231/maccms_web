@@ -164,7 +164,7 @@ export default {
     }
   }
 }
-/deep/ .CodeMirror {
+/deep/ .cm-s-paraiso-light.CodeMirror {
   z-index: 0;
   background: #f2f2f2;
   height: auto;
