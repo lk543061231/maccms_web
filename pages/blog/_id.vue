@@ -33,7 +33,7 @@ export default {
   },
   head() {
     return {
-      title: 'MacCMS Pro-博客详情'
+      title: 'MacCMS Pro-'+this.detail.title
     };
   },
   data() {
