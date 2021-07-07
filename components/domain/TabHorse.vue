@@ -79,7 +79,7 @@
       </div>
     </div>
     <div v-if="!checkResult">
-      <DownPack :code="code"></DownPack>
+      <DownPack></DownPack>
     </div>
     <sampleDialog :visiable.sync="visiable" />
   </div>
@@ -92,10 +92,6 @@ import { checkSiteInject, getInjectList } from '@/utils/api';
 export default {
   components: { DownPack, SampleDialog },
   props: {
-    code: {
-      type: String,
-      default: ''
-    },
     domainVal: {
       type: String,
       default: ''

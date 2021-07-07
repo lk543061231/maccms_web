@@ -31,12 +31,7 @@
 <script>
 export default {
   components: {},
-  props: {
-    code: {
-      type: String,
-      default: ''
-    }
-  },
+  props: {},
   data() {
     return {
       hoveIndex: '',

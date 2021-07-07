@@ -1,11 +1,18 @@
 <template>
   <div class="pt-118 page-wrap">
     <div class="domain-top">
-      <div class="logo-img">
-        <img src="~/assets/images/domain/logo-white.png" alt="macCms" />
+      <div class="tag-wrap">
+        <div class="tag-item" v-for="(item, index) in tagList" :key="index">
+          <div class="tag-top">
+            <span class="tag-title">{{ item.title | NumberQ }}</span>
+            <span class="tag-label"> / {{ item.unit }}</span>
+          </div>
+          <p class="tag-label">{{ item.label }}</p>
+        </div>
+        <!-- <img src="~/assets/images/domain/logo-white.png" alt="macCms" /> -->
       </div>
       <div class="search-div">
-        <div class="tab-div">
+        <!-- <div class="tab-div">
           <p class="tab-title" :class="{ active: activeIndex == 1 }" @click="choiceSearch(1)">
             域名真伪
           </p>
@@ -16,12 +23,12 @@
           <p class="tab-title" :class="{ active: activeIndex == 3 }" @click="choiceSearch(3)">
             挂马检测
           </p>
-        </div>
+        </div> -->
         <div class="input-div">
-          <!-- <el-select v-model="activeIndex" clearable placeholder="请选择">
-            <el-option v-for="(item, index) in options" :key="item" :label="item" :value="index"> </el-option>
-          </el-select> -->
-          <el-input v-model="domainVal" :placeholder="palceHolder"> </el-input>
+          <el-select v-model="activeIndex" placeholder="请选择" @change="choiceSearch">
+            <el-option v-for="item in options" :key="item.key" :label="item.title" :value="item.key"> </el-option>
+          </el-select>
+          <el-input class="input" v-model="domainVal" :placeholder="palceHolder"> </el-input>
 
           <div class="btn global-btn-hover1" @click="check">检测一下</div>
         </div>
@@ -39,13 +46,13 @@
     <div class="domain-bottom">
       <div>
         <div v-if="activeIndex == 1">
-          <TabUrl ref="tabUrl" :checkResult="checkResult" :domainVal="domainVal"></TabUrl>
+          <TabUrl ref="tabUrl" :domainVal="domainVal"></TabUrl>
         </div>
         <div v-if="activeIndex == 2">
-          <TabBug ref="tabBug" :checkResult="checkResult" :domainVal="domainVal"></TabBug>
+          <TabBug ref="tabBug" :domainVal="domainVal"></TabBug>
         </div>
         <div v-if="activeIndex == 3">
-          <TabHorse ref="horse" :code="String(code)" :domainVal.sync="domainVal" :checkResult="checkResult"></TabHorse>
+          <TabHorse ref="horse" :domainVal.sync="domainVal"></TabHorse>
         </div>
       </div>
       <div class="update"></div>
@@ -55,7 +62,6 @@
 </template>
 
 <script>
-import { getIsfake, checkSiteInject, getInjectList } from '@/utils/api';
 import commonHead from '@/components/common/commonHead.vue';
 import commonFoot from '@/components/common/commonFoot.vue';
 
@@ -75,32 +81,48 @@ export default {
   },
   data() {
     return {
-      inputCheck: false,
       activeIndex: 1,
-      options: ['域名真伪', '漏洞检测', '挂马检测'],
+      options: [
+        { key: 1, title: '域名真伪' },
+        { key: 2, title: '漏洞检测' },
+        { key: 3, title: '挂马检测' }
+      ],
       domainVal: '',
-      checkResult: '',
-      code: 0,
-      showTxt: false,
       palceHolder: '请输入检测域名',
-      resMsg: '',
-      checkTime: ''
+      tagList: [
+        {
+          title: '199',
+          unit: '个',
+          label: '今日被挂马新增'
+        },
+        {
+          title: '60',
+          unit: '个',
+          label: '今日修复站点'
+        },
+        {
+          title: '1300',
+          unit: '个',
+          label: '被挂马站点总数'
+        },
+        {
+          title: '654214978',
+          unit: '个',
+          label: '监测域名数量'
+        }
+      ]
     };
   },
   created() {
     let query = this.$route.query;
-    if (query && query.activeIndex) {
-      this.activeIndex = query.activeIndex;
-      this.palceHolder =
-        query.activeIndex == 1 || query.activeIndex == 3 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
-    }
-    this.showTxt = false;
+    this.initCheck(query);
   },
+
   watch: {
     $route: function(val) {
-      this.activeIndex = val.query.activeIndex;
-      this.palceHolder = val.query.activeIndex == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
+      this.initCheck(val.query);
     },
+
     domainVal: function(val) {
       console.log(val);
       if (this.activeIndex == 3) {
@@ -114,6 +136,13 @@ export default {
     }
   },
   methods: {
+    initCheck(query) {
+      if (query && query.activeIndex) {
+        this.activeIndex = Number(query.activeIndex);
+        this.palceHolder =
+          query.activeIndex == 1 || query.activeIndex == 3 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
+      }
+    },
     check() {
       if (this.activeIndex == 1) {
         this.$refs.tabUrl && this.$refs.tabUrl.check();
@@ -132,6 +161,7 @@ export default {
       }
     },
     choiceSearch(i) {
+      console.log(i);
       // this.activeIndex = i;
       // this.palceHolder = i == 1 ? '请输入检测域名' : '检测域名请携带http或者https协议，默认携带http';
       this.$router.push({
@@ -161,33 +191,83 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    .logo-img {
-      width: 103px;
-      height: 58px;
-      margin-bottom: 38px;
-      img {
-        width: 100%;
+    // .logo-img {
+    //   width: 103px;
+    //   height: 58px;
+    //   margin-bottom: 38px;
+    //   img {
+    //     width: 100%;
+    //   }
+    // }
+    .tag-wrap {
+      margin-bottom: 50px;
+      width: 1200px;
+      height: 140px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .tag-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        .tag-top {
+          margin-bottom: 10px;
+          .tag-title {
+            font-size: 40px;
+            font-family: DINAlternate-Bold, DINAlternate;
+            font-weight: bold;
+            color: #ffffff;
+            line-height: 47px;
+          }
+        }
+        .tag-label {
+          font-size: 16px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: #ffeae0;
+          line-height: 22px;
+        }
+
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 1px;
+          height: 80px;
+          background: #ffd3bc;
+
+          right: 0;
+          top: 0px;
+        }
+        &:nth-child(4) {
+          &::after {
+            width: 0;
+          }
+        }
       }
     }
     .search-div {
-      .tab-div {
-        .flex-center();
-        margin-bottom: 16px;
-        .tab-title {
-          font-size: 16px;
-          font-weight: 400;
-          color: #ffeae0;
-          cursor: pointer;
-          & + .tab-title {
-            margin-left: 24px;
-          }
-        }
-        .active {
-          font-size: 20px;
-          font-weight: 500;
-          color: #ffffff;
-        }
-      }
+      // .tab-div {
+      //   .flex-center();
+      //   margin-bottom: 16px;
+      //   .tab-title {
+      //     font-size: 16px;
+      //     font-weight: 400;
+      //     color: #ffeae0;
+      //     cursor: pointer;
+      //     & + .tab-title {
+      //       margin-left: 24px;
+      //     }
+      //   }
+      //   .active {
+      //     font-size: 20px;
+      //     font-weight: 500;
+      //     color: #ffffff;
+      //   }
+      // }
     }
     .input-div {
       .flex-center;
@@ -195,24 +275,65 @@ export default {
       position: relative;
       /deep/ .el-select {
         position: absolute;
+        width: 120px;
+        top: 0;
+        left: 0;
+        background: #f2f2f2;
+        z-index: 2;
+        height: 60px;
+        border-radius: 30px;
+        .el-input {
+          // width: 120px;
+          // height: 60px;
+          // border-top-left-radius: 30px;
+          // border-bottom-left-radius: 30px;
+          .el-input__inner {
+            width: 120px;
+            height: 60px;
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+            border-right: none;
+            position: relative;
+            text-align: center;
+            &:focus {
+              border-color: #dcdfe6;
+            }
+          }
+          &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 1px;
+            height: 40px;
+            background-color: #596371;
+            opacity: 0.2;
+            right: 0;
+            top: 10px;
+          }
+        }
       }
-      /deep/.el-input {
+      /deep/.input {
         width: 700px;
-        height: 50px;
+        height: 60px;
+
         margin-right: 15px;
-        border-radius: 25px;
+        border-radius: 30px;
         overflow: hidden;
         color: #f7502d;
         // border: 1px solid #e1e1e1;
         .el-input__inner {
           // position: relative;
-          padding-left: 30px;
-          height: 50px;
-          border-radius: 25px;
+          // padding-left: 30px;
+          height: 60px;
+          border-radius: 30px;
+          padding-left: 125px;
           // top: -1px;
           // left: -1px;
+          // &:focus {
+          //   border: 1px solid #e5552d !important;
+          // }
           &:focus {
-            border: 1px solid #e5552d !important;
+            border-color: #dcdfe6;
           }
         }
       }
@@ -258,75 +379,6 @@ export default {
       img {
         width: 100%;
       }
-    }
-    .text {
-      margin-top: 20px;
-      font-size: 24px;
-      font-weight: 500;
-      color: #242424;
-      text-align: center;
-    }
-    .btns-div {
-      margin-top: 60px;
-      width: 1200px;
-      background: #fff;
-      padding-bottom: 30px;
-      border-radius: 8px;
-      .text-b {
-        color: #666;
-        font-size: 16px;
-        font-weight: normal;
-        text-align: center;
-        margin-top: 15px;
-      }
-      // .btns {
-      //   margin-top: 30px;
-      //   cursor: pointer;
-      //   justify-content: center !important;
-      //   .website-btn {
-      //     width: 240px;
-      //     height: 45px;
-      //     line-height: 45px;
-      //     text-align: center;
-      //     background: #f8f8f8;
-      //     border-radius: 28px;
-      //     border: 1px solid #cccccc;
-      //     font-size: 16px;
-      //     font-weight: 400;
-      //     color: #666666;
-      //     margin-right: 30px;
-      //     user-select: none;
-      //     &:last-child {
-      //       margin-right: 0;
-      //     }
-      //     &:hover {
-      //       opacity: 0.8;
-      //     }
-      //     &:active {
-      //       opacity: 0.6;
-      //     }
-      //   }
-      // }
-      // .pro {
-      //   .website-btn {
-      //     display: flex;
-      //     align-items: center;
-      //     text-align: center;
-      //     justify-content: center;
-      //     &:hover {
-      //       border: 1px solid #f7502d;
-      //       color: #f7502d;
-      //     }
-      //   }
-      //   .mlr {
-      //     margin: 0 30px !important;
-      //   }
-      //   .b-img {
-      //     width: 24px;
-      //     height: 24px;
-      //     margin-right: 5px;
-      //   }
-      // }
     }
   }
 }
