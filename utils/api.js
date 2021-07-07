@@ -1,7 +1,7 @@
 import request from '@/plugins/server';
-
+const isDev = process.env.NODE_ENV !== 'production';
 // let baseUrl = '/api';
-let baseUrl = 'https://www.maccms.pro';
+let baseUrl = isDev ? '/api' : 'https://www.maccms.pro';
 
 // 是否有漏洞
 export function getIsfake(data) {

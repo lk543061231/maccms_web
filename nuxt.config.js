@@ -2,18 +2,21 @@ import path from 'path';
 import fs from 'fs';
 import autoprefixer from 'autoprefixer';
 import pxtorem from 'postcss-pxtorem';
+const isDev = process.env.NODE_ENV !== 'production';
 module.exports = {
   // devServer: {
-  // proxy: {
-  //   '/api': {
-  //     target: 'https://www.maccms.pro',
-  //     pathRewrite: {
-  //       '^/api': '/'
-  //       // '^/dapi': '/dapi',
-  //     },
-  //     changeOrigin: true
-  //   }
-  // },
+  proxy: isDev
+    ? {
+        '/api': {
+          target: 'https://www.maccms.pro',
+          pathRewrite: {
+            '^/api': '/'
+            // '^/dapi': '/dapi',
+          },
+          changeOrigin: true
+        }
+      }
+    : null,
   // },
 
   head: {
@@ -32,7 +35,7 @@ module.exports = {
       { hid: 'apple-mobile-web-app-title', name: 'apple-mobile-web-app-title', content: 'MacCMS Pro' },
       { hid: 'og:site_name', property: 'og:site_name', content: 'MacCMS Pro' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
     // script: [{ src: '/rem.js', type: 'text/javascript', charset: 'utf-8' }]
   },
   css: [
@@ -75,19 +78,19 @@ module.exports = {
   },
   content: {},
   build: {
-    transpile: [/^element-ui/],
-    postcss: {
-      plugins: [
-        // autoprefixer(),
-        // pxtorem({
-        //   rootValue: 192,
-        //   propList: ['*'],
-        //   replace: true
-        //   // 该项仅在使用 Circle 组件时需要
-        //   // 原因参见 https://github.com/youzan/vant/issues/1948
-        //   // selectorBlackList: ['van-circle__layer'],
-        // })
-      ]
-    }
+    transpile: [/^element-ui/]
+    // postcss: {
+    //   plugins: [
+    // autoprefixer(),
+    // pxtorem({
+    //   rootValue: 192,
+    //   propList: ['*'],
+    //   replace: true
+    //   // 该项仅在使用 Circle 组件时需要
+    //   // 原因参见 https://github.com/youzan/vant/issues/1948
+    //   // selectorBlackList: ['van-circle__layer'],
+    // })
+    //   ]
+    // }
   }
 };

@@ -68,6 +68,7 @@ export default {
       slide: false
     };
   },
+
   mounted() {
     this.getList();
 
@@ -142,12 +143,12 @@ export default {
     align-items: center;
 
     .blog-list {
-      // width: 1388px;
+      width: 1300px;
       flex-wrap: wrap;
-      padding: 0 350px;
+      // padding: 0 350px;
       .blog-item {
         display: flex;
-        width: 690px;
+        width: 640px;
         height: 180px;
         background: #ffffff;
         box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.04);
