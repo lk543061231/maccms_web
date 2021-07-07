@@ -33,6 +33,11 @@ export default {
   },
   computed: {},
   created() {},
+  head(){
+      return {
+          title:'MacCMS Pro-开发文档',
+      }
+  },
   mounted() {
     document.addEventListener('scroll', e => {
       var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
