@@ -61,7 +61,7 @@
           <span>https://www.maccms.pro/blog/3</span>
         </div>
       </div>
-      <div class="detection-success" v-else>
+      <div class="detection-success" v-if="showList">
         <div class="detection-success-top flex-between-center">
           <div class="detection-success-top-left fw500">
             <span class="f18-c172335">挂马站点总数：</span>
@@ -118,7 +118,8 @@ export default {
       total: '',
       checkUrl: '',
       showFakeResult:false,
-      fakeMsg:''
+      fakeMsg:'',
+      showList:true
     };
   },
   computed: {
@@ -183,6 +184,9 @@ export default {
         } else {
           this.checkResult = false;
         }
+        if(!this.checkResult){
+          this.showList=false
+        }
         this.showTxt = true;
       });
     },
@@ -194,7 +198,7 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       });
       let t = new Date().getTime();
-      getIsfake({ url: this.domainVal, t: t }).then(res => {
+      getIsfake({ url: this.domainVal || this.checkUrl, t: t }).then(res => {
         loading.close();
         var fakeResult=''
         if (res.data.code == 1) {

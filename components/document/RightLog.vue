@@ -59,6 +59,14 @@ export default {
 
       logList: [
         {
+          timestamp: "2020.1000.2010",
+          type: "multiple",
+          list: [
+            "1. 广告管理，可通过标签调用",
+            "2. 防假墙，搜索频次控制，支持1分钟、1小时、24小时级别的控制，后台可配置。",
+          ],
+        },
+        {
           timestamp: '2020.1000.2000',
           type: 'multiple',
           list: [
