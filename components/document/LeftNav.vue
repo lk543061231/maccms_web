@@ -22,12 +22,12 @@
                 <p class="zh-t">{{ item.zhTitle }}</p>
                 <p class="en-t">{{ item.enTitle }}</p>
               </div>
-              <div class="icon-wrap" v-if="item.subMenu">
+              <div class="icon-wrap" @click="toggleShowMore(index)" v-if="item.subMenu">
                 <i v-if="item.showMore" class="el-icon-arrow-up"></i>
                 <i v-else class="el-icon-arrow-down"></i>
               </div>
             </div>
-            <div class="sub-menu" v-if="item.subMenu">
+            <div class="sub-menu" v-if="item.subMenu && item.showMore">
               <div
                 @click="selectSub(subIndex)"
                 class="sub-item"
@@ -143,6 +143,9 @@ export default {
     },
     selectSub(i) {
       this.handleSetNav(this.activeNav.menu, i);
+    },
+    toggleShowMore(i) {
+      this.navList[i].showMore = !this.navList[i].showMore;
     },
     handleSetNav(v, sub) {
       if (!sub && sub !== 0) {
