@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- 挂马检测 -->
-    <div class="detection">
+    <div class="detection" v-if="showList">
       <div class="detection-error" v-if="!checkResult">
         <div class="detection-error-top fw500">
           <span class="f18-c242424">Head 请求头/返回头</span>
@@ -61,7 +61,7 @@
           <span>https://www.maccms.pro/blog/3</span>
         </div>
       </div>
-      <div class="detection-success" v-if="showList">
+      <div class="detection-success" v-else>
         <div class="detection-success-top flex-between-center">
           <div class="detection-success-top-left fw500">
             <span class="f18-c172335">挂马站点总数：</span>
@@ -184,10 +184,10 @@ export default {
         } else {
           this.checkResult = false;
         }
-        // if(!this.checkResult){
-          
-        // }
-        this.showList=false
+        if(this.checkResult){
+          this.showList=false
+        }
+        
         this.showTxt = true;
       });
     },
