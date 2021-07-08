@@ -41,7 +41,8 @@
             <div class="img-text">
               <img src="~/assets/images/helpCenter/img4.png" />
               <span
-                >通过在<a href="https://github.com/maccmspro/maccms10" target="_blank" class="f18-cF7502D">maccmspro/pro</a
+                >通过在<a href="https://github.com/maccmspro/maccms10" target="_blank" class="f18-cF7502D"
+                  >https://github.com/maccmspro/maccms10</a
                 >代码仓库提交issues来<a href="https://github.com/maccmspro/maccms10/issues" target="_blank" class="f18-cF7502D"
                   >报告Bug</a
                 ></span

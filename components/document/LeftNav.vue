@@ -14,7 +14,13 @@
           </el-popover>
         </div>
         <div class="l-list">
-          <div class="nav-item" v-for="(item, index) in navList" :key="index">
+          <div
+            class="nav-item"
+            v-for="(item, index) in navList"
+            :key="index"
+            @mouseover="handleShowMore(index)"
+            @mouseleave="handleHideMore(index)"
+          >
             <div class="nav-con" :class="activeNav.menu == index && 'activeNav'" @click="selectNav(index)">
               <img v-if="activeNav.menu == index" class="nav-img" :src="item.aimg" />
               <img v-else class="nav-img" :src="item.img" />
@@ -22,14 +28,14 @@
                 <p class="zh-t">{{ item.zhTitle }}</p>
                 <p class="en-t">{{ item.enTitle }}</p>
               </div>
-              <div class="icon-wrap" @click="toggleShowMore(index)" @mouseover="handleShowMore(index)" v-if="item.subMenu">
+              <div class="icon-wrap" v-if="item.subMenu">
                 <i v-if="item.showMore" class="el-icon-arrow-up"></i>
                 <i v-else class="el-icon-arrow-down"></i>
               </div>
             </div>
             <div class="sub-menu" v-if="item.subMenu && item.showMore">
               <div
-                @click="selectSub(subIndex)"
+                @click="selectSub(index, subIndex)"
                 class="sub-item"
                 :class="{ active: activeNav.sub === subIndex }"
                 v-for="(subItem, subIndex) in item.subMenu"
@@ -141,11 +147,11 @@ export default {
     selectNav(val) {
       this.handleSetNav(val);
     },
-    selectSub(i) {
-      this.handleSetNav(this.activeNav.menu, i);
+    selectSub(v, i) {
+      this.handleSetNav(v, i);
     },
-    toggleShowMore(i) {
-      this.navList[i].showMore = !this.navList[i].showMore;
+    handleHideMore(i) {
+      this.navList[i].showMore = false;
     },
     handleShowMore(i) {
       this.navList[i].showMore = true;
@@ -167,10 +173,10 @@ export default {
 <style scoped lang="less">
 .left {
   width: 220px;
-  height: 550px;
+  // height: 550px;
   background: #fff;
   flex-shrink: 0;
-  padding: 30px 15px;
+  padding: 30px 15px 10px;
   margin-right: 50px;
   .l-top {
     display: flex;
