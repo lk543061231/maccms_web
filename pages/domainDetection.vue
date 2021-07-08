@@ -64,7 +64,7 @@
 <script>
 import commonHead from '@/components/common/commonHead.vue';
 import commonFoot from '@/components/common/commonFoot.vue';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import { TabUrl, TabBug, TabHorse } from '@/components/domain';
 export default {
   components: {
@@ -94,9 +94,11 @@ export default {
   created() {
     let query = this.$route.query;
     this.initCheck(query);
+    this.getInject();
   },
   computed: {
     ...mapState('domain', ['inject']),
+
     tagList() {
       return [
         {
@@ -137,6 +139,24 @@ export default {
     }
   },
   methods: {
+    ...mapActions('domain', ['GetInject']),
+    async getInject() {
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      // getInjectList().then(res => {
+      //   loading.close();
+      //   if (res.data.code == 0) {
+      //     this.inJEctList = res.data.data.list;
+      //     this.total = res.data.data.total;
+      //   }
+      // });
+      await this.GetInject();
+      loading.close();
+    },
     initCheck(query) {
       if (query && query.activeIndex) {
         this.activeIndex = Number(query.activeIndex);

@@ -14,7 +14,7 @@
         检测网站已被挂马!
       </p>
       <div class="text error-color" v-if="showFakeResult">
-        <p class="f-t">{{fakeMsg || '网站检测异常存在漏洞，请立即升级版本'}}</p>
+        <p class="f-t">{{ fakeMsg || '网站检测异常存在漏洞，请立即升级版本' }}</p>
         <p class="mt10 f16-c242424">当前网址已提供最新版本</p>
       </div>
     </div>
@@ -97,7 +97,7 @@
 <script>
 import SampleDialog from './SampleDialog.vue';
 import DownPack from './DownPack.vue';
-import { checkSiteInject, getInjectList,getIsfake } from '@/utils/api';
+import { checkSiteInject, getInjectList, getIsfake } from '@/utils/api';
 import { mapActions, mapState } from 'vuex';
 export default {
   components: { DownPack, SampleDialog },
@@ -117,8 +117,8 @@ export default {
       detail: {},
       total: '',
       checkUrl: '',
-      showFakeResult:false,
-      fakeMsg:''
+      showFakeResult: false,
+      fakeMsg: ''
     };
   },
   computed: {
@@ -128,45 +128,27 @@ export default {
     }
   },
   created() {
-    this.getInject();
     this.checkTime = this.$utils.formatTime();
   },
   mounted() {},
   watch: {},
   methods: {
-    ...mapActions('domain', ['GetInject']),
     toHref(url) {
       if (url.indexOf('http') == -1) {
         url = 'http://' + url.trim();
       }
       this.$emit('update:domainVal', url);
       this.checkUrl = url;
-      this.check()
+      this.check();
     },
     goToBlog() {
       this.$router.push({
         path: `/blog/3`
       });
     },
-    async getInject() {
-      const loading = this.$loading({
-        lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      });
-      // getInjectList().then(res => {
-      //   loading.close();
-      //   if (res.data.code == 0) {
-      //     this.inJEctList = res.data.data.list;
-      //     this.total = res.data.data.total;
-      //   }
-      // });
-      await this.GetInject();
-      loading.close();
-    },
+
     check() {
-      this.getFake()
+      this.getFake();
       const loading = this.$loading({
         lock: true,
         text: 'Loading',
@@ -196,15 +178,15 @@ export default {
       let t = new Date().getTime();
       getIsfake({ url: this.domainVal, t: t }).then(res => {
         loading.close();
-        var fakeResult=''
+        var fakeResult = '';
         if (res.data.code == 1) {
           fakeResult = !res.data.info.is_fake;
         } else {
           fakeResult = false;
         }
-        this.fakeMsg=res.data.msg
-        if(!fakeResult){
-          this.showFakeResult=true
+        this.fakeMsg = res.data.msg;
+        if (!fakeResult) {
+          this.showFakeResult = true;
         }
       });
     }
@@ -352,8 +334,7 @@ export default {
     color: #333;
     margin-bottom: 5px;
   }
-  .f-b{
-
+  .f-b {
   }
 }
 .detection-error {
