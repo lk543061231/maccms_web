@@ -53,8 +53,8 @@
           </div>
         </div>
         <div class="xiufu-blog" @click="goToBlog">
-          <span>后台清理教程</span>
-          <span>小白通用清理php后门办法简单易懂</span>
+          <span>后门清理教程：</span>
+          <span>https://www.maccms.pro/blog/3</span>
         </div>
       </div>
       <div class="detection-success" v-else>
@@ -375,14 +375,13 @@ export default {
     }
   }
   .xiufu-blog {
-    font-size: 16px;
+    font-size: 12px;
     margin-top: 10px;
-    color: #f64a36;
+    color: #999;
     cursor: pointer;
     span {
       &:nth-child(2) {
-        font-size: 14px;
-        margin-left: 10px;
+        // margin-left: 10px;
       }
     }
   }
