@@ -46,11 +46,15 @@
         <div class="xiufu">
           <div class="x-left">
             <i class="el-icon-warning-outline"></i>
-            <span style="font-size:16px">修复方案</span>
+            <span>修复方案</span>
           </div>
           <div class="x-right">
             下载最新更新包能够自动修复
           </div>
+        </div>
+        <div class="xiufu-blog" @click="goToBlog">
+          <span>后台清理教程</span>
+          <span>小白通用清理php后门办法简单易懂</span>
         </div>
       </div>
       <div class="detection-success" v-else>
@@ -131,6 +135,11 @@ export default {
       }
       this.$emit('update:domainVal', url);
       this.checkUrl = url;
+    },
+    goToBlog() {
+      this.$router.push({
+        path: `/blog/3`
+      });
     },
     async getInject() {
       const loading = this.$loading({
@@ -362,6 +371,19 @@ export default {
     align-items: center;
     .x-left {
       margin-right: 10px;
+      font-size: 16px;
+    }
+  }
+  .xiufu-blog {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #f64a36;
+    cursor: pointer;
+    span {
+      &:nth-child(2) {
+        font-size: 14px;
+        margin-left: 10px;
+      }
     }
   }
 }
