@@ -3,7 +3,7 @@ module.exports = {
     {
       title: '快速安装',
       label: [
-        '获得 苹果CMS 后，将其完整地部署到你的网站目录，然后访问网站，即可自动跳转到安装页面install.php。',
+        '获得 MacCMS 后，将其完整地部署到你的网站目录，然后访问网站，即可自动跳转到安装页面install.php。',
         '输入事先准备好的mysql数据库账户密码，即可一键安装。'
       ]
     },
@@ -90,7 +90,7 @@ REPAIR TABLE \`{pre}art\` ,\`{pre}vod\` ,\`{pre}type\` ,\`{pre}comment\` ,\`{pre
     {
       title: '快速安装',
       label: [
-        '获得 苹果CMS后，将其完整地部署到你的网站目录，然后访问网站，即可自动跳转到安装页面install.php。',
+        '获得 MacCMS后，将其完整地部署到你的网站目录，然后访问网站，即可自动跳转到安装页面install.php。',
         '输入事先准备好的mysql数据库账户密码，即可一键安装。'
       ]
     },
@@ -1217,7 +1217,7 @@ paging是否分页yes
       MAC.Title       当前网页的标题
       MAC.Copy(s)     复制内容到剪切板; s=字符串
       MAC.Home(o,u)   设置默认主页;     onclick="MAC.Home(this,'http://www.maccms.cn')"
-      MAC.Fav(u,s)    加入浏览器收藏夹;  onclick="MAC.FAV('http://www.maccms.cn','苹果CMS')"
+      MAC.Fav(u,s)    加入浏览器收藏夹;  onclick="MAC.FAV('http://www.maccms.cn','MacCMS')"
       MAC.Open(u,w,h)  弹出网页;u=网址,w=宽度,h=高度
       MAC.Cookie.Set(name,value,days)   设置cookie的值; name=cookie名称,value=cookie值,days=过期时间
       MAC.Cookie.Get(name)              获取cookie的值; name=cookie名称
@@ -2087,8 +2087,8 @@ paging是否分页yes
     {
       title: '',
       label: [
-        'api接口仅供提供数据，可以直接在苹果CMS后台联盟采集中加入-并提供给他人采集。',
-        '联盟资源分配唯一标识ID，用来区别绑定分类，这个ID一般由苹果CMS官方提供，不可随意修改设置，否则造成入库分类错乱。'
+        'api接口仅供提供数据，可以直接在MacCMS后台联盟采集中加入-并提供给他人采集。',
+        '联盟资源分配唯一标识ID，用来区别绑定分类，这个ID一般由MacCMS官方提供，不可随意修改设置，否则造成入库分类错乱。'
       ]
     },
     {

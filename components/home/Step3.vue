@@ -63,13 +63,13 @@ export default {
           },
           {
             title: '第三方支付接口',
-            subTitle: '苹果CMS内置多种在线支付方案，支付宝、微信等等接口，轻松配置扩展即可拥有支付功能收取打赏不发愁',
+            subTitle: 'MacCMS内置多种在线支付方案，支付宝、微信等等接口，轻松配置扩展即可拥有支付功能收取打赏不发愁',
             img: require('@/assets/images/home/home-adv5.png')
           },
           {
             title: '三层级推广模式',
             subTitle:
-              '苹果CMS内置三层级分销模块，会员推广赚取积分，提取服务，会员层级系统社交推广站点，合理的提高用户体验性与用户使用的粘合度',
+              'MacCMS内置三层级分销模块，会员推广赚取积分，提取服务，会员层级系统社交推广站点，合理的提高用户体验性与用户使用的粘合度',
             img: require('@/assets/images/home/home-adv6.png')
           }
         ]
