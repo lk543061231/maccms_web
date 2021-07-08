@@ -184,9 +184,10 @@ export default {
         } else {
           this.checkResult = false;
         }
-        if(!this.checkResult){
-          this.showList=false
-        }
+        // if(!this.checkResult){
+          
+        // }
+        this.showList=false
         this.showTxt = true;
       });
     },
