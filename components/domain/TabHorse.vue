@@ -39,21 +39,26 @@
           </div>
         </div>
         <div class="detection-b">
-          <p class="f14-c242424">特征标题：{{ detail.inject_name }}</p>
-          <p class="f16-c242424 mt10">匹配特征内容</p>
-          <pre class="layui-code layui-box layui-code-view"
-            >{{ detail.response_body }}
-            </pre
-          >
+          <p class="f16-c242424">特征标题：{{ detail.inject_name }}</p>
+          <div>
+            <p class="f14-c242424 mt10 ">匹配特征内容</p>
+            <pre class="layui-code layui-box layui-code-view"
+              >{{ detail.response_body }}
+            </pre>
+          </div>
         </div>
         <div class="xiufu">
           <div class="x-left">
             <i class="el-icon-warning-outline"></i>
-            <span style="font-size:16px">修复方案</span>
+            <span>修复方案</span>
           </div>
           <div class="x-right">
             下载最新更新包能够自动修复
           </div>
+        </div>
+        <div class="xiufu-blog" @click="goToBlog">
+          <span>后门清理教程：</span>
+          <span>https://www.maccms.pro/blog/3</span>
         </div>
       </div>
       <div class="detection-success" v-else>
@@ -93,6 +98,7 @@
 import SampleDialog from './SampleDialog.vue';
 import DownPack from './DownPack.vue';
 import { checkSiteInject, getInjectList,getIsfake } from '@/utils/api';
+import { mapActions, mapState } from 'vuex';
 export default {
   components: { DownPack, SampleDialog },
   props: {
@@ -103,7 +109,6 @@ export default {
   },
   data() {
     return {
-      inJEctList: [],
       hoveIndex: '',
       visiable: false,
       showTxt: false,
@@ -116,14 +121,20 @@ export default {
       fakeMsg:''
     };
   },
-  computed: {},
+  computed: {
+    ...mapState('domain', ['inject']),
+    inJEctList() {
+      return this.inject.list || [];
+    }
+  },
   created() {
     this.getInject();
-    this.checkTime = this.$utils.formatTime(new Date().getTime());
+    this.checkTime = this.$utils.formatTime();
   },
   mounted() {},
   watch: {},
   methods: {
+    ...mapActions('domain', ['GetInject']),
     toHref(url) {
       if (url.indexOf('http') == -1) {
         url = 'http://' + url.trim();
@@ -132,20 +143,27 @@ export default {
       this.checkUrl = url;
       this.check()
     },
-    getInject() {
+    goToBlog() {
+      this.$router.push({
+        path: `/blog/3`
+      });
+    },
+    async getInject() {
       const loading = this.$loading({
         lock: true,
         text: 'Loading',
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       });
-      getInjectList().then(res => {
-        loading.close();
-        if (res.data.code == 0) {
-          this.inJEctList = res.data.data.list;
-          this.total = res.data.data.total;
-        }
-      });
+      // getInjectList().then(res => {
+      //   loading.close();
+      //   if (res.data.code == 0) {
+      //     this.inJEctList = res.data.data.list;
+      //     this.total = res.data.data.total;
+      //   }
+      // });
+      await this.GetInject();
+      loading.close();
     },
     check() {
       this.getFake()
@@ -159,7 +177,7 @@ export default {
       checkSiteInject({ url: this.domainVal || this.checkUrl, t: t }).then(res => {
         loading.close();
         if (res.data.code == 0) {
-          this.checkTime = this.$utils.formatTime(new Date().getTime());
+          this.checkTime = this.$utils.formatTime();
           this.checkResult = res.data && !res.data.data.is_inject;
           this.detail = res.data.data;
         } else {
@@ -386,6 +404,18 @@ export default {
     align-items: center;
     .x-left {
       margin-right: 10px;
+      font-size: 16px;
+    }
+  }
+  .xiufu-blog {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #999;
+    cursor: pointer;
+    span {
+      &:nth-child(2) {
+        // margin-left: 10px;
+      }
     }
   }
 }

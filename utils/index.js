@@ -1,5 +1,8 @@
 import moment from 'moment';
 export function formatTime(timestamp, type = 'YYYY-MM-DD hh:mm:ss') {
+  if (!timestamp) {
+    return moment().format(type);
+  }
   return moment(timestamp * 1000).format(type);
   // let timeType = type || 'yy-mm-dd hh-mm-ss'
   // var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000

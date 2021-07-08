@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
 export default {
   components: {},
   props: {
@@ -182,7 +183,9 @@ REPAIR TABLE \`{pre}art\` ,\`{pre}vod\` ,\`{pre}type\` ,\`{pre}comment\` ,\`{pre
       ]
     };
   },
-  computed: {},
+  computed: {
+    ...mapState('document', ['activeNav'])
+  },
   created() {},
   mounted() {},
   watch: {},
