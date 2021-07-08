@@ -134,6 +134,7 @@ export default {
         if (val == '' || !val) {
           this.$refs.horse.checkResult = true;
           this.$refs.horse.showTxt = false;
+          this.$refs.horse.showList = true;
         }
       }
     }

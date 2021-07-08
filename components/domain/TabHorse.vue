@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- 挂马检测 -->
-    <div class="detection">
+    <div class="detection" v-if="showList">
       <div class="detection-error" v-if="!checkResult">
         <div class="detection-error-top fw500">
           <span class="f18-c242424">Head 请求头/返回头</span>
@@ -118,7 +118,8 @@ export default {
       total: '',
       checkUrl: '',
       showFakeResult: false,
-      fakeMsg: ''
+      fakeMsg: '',
+      showList: true
     };
   },
   computed: {
@@ -165,6 +166,10 @@ export default {
         } else {
           this.checkResult = false;
         }
+        if (this.checkResult) {
+          this.showList = false;
+        }
+
         this.showTxt = true;
       });
     },
@@ -176,7 +181,7 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       });
       let t = new Date().getTime();
-      getIsfake({ url: this.domainVal, t: t }).then(res => {
+      getIsfake({ url: this.domainVal || this.checkUrl, t: t }).then(res => {
         loading.close();
         var fakeResult = '';
         if (res.data.code == 1) {
