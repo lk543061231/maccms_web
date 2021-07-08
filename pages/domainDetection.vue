@@ -64,7 +64,7 @@
 <script>
 import commonHead from '@/components/common/commonHead.vue';
 import commonFoot from '@/components/common/commonFoot.vue';
-
+import { mapState } from 'vuex';
 import { TabUrl, TabBug, TabHorse } from '@/components/domain';
 export default {
   components: {
@@ -88,36 +88,40 @@ export default {
         { key: 3, title: '挂马检测' }
       ],
       domainVal: '',
-      palceHolder: '请输入检测域名',
-      tagList: [
-        {
-          title: '199',
-          unit: '个',
-          label: '今日被挂马新增'
-        },
-        {
-          title: '60',
-          unit: '个',
-          label: '今日修复站点'
-        },
-        {
-          title: '1300',
-          unit: '个',
-          label: '被挂马站点总数'
-        },
-        {
-          title: '654214978',
-          unit: '个',
-          label: '监测域名数量'
-        }
-      ]
+      palceHolder: '请输入检测域名'
     };
   },
   created() {
     let query = this.$route.query;
     this.initCheck(query);
   },
-
+  computed: {
+    ...mapState('domain', ['inject']),
+    tagList() {
+      return [
+        {
+          title: this.inject.today_num,
+          unit: '个',
+          label: '今日被挂马新增'
+        },
+        {
+          title: this.inject.today_repair_num,
+          unit: '个',
+          label: '今日修复站点'
+        },
+        {
+          title: this.inject.total,
+          unit: '个',
+          label: '被挂马站点总数'
+        },
+        {
+          title: this.inject.checked_num,
+          unit: '个',
+          label: '监测域名数量'
+        }
+      ];
+    }
+  },
   watch: {
     $route: function(val) {
       this.initCheck(val.query);

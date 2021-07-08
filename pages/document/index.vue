@@ -2,15 +2,15 @@
   <div class="pt-118 page-wrap">
     <div class="dev-container">
       <div class="left" :class="isFixed && 'fixed'">
-        <LeftNav :activeNav="activeNav" :activeVer="activeVer" @selectNav="selectNav" @selectVer="selectVer"></LeftNav>
+        <LeftNav :activeVer="activeVer" @selectVer="selectVer"></LeftNav>
       </div>
 
       <div class="right" :class="isFixed && 'ml'">
-        <RightBegin :activeVer="activeVer" v-if="activeNav === 0"></RightBegin>
-        <RightFaq :activeVer="activeVer" v-if="activeNav === 1"></RightFaq>
-        <RightTem :activeVer="activeVer" v-if="activeNav === 2"></RightTem>
-        <RightApi :activeVer="activeVer" v-if="activeNav === 3"></RightApi>
-        <RightLog :activeVer="activeVer" v-if="activeNav === 4"></RightLog>
+        <RightBegin :activeVer="activeVer" v-if="activeNav.menu === 0"></RightBegin>
+        <RightFaq :activeVer="activeVer" v-if="activeNav.menu === 1"></RightFaq>
+        <RightTem :activeVer="activeVer" v-if="activeNav.menu === 2"></RightTem>
+        <RightApi :activeVer="activeVer" v-if="activeNav.menu === 3"></RightApi>
+        <RightLog :activeVer="activeVer" v-if="activeNav.menu === 4"></RightLog>
       </div>
     </div>
     <commonFoot />
@@ -19,19 +19,20 @@
 
 <script>
 import { commonHead, commonFoot } from '@/components/common';
-
+import { mapMutations, mapState } from 'vuex';
 import { LeftNav, RightBegin, RightFaq, RightTem, RightApi, RightLog } from '@/components/document';
 export default {
   components: { commonHead, commonFoot, LeftNav, RightBegin, RightFaq, RightTem, RightApi, RightLog },
   props: {},
   data() {
     return {
-      activeNav: 0,
       activeVer: 0,
       isFixed: false
     };
   },
-  computed: {},
+  computed: {
+    ...mapState('document', ['activeNav'])
+  },
   created() {},
   head() {
     return {
@@ -47,25 +48,9 @@ export default {
         this.isFixed = false;
       }
     });
-    let logType = this.$route.query.logType;
-    if (logType) {
-      this.getLog(logType);
-    }
   },
   watch: {},
   methods: {
-    getLog(logType) {
-      if (logType == 'V10') {
-        this.activeVer = 0;
-      } else if (logType == 'V8') {
-        this.activeVer = 1;
-      }
-      this.activeNav = 4;
-    },
-    selectNav(index) {
-      window.scrollTo(0, 0);
-      this.activeNav = index;
-    },
     selectVer(val) {
       console.log(val, 'val');
       this.activeVer = val;

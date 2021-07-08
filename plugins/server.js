@@ -12,7 +12,7 @@ let service = axios.create({
 // 请求拦截 可在请求头中加入token等
 service.interceptors.request.use(
   config => {
-    console.log(config, 'config');
+    // console.log(config, 'config');
     return config;
   },
   error => {
@@ -23,7 +23,7 @@ service.interceptors.request.use(
 // 响应拦截 对响应消息作初步的处理
 service.interceptors.response.use(
   resp => {
-    console.log(resp);
+    // console.log(resp);
     //   if (resp.data) {
     //     if (resp.data.code !== '0') {
     //       Message({
@@ -38,7 +38,7 @@ service.interceptors.response.use(
     //   }
   },
   error => {
-    console.log(error);
+    // console.log(error);
     if (error.response) {
       Message({
         type: 'error',

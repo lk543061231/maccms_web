@@ -35,12 +35,13 @@
           </div>
         </div>
         <div class="detection-b">
-          <p class="f16-c242424">匹配特征内容</p>
-          <p class="f14-c242424 mt10">特征标题：{{ detail.inject_name }}</p>
-          <pre class="layui-code layui-box layui-code-view"
-            >{{ detail.response_body }}
-            </pre
-          >
+          <p class="f16-c242424">特征标题：{{ detail.inject_name }}</p>
+          <div>
+            <p class="f14-c242424 mt10 ">匹配特征内容</p>
+            <pre class="layui-code layui-box layui-code-view"
+              >{{ detail.response_body }}
+            </pre>
+          </div>
         </div>
         <div class="xiufu">
           <div class="x-left">
@@ -89,6 +90,7 @@
 import SampleDialog from './SampleDialog.vue';
 import DownPack from './DownPack.vue';
 import { checkSiteInject, getInjectList } from '@/utils/api';
+import { mapActions, mapState } from 'vuex';
 export default {
   components: { DownPack, SampleDialog },
   props: {
@@ -99,7 +101,6 @@ export default {
   },
   data() {
     return {
-      inJEctList: [],
       hoveIndex: '',
       visiable: false,
       showTxt: false,
@@ -110,7 +111,12 @@ export default {
       checkUrl: ''
     };
   },
-  computed: {},
+  computed: {
+    ...mapState('domain', ['inject']),
+    inJEctList() {
+      return this.inject.list || [];
+    }
+  },
   created() {
     this.getInject();
     this.checkTime = this.$utils.formatTime();
@@ -118,6 +124,7 @@ export default {
   mounted() {},
   watch: {},
   methods: {
+    ...mapActions('domain', ['GetInject']),
     toHref(url) {
       if (url.indexOf('http') == -1) {
         url = 'http://' + url.trim();
@@ -125,20 +132,22 @@ export default {
       this.$emit('update:domainVal', url);
       this.checkUrl = url;
     },
-    getInject() {
+    async getInject() {
       const loading = this.$loading({
         lock: true,
         text: 'Loading',
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       });
-      getInjectList().then(res => {
-        loading.close();
-        if (res.data.code == 0) {
-          this.inJEctList = res.data.data.list;
-          this.total = res.data.data.total;
-        }
-      });
+      // getInjectList().then(res => {
+      //   loading.close();
+      //   if (res.data.code == 0) {
+      //     this.inJEctList = res.data.data.list;
+      //     this.total = res.data.data.total;
+      //   }
+      // });
+      await this.GetInject();
+      loading.close();
     },
     check() {
       const loading = this.$loading({
