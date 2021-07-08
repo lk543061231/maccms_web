@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
 export default {
   components: {},
   props: {
