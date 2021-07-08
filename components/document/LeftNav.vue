@@ -22,7 +22,7 @@
                 <p class="zh-t">{{ item.zhTitle }}</p>
                 <p class="en-t">{{ item.enTitle }}</p>
               </div>
-              <div class="icon-wrap" @click="toggleShowMore(index)" v-if="item.subMenu">
+              <div class="icon-wrap" @click="toggleShowMore(index)" @mouseover="handleShowMore(index)" v-if="item.subMenu">
                 <i v-if="item.showMore" class="el-icon-arrow-up"></i>
                 <i v-else class="el-icon-arrow-down"></i>
               </div>
@@ -147,6 +147,9 @@ export default {
     toggleShowMore(i) {
       this.navList[i].showMore = !this.navList[i].showMore;
     },
+    handleShowMore(i) {
+      this.navList[i].showMore = true;
+    },
     handleSetNav(v, sub) {
       if (!sub && sub !== 0) {
         sub = -1;
@@ -215,8 +218,14 @@ export default {
         }
         .icon-wrap {
           color: #f7502d;
-          font-weight: bold;
+
           margin-left: 30px;
+          i {
+            font-weight: bold;
+          }
+          // .el-icon-arrow-down {
+          //   color: #666;
+          // }
         }
       }
       .sub-menu {

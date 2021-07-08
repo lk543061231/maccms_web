@@ -1,4 +1,307 @@
 module.exports = {
+  feq0: [
+    {
+      title: '快速安装',
+      label: [
+        '获得 苹果CMS 后，将其完整地部署到你的网站目录，然后访问网站，即可自动跳转到安装页面install.php。',
+        '输入事先准备好的mysql数据库账户密码，即可一键安装。'
+      ]
+    },
+    {
+      title: '常见问题',
+      con: [
+        '1，由于采用最新的TP框架，所以php版本建议5.6以上，上传文件时需要开启fileinfo支持库，php.ini里 extension=php_fileinfo.dll ；宝塔等面板里直接安装开启 。',
+        '2，如果使用的是php5.6版本（php7版本不受影响），还需要设置php.ini开启always_populate_raw_post_data = -1 这个选项，也就是去掉这项配置前面的分号即可。',
+        '3，运行安装页面出现空白页面，该情况一般为Runtime目录没有修改写入权限**',
+        '4，SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column "" at row 1  或者 Warning: 1265 Data truncated for column 类似错误**',
+        '该错误就插入字段长度超过设定的长度，一般程序会在数据库字段设置字符长度在插入之前程序很少会先判断数据长度和截取数据 这样会影响性能，所以你就需要修改你数据库的配置文件一般在MYSQL 安装目录中的my.ini中 搜索sql-modesql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"把其中的STRICT_TRANS_TABLES,去掉 建议使用该方法sql-mode="NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"或者把sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" 直接删除',
+        '5，数据库连接配置文件。 \n RE:手动修改数据库连接信息，数据库密码等/application/database.php',
+        `6，重新安装程序删除install.lock。\n RE:需要删除/application/data/install/install.lock`,
+        '7，采集联盟资源库或其他资源库为何播放不了？（资源类型是youku、tudou、iqiyi等等）第三方网址.\n RE:方法1，整合资源站的播放器js文件。方案2，开启全局解析或独立解析和播放器解析状态。',
+        '8，宝塔Nginx环境下，程序安装完毕后除非首页其他页面全部404的问题？RE:方法，进入宝塔软件设置，找到对应的php版本-设置，安装扩展，找到PATH_INFO这项，点击关闭，然后重新安装一下就ok了，这个可能是宝塔的bug。',
+        '9，采集完数据后为何无法播放？？？\n RE:检查采集数据的播放地址，如果是完成的http地址，则需要开启播放器的解析状态用解析播放；如果采集的数据ID可会直接用本地播放器来播放。',
+        '10，为何新增加了分类，前台页面进入提示没有权限？？？\n RE:因为新加的分类默认所有会员组都是没有权限的，需要进入会员组里配置每个组的分类权限，保存一下即可。',
+        '11，路由规则改错了，页面权都打不开了，怎么恢复到默认的？？？\n RE:下载完整安装包，复制application/route.php 替换到网站里，就可以打开了，然后在后台重新修改下路由规则。',
+        '12，nginx下除了首页其他都是404怎么办？\n RE:修改一下伪静态规则，一般都可以解决了。 如果修改了后台文件入口admin.php，则改为对应的文件名。',
+        {
+          pre: `if (!-e $request_filename) {
+rewrite ^/index.php(.*)$ /index.php?s=$1 last;
+rewrite ^/admin.php(.*)$ /admin.php?s=$1 last;
+rewrite ^/api.php(.*)$ /api.php?s=$1 last;
+rewrite ^(.*)$ /index.php?s=$1 last;
+break;
+}`
+        },
+        '13，安装提示“always_populate_raw_post_data”配置不支持解决方法 \n RE:编辑PHP-5.6 配置文件  php.ini， \n 查找 always_populate_raw_post_data \n 把前面的; 去掉保存，然后重启php5.6。',
+        '本篇将主要讲解使用过程中普遍遇到的“问题”，这些问题并非是BUG，通常是需要我们自己去注意的一些点。（会结合用户反馈持续补充）'
+      ]
+    },
+    {
+      title: '常用sql语句',
+      pre: `
+1.查询数据
+SELECT * FROM {pre}vod   查询所有数据
+SELECT * FROM {pre}vod WHERE vod_id=1000   查询指定ID数据
+
+2.删除数据
+DELETE  FROM {pre}vod   删除所有数据
+DELETE  FROM {pre}vod WHERE vod_id=1000   删除指定的第几条数据
+DELETE  FROM {pre}vod WHERE vod_actor LIKE '%刘德华%'   删除vod_actor字段里有"刘德华"的数据
+DELETE  FROM {pre}vod WHERE vod_type=1   删除指定的分类ID的数据
+DELETE  FROM {pre}vod WHERE vod_area LIKE '%台湾%'   删除指定地区的数据
+DELETE  FROM {pre}vod WHERE vod_lang LIKE '%粤语%'  删除指定语言的数据
+
+3.修改数据
+UPDATE {pre}vod SET vod_hits=1   将所有vod_hits字段里的值修改成1
+UPDATE {pre}vod SET vod_hits=1 WHERE vod_id=1000  指定的第几条数据把vod_hits字段里的值修改成1
+4，把图片地址中的某个字符串替换为另外一个字符串
+UPDATE {pre}vod SET vod_pic=REPLACE(vod_pic, '原始字符串', '替换成其他字符串')
+
+5，删除数据库后自增ID重新从1开始
+PHP： truncate {pre}vod
+ASP： acc 用office打开数据库，删除数据后，压缩修复数据库即可。
+      或 ALTER TABLE {pre}vod ALTER COLUMN vod_id COUNTER (1, 1)
+      mssql用   TRUNCATE TABLE  {pre}vod
+
+6，删除数据库名称重复的数据
+DELETE FROM {pre}vod where vod_id not in ( SELECT vod_id FROM {pre}vod GROUP BY vod_name HAVING COUNT(*)>1)
+
+7，修复死锁的表
+REPAIR TABLE \`{pre}art\` ,\`{pre}vod\` ,\`{pre}type\` ,\`{pre}comment\` ,\`{pre}gbook\` ,\`{pre}link\` ,\`{pre}admin\` ,\`{pre}topic\` ,\`{pre}user\` ,\`{pre}card\` ,\`{pre}group\` ,\`{pre}visit\``
+    },
+    {
+      title: '页面提交数据后过段时间才生效？',
+      label: [
+        '这个一般是web服务配置了缓存导致的~~\n访问phpinfo(),看看是不是你开启了ZendOpcache之类的opcode缓存.ZendOpcache里面有个过期时间配置,如opcache.revalidate_freq=60 ,表示60秒后脚本再次被访问时会检测PHP文件的时间戳,有改变则更新opcode缓存,你可以设为0,这样每次访问都会检测文件时间戳,你的修改就能生效了.在php.ini文件中找到opcache.enable=1或opcache.enable_cli=1改为0，重启php-fpm，done'
+      ]
+    },
+    {
+      title: '为什么播放器不能全屏？',
+      label: [
+        `如果播放器被包含在 iframe 里，尝试在 iframe 上添加 allowfullscreen 属性。为了完善的浏览器兼容性，它应该是这样：</li><li><iframe src="example.com" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>`
+      ]
+    }
+  ],
+  feq02: [
+    {
+      title: '常见问题',
+      label: ['本篇将主要讲解使用过程中普遍遇到的“问题”，这些问题并非是BUG，通常是需要我们自己去注意的一些点。（会结合用户反馈持续补充）']
+    },
+    {
+      title: '快速安装',
+      label: [
+        '获得 苹果CMS后，将其完整地部署到你的网站目录，然后访问网站，即可自动跳转到安装页面install.php。',
+        '输入事先准备好的mysql数据库账户密码，即可一键安装。'
+      ]
+    },
+    {
+      title: '常用sql语句',
+      pre: `
+1.查询数据
+SELECT * FROM {pre}vod   查询所有数据
+SELECT * FROM {pre}vod WHERE d_id=1000   查询指定ID数据
+
+2.删除数据
+DELETE  FROM {pre}vod   删除所有数据
+DELETE  FROM {pre}vod WHERE d_id=1000   删除指定的第几条数据
+DELETE  FROM {pre}vod WHERE d_starring LIKE '%刘德华%'   删除d_starring字段里有"刘德华"的数据
+DELETE  FROM {pre}vod WHERE d_type=1   删除指定的分类ID的数据
+DELETE  FROM {pre}vod WHERE d_area LIKE '%台湾%'   删除指定地区的数据
+DELETE  FROM {pre}vod WHERE d_language LIKE '%粤语%'  删除指定语言的数据
+
+3.修改数据
+UPDATE {pre}vod SET d_hits=1   将所有d_hits字段里的值修改成1
+UPDATE {pre}vod SET d_hits=1 WHERE d_id=1000  指定的第几条数据把d_hits字段里的值修改成1
+
+4，把图片地址中的某个字符串替换为另外一个字符串
+UPDATE {pre}vod SET d_pic=REPLACE(d_pic, '原始字符串', '替换成其他字符串')
+
+5，删除数据库后自增ID重新从1开始
+PHP： truncate {pre}vod
+ASP： acc 用office打开数据库，删除数据后，压缩修复数据库即可。
+      或 ALTER TABLE {pre}vod ALTER COLUMN d_id COUNTER (1, 1)
+      mssql用   TRUNCATE TABLE  {pre}vod
+
+6，删除数据库名称重复的数据
+DELETE FROM {pre}vod where d_id not in ( SELECT d_id FROM {pre}vod GROUP BY d_name HAVING COUNT(*)>1)
+
+7，php 7x 版本修复死锁的表
+REPAIR TABLE \`{pre}art\` ,\`{pre}art_topic\` ,\`{pre}art_type\` ,\`{pre}comment\` ,\`{pre}gbook\` ,\`{pre}link\` ,
+\`{pre}manager\` ,\`{pre}mood\` ,\`{pre}user\` ,\`{pre}user_card\` ,\`{pre}user_group\` ,\`{pre}user_visit\` ,\`{pre}vod\` ,
+\`{pre}vod_topic\` ,\`{pre}vod_type\`
+`
+    }
+  ],
+  feq1: [
+    {
+      title: '入库接口说明',
+      label: [
+        'api接口仅供提供数据。',
+        '资源分配唯一标识ID，用来区别绑定分类，这个ID一般，不可随意修改设置，否则造成入库分类错乱。视频接口同时支持老板xml格式的数据，增加参数 &at=xml即可。'
+      ]
+    },
+    {
+      title: '1,视频部分',
+      label: [
+        '列表http://域名/api.php/provide/vod/?ac=list',
+        '详情http://域名/api.php/provide/vod/?ac=detail',
+        '同样支持老板xml格式的数据',
+        '列表api.php/provide/vod/at/xml/?ac=list',
+        '详情api.php/provide/vod/at/xml/?ac=detail'
+      ]
+    },
+    {
+      title: '2,文章部分',
+      label: ['列表http://域名/api.php/provide/art/?ac=list', '详情http://域名/api.php/provide/art/?ac=detail']
+    },
+    {
+      title: '3,演员部分',
+      label: ['列表http://域名/api.php/provide/actor/?ac=list', '详情http://域名/api.php/provide/actor/?ac=detail']
+    },
+    {
+      title: '4,角色部分',
+      label: ['列表http://域名/api.php/provide/role/?ac=list', '详情http://域名/api.php/provide/role/?ac=detail']
+    },
+    {
+      title: '5,网址部分',
+      label: ['列表http://域名/api.php/provide/website/?ac=list', '详情http://域名/api.php/provide/website/?ac=detail']
+    },
+    {
+      title: '列表数据格式：',
+      pre: `{
+"code":1,
+“msg”:“数据列表”
+,page,
+pagecount,
+“limit”:“20”,
+total,
+“list”:[{"vod_id":21,“vod_name”:“情剑”,type_id,“type_name”:“动作片”,“vod_en”:“qingjian”,“vod_time”:“2018-03-29 20:50:19”,“vod_remarks”:“超清”,“vod_play_from”:"youku"},{"vod_id":20,“vod_name”:“暴力街区”,type_id,“type_name”:“动作片”,“vod_en”:“baolijiequ”,“vod_time”:“2018-03-27 21:17:52”,“vod_remarks”:“超清”,“vod_play_from”:"youku"},{"vod_id":19,“vod_name”:“超凡蜘蛛侠2”,type_id,“type_name”:“动作片”,“vod_en”:“chaofanzhizhuxia2”,“vod_time”:“2018-03-27 21:17:51”,“vod_remarks”:“高清”,“vod_play_from”:"youku"},{"vod_id":18,“vod_name”:“木星上行”,type_id,“type_name”:“动作片”,“vod_en”:“muxingshangxing”,“vod_time”:“2018-03-27 21:17:37”,“vod_remarks”:“高清”,“vod_play_from”:"youku"},{"vod_id":15,“vod_name”:“英雄本色2018”,type_id,“type_name”:“动作片”,“vod_en”:“yingxiongbense2018”,“vod_time”:“2018-03-22 16:09:17”,“vod_remarks”:“高清”,“vod_play_from”:“qiyi,sinahd”},{"vod_id":13,“vod_name”:“飘香剑雨”,type_id,“type_name”:“爱情片”,“vod_en”:“piaoxiangjianyu”,“vod_time”:“2018-03-21 20:37:52”,“vod_remarks”:“全36集”,“vod_play_from”:“youku,qiyi”},{"vod_id":14,“vod_name”:“怪谈之魅影惊魂”,type_id,“type_name”:“爱情片”,“vod_en”:“guaitanzhimeiyingjinghun”,“vod_time”:“2018-03-20 21:32:27”,“vod_remarks”:“高清”,“vod_play_from”:"qiyi"},{"vod_id":12,“vod_name”:“桃李劫”,type_id,“type_name”:“爱情片”,“vod_en”:“taolijie”,“vod_time”:“2018-03-20 21:32:26”,“vod_remarks”:“高清”,“vod_play_from”:“mgtv,pptv”},{"vod_id":9,“vod_name”:“胡杨的夏天”,type_id,“type_name”:“喜剧片”,“vod_en”:“huyangdexiatian”,“vod_time”:“2018-03-20 21:32:00”,“vod_remarks”:“高清”,“vod_play_from”:“27pan,mgtv,qiyi,qq,youku”},{"vod_id":10,“vod_name”:“宝贝特攻”,type_id,“type_name”:“喜剧片”,“vod_en”:“baobeitegong”,“vod_time”:“2018-03-20 21:32:00”,“vod_remarks”:“高清”,“vod_play_from”:“mgtv,qiyi,qq,youku”},{"vod_id":11,“vod_name”:“午夜劫案”,type_id,“type_name”:“喜剧片”,“vod_en”:“wuyejiean”,“vod_time”:“2018-03-20 21:32:00”,“vod_remarks”:“高清”,“vod_play_from”:"qiyi"},{"vod_id":6,“vod_name”:“密战”,type_id,“type_name”:“动作片”,“vod_en”:“mizhan”,“vod_time”:“2018-03-20 21:31:41”,“vod_remarks”:“全30集”,“vod_play_from”:“mgtv,youku,27pan,qiyi,qq,pptv”},{"vod_id":7,“vod_name”:“黑道老师”,type_id,“type_name”:“动作片”,“vod_en”:“heidaolaoshi”,“vod_time”:“2018-03-20 21:31:41”,“vod_remarks”:“高清”,“vod_play_from”:“sohu,pptv”},{"vod_id":8,“vod_name”:“跃影江湖之森罗万象”,type_id,“type_name”:“动作片”,“vod_en”:“yueyingjianghuzhisenluowanxiang”,“vod_time”:“2018-03-20 21:31:41”,“vod_remarks”:“高清”,“vod_play_from”:"qq"},{"vod_id":4,“vod_name”:“我的青春遇见你”,type_id,“type_name”:“国产剧”,“vod_en”:“wodeqingchunyujianni”,“vod_time”:“2018-03-20 19:26:54”,“vod_remarks”:“56集全”,“vod_play_from”:“youku,xigua”}],“class”:[{"type_id":1,“type_name”:"电影"},{"type_id":2,“type_name”:"连续剧"},{"type_id":3,“type_name”:"综艺"},{"type_id":4,“type_name”:"动漫"},{"type_id":5,“type_name”:"资讯"},{"type_id":6,“type_name”:"动作片"},{"type_id":7,“type_name”:"喜剧片"},{"type_id":8,“type_name”:"爱情片"},{"type_id":9,“type_name”:"科幻片"},{"type_id":10,“type_name”:"恐怖片"},{"type_id":11,“type_name”:"剧情片"},{"type_id":12,“type_name”:"战争片"},{"type_id":13,“type_name”:"国产剧"},{"type_id":14,“type_name”:"港台剧"},{"type_id":15,“type_name”:"日韩剧"},{"type_id":16,“type_name”:"欧美剧"},{"type_id":17,“type_name”:"公告"},{"type_id":18,“type_name”:"头条"}]}`
+    },
+    {
+      title: '列表接收参数：',
+      label: [
+        'ac=list',
+        't=类别ID',
+        'pg=页码',
+        'wd=搜索关键字',
+        'h=几小时内的数据',
+        '例如： http://域名/api.php/provide/vod/?ac=list&t=1&pg=5 分类ID为1的列表数据第5页'
+      ]
+    },
+    {
+      title: '内容数据格式：',
+      pre: `{
+"code":1,
+“msg”:“数据列表”,
+page,
+pagecount,
+“limit”:“20”,
+total,
+“list”:[
+  {"vod_id":21,“vod_name”:“情剑”,type_id,“type_name”:“动作片”,“vod_en”:“qingjian”,“vod_time”:“2018-03-29 20:50:19”,“vod_remarks”:“超清”,“vod_play_from”:“youku”,“vod_pic”:“https:\/\/img1.doubanio.com\/view\/photo\/s_ratio_poster\/public\/p2259384068.jpg”,“vod_area”:“大陆”,“vod_lang”:“国语”,“vod_year”:“2018”,“vod_serial”:“0”,“vod_actor”:“谢霆锋,钟欣潼,乔振宇,伊能静,谭耀文,赵鸿飞,周莉”,“vod_director”:“陈咏歌”,“vod_content”:“”margin: 5px 12px; padding: 0px; color: rgb(24, 55, 120); font-family: Verdana, Arial, Helvetica, sans-serif;\“>一位手执名剑“长光”的年轻剑客（谢霆锋 饰）只为完成师父生前的遗愿——找到古代中原留下的九大旷世名剑，从北方蓬莱来到中原。而此前早已归顺朝廷的山东武林盟主、青萍剑客白三空（计春华 饰）利用与年轻剑客的比武诈死，成为朝廷埋藏在武林中的黑手。白三空的外孙方宝玉（乔振宇 饰）从小被外公禁止接触武功，然而为了替外公报仇，为了武林的正义，跟随“天下第一剑”紫衣候（谭耀文 饰）学武，誓要杀死蓬莱剑客。生命攸关的时刻，蓬莱剑客结识了黄河狂侠王巅之女珠儿（钟欣潼 饰），并且渐生情愫，方宝玉与紫衣候养女奔月（杨蕊 饰）两人也爱得难舍难分。青木堡少堡主木郎神君（赵鸿飞 饰）的朝廷锦衣卫身份终于暴露，朝廷意欲借武林中人控制武林，寻找罗雅古城宝藏的目的彻底呈现出来。 <\/p>”margin: 5px 12px; padding: 0px; color: rgb(24, 55, 120); font-family: Verdana, Arial, Helvetica, sans-serif;\“>　　一场武林浩劫正在上演，每一个人的立场都真相大白。在纷争中发现对方竟是同母异父亲兄亲的蓬莱剑客和宝玉决定联手对付木郎神君，然而木郎神君已经炼成了混元神功，就在那千钧一发时刻，木郎神君死在了心爱的女人——脱尘郡主（伊能静 饰）的剑下，纷争也随之结束……<\/p>”text-align: center; margin: 5px 12px; padding: 0px; color: rgb(24, 55, 120); font-family: Verdana, Arial, Helvetica, sans-serif;\“>”http:\/\/dy2.fahai1.club\/dianying\/dongzuopian\/qingjian\/1.jpg\" alt=\“\”\/> <img src=\“http:\/\/dy2.fahai1.club\/dianying\/dongzuopian\/qingjian\/2.jpg\” alt=\“\”\/> <img src=\“http:\/\/dy2.fahai1.club\/dianying\/dongzuopian\/qingjian\/3.jpg\” alt=\“\”\/> <\/p>",“vod_play_url”:“正片$http:\/\/v.youku.com\/v_show\/id_XMTM0NTczNDExMg==.html”}]
+}`
+    },
+    {
+      title: '内容接收参数：',
+      label: [
+        '参数 ids=数据ID，多个ID逗号分割。',
+        't=类型ID',
+        'pg=页码',
+        'h=几小时内的数据',
+        '例如: http://域名/api.php/provide/vod/?ac=detail&ids=123,567 获取ID为123和567的数据信息',
+        'http://域名/api.php/provide/vod/?ac=detail&h=24 获取24小时内更新数据信息'
+      ]
+    }
+  ],
+  feq2: [
+    {
+      title: '多语言包支持说明',
+      label: [
+        'v10在1036版本之后增加了多语言的支持，方便更多全球友人使用，系统内所有显示和提示的信息完全由语言包控制。',
+        '系统默认内置了简体中文，繁体中文 语言包，安装的时候选择切换您熟悉的语言即可在 安装、后台中完全显示对应的语言，所有模块提示信息也将显示对应语言。',
+        '后续还将内置或提供更多的语言包扩展，也欢迎大家友情提供。',
+        '建议不要修改公共语言包，如果想替换公共语言包里的内容，可以到对应的模块语言包下创建同样key的内容即可自动加载替换。',
+
+        '==语言包结构='
+      ],
+      pre: `│─application/
+│ ├─lang/ 公共语言包
+│ ├──zh-cn.php 简体中文
+│ ├──zh-tw.php 繁体中文
+│─…
+│ ├─admin/lang/ admin模块自定义语言包
+│ ├──zh-cn.php
+│ ├──zh-tw.php
+│─…
+│ ├─api/lang/ api模块自定义语言包
+│ ├──zh-cn.php
+│ ├──zh-tw.php
+│─…
+等等…`
+    }
+  ],
+  feq3: [
+    {
+      title: '定时任务说明',
+      label: [
+        '执行文件：选择 采集资源库collect',
+        '附加参数：可从联盟资源库，自定义资源列表中获取（在采集今日，采集本周，采集全部 右键复制链接）截取参数部分即可。',
+        '例如：',
+        '任务名称：cj_day',
+        '任务描述：采集当天数据',
+        '附加参数：ac=cjall&h=24&xt=1&ct=&cjflag=b9c546ba925d22ed654927b44638df34&cjurl=http://cj.tv6.com/mox/inc/youku.php'
+      ]
+    },
+    {
+      title: '2，生成静态',
+      label: [
+        '执行文件：选择生成make',
+        '附加参数：',
+        '例如：',
+        '生成首页 ac=index',
+        '生成地图页 ac=map',
+        '生成rss ac=rss',
+        '生成百度sitemap ac=rss&ac2=baidu',
+        '生成谷歌sitemap ac=rss&ac2=google',
+        '生成专题首页 ac=topic_index',
+        '生成专题详情页 ac=topic_info&topic=1,2,3,4',
+        '生成视频分类页 ac=type&tab=vod&vodtype=1,2',
+        '生成当日有更新数据的视频分类 ac=type&tab=vod&ac2=day',
+        '生成文章分类页 ac=type&tab=art&arttype=3,4',
+        '生成当日有更新数据的文章分类 ac=type&tab=art&ac2=day',
+        '生成自定义页面 ac=label&label=rand.html',
+        '生成视频详情页 ac=info&tab=vod&ids=1,2,3',
+        '生成未生成视频详情页 ac=info&tab=vod&ac2=nomake',
+        '生成文章详情页 ac=info&tab=art&ids=1,2,3',
+        '生成未生成文章详情页 ac=info&tab=art&ac2=nomake'
+      ]
+    },
+    {
+      title: '3，采集规则',
+      label: ['执行文件：选择 采集规则cj', '参数id=1，参数就是当前采集自定义采集规则的编号。', '为了不影响服务器性能，目前仅采集第一页。']
+    },
+    {
+      title: '4，清理缓存',
+      label: ['执行文件：选择 清理缓存cache', '无需参数']
+    },
+    {
+      title: '5，网址推送',
+      label: [
+        '执行文件：选择 网址推送urlsend',
+        '附加参数：',
+        '百度主动推送当天视频 ac=baidu_push&ac2=today&mid=1',
+        '百度主动推送当天文章 ac=baidu_push&ac2=today&mid=2',
+        '百度主动推送当天专题 ac=baidu_push&ac2=today&mid=3',
+        '百度主动推送当天演员 ac=baidu_push&ac2=today&mid=8',
+        '百度主动推送当天角色 ac=baidu_push&ac2=today&mid=9',
+        '百度熊掌号推送当天视频 ac=baidu_bear&ac2=today&type=realtime&mid=1',
+        '百度熊掌号推送当天文章 ac=baidu_bear&ac2=today&type=realtime&mid=2',
+        '百度熊掌号推送当天专题 ac=baidu_bear&ac2=today&type=realtime&mid=3',
+        '百度熊掌号推送当天演员 ac=baidu_bear&ac2=today&type=realtime&mid=8',
+        '百度熊掌号推送当天角色 ac=baidu_bear&ac2=today&type=realtime&mid=9'
+      ]
+    }
+  ],
   tem: [
     {
       title: '模板标签',

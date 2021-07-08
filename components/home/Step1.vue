@@ -8,7 +8,7 @@
         <span class="p3-s3 f28-c172335">版本号 （{{ version }}）</span>
       </p>
       <p class="p4 f16-c172335">
-        更新时间（2021-06-30)
+        更新时间（2021-07-08)
         <span class="p3-s4 f16-c172335" v-if="packageTitle != 'Pro版'" @click="toLog">更新日志</span>
       </p>
       <div class="package-list">
