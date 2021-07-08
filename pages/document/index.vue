@@ -56,6 +56,7 @@ export default {
       this.activeVer = val;
       window.scrollTo(0, 0);
     }
+    // 测试打包
   }
 };
 </script>

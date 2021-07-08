@@ -4,7 +4,7 @@ import { Message, Notification } from 'element-ui'; // 这里使用了element-ui
 
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.post['Content-Type'] = 'text/plain;charset=UTF-8';
-axios.defaults.headers['referer'] = '/blog';
+// axios.defaults.headers['referer'] = '/blog';
 let service = axios.create({
   // baseURL: '/',
   timeout: 15000
