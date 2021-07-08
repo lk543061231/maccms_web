@@ -124,13 +124,10 @@ export default {
     },
 
     domainVal: function(val) {
-      console.log(val);
       if (this.activeIndex == 3) {
         if (val == '' || !val) {
           this.$refs.horse.checkResult = true;
           this.$refs.horse.showTxt = false;
-        } else {
-          this.check();
         }
       }
     }

@@ -11,8 +11,12 @@
         恭喜您，域名通过大数据匹配特征没有被挂马
       </p>
       <p class="text error-color" v-else>
-        您的域名通过大数据匹配，已经被挂马!
+        检测网站已被挂马!
       </p>
+      <div class="text error-color" v-if="showFakeResult">
+        <p class="f-t">{{fakeMsg || '网站检测异常存在漏洞，请立即升级版本'}}</p>
+        <p class="mt10 f16-c242424">当前网址已提供最新版本</p>
+      </div>
     </div>
     <!-- 挂马检测 -->
     <div class="detection">
@@ -35,8 +39,8 @@
           </div>
         </div>
         <div class="detection-b">
-          <p class="f16-c242424">匹配特征内容</p>
-          <p class="f14-c242424 mt10">特征标题：{{ detail.inject_name }}</p>
+          <p class="f14-c242424">特征标题：{{ detail.inject_name }}</p>
+          <p class="f16-c242424 mt10">匹配特征内容</p>
           <pre class="layui-code layui-box layui-code-view"
             >{{ detail.response_body }}
             </pre
@@ -78,7 +82,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!checkResult">
+    <div v-if="!checkResult || showFakeResult">
       <DownPack></DownPack>
     </div>
     <sampleDialog :visiable.sync="visiable" />
@@ -88,7 +92,7 @@
 <script>
 import SampleDialog from './SampleDialog.vue';
 import DownPack from './DownPack.vue';
-import { checkSiteInject, getInjectList } from '@/utils/api';
+import { checkSiteInject, getInjectList,getIsfake } from '@/utils/api';
 export default {
   components: { DownPack, SampleDialog },
   props: {
@@ -107,7 +111,9 @@ export default {
       checkTime: '',
       detail: {},
       total: '',
-      checkUrl: ''
+      checkUrl: '',
+      showFakeResult:false,
+      fakeMsg:''
     };
   },
   computed: {},
@@ -124,6 +130,7 @@ export default {
       }
       this.$emit('update:domainVal', url);
       this.checkUrl = url;
+      this.check()
     },
     getInject() {
       const loading = this.$loading({
@@ -141,6 +148,7 @@ export default {
       });
     },
     check() {
+      this.getFake()
       const loading = this.$loading({
         lock: true,
         text: 'Loading',
@@ -158,6 +166,28 @@ export default {
           this.checkResult = false;
         }
         this.showTxt = true;
+      });
+    },
+    getFake() {
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      let t = new Date().getTime();
+      getIsfake({ url: this.domainVal, t: t }).then(res => {
+        loading.close();
+        var fakeResult=''
+        if (res.data.code == 1) {
+          fakeResult = !res.data.info.is_fake;
+        } else {
+          fakeResult = false;
+        }
+        this.fakeMsg=res.data.msg
+        if(!fakeResult){
+          this.showFakeResult=true
+        }
       });
     }
   }
@@ -303,6 +333,9 @@ export default {
     font-size: 16px;
     color: #333;
     margin-bottom: 5px;
+  }
+  .f-b{
+
   }
 }
 .detection-error {
