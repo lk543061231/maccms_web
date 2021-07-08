@@ -23,27 +23,35 @@
           <div class="helpcenter-contain-bottom-item flex-between-center">
             <div class="img-text">
               <img src="~/assets/images/helpCenter/img1.png" />
-              <span>一键搭建平台，直接<span class="f18-cF7502D">下载</span>免费影视源码</span>
+              <span>一键搭建平台，直接<span @click="goToPage('/')" class="f18-cF7502D">下载</span>免费影视源码</span>
             </div>
             <div class="img-text">
               <img src="~/assets/images/helpCenter/img2.png" />
-              <span>需要二次开发，可以直接访问<span class="f18-cF7502D">开发文档</span>页面，帮助您了解开发文档</span>
+              <span
+                >需要二次开发，可以直接访问<span class="f18-cF7502D" @click="goToPage('/document')">开发文档</span
+                >页面，帮助您了解开发文档</span
+              >
             </div>
           </div>
           <div class="helpcenter-contain-bottom-item flex-between-center">
             <div class="img-text">
               <img src="~/assets/images/helpCenter/img3.png" />
-              <span>发送邮件到<span class="f18-cF7502D">acb.bet@gmail.com</span>告知系统问题或者疑问</span>
+              <span>发送邮件到<a href="mailto:ceo@maccms.pro" class="f18-cF7502D">ceo@maccms.pro</a>告知系统问题或者疑问</span>
             </div>
             <div class="img-text">
               <img src="~/assets/images/helpCenter/img4.png" />
-              <span>通过在<span class="f18-cF7502D">maccmspro/pro</span>代码仓库提交issues来<span class="f18-cF7502D">报告Bug</span></span>
+              <span
+                >通过在<a href="https://github.com/maccmspro/maccms10" target="_blank" class="f18-cF7502D">maccmspro/pro</a
+                >代码仓库提交issues来<a href="https://github.com/maccmspro/maccms10/issues" target="_blank" class="f18-cF7502D"
+                  >报告Bug</a
+                ></span
+              >
             </div>
           </div>
           <div class="helpcenter-contain-bottom-item flex-between-center">
             <div class="img-text">
               <img src="~/assets/images/helpCenter/img5.png" />
-              <span>咨询其他问题，请发送邮件<span class="f18-cF7502D">acb.pro@gmail.com</span></span>
+              <span>咨询其他问题，请发送邮件<a href="mailto:help@maccms.pro" class="f18-cF7502D">help@maccms.pro</a></span>
             </div>
           </div>
         </div>
@@ -65,6 +73,11 @@ export default {
     return {
       title: 'MacCMS Pro-帮助中心'
     };
+  },
+  methods: {
+    goToPage(route) {
+      this.$router.push(route);
+    }
   }
 };
 </script>
@@ -75,6 +88,7 @@ export default {
   color: #666666;
 }
 .helpcenter-contain {
+  min-width: 1388px;
   background: #f7f8fa;
   padding-bottom: 50px;
   .helpcenter-contain-top {
