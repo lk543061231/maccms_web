@@ -15,7 +15,7 @@
         "@nuxtjs/pwa": "^3.3.5",
         "cookieparser": "^0.1.0",
         "core-js": "^3.9.1",
-        "element-ui": "^2.15.1",
+        "element-ui": "^2.15.5",
         "js-cookie": "^2.2.1",
         "less": "^3.9.0",
         "less-loader": "^5.0.0",
